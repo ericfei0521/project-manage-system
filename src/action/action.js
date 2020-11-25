@@ -1,5 +1,5 @@
-export function isLogged() {
+export function signup() {
   return {
-    type: "LOGO_IN",
+    type: "SIGN_UP",
   };
 }
