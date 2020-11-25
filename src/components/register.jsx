@@ -2,7 +2,7 @@ import logo from "../images/logo.svg";
 import { useDispatch } from "react-redux";
 import { isLogged } from "../action/action";
 
-function WelcomPage() {
+function RegisterPage() {
   let dispatch = useDispatch();
   return (
     <div className="App">
@@ -13,4 +13,4 @@ function WelcomPage() {
   );
 }
 
-export default WelcomPage;
+export default RegisterPage;
