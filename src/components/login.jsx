@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { login } from "../action/action";
-
+import { signInWithGoogle } from "../firebase";
 function Login() {
   let dispatch = useDispatch();
   const state = useSelector((state) => state);
@@ -44,6 +44,7 @@ function Login() {
         >
           Submit
         </button>
+        <button onClick={signInWithGoogle}>Continue with Google</button>
       </div>
     </div>
   );
