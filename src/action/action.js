@@ -1,5 +1,6 @@
-export function signup() {
+export function login(value) {
   return {
-    type: "SIGN_UP",
+    type: "LOG_IN",
+    payload: value,
   };
 }
