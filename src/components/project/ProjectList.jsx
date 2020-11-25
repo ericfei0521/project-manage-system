@@ -1,11 +1,16 @@
 import React from "react";
+import { auth } from "../../firebase";
 
-function projectList() {
+function ProjectList(prop) {
+  console.log(prop);
   return (
     <div>
-      <h1>abc</h1>
+      <div>
+        <h1>123</h1>
+        <button onClick={() => auth.signOut()}>signout</button>
+      </div>
     </div>
   );
 }
 
-export default projectList;
+export default ProjectList;
