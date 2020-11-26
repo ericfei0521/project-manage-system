@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import logo from "../images/logo.svg";
 import { Link, useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { login } from "../action/action";
 import { auth, signInWithGoogle, createNewUser } from "../firebase";
 
 function Login() {
   let dispatch = useDispatch();
-  const state = useSelector((state) => state.Login);
   let [email, setEmail] = useState(null);
   let [password, setPassword] = useState(null);
   let history = useHistory();
