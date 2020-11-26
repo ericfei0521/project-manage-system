@@ -1,8 +1,9 @@
-import { auth } from "../firebase";
+import { auth, firestore } from "../firebase";
 let initialState = {
   email: "",
   password: "",
   confirmpassword: "",
+  displayName: "",
 };
 const Signup = (state = initialState, action) => {
   const emailRule = /^\w+((-\w+)|(\.\w+))*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
@@ -25,7 +26,23 @@ const Signup = (state = initialState, action) => {
         state.password !== "" &&
         state.confirmpassword !== ""
       ) {
-        auth.createUserWithEmailAndPassword(state.email, state.password);
+        auth
+          .createUserWithEmailAndPassword(state.email, state.password)
+          .then(() => {
+            const createAt = new Date();
+            firestore
+              .collection("users")
+              .doc(auth.currentUser.uid)
+              .set({
+                displayName: state.displayName,
+                createAt: createAt,
+                email: auth.currentUser.email,
+                userID: auth.currentUser.uid,
+              })
+              .catch((error) => {
+                console.log("something went wront", error);
+              });
+          });
       }
       return state;
     }

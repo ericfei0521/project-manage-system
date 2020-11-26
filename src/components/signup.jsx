@@ -10,9 +10,10 @@ function Signup() {
   let [email, setEmail] = useState(state.email);
   let [password, setPassword] = useState(state.password);
   let [confirm, setConfirm] = useState(state.confirmpassword);
+  let [name, setName] = useState(state.confirmpassword);
   return (
     <div className="App">
-      <Link to="/signup" className="brand-logo">
+      <Link to="/" className="brand-logo">
         <img src={logo} alt="" width="80px" />
       </Link>
       <input
@@ -33,6 +34,12 @@ function Signup() {
         type="text"
         placeholder="comfrim password"
       />
+      <input
+        onChange={(e) => setName(e.target.value)}
+        value={name}
+        type="text"
+        placeholder="comfrim password"
+      />
       <button
         onClick={() => {
           dispatch(
@@ -40,8 +47,13 @@ function Signup() {
               email: email,
               password: password,
               confirmpassword: confirm,
+              displayName: name,
             })
           );
+          setEmail("");
+          setPassword("");
+          setConfirm("");
+          setName("");
         }}
       >
         signup

@@ -1,3 +1,5 @@
+import { auth } from "../firebase";
+
 let initialState = {
   email: "",
   password: "",
@@ -5,9 +7,13 @@ let initialState = {
 const Login = (state = initialState, action) => {
   switch (action.type) {
     case "LOG_IN": {
-      state.email = action.payload.email;
-      state.password = action.payload.password;
-      return console.log(state);
+      state = action.payload;
+      auth
+        .signInWithEmailAndPassword(state.email, state.password)
+        .catch((error) => {
+          alert(error.message);
+        });
+      return state;
     }
 
     default:

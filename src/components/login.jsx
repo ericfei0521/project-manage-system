@@ -8,8 +8,8 @@ import { auth, signInWithGoogle, createNewUser } from "../firebase";
 function Login() {
   let dispatch = useDispatch();
   const state = useSelector((state) => state.Login);
-  let [email, setEmail] = useState(state.email);
-  let [password, setPassword] = useState(state.password);
+  let [email, setEmail] = useState(null);
+  let [password, setPassword] = useState(null);
   let history = useHistory();
 
   auth.onAuthStateChanged(async (userAuth) => {
@@ -20,7 +20,7 @@ function Login() {
   });
   return (
     <div className="App">
-      <Link to="/login" className="brand-logo">
+      <Link to="/" className="brand-logo">
         <img src={logo} alt="" width="80px" />
       </Link>
       <div>
