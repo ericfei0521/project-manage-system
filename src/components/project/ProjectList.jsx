@@ -1,13 +1,20 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { auth } from "../../firebase";
 
 function ProjectList(prop) {
-  console.log(prop);
+  let history = useHistory();
+  const routeChange = () => {
+    auth.signOut().then(function () {
+      // Sign-out successful.
+      history.push("/");
+    });
+  };
   return (
     <div>
       <div>
         <h1>123</h1>
-        <button onClick={() => auth.signOut()}>signout</button>
+        <button onClick={routeChange}>signout</button>
       </div>
     </div>
   );

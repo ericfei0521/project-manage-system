@@ -1,16 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../images/logo.svg";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../action/action";
-import { signInWithGoogle } from "../firebase";
+import { auth, signInWithGoogle, createNewUser } from "../firebase";
+
 function Login() {
   let dispatch = useDispatch();
-  const state = useSelector((state) => state);
+  const state = useSelector((state) => state.Login);
   let [email, setEmail] = useState(state.email);
   let [password, setPassword] = useState(state.password);
+  let history = useHistory();
 
+  auth.onAuthStateChanged(async (userAuth) => {
+    if (userAuth) {
+      createNewUser(userAuth);
+      history.push("/project");
+    }
+  });
   return (
     <div className="App">
       <Link to="/login" className="brand-logo">

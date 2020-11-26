@@ -5,10 +5,10 @@ import "./index.css";
 import App from "./components/App";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import allReducer from "./reducer";
+import allRedcuer from "./reducer/allreducer";
 
 const store = createStore(
-  allReducer,
+  allRedcuer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 

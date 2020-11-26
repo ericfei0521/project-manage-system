@@ -1,12 +1,18 @@
 import React from "react";
 import logo from "../images/logo.svg";
-
-import { Link } from "react-router-dom";
+import { auth } from "../firebase";
+import { Link, useHistory } from "react-router-dom";
 // import { useDispatch } from "react-redux";
 // import { signup } from "../action/action";
 
 function Welcome() {
   // let dispatch = useDispatch();
+  let history = useHistory();
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      history.push("/project");
+    }
+  });
   return (
     <div className="App">
       <div>

@@ -2,7 +2,7 @@ let initialState = {
   email: "",
   password: "",
 };
-const allReducer = (state = initialState, action) => {
+const Login = (state = initialState, action) => {
   switch (action.type) {
     case "LOG_IN": {
       state.email = action.payload.email;
@@ -15,4 +15,4 @@ const allReducer = (state = initialState, action) => {
   }
 };
 
-export default allReducer;
+export default Login;
