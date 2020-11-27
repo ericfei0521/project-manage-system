@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Header from "../context/header";
 import { useHistory } from "react-router-dom";
 import { auth } from "../../firebase";
 
@@ -10,7 +11,7 @@ function ProjectList() {
     if (!userAuth) {
       history.push("/");
     } else {
-      setUserID(userAuth.email);
+      setUserID(userAuth.uid);
     }
   });
   const routeChange = () => {
@@ -22,11 +23,11 @@ function ProjectList() {
   return (
     <div>
       <div>
+        <Header />
         <h1>{state}</h1>
         <button onClick={routeChange}>signout</button>
       </div>
     </div>
   );
 }
-
 export default ProjectList;
