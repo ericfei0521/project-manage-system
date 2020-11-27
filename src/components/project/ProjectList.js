@@ -22,16 +22,11 @@ function ProjectList() {
           .get()
           .then(function (doc) {
             doc.forEach((item) => {
-              let member = item.data().member;
-              for (let i = 0; i < member.length; i++) {
-                if (member[i] === userID) {
-                  let dataitem = {
-                    name: item.data().name,
-                    id: item.id,
-                  };
-                  data.push(dataitem);
-                }
-              }
+              let dataitem = {
+                name: item.data().name,
+                id: item.id,
+              };
+              data.push(dataitem);
             });
           })
           .then(() => {
@@ -45,16 +40,11 @@ function ProjectList() {
     projects.onSnapshot(function (doc) {
       let updateData = [];
       doc.forEach((item) => {
-        let member = item.data().member;
-        for (let i = 0; i < member.length; i++) {
-          if (member[i] === userID) {
-            let dataitem = {
-              name: item.data().name,
-              id: item.id,
-            };
-            updateData.push(dataitem);
-          }
-        }
+        let dataitem = {
+          name: item.data().name,
+          id: item.id,
+        };
+        updateData.push(dataitem);
       });
       setProjects(updateData);
     });
