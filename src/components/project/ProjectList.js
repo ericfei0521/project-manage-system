@@ -3,6 +3,7 @@ import Header from "../head/header";
 import PrjectCard from "./prjectCard";
 import { useHistory } from "react-router-dom";
 import { auth, firestore } from "../../firebase";
+import { doc } from "prettier";
 
 function ProjectList() {
   let history = useHistory();
@@ -22,11 +23,16 @@ function ProjectList() {
           .get()
           .then(function (doc) {
             doc.forEach((item) => {
-              let dataitem = {
-                name: item.data().name,
-                id: item.id,
-              };
-              data.push(dataitem);
+              let member = item.data().member;
+              for (let i = 0; i < member.length; i++) {
+                if (member[i] === userID) {
+                  let dataitem = {
+                    name: item.data().name,
+                    id: item.id,
+                  };
+                  data.push(dataitem);
+                }
+              }
             });
           })
           .then(() => {
@@ -36,21 +42,21 @@ function ProjectList() {
     });
   }, []);
   useEffect(() => {
-    console.log("abcd");
     projects.onSnapshot(function (doc) {
       let updateData = [];
       doc.forEach((item) => {
-        let updateitem = {
-          name: item.data().name,
-          id: item.id,
-        };
-        updateData.push(updateitem);
+        let member = item.data().member;
+        for (let i = 0; i < member.length; i++) {
+          if (member[i] === userID) {
+            let dataitem = {
+              name: item.data().name,
+              id: item.id,
+            };
+            updateData.push(dataitem);
+          }
+        }
       });
-      if (updateData.length === dataProject.length) {
-        return;
-      } else {
-        setProjects(updateData);
-      }
+      setProjects(updateData);
     });
   }, []);
   const routeChange = () => {
@@ -69,9 +75,10 @@ function ProjectList() {
         ))}
         <button
           onClick={() => {
+            let name = prompt("please enter project name", "name");
             firestore.collection("projects").add({
-              name: "test002",
-              id: Math.floor(Math.random * 1000),
+              member: [userID],
+              name: name,
             });
           }}
         >
