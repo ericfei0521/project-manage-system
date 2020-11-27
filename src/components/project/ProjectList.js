@@ -3,7 +3,6 @@ import Header from "../head/header";
 import PrjectCard from "./prjectCard";
 import { useHistory } from "react-router-dom";
 import { auth, firestore } from "../../firebase";
-import { doc } from "prettier";
 
 function ProjectList() {
   let history = useHistory();
@@ -40,6 +39,7 @@ function ProjectList() {
           });
       }
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
     projects.onSnapshot(function (doc) {
@@ -58,6 +58,7 @@ function ProjectList() {
       });
       setProjects(updateData);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const routeChange = () => {
     auth.signOut().then(function () {
