@@ -13,9 +13,7 @@ const Header = () => {
       <Link to="/project">
         <img src={logo} alt="" width="80px" />
       </Link>
-      <div>
-        <Clock />
-      </div>
+      <div>{/* <Clock /> */}</div>
     </div>
   );
 };

@@ -7,8 +7,8 @@ import { auth, signInWithGoogle, createNewUser } from "../firebase";
 
 function Login() {
   let dispatch = useDispatch();
-  let [email, setEmail] = useState(null);
-  let [password, setPassword] = useState(null);
+  let [email, setEmail] = useState("");
+  let [password, setPassword] = useState("");
   let history = useHistory();
 
   auth.onAuthStateChanged(async (userAuth) => {
