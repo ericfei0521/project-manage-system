@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from "../images/logo.svg";
+import logo from "../images/logo.png";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signup } from "../action/action";

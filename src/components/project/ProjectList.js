@@ -12,26 +12,27 @@ function ProjectList() {
   //監聽使用者登入
   useEffect(() => {
     let user = auth.currentUser;
-    if (user) {
+    if (!user) {
+      history.push("/login");
+    } else {
       setUserID(user.uid);
-    }
-    projects.onSnapshot(function (doc) {
-      console.log("abc");
-      let updateData = [];
-      // console.log(userID)
-      doc.forEach((item) => {
-        let member = item.data().member;
-        if (member.includes(userID)) {
-          let dataitem = {
-            name: item.data().name,
-            id: item.id,
-          };
-          updateData.push(dataitem);
-        }
+      projects.onSnapshot(function (doc) {
+        console.log("abc");
+        let updateData = [];
+        // console.log(userID)
+        doc.forEach((item) => {
+          let member = item.data().member;
+          if (member.includes(userID)) {
+            let dataitem = {
+              name: item.data().name,
+              id: item.id,
+            };
+            updateData.push(dataitem);
+          }
+        });
+        setProjects(updateData);
       });
-      setProjects(updateData);
-    });
-
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userID]);
   const routeChange = () => {

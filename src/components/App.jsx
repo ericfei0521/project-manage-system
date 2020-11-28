@@ -4,6 +4,7 @@ import Welcome from "./welcome";
 import Login from "./login";
 import Signup from "./signup";
 import ProjectList from "./project/ProjectList";
+import "../style/Reset.css";
 
 function App() {
   return (
