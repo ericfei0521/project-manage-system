@@ -16,3 +16,9 @@ export function addList(value) {
     payload: value,
   };
 }
+export function addTasks(value) {
+  return {
+    type: "ADD_TASKS",
+    payload: value,
+  };
+}

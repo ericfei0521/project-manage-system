@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Header from "../head/header";
-import TaskList from "./task/taskList";
+import TaskList from "../Task/taskList";
 import { addList } from "../../action/action";
 import { useParams } from "react-router-dom";
 import { firestore } from "../../firebase";
