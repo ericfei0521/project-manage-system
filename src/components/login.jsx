@@ -14,7 +14,7 @@ function Login() {
   auth.onAuthStateChanged(async (userAuth) => {
     if (userAuth) {
       createNewUser(userAuth);
-      history.push("/project");
+      history.push("/projects");
     }
   });
   return (

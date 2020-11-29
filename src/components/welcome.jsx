@@ -13,7 +13,7 @@ function Welcome() {
   let history = useHistory();
   auth.onAuthStateChanged((user) => {
     if (user) {
-      history.push("/project");
+      history.push("/projects");
     }
   });
   return (

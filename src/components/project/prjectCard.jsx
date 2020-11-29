@@ -1,10 +1,20 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const PrjectCard = ({ id, name }) => {
+const PrjectCard = ({ id, name, state }) => {
   return (
-    <div>
-      <h1>{name}</h1>
-    </div>
+    <Link
+      to={{
+        pathname: `/projects/${id}`,
+      }}
+      className="brand-logo"
+    >
+      <div display="flex">
+        <h1>
+          {name} state:{state}
+        </h1>
+      </div>
+    </Link>
   );
 };
 

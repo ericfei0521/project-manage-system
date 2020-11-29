@@ -26,6 +26,7 @@ function ProjectList() {
             let dataitem = {
               name: item.data().name,
               id: item.id,
+              state: item.data().state,
             };
             updateData.push(dataitem);
           }
@@ -47,7 +48,12 @@ function ProjectList() {
       <div>
         <Header />
         {dataProject.map((item) => (
-          <PrjectCard key={item.id} id={item.id} name={item.name} />
+          <PrjectCard
+            key={item.id}
+            id={item.id}
+            name={item.name}
+            state={item.state}
+          />
         ))}
         <button
           onClick={() => {

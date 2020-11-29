@@ -10,3 +10,9 @@ export function signup(value) {
     payload: value,
   };
 }
+export function addList(value) {
+  return {
+    type: "ADD_LIST",
+    payload: value,
+  };
+}
