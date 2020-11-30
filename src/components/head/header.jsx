@@ -16,7 +16,7 @@ const Header = (prop) => {
       <div>
         <Clock />
       </div>
-      {prop.name ? <h1>{prop.name}</h1> : <></>}
+      {prop.name ? <h1>Project: {prop.name}</h1> : <></>}
     </div>
   );
 };

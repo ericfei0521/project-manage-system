@@ -42,6 +42,15 @@ const HandleList = (state = initialState, action) => {
       });
       return state;
     }
+    case "EDIT_TASKS": {
+      state = action.payload;
+      console.log(state);
+      firestore.collection("subtasks").doc(state.taskid).update({
+        name: state.name,
+        description: state.description,
+      });
+      return state;
+    }
     default:
       return state;
   }

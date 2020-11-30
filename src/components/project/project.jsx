@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "../head/header";
 import TaskList from "../Task/taskList";
+import style from "../../style/project.module.scss";
 import { addList } from "../../action/action";
 import { useParams } from "react-router-dom";
 import { firestore } from "../../firebase";
@@ -59,28 +60,30 @@ const Project = () => {
           <button>加member</button>
         </div>
       </div>
-      <div>
+      <div className={style.project}>
         {tasks.map((item) => (
           <TaskList key={item.id} id={item.id} name={item.name} />
         ))}
-        <input
-          onChange={(e) => setListName(e.target.value)}
-          value={listname}
-          type="text"
-          placeholder="Task Name"
-        />
-        <button
-          onClick={() => {
-            dispatch(
-              addList({
-                id: projectId,
-                name: listname,
-              })
-            );
-          }}
-        >
-          +
-        </button>
+        <div>
+          <input
+            onChange={(e) => setListName(e.target.value)}
+            value={listname}
+            type="text"
+            placeholder="Task Name"
+          />
+          <button
+            onClick={() => {
+              dispatch(
+                addList({
+                  id: projectId,
+                  name: listname,
+                })
+              );
+            }}
+          >
+            +
+          </button>
+        </div>
       </div>
     </div>
   );

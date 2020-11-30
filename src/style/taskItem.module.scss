@@ -1,0 +1,25 @@
+.shortCard {
+  padding: 5px;
+  border: 1px solid gray;
+  background-color: rgba(255, 224, 137, 0.787);
+  margin: 2px;
+}
+.opencard {
+  box-sizing: border-box;
+  padding: 30px;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(112, 102, 88, 0.63);
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  .card {
+    width: 60%;
+    background-color: rgb(252, 253, 155);
+  }
+}
+.close {
+  display: none;
+}

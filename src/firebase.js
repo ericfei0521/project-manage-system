@@ -18,6 +18,9 @@ const firebaseSet = firebase.initializeApp(firebaseConfig);
 export const auth = firebaseSet.auth();
 export const firestore = firebaseSet.firestore();
 export const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+export const timetoDate = (e) => {
+  return e.firebase.firestore.Timestamp.toDate();
+};
 
 const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({

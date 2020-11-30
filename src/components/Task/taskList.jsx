@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { firestore } from "../../firebase";
 import { nanoid } from "nanoid";
+import style from "../../style/taskList.module.scss";
+import TaskItem from "./taskItem";
 
 const TaskList = ({ name, id }) => {
   let dispatch = useDispatch();
@@ -11,6 +13,7 @@ const TaskList = ({ name, id }) => {
   let [nowTask, setTask] = useState([]);
   let [subTaskname, setsubTaskName] = useState("");
   let [substate, setsubTaskState] = useState("");
+  let [isEdit, setEdit] = useState(false);
   //   project內的tasklist
   let taskList = firestore
     .collection("projects")
@@ -48,49 +51,64 @@ const TaskList = ({ name, id }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <div>
+    <div className={style.list}>
       {name}
-      {nowTask.map((item) => (
-        <h1 key={item.id}>
-          task: {item.name} <br /> state:{item.state}
-        </h1>
-      ))}
-      <input
-        onChange={(e) => setsubTaskName(e.target.value)}
-        value={subTaskname}
-        type="text"
-        placeholder="Task Name"
-      />
-      <select
-        name=""
-        id=""
-        onChange={(e) => setsubTaskState(e.target.value)}
-        value={substate}
-      >
-        <option value="On-hold">On-hold</option>
-        <option value="Pending">Pending</option>
-        <option value="Running">Running</option>
-        <option value="Reviewing">Reviewing</option>
-        <option value="Complete">Complete</option>
-      </select>
-      <button
-        onClick={() => {
-          dispatch(
-            addTasks({
-              oldtasks: nowTask,
-              projectid: projectId,
-              listid: id,
-              id: nanoid(),
-              name: subTaskname,
-              state: substate,
-            })
-          );
-          setsubTaskName("");
-          setsubTaskState("");
-        }}
-      >
-        +
-      </button>
+      <div>
+        {nowTask.map((item) => (
+          <TaskItem
+            key={item.id}
+            id={item.id}
+            name={item.name}
+            state={item.state}
+          />
+        ))}
+        {isEdit ? (
+          <div>
+            <input
+              onChange={(e) => setsubTaskName(e.target.value)}
+              value={subTaskname}
+              type="text"
+              placeholder="Task Name"
+            />
+            <select
+              name=""
+              id=""
+              onChange={(e) => setsubTaskState(e.target.value)}
+              value={substate}
+            >
+              <option value="On-hold">On-hold</option>
+              <option value="Pending">Pending</option>
+              <option value="Running">Running</option>
+              <option value="Reviewing">Reviewing</option>
+              <option value="Complete">Complete</option>
+            </select>
+
+            <button
+              onClick={() => {
+                dispatch(
+                  addTasks({
+                    oldtasks: nowTask,
+                    projectid: projectId,
+                    listid: id,
+                    id: nanoid(),
+                    name: subTaskname,
+                    state: substate,
+                  })
+                );
+                setsubTaskName("");
+                setsubTaskState("");
+              }}
+            >
+              Add Task
+            </button>
+            <button onClick={() => setEdit(false)}>X</button>
+          </div>
+        ) : (
+          <div>
+            <button onClick={() => setEdit(true)}>Add Task</button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

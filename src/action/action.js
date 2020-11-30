@@ -22,3 +22,9 @@ export function addTasks(value) {
     payload: value,
   };
 }
+export function editTask(value) {
+  return {
+    type: "EDIT_TASKS",
+    payload: value,
+  };
+}
