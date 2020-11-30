@@ -28,3 +28,9 @@ export function editTask(value) {
     payload: value,
   };
 }
+export function addJob(value) {
+  return {
+    type: "ADD_JOBS",
+    payload: value,
+  };
+}

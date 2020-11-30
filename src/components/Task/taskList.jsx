@@ -12,7 +12,7 @@ const TaskList = ({ name, id }) => {
   let { projectId } = useParams();
   let [nowTask, setTask] = useState([]);
   let [subTaskname, setsubTaskName] = useState("");
-  let [substate, setsubTaskState] = useState("");
+  let [substate, setsubTaskState] = useState("on-hold");
   let [isEdit, setEdit] = useState(false);
   //   project內的tasklist
   let taskList = firestore
@@ -71,8 +71,6 @@ const TaskList = ({ name, id }) => {
               placeholder="Task Name"
             />
             <select
-              name=""
-              id=""
               onChange={(e) => setsubTaskState(e.target.value)}
               value={substate}
             >
@@ -97,6 +95,7 @@ const TaskList = ({ name, id }) => {
                 );
                 setsubTaskName("");
                 setsubTaskState("");
+                setEdit(false);
               }}
             >
               Add Task

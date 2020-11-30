@@ -9,6 +9,9 @@ function ProjectList() {
   let projects = firestore.collection("projects");
   let [userID, setUserID] = useState(null);
   let [dataProject, setProjects] = useState([]);
+  let [isAdd, setAdd] = useState(false);
+  let [newProjectName, setNewProjectsName] = useState("");
+  let [newProjectState, setNewProjectState] = useState("On-hold");
   //監聽使用者登入
   useEffect(() => {
     let user = auth.currentUser;
@@ -47,6 +50,7 @@ function ProjectList() {
     <div>
       <div>
         <Header />
+        <button onClick={routeChange}>signout</button>
         {dataProject.map((item) => (
           <PrjectCard
             key={item.id}
@@ -55,18 +59,43 @@ function ProjectList() {
             state={item.state}
           />
         ))}
-        <button
-          onClick={() => {
-            let name = prompt("please enter project name", "name");
-            firestore.collection("projects").add({
-              member: [userID],
-              name: name,
-            });
-          }}
-        >
-          +
-        </button>
-        <button onClick={routeChange}>signout</button>
+        {isAdd ? (
+          <div>
+            <input
+              onChange={(e) => setNewProjectsName(e.target.value)}
+              value={newProjectName}
+              type="text"
+              placeholder="Project Name"
+            />
+            <select
+              onChange={(e) => setNewProjectState(e.target.value)}
+              value={newProjectState}
+            >
+              <option value="On-hold">On-hold</option>
+              <option value="Pending">Pending</option>
+              <option value="Running">Running</option>
+              <option value="Reviewing">Reviewing</option>
+              <option value="Complete">Complete</option>
+            </select>
+            <button
+              onClick={() => {
+                firestore.collection("projects").add({
+                  member: [userID],
+                  name: newProjectName,
+                  state: newProjectState,
+                });
+                setNewProjectsName("");
+                setNewProjectState("On-hold");
+                setAdd(true);
+              }}
+            >
+              Add Project
+            </button>
+            <button onClick={() => setAdd(true)}>X</button>
+          </div>
+        ) : (
+          <button onClick={() => setAdd(true)}>Add Project</button>
+        )}
       </div>
     </div>
   );

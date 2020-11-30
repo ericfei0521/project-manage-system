@@ -3,7 +3,6 @@ import style from "../../style/taskItem.module.scss";
 import JobItem from "./jobItem";
 import { useDispatch } from "react-redux";
 import { firestore } from "../../firebase";
-import { nanoid } from "nanoid";
 import { editTask } from "../../action/action";
 
 const TaskItem = ({ id, name, state }) => {
@@ -112,6 +111,7 @@ const TaskItem = ({ id, name, state }) => {
                 member={item.member}
                 state={item.state}
                 startDate={item.startdate}
+                dueDate={item.duedate}
               />
             ))}
             <button>Add Task</button>
