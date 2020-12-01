@@ -38,16 +38,17 @@ const HandleList = (state = initialState, action) => {
         createTime: time,
         name: state.name,
         state: state.state,
+        description: "Please Enter Description",
         tasks: [],
       });
       return state;
     }
     case "EDIT_TASKS": {
-      state = action.payload;
       console.log(state);
-      firestore.collection("subtasks").doc(state.taskid).update({
-        name: state.name,
-        description: state.description,
+      state = action.payload;
+      firestore.collection("subtasks").doc(action.payload.taskid).update({
+        name: action.payload.name,
+        description: action.payload.description,
       });
       return state;
     }

@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from "react";
 import style from "../../style/taskItem.module.scss";
 import JobItem from "./jobItem";
+import InputJob from "./inputJob";
 import { useDispatch } from "react-redux";
 import { firestore } from "../../firebase";
 import { editTask } from "../../action/action";
+import { useParams } from "react-router-dom";
 
 const TaskItem = ({ id, name, state }) => {
   let dispatch = useDispatch();
+  let { projectId } = useParams();
   let [editeCard, setEditCard] = useState(false);
   let [taskName, setTaskName] = useState(name);
   let [editTaskName, setEditTaskName] = useState(false);
   let [discript, setDiscript] = useState("Please Enter Description");
   let [editdiscript, setEditdiscript] = useState(false);
   let [subTask, setSubTask] = useState([]);
+  let [addsubTask, setAddSubTask] = useState(false);
   useEffect(() => {
     firestore
       .collection("subtasks")
@@ -53,6 +57,9 @@ const TaskItem = ({ id, name, state }) => {
         })
       );
     }
+  };
+  const handleAddTask = () => {
+    setAddSubTask(false);
   };
   return (
     <div>
@@ -114,7 +121,13 @@ const TaskItem = ({ id, name, state }) => {
                 dueDate={item.duedate}
               />
             ))}
-            <button>Add Task</button>
+            {addsubTask ? (
+              <InputJob projectId={projectId} handleAddTask={handleAddTask} />
+            ) : (
+              <button onClick={() => setAddSubTask(!addsubTask)}>
+                Add Task
+              </button>
+            )}
           </div>
         </div>
       </div>

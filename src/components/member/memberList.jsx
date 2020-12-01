@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 const MemberList = (props) => {
   const state = useSelector((state) => state.Handleshowmember);
   console.log(state);
+
   return (
     <div>
       <button onClick={() => props.showmember()}>X</button>
