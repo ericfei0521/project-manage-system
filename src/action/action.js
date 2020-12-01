@@ -1,3 +1,6 @@
+import { firestore } from "../firebase";
+import { SHOW } from "./actionType";
+
 export function login(value) {
   return {
     type: "LOG_IN",
@@ -32,5 +35,49 @@ export function addJob(value) {
   return {
     type: "ADD_JOBS",
     payload: value,
+  };
+}
+// export function showMember(value) {
+//   console.log(value)
+//   return {
+//     type: 'SHOW',
+//     payload: value,
+//   }
+// }
+
+export function getMember(value) {
+  return (dispatch) => {
+    console.log(value);
+    let list = [];
+    let memberName = [];
+    firestore
+      .collection("users")
+      .get()
+      .then((doc) => {
+        doc.forEach((item) => {
+          list.push(item.data());
+        });
+      })
+      .then(() => {
+        list.forEach((item) => {
+          value.member.forEach((user) => {
+            if (user === item.userID) {
+              memberName.push(item);
+            }
+          });
+        });
+      })
+      .then(() => {
+        let newList = {
+          show: !value.show,
+          member: memberName,
+          allusers: list,
+        };
+        console.log(newList);
+        dispatch({
+          type: SHOW,
+          payload: newList,
+        });
+      });
   };
 }

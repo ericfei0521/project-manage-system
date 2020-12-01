@@ -3,7 +3,12 @@ import { addJob } from "../../action/action";
 import { useDispatch } from "react-redux";
 
 const InputJob = () => {
-  return <div></div>;
+  let dispatch = useDispatch();
+  return (
+    <div>
+      <input type="text" />
+    </div>
+  );
 };
 
 export default InputJob;

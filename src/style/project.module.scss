@@ -3,3 +3,13 @@
   max-width: 1920;
   overflow-x: auto;
 }
+.open {
+  width: 500px;
+  height: 500px;
+  position: fixed;
+  background-color: green;
+  display: block;
+}
+.close {
+  display: none;
+}

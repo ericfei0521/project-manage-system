@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Header from "../head/header";
 import TaskList from "../Task/taskList";
+import MemberList from "../member/memberList";
+import AlluserList from "../member/alluserList";
 import style from "../../style/project.module.scss";
-import { addList } from "../../action/action";
+import { addList, getMember } from "../../action/action";
 import { useParams } from "react-router-dom";
 import { firestore } from "../../firebase";
 import { useDispatch } from "react-redux";
@@ -13,15 +15,21 @@ const Project = () => {
   let project = firestore.collection("projects").doc(projectId);
   let [name, setName] = useState("");
   let [listname, setListName] = useState("");
-  let [memberNum, setMemberNum] = useState(0);
+  let [memberNum, setMemberNum] = useState([]);
   let [tasks, setTasks] = useState([]);
+  let [membershow, setMemberShow] = useState(false);
+  let [showallusers, setAllusers] = useState(false);
 
   useEffect(() => {
     console.log("now in project");
     project.onSnapshot(function (doc) {
       let data = doc.data();
       setName(data.name);
-      setMemberNum(data.member.length);
+      let list = [];
+      data.member.forEach((item) => {
+        list.push(item);
+      });
+      setMemberNum(list);
     });
     project
       .collection("tasks")
@@ -39,12 +47,18 @@ const Project = () => {
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const handlemember = () => {
+    setMemberShow(!membershow);
+  };
+  const handleAddmember = () => {
+    setAllusers(!showallusers);
+  };
   return (
     <div>
       <Header name={name} />
       <div>
         <button>成員項目</button>
-        <button>期限</button>
         <button>甘特圖</button>
         <button>績效</button>
         <div>
@@ -56,8 +70,52 @@ const Project = () => {
         </div>
         <div>
           <button>權限</button>
-          <button>{memberNum}</button>
-          <button>加member</button>
+          <button
+            onClick={() => {
+              console.log(membershow);
+              dispatch(
+                getMember({
+                  show: membershow,
+                  member: memberNum,
+                })
+              );
+              setMemberShow(!membershow);
+            }}
+          >
+            +{memberNum.length}
+          </button>
+          {membershow ? (
+            <MemberList
+              projectid={projectId}
+              member={memberNum}
+              showmember={handlemember}
+            />
+          ) : (
+            <></>
+          )}
+          <button
+            onClick={() => {
+              console.log(membershow);
+              dispatch(
+                getMember({
+                  show: membershow,
+                  member: memberNum,
+                })
+              );
+              setAllusers(!showallusers);
+            }}
+          >
+            + member
+          </button>
+          {showallusers ? (
+            <AlluserList
+              projectid={projectId}
+              member={memberNum}
+              showmember={handleAddmember}
+            />
+          ) : (
+            <></>
+          )}
         </div>
       </div>
       <div className={style.project}>
