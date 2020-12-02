@@ -4,9 +4,6 @@ import Clock from "./clock";
 import { Link } from "react-router-dom";
 
 const Header = (prop) => {
-  // function componentDidMount(){
-  //   setInterval(new Date(),1000)
-  // }
   console.log();
   return (
     <div>

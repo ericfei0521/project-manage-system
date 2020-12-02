@@ -2,14 +2,20 @@ import React, { useState } from "react";
 import { format } from "date-fns";
 import { enGB } from "date-fns/locale";
 import { DatePickerCalendar } from "react-nice-dates";
+import DayJS from "react-dayjs";
 import "react-nice-dates/build/style.css";
-function DatePicker(props) {
+function EditDatePicker(props) {
   const [date, setDate] = useState();
   let [show, setShow] = useState(false);
   return (
     <div>
       <button onClick={() => setShow(!show)}>
-        Due date: {date ? format(date, "yyyy/MM/dd", { locale: enGB }) : "none"}
+        Due date:{" "}
+        {date ? (
+          format(date, "yyyy/MM/dd", { locale: enGB })
+        ) : (
+          <DayJS format="YYYY/MM/DD">{props.dueDate}</DayJS>
+        )}
       </button>
       {show ? (
         <div>
@@ -34,4 +40,4 @@ function DatePicker(props) {
   );
 }
 
-export default DatePicker;
+export default EditDatePicker;

@@ -28,22 +28,25 @@ const TaskItem = ({ id, name, state }) => {
     firestore
       .collection("subtasks")
       .doc(id)
-      .collection("tasks")
+      .collection("jobs")
+      .orderBy("createTime")
       .onSnapshot((doc) => {
         let childTask = [];
         doc.forEach((item) => {
           let data = {
             id: item.id,
+            memberID: item.data().memberID,
             name: item.data().name,
             member: item.data().member,
-            startdate: item.data().startDate,
-            duedate: item.data().dueDate,
+            dueDate: item.data().dueDate,
             state: item.data().state,
+            comment: item.data().comment,
           };
           childTask.push(data);
         });
         setSubTask(childTask);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const handletask = (e) => {
     if (e.key === "Enter") {
@@ -113,22 +116,26 @@ const TaskItem = ({ id, name, state }) => {
             {subTask.map((item) => (
               <JobItem
                 key={item.id}
+                memberID={item.memberID}
+                subtaskId={id}
+                projectId={projectId}
+                jobid={item.id}
                 name={item.name}
-                id={item.id}
-                member={item.member}
                 state={item.state}
-                startDate={item.startdate}
-                dueDate={item.duedate}
+                member={item.member}
+                dueDate={item.dueDate}
               />
             ))}
-            {addsubTask ? (
-              <InputJob projectId={projectId} handleAddTask={handleAddTask} />
-            ) : (
-              <button onClick={() => setAddSubTask(!addsubTask)}>
-                Add Task
-              </button>
-            )}
           </div>
+          {addsubTask ? (
+            <InputJob
+              projectId={projectId}
+              handleAddTask={handleAddTask}
+              subTaskID={id}
+            />
+          ) : (
+            <button onClick={() => setAddSubTask(!addsubTask)}>Add Task</button>
+          )}
         </div>
       </div>
     </div>

@@ -37,13 +37,6 @@ export function addJob(value) {
     payload: value,
   };
 }
-// export function showMember(value) {
-//   console.log(value)
-//   return {
-//     type: 'SHOW',
-//     payload: value,
-//   }
-// }
 
 export function getMember(value) {
   return (dispatch) => {
