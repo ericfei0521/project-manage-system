@@ -7,11 +7,14 @@ import { firestore } from "../../firebase";
 import { editTask } from "../../action/action";
 import { useParams } from "react-router-dom";
 
-const TaskItem = ({ id, name, state }) => {
+const TaskItem = ({ id, name, state, taskID }) => {
+  console.log(taskID);
+  console.log(id);
   let dispatch = useDispatch();
   let { projectId } = useParams();
   let [editeCard, setEditCard] = useState(false);
   let [taskName, setTaskName] = useState(name);
+  let [taskState, setTaskState] = useState(state);
   let [editTaskName, setEditTaskName] = useState(false);
   let [discript, setDiscript] = useState("Please Enter Description");
   let [editdiscript, setEditdiscript] = useState(false);
@@ -22,8 +25,12 @@ const TaskItem = ({ id, name, state }) => {
       .collection("subtasks")
       .doc(id)
       .onSnapshot((doc) => {
-        setTaskName(doc.data().name);
-        setDiscript(doc.data().description);
+        if (doc.data() === undefined) {
+          return;
+        } else {
+          setTaskName(doc.data().name);
+          setDiscript(doc.data().description);
+        }
       });
     firestore
       .collection("subtasks")
@@ -64,11 +71,44 @@ const TaskItem = ({ id, name, state }) => {
   const handleAddTask = () => {
     setAddSubTask(false);
   };
+  const handleTaskState = (value) => {
+    firestore.collection("subtasks").doc(id).update({
+      state: value,
+    });
+  };
+  const deleteTask = () => {
+    firestore.collection("subtasks").doc(id).delete();
+    firestore
+      .collection("projects")
+      .doc(projectId)
+      .collection("tasks")
+      .doc(taskID)
+      .get()
+      .then((doc) => {
+        let data = [];
+        doc.data().task.forEach((item) => {
+          if (item !== id) {
+            data.push(item);
+          }
+        });
+        return data;
+      })
+      .then((data) => {
+        firestore
+          .collection("projects")
+          .doc(projectId)
+          .collection("tasks")
+          .doc(taskID)
+          .update({
+            task: data,
+          });
+      });
+  };
   return (
     <div>
       <div className={style.shortCard} onClick={() => setEditCard(true)}>
         <h1>{taskName}</h1>
-        <h1>{state}</h1>
+        <h1>{taskState}</h1>
       </div>
       <div className={editeCard ? style.opencard : style.close}>
         <div className={style.card}>
@@ -93,6 +133,20 @@ const TaskItem = ({ id, name, state }) => {
                 Task: {taskName} id:{id}
               </div>
             )}
+            <select
+              onChange={(e) => {
+                setTaskState(e.target.value);
+                handleTaskState(e.target.value);
+              }}
+              value={taskState}
+            >
+              <option value="On-hold">On-hold</option>
+              <option value="Pending">Pending</option>
+              <option value="Running">Running</option>
+              <option value="Reviewing">Reviewing</option>
+              <option value="Complete">Complete</option>
+            </select>
+            <button onClick={() => deleteTask()}>Delete</button>
             <button onClick={() => setEditCard(false)}>X</button>
           </div>
           <div>

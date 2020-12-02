@@ -37,7 +37,7 @@ const HandleList = (state = initialState, action) => {
       firestore.collection("subtasks").doc(state.id).set({
         createTime: time,
         name: state.name,
-        state: state.state,
+        state: action.payload.state,
         description: "Please Enter Description",
         tasks: [],
       });

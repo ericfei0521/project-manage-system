@@ -52,10 +52,11 @@ const TaskList = ({ name, id }) => {
   }, []);
   return (
     <div className={style.list}>
-      {name}
+      {name}124
       <div>
         {nowTask.map((item) => (
           <TaskItem
+            taskID={id}
             key={item.id}
             id={item.id}
             name={item.name}

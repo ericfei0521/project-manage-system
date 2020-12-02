@@ -3,16 +3,11 @@ import { firestore } from "../../firebase";
 import EditDatePicker from "./editDayPicker";
 
 const JobItem = (prop) => {
-  console.log(prop);
   let subtaskPath = firestore
     .collection("subtasks")
     .doc(prop.subtaskId)
     .collection("jobs")
     .doc(prop.jobid);
-  let userTaskkPath = firestore
-    .collection("users")
-    .doc(prop.memberID)
-    .collection("jobs");
   let [isEdit, setIsEdit] = useState(false);
   let [taskName, setTaskName] = useState(prop.name);
   let [edittaskName, setEditTaskName] = useState(false);
@@ -40,7 +35,6 @@ const JobItem = (prop) => {
             memberlist.push(item.data());
           }
         });
-        console.log(memberlist);
         setMember(memberlist);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -64,15 +58,21 @@ const JobItem = (prop) => {
       member: value,
     });
   };
+  const updateMemberID = (value) => {
+    subtaskPath.update({
+      memberID: value,
+    });
+  };
+  const getDate = (value) => {
+    subtaskPath.update({
+      dueDate: value,
+    });
+  };
+  const removeJob = () => {
+    subtaskPath.delete();
+  };
   return (
     <div>
-      <input
-        type="checkbox"
-        onChange={() => {
-          setStatechange(!statechange);
-        }}
-        checked={statechange ? true : false}
-      />
       {edittaskName ? (
         <div>
           <input
@@ -117,37 +117,44 @@ const JobItem = (prop) => {
       )}
 
       {membershow ? (
-        <select
-          name=""
-          id=""
-          value={membername}
-          onChange={(e) => {
-            setMemberName(e.target.value);
-            setMemberShow(!membershow);
-          }}
-        >
+        <div>
           {member.map((item) => (
-            <option
+            <button
+              key={item.userID}
               value={item.displayName}
               name={item.userID}
               onClick={(e) => {
                 updateMember(e.target.value);
-                console.log(e.target.name);
+                setMemberName(e.target.value);
+                updateMemberID(e.target.name);
                 setMemberShow(!membershow);
               }}
             >
               {item.displayName}
-            </option>
+            </button>
           ))}
-        </select>
+        </div>
       ) : (
         <div onClick={() => setMemberShow(!membershow)}>{membername}</div>
       )}
 
-      <EditDatePicker dueDate={prop.dueDate} />
+      <EditDatePicker dueDate={prop.dueDate} getDate={getDate} />
       {isEdit ? (
         <div>
-          <button onClick={() => setIsEdit(!isEdit)}>Delete</button>
+          <button
+            onClick={() => {
+              removeJob();
+            }}
+          >
+            Delete
+          </button>
+          <button
+            onClick={() => {
+              setIsEdit(!isEdit);
+            }}
+          >
+            Back
+          </button>
         </div>
       ) : (
         <div onClick={() => setIsEdit(!isEdit)}>...</div>
