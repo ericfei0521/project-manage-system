@@ -39,7 +39,6 @@ const HandleList = (state = initialState, action) => {
         name: state.name,
         state: action.payload.state,
         description: "Please Enter Description",
-        tasks: [],
       });
       return state;
     }
@@ -50,6 +49,30 @@ const HandleList = (state = initialState, action) => {
         name: action.payload.name,
         description: action.payload.description,
       });
+      return state;
+    }
+    case "DElETE_TASKS": {
+      console.log(action.payload);
+      firestore
+        .collection("projects")
+        .doc(action.payload.projectId)
+        .collection("tasks")
+        .doc(action.payload.id)
+        .delete();
+      let list = [];
+      action.payload.task.forEach((item) => {
+        list.push(item.id);
+      });
+      firestore
+        .collection("subtasks")
+        .get()
+        .then((doc) => {
+          doc.forEach((item) => {
+            if (list.includes(item.id)) {
+              firestore.collection("subtasks").doc(item.id).delete();
+            }
+          });
+        });
       return state;
     }
     default:

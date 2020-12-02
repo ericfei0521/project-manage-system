@@ -8,8 +8,6 @@ import { editTask } from "../../action/action";
 import { useParams } from "react-router-dom";
 
 const TaskItem = ({ id, name, state, taskID }) => {
-  console.log(taskID);
-  console.log(id);
   let dispatch = useDispatch();
   let { projectId } = useParams();
   let [editeCard, setEditCard] = useState(false);
@@ -130,7 +128,7 @@ const TaskItem = ({ id, name, state, taskID }) => {
                   setEditTaskName(true);
                 }}
               >
-                Task: {taskName} id:{id}
+                Task: {taskName}
               </div>
             )}
             <select

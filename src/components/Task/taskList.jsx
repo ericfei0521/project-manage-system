@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { addTasks } from "../../action/action";
+import { addTasks, deleteTask } from "../../action/action";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { firestore } from "../../firebase";
@@ -12,7 +12,10 @@ const TaskList = ({ name, id }) => {
   let { projectId } = useParams();
   let [nowTask, setTask] = useState([]);
   let [subTaskname, setsubTaskName] = useState("");
+  let [listName, setListName] = useState(name);
   let [substate, setsubTaskState] = useState("on-hold");
+  let [nameEdit, setNameEdit] = useState(false);
+  let [removeTask, setRemoveTask] = useState(false);
   let [isEdit, setEdit] = useState(false);
   //   project內的tasklist
   let taskList = firestore
@@ -25,34 +28,72 @@ const TaskList = ({ name, id }) => {
   // 核對兩者是否有相等
   useEffect(() => {
     taskList.onSnapshot(function (doc) {
-      if (!doc.data().task) {
-        return;
-      }
-      let updateData = [];
-      let list = doc.data().task;
-      dataList
-        .orderBy("createTime")
-        .get()
-        .then(function (doc) {
-          doc.forEach((item) => {
-            if (list.includes(item.id)) {
-              let data = {
-                id: item.id,
-                name: item.data().name,
-                state: item.data().state,
-              };
-              updateData.push(data);
-            }
+      if (doc.data() !== undefined) {
+        let updateData = [];
+        let list = doc.data().task;
+        dataList
+          .orderBy("createTime")
+          .get()
+          .then(function (doc) {
+            doc.forEach((item) => {
+              if (list.includes(item.id)) {
+                let data = {
+                  id: item.id,
+                  name: item.data().name,
+                  state: item.data().state,
+                };
+                updateData.push(data);
+              }
+            });
+            // console.log(updateData)
+            setTask(updateData);
           });
-          // console.log(updateData)
-          setTask(updateData);
-        });
+      }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const keyEvent = (e) => {
+    if (e.key === "Enter") {
+      setNameEdit(!nameEdit);
+      taskList.update({
+        name: e.target.value,
+      });
+    }
+  };
   return (
     <div className={style.list}>
-      {name}124
+      {nameEdit ? (
+        <div>
+          <input
+            type="text"
+            onChange={(e) => setListName(e.target.value)}
+            onKeyDown={(e) => keyEvent(e)}
+          />
+        </div>
+      ) : (
+        <h1 onClick={() => setNameEdit(!nameEdit)}>{listName}</h1>
+      )}
+
+      {removeTask ? (
+        <div>
+          <button
+            onClick={() =>
+              dispatch(
+                deleteTask({
+                  projectId: projectId,
+                  task: nowTask,
+                  id: id,
+                })
+              )
+            }
+          >
+            Delete
+          </button>
+          <button onClick={() => setRemoveTask(!removeTask)}>Cancel</button>
+        </div>
+      ) : (
+        <button onClick={() => setRemoveTask(!removeTask)}>...</button>
+      )}
       <div>
         {nowTask.map((item) => (
           <TaskItem

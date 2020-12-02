@@ -31,6 +31,13 @@ export function editTask(value) {
     payload: value,
   };
 }
+export function deleteTask(value) {
+  return {
+    type: "DElETE_TASKS",
+    payload: value,
+  };
+}
+
 export function addJob(value) {
   return {
     type: "ADD_JOBS",
