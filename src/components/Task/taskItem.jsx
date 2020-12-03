@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import style from "../../style/taskItem.module.scss";
 import JobItem from "./jobItem";
 import InputJob from "./inputJob";
+import ImageDropper from "./imageDropper";
 import { useDispatch } from "react-redux";
 import { firestore } from "../../firebase";
 import { editTask } from "../../action/action";
 import { useParams } from "react-router-dom";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const TaskItem = ({ id, name, state, taskID }) => {
   let dispatch = useDispatch();
@@ -19,6 +21,7 @@ const TaskItem = ({ id, name, state, taskID }) => {
   let [subTask, setSubTask] = useState([]);
   let [addsubTask, setAddSubTask] = useState(false);
   useEffect(() => {
+    console.log(id);
     firestore
       .collection("subtasks")
       .doc(id)
@@ -26,6 +29,8 @@ const TaskItem = ({ id, name, state, taskID }) => {
         if (doc.data() === undefined) {
           return;
         } else {
+          if (doc.data().jobs) {
+          }
           setTaskName(doc.data().name);
           setDiscript(doc.data().description);
         }
@@ -102,6 +107,16 @@ const TaskItem = ({ id, name, state, taskID }) => {
           });
       });
   };
+  const handleDrag = (result) => {
+    if (!result.destination) return;
+    const item = Array.from(subTask);
+    const [reorderItem] = item.splice(result.source.index, 1);
+    item.splice(result.destination.index, 0, reorderItem);
+    setSubTask(item);
+    firestore.collection("subtasks").doc(id).update({
+      jobs: item,
+    });
+  };
   return (
     <div>
       <div className={style.shortCard} onClick={() => setEditCard(true)}>
@@ -110,47 +125,54 @@ const TaskItem = ({ id, name, state, taskID }) => {
       </div>
       <div className={editeCard ? style.opencard : style.close}>
         <div className={style.card}>
-          <div>
-            {editTaskName ? (
-              <div>
+          <div className={style.head}>
+            <div className={style.headTitle}>
+              {editTaskName ? (
                 <input
                   type="text"
                   onChange={(e) => setTaskName(e.target.value)}
-                  value={taskName}
+                  value={`Task: ${taskName}`}
                   onKeyDown={(e) => {
                     handletask(e);
                   }}
                 />
-              </div>
-            ) : (
-              <div
-                onClick={() => {
-                  setEditTaskName(true);
+              ) : (
+                <h1
+                  onClick={() => {
+                    setEditTaskName(true);
+                  }}
+                >
+                  Task: {taskName}
+                </h1>
+              )}
+              <button onClick={() => setEditCard(false)}>X</button>
+            </div>
+            <div className={style.Status}>
+              <h1>Status:</h1>
+              <select
+                onChange={(e) => {
+                  setTaskState(e.target.value);
+                  handleTaskState(e.target.value);
                 }}
+                value={taskState}
+                className={
+                  taskState === "Complete" ? style.Complete : style.inComplete
+                }
               >
-                Task: {taskName}
-              </div>
-            )}
-            <select
-              onChange={(e) => {
-                setTaskState(e.target.value);
-                handleTaskState(e.target.value);
-              }}
-              value={taskState}
-            >
-              <option value="On-hold">On-hold</option>
-              <option value="Pending">Pending</option>
-              <option value="Running">Running</option>
-              <option value="Reviewing">Reviewing</option>
-              <option value="Complete">Complete</option>
-            </select>
+                <option value="On-hold">On-hold</option>
+                <option value="Pending">Pending</option>
+                <option value="Running">Running</option>
+                <option value="Reviewing">Reviewing</option>
+                <option value="Complete">Complete</option>
+              </select>
+            </div>
+
             <button onClick={() => deleteTask()}>Delete</button>
-            <button onClick={() => setEditCard(false)}>X</button>
           </div>
           <div>
             {editdiscript ? (
-              <div>
-                <input
+              <div className={style.head}>
+                <textarea
                   type="text"
                   onChange={(e) => setDiscript(e.target.value)}
                   value={discript}
@@ -160,25 +182,47 @@ const TaskItem = ({ id, name, state, taskID }) => {
               </div>
             ) : (
               <div onClick={() => setEditdiscript(true)}>
-                <h1>{discript}</h1>
+                <h1 onClick={() => setEditdiscript(true)}>{discript}</h1>
               </div>
             )}
           </div>
-          <div>
-            {subTask.map((item) => (
-              <JobItem
-                key={item.id}
-                memberID={item.memberID}
-                subtaskId={id}
-                projectId={projectId}
-                jobid={item.id}
-                name={item.name}
-                state={item.state}
-                member={item.member}
-                dueDate={item.dueDate}
-              />
-            ))}
-          </div>
+          <DragDropContext onDragEnd={handleDrag}>
+            <Droppable droppableId="jobs">
+              {(Provided) => (
+                <ul {...Provided.droppableProps} ref={Provided.innerRef}>
+                  {subTask.map((item, index) => {
+                    return (
+                      <Draggable
+                        key={item.id}
+                        draggableId={item.id}
+                        index={index}
+                      >
+                        {(Provided) => (
+                          <li
+                            {...Provided.draggableProps}
+                            {...Provided.dragHandleProps}
+                            ref={Provided.innerRef}
+                          >
+                            <JobItem
+                              memberID={item.memberID}
+                              subtaskId={id}
+                              projectId={projectId}
+                              jobid={item.id}
+                              name={item.name}
+                              state={item.state}
+                              member={item.member}
+                              dueDate={item.dueDate}
+                            />
+                          </li>
+                        )}
+                      </Draggable>
+                    );
+                  })}
+                  {Provided.placeholder}
+                </ul>
+              )}
+            </Droppable>
+          </DragDropContext>
           {addsubTask ? (
             <InputJob
               projectId={projectId}

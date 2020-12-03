@@ -6,6 +6,7 @@ import { addJob } from "../../action/action";
 import { useDispatch } from "react-redux";
 
 const InputJob = ({ handleAddTask, projectId, subTaskID }) => {
+  console.log(subTaskID);
   let dispatch = useDispatch();
   let [member, setMember] = useState([]);
   let [showmember, setShowmember] = useState(false);
@@ -89,6 +90,7 @@ const InputJob = ({ handleAddTask, projectId, subTaskID }) => {
               addJob({
                 id: nanoid(),
                 memberID: taskmemberID,
+                projectId: projectId,
                 taskid: subTaskID,
                 dueDate: date,
                 member: taskmember,

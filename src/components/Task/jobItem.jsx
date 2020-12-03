@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
+import firebase from "firebase/app";
 import { firestore } from "../../firebase";
 import EditDatePicker from "./editDayPicker";
-
+import style from "../../style/jobItem.module.scss";
 const JobItem = (prop) => {
   let subtaskPath = firestore
     .collection("subtasks")
     .doc(prop.subtaskId)
     .collection("jobs")
     .doc(prop.jobid);
+  let jobsPath = firestore.collection("subtasks").doc(prop.subtaskId);
   let [isEdit, setIsEdit] = useState(false);
   let [taskName, setTaskName] = useState(prop.name);
   let [edittaskName, setEditTaskName] = useState(false);
   let [state, setState] = useState(prop.state);
   let [editstate, setEditState] = useState(false);
-  let [statechange, setStatechange] = useState(false);
   let [membername, setMemberName] = useState(prop.member);
   let [membershow, setMemberShow] = useState(false);
   let [member, setMember] = useState([]);
@@ -71,12 +72,22 @@ const JobItem = (prop) => {
     });
   };
   const removeJob = () => {
+    // firestore.collection('subtasks').doc(prop.subtaskId)
+    jobsPath.get().then((doc) => {
+      for (let i = 0; i < doc.data().jobs.length; i++) {
+        if (doc.data().jobs[i].id === prop.jobid) {
+          jobsPath.update({
+            jobs: firebase.firestore.FieldValue.arrayRemove(doc.data().jobs[i]),
+          });
+        }
+      }
+    });
     subtaskPath.delete();
   };
   return (
-    <div>
+    <div className={style.jobitem}>
       {edittaskName ? (
-        <div>
+        <div className={style.item}>
           <input
             type="text"
             value={taskName}
@@ -87,36 +98,30 @@ const JobItem = (prop) => {
           />
         </div>
       ) : (
-        <h1 onClick={() => setEditTaskName(!edittaskName)}>{taskName}</h1>
+        <h1
+          onClick={() => setEditTaskName(!edittaskName)}
+          className={style.item}
+        >
+          {taskName}
+        </h1>
       )}
 
-      {editstate ? (
-        <select
-          name="status"
-          id=""
-          value={statechange ? "Complete" : state}
-          onChange={(e) => {
-            setState(e.target.value);
-            setEditState(!editstate);
-            updateDate(e.target.value);
-            if (e.target.value === "Complete") {
-              setStatechange(true);
-            } else {
-              setStatechange(false);
-            }
-          }}
-        >
-          <option value="On-hold">On-hold</option>
-          <option value="Pending">Pending</option>
-          <option value="Running">Running</option>
-          <option value="Reviewing">Reviewing</option>
-          <option value="Complete">Complete</option>
-        </select>
-      ) : (
-        <div onClick={() => setEditState(!editstate)}>
-          {statechange ? "Complete" : state}
-        </div>
-      )}
+      <select
+        name="status"
+        id=""
+        value={state}
+        onChange={(e) => {
+          setState(e.target.value);
+          setEditState(!editstate);
+          updateDate(e.target.value);
+        }}
+      >
+        <option value="On-hold">On-hold</option>
+        <option value="Pending">Pending</option>
+        <option value="Running">Running</option>
+        <option value="Reviewing">Reviewing</option>
+        <option value="Complete">Complete</option>
+      </select>
 
       {membershow ? (
         <div>
