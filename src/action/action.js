@@ -37,7 +37,12 @@ export function deleteTask(value) {
     payload: value,
   };
 }
-
+export function deleteProject(value) {
+  return {
+    type: "DElETE_PROJECT",
+    payload: value,
+  };
+}
 export function addJob(value) {
   return {
     type: "ADD_JOBS",

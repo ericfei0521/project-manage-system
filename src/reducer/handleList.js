@@ -75,6 +75,69 @@ const HandleList = (state = initialState, action) => {
         });
       return state;
     }
+    case "DElETE_PROJECT": {
+      console.log(action.payload);
+      let taskList = [];
+      firestore
+        .collection("projects")
+        .doc(action.payload.projectId)
+        .collection("tasks")
+        .get()
+        .then((doc) =>
+          doc.forEach((item) => {
+            item.data().task.forEach((data) => {
+              taskList.push(data);
+            });
+          })
+        )
+        .then(() => {
+          firestore
+            .collection("subtasks")
+            .get()
+            .then((doc) => {
+              firestore
+                .collection("projects")
+                .doc(action.payload.projectId)
+                .collection("tasks")
+                .get()
+                .then((doc) => {
+                  doc.forEach((item) => {
+                    firestore
+                      .collection("projects")
+                      .doc(action.payload.projectId)
+                      .collection("tasks")
+                      .doc(item.id)
+                      .delete();
+                  });
+                });
+              firestore
+                .collection("projects")
+                .doc(action.payload.projectId)
+                .delete();
+              doc.forEach((item) => {
+                if (taskList.includes(item.id)) {
+                  firestore
+                    .collection("subtasks")
+                    .doc(item.id)
+                    .collection("jobs")
+                    .get()
+                    .then((task) => {
+                      task.forEach((data) => {
+                        firestore
+                          .collection("subtasks")
+                          .doc(item.id)
+                          .collection("jobs")
+                          .doc(data.id)
+                          .delete();
+                      });
+                    });
+                  firestore.collection("subtasks").doc(item.id).delete();
+                }
+              });
+            });
+        });
+      return action.payload;
+    }
     default:
       return state;
   }

@@ -4,8 +4,8 @@ import TaskList from "../Task/taskList";
 import MemberList from "../member/memberList";
 import AlluserList from "../member/alluserList";
 import style from "../../style/project.module.scss";
-import { addList, getMember } from "../../action/action";
-import { useParams } from "react-router-dom";
+import { addList, getMember, deleteProject } from "../../action/action";
+import { useParams, Link } from "react-router-dom";
 import { firestore } from "../../firebase";
 import { useDispatch } from "react-redux";
 
@@ -23,13 +23,16 @@ const Project = () => {
   useEffect(() => {
     console.log("now in project");
     project.onSnapshot(function (doc) {
-      let data = doc.data();
-      setName(data.name);
-      let list = [];
-      data.member.forEach((item) => {
-        list.push(item);
-      });
-      setMemberNum(list);
+      console.log(doc.data());
+      if (doc.data() !== undefined) {
+        let data = doc.data();
+        setName(data.name);
+        let list = [];
+        data.member.forEach((item) => {
+          list.push(item);
+        });
+        setMemberNum(list);
+      }
     });
     project
       .collection("tasks")
@@ -107,6 +110,19 @@ const Project = () => {
           >
             + member
           </button>
+          <Link to="/projects">
+            <button
+              onClick={() => {
+                dispatch(
+                  deleteProject({
+                    projectId: projectId,
+                  })
+                );
+              }}
+            >
+              Delete
+            </button>
+          </Link>
           {showallusers ? (
             <AlluserList
               projectid={projectId}

@@ -24,7 +24,9 @@ const JobItem = (prop) => {
       .collection("projects")
       .doc(prop.projectId)
       .onSnapshot(function (doc) {
-        list = doc.data().member;
+        if (doc.data() !== undefined) {
+          list = doc.data().member;
+        }
       });
     firestore
       .collection("users")

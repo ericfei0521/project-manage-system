@@ -21,8 +21,9 @@ const InputJob = ({ handleAddTask, projectId, subTaskID }) => {
       .collection("projects")
       .doc(projectId)
       .onSnapshot(function (doc) {
-        list = doc.data().member;
-        console.log(list);
+        if (doc.data() !== undefined) {
+          list = doc.data().member;
+        }
       });
     firestore
       .collection("users")
