@@ -11,6 +11,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const TaskItem = ({ id, name, state, taskID }) => {
   let dispatch = useDispatch();
+  let docPath = firestore.collection("subtasks").doc(id);
   let { projectId } = useParams();
   let [editeCard, setEditCard] = useState(false);
   let [taskName, setTaskName] = useState(name);
@@ -19,27 +20,21 @@ const TaskItem = ({ id, name, state, taskID }) => {
   let [discript, setDiscript] = useState("Please Enter Description");
   let [editdiscript, setEditdiscript] = useState(false);
   let [subTask, setSubTask] = useState([]);
+  let [orderList, setOrderList] = useState([]);
   let [addsubTask, setAddSubTask] = useState(false);
   useEffect(() => {
     console.log(id);
-    firestore
-      .collection("subtasks")
-      .doc(id)
-      .onSnapshot((doc) => {
-        if (doc.data() === undefined) {
-          return;
-        } else {
-          if (doc.data().jobs) {
-          }
-          setTaskName(doc.data().name);
-          setDiscript(doc.data().description);
-        }
-      });
-    firestore
-      .collection("subtasks")
-      .doc(id)
+    docPath.onSnapshot((doc) => {
+      if (doc.data() === undefined) {
+        return;
+      } else {
+        setTaskName(doc.data().name);
+        setDiscript(doc.data().description);
+      }
+    });
+    docPath
       .collection("jobs")
-      .orderBy("createTime")
+      .orderBy("Index")
       .onSnapshot((doc) => {
         let childTask = [];
         doc.forEach((item) => {
@@ -58,6 +53,7 @@ const TaskItem = ({ id, name, state, taskID }) => {
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   const handletask = (e) => {
     if (e.key === "Enter") {
       setEditTaskName(false);
@@ -80,7 +76,6 @@ const TaskItem = ({ id, name, state, taskID }) => {
     });
   };
   const deleteTask = () => {
-    firestore.collection("subtasks").doc(id).delete();
     firestore
       .collection("projects")
       .doc(projectId)
@@ -108,14 +103,34 @@ const TaskItem = ({ id, name, state, taskID }) => {
       });
   };
   const handleDrag = (result) => {
+    console.log(result);
     if (!result.destination) return;
     const item = Array.from(subTask);
     const [reorderItem] = item.splice(result.source.index, 1);
     item.splice(result.destination.index, 0, reorderItem);
     setSubTask(item);
-    firestore.collection("subtasks").doc(id).update({
-      jobs: item,
-    });
+    console.log(item);
+    firestore
+      .collection("subtasks")
+      .doc(id)
+      .collection("jobs")
+      .get()
+      .then((doc) => {
+        doc.forEach((data) => {
+          for (let i = 0; i < item.length; i++) {
+            if (item[i].id === data.data().id) {
+              firestore
+                .collection("subtasks")
+                .doc(id)
+                .collection("jobs")
+                .doc(item[i].id)
+                .update({
+                  Index: i,
+                });
+            }
+          }
+        });
+      });
   };
   return (
     <div>

@@ -72,16 +72,6 @@ const JobItem = (prop) => {
     });
   };
   const removeJob = () => {
-    // firestore.collection('subtasks').doc(prop.subtaskId)
-    jobsPath.get().then((doc) => {
-      for (let i = 0; i < doc.data().jobs.length; i++) {
-        if (doc.data().jobs[i].id === prop.jobid) {
-          jobsPath.update({
-            jobs: firebase.firestore.FieldValue.arrayRemove(doc.data().jobs[i]),
-          });
-        }
-      }
-    });
     subtaskPath.delete();
   };
   return (

@@ -1,4 +1,4 @@
-import { firestore } from "../firebase";
+import { timestamp, firestore } from "../firebase";
 import { SHOW } from "./actionType";
 
 export function login(value) {
@@ -49,7 +49,46 @@ export function addJob(value) {
     payload: value,
   };
 }
-
+export function preaddJobe(value) {
+  return (dispatch) => {
+    firestore
+      .collection("subtasks")
+      .doc(value.taskid)
+      .collection("jobs")
+      .get()
+      .then((doc) => {
+        let temp = [];
+        doc.forEach((item) => {
+          temp.push(item.data);
+        });
+        return temp;
+      })
+      .then((list) => {
+        let index = list.length;
+        return index;
+      })
+      .then((index) => {
+        let newState = {
+          Index: index,
+          memberID: value.memberID,
+          subtaskId: value.taskid,
+          projectId: value.projectId,
+          id: value.id,
+          dueDate: value.dueDate,
+          member: value.member,
+          name: value.name,
+          state: value.state,
+          createTime: timestamp,
+          comment: [],
+        };
+        console.log(newState);
+        dispatch({
+          type: "ADD_JOBS",
+          payload: newState,
+        });
+      });
+  };
+}
 export function getMember(value) {
   return (dispatch) => {
     console.log(value);

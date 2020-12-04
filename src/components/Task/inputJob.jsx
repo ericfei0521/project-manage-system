@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import DatePicker from "./dayPicker";
 import { nanoid } from "nanoid";
 import { firestore } from "../../firebase";
-import { addJob } from "../../action/action";
+import { preaddJobe } from "../../action/action";
 import { useDispatch } from "react-redux";
 
 const InputJob = ({ handleAddTask, projectId, subTaskID }) => {
@@ -87,7 +87,7 @@ const InputJob = ({ handleAddTask, projectId, subTaskID }) => {
         onClick={() => {
           if (taskname && taskmember) {
             dispatch(
-              addJob({
+              preaddJobe({
                 id: nanoid(),
                 memberID: taskmemberID,
                 projectId: projectId,
