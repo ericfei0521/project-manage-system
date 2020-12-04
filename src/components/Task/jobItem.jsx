@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import firebase from "firebase/app";
 import { firestore } from "../../firebase";
 import EditDatePicker from "./editDayPicker";
 import style from "../../style/jobItem.module.scss";
@@ -9,7 +8,6 @@ const JobItem = (prop) => {
     .doc(prop.subtaskId)
     .collection("jobs")
     .doc(prop.jobid);
-  let jobsPath = firestore.collection("subtasks").doc(prop.subtaskId);
   let [isEdit, setIsEdit] = useState(false);
   let [taskName, setTaskName] = useState(prop.name);
   let [edittaskName, setEditTaskName] = useState(false);

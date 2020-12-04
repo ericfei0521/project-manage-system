@@ -8,6 +8,7 @@ import { addList, getMember, deleteProject } from "../../action/action";
 import { useParams, Link } from "react-router-dom";
 import { firestore } from "../../firebase";
 import { useDispatch } from "react-redux";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 const Project = () => {
   let dispatch = useDispatch();
@@ -135,9 +136,11 @@ const Project = () => {
         </div>
       </div>
       <div className={style.project}>
-        {tasks.map((item) => (
-          <TaskList key={item.id} id={item.id} name={item.name} />
-        ))}
+        <DragDropContext>
+          {tasks.map((item) => (
+            <TaskList id={item.id} name={item.name} />
+          ))}
+        </DragDropContext>
         <div>
           <input
             onChange={(e) => setListName(e.target.value)}

@@ -1,5 +1,4 @@
 import { firestore } from "../firebase";
-import firebase from "firebase/app";
 let initail = {
   id: "",
   dueDate: "",

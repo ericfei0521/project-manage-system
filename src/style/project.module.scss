@@ -1,8 +1,10 @@
 .project {
   display: flex;
   max-width: 1920;
+  min-width: 500px;
   overflow-x: auto;
 }
+
 .open {
   width: 500px;
   height: 500px;

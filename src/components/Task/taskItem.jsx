@@ -20,7 +20,6 @@ const TaskItem = ({ id, name, state, taskID }) => {
   let [discript, setDiscript] = useState("Please Enter Description");
   let [editdiscript, setEditdiscript] = useState(false);
   let [subTask, setSubTask] = useState([]);
-  let [orderList, setOrderList] = useState([]);
   let [addsubTask, setAddSubTask] = useState(false);
   useEffect(() => {
     console.log(id);
@@ -144,9 +143,10 @@ const TaskItem = ({ id, name, state, taskID }) => {
             <div className={style.headTitle}>
               {editTaskName ? (
                 <input
+                  autoFocus
                   type="text"
                   onChange={(e) => setTaskName(e.target.value)}
-                  value={`Task: ${taskName}`}
+                  value={taskName}
                   onKeyDown={(e) => {
                     handletask(e);
                   }}
@@ -157,7 +157,7 @@ const TaskItem = ({ id, name, state, taskID }) => {
                     setEditTaskName(true);
                   }}
                 >
-                  Task: {taskName}
+                  {taskName}
                 </h1>
               )}
               <button onClick={() => setEditCard(false)}>X</button>
