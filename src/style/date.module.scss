@@ -1,0 +1,27 @@
+.background {
+  box-sizing: border-box;
+  padding: 15px;
+  background-color: rgba(53, 53, 53, 0.931);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  min-width: 320px;
+  border-radius: 15px;
+  margin: 0 auto;
+  max-width: 500px;
+  max-height: 500px;
+  overflow: auto;
+  line-height: 1em;
+  animation-name: example;
+  animation-duration: 0.5s;
+}
+@keyframes example {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 10;
+  }
+}

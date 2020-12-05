@@ -5,9 +5,9 @@ import { useDispatch } from "react-redux";
 import { firestore } from "../../firebase";
 import { nanoid } from "nanoid";
 import style from "../../style/taskList.module.scss";
-import TaskItem from "./taskItem";
+import TaskItemCard from "./taskItemCard";
 
-const TaskList = ({ name, id }) => {
+const TaskList = ({ name, id, open }) => {
   let dispatch = useDispatch();
   let { projectId } = useParams();
   let [nowTask, setTask] = useState([]);
@@ -96,12 +96,13 @@ const TaskList = ({ name, id }) => {
       )}
       <div>
         {nowTask.map((item) => (
-          <TaskItem
+          <TaskItemCard
             taskID={id}
             key={item.id}
             id={item.id}
             name={item.name}
             state={item.state}
+            open={open}
           />
         ))}
         {isEdit ? (

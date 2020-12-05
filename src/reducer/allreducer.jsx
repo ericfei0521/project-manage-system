@@ -3,6 +3,7 @@ import Signup from "./signup";
 import HandleList from "./handleList";
 import HandleJobs from "./handleJobs";
 import Handleshowmember from "./showmember";
+import HandleTaskMember from "./handleTaskItem";
 import { combineReducers } from "redux";
 
 const allRedcuer = combineReducers({
@@ -11,6 +12,7 @@ const allRedcuer = combineReducers({
   HandleList,
   HandleJobs,
   Handleshowmember,
+  HandleTaskMember,
 });
 
 export default allRedcuer;

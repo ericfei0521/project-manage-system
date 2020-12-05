@@ -2,13 +2,42 @@
   box-sizing: border-box;
   margin: 5px auto;
   border: 1px solid gray;
-  padding: 10px;
-  display: flex;
-  justify-content: space-around;
+  padding: 1px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
   border-radius: 15px;
   background-color: rgba(70, 70, 70, 0.623);
   backdrop-filter: blur(10px);
-  .item {
-    color: rgba(255, 224, 137, 0.787);
+  max-height: 100vh;
+  align-items: center;
+  .jobname {
+    text-align: center;
+    margin-left: 5px;
+    color: white;
+    font-size: 1em;
+    height: 1em;
+  }
+  input {
+    text-align-last: center;
+    margin-left: 5px;
+    background-color: transparent;
+    border: none;
+    height: 1em;
+    font-size: 1em;
+    color: white;
+    transform: translateY(-1px);
+  }
+}
+.inComplete {
+  color: white;
+  letter-spacing: 2px;
+  border: none;
+  font-size: 1.2em;
+  background: transparent;
+  border-radius: 15px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  option {
+    background-color: gray;
   }
 }

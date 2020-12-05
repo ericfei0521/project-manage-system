@@ -65,6 +65,7 @@ const JobItem = (prop) => {
     });
   };
   const getDate = (value) => {
+    console.log(value);
     subtaskPath.update({
       dueDate: value,
     });
@@ -75,29 +76,28 @@ const JobItem = (prop) => {
   return (
     <div className={style.jobitem}>
       {edittaskName ? (
-        <div className={style.item}>
-          <input
-            type="text"
-            value={taskName}
-            onChange={(e) => setTaskName(e.target.value)}
-            onKeyDown={(e) => {
-              handletask(e);
-            }}
-          />
-        </div>
+        <input
+          type="text"
+          autoFocus
+          value={taskName}
+          onChange={(e) => setTaskName(e.target.value)}
+          onKeyDown={(e) => {
+            handletask(e);
+          }}
+        />
       ) : (
-        <h1
+        <div
           onClick={() => setEditTaskName(!edittaskName)}
-          className={style.item}
+          className={style.jobname}
         >
           {taskName}
-        </h1>
+        </div>
       )}
-
       <select
         name="status"
         id=""
         value={state}
+        className={style.inComplete}
         onChange={(e) => {
           setState(e.target.value);
           setEditState(!editstate);
@@ -132,7 +132,6 @@ const JobItem = (prop) => {
       ) : (
         <div onClick={() => setMemberShow(!membershow)}>{membername}</div>
       )}
-
       <EditDatePicker dueDate={prop.dueDate} getDate={getDate} />
       {isEdit ? (
         <div>

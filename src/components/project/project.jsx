@@ -3,17 +3,20 @@ import Header from "../head/header";
 import TaskList from "../Task/taskList";
 import MemberList from "../member/memberList";
 import AlluserList from "../member/alluserList";
+import TaskItem from "../Task/taskItem";
 import style from "../../style/project.module.scss";
 import { addList, getMember, deleteProject } from "../../action/action";
 import { useParams, Link } from "react-router-dom";
 import { firestore } from "../../firebase";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 const Project = () => {
   let dispatch = useDispatch();
   let { projectId } = useParams();
+  const state = useSelector((state) => state.HandleTaskMember);
   let project = firestore.collection("projects").doc(projectId);
+  let [open, setOpen] = useState(state.open);
   let [name, setName] = useState("");
   let [listname, setListName] = useState("");
   let [memberNum, setMemberNum] = useState([]);
@@ -57,6 +60,9 @@ const Project = () => {
   };
   const handleAddmember = () => {
     setAllusers(!showallusers);
+  };
+  const handleOpen = () => {
+    setOpen(!open);
   };
   return (
     <div>
@@ -136,11 +142,9 @@ const Project = () => {
         </div>
       </div>
       <div className={style.project}>
-        <DragDropContext>
-          {tasks.map((item) => (
-            <TaskList id={item.id} name={item.name} />
-          ))}
-        </DragDropContext>
+        {tasks.map((item) => (
+          <TaskList id={item.id} name={item.name} open={handleOpen} />
+        ))}
         <div>
           <input
             onChange={(e) => setListName(e.target.value)}
@@ -161,6 +165,28 @@ const Project = () => {
             +
           </button>
         </div>
+        {open ? (
+          <div
+            style={{
+              position: "absolute",
+              left: 0,
+              top: 0,
+              width: "100%",
+              minHeight: "100vh",
+              backgroundColor: "black",
+            }}
+          >
+            <TaskItem
+              taskID={state.taskID}
+              id={state.id}
+              name={state.name}
+              state={state.state}
+              open={handleOpen}
+            />
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

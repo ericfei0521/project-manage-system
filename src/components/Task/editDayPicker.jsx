@@ -4,6 +4,7 @@ import { enGB } from "date-fns/locale";
 import { DatePickerCalendar } from "react-nice-dates";
 import DayJS from "react-dayjs";
 import "react-nice-dates/build/style.css";
+import style from "../../style/jobItem.module.scss";
 function EditDatePicker(props) {
   const [date, setDate] = useState();
   let [show, setShow] = useState(false);
@@ -17,25 +18,27 @@ function EditDatePicker(props) {
           <DayJS format="YYYY/MM/DD">{props.dueDate}</DayJS>
         )}
       </button>
-      {show ? (
-        <div>
-          <DatePickerCalendar
-            date={date}
-            onDateChange={setDate}
-            locale={enGB}
-          />
-          <button
-            onClick={() => {
-              setShow(!show);
-              props.getDate(date.getTime());
-            }}
-          >
-            Set Date
-          </button>
-        </div>
-      ) : (
-        <></>
-      )}
+      <div className={style.date}>
+        {show ? (
+          <div style={{ width: "300px" }}>
+            <DatePickerCalendar
+              date={date}
+              onDateChange={setDate}
+              locale={enGB}
+            />
+            <button
+              onClick={() => {
+                setShow(!show);
+                props.getDate(date.getTime());
+              }}
+            >
+              Set Date
+            </button>
+          </div>
+        ) : (
+          <></>
+        )}
+      </div>
     </div>
   );
 }

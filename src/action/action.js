@@ -49,6 +49,14 @@ export function addJob(value) {
     payload: value,
   };
 }
+
+export function showtaskitem(value) {
+  return {
+    type: "SHOW_TASKITEM",
+    payload: value,
+  };
+}
+
 export function preaddJobe(value) {
   return (dispatch) => {
     firestore
