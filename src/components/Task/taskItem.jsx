@@ -101,14 +101,20 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
           });
       });
   };
+
   const handleDrag = (result) => {
     console.log(result);
     if (!result.destination) return;
+    if (
+      result.destination.droppableId === result.source.droppableId &&
+      result.destination.index === result.source.index
+    ) {
+      return;
+    }
     const item = Array.from(subTask);
     const [reorderItem] = item.splice(result.source.index, 1);
     item.splice(result.destination.index, 0, reorderItem);
     setSubTask(item);
-    console.log(item);
     firestore
       .collection("subtasks")
       .doc(id)
@@ -196,10 +202,15 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
             </div>
           )}
         </div>
+        <ImageDropper />
         <DragDropContext onDragEnd={handleDrag}>
-          <Droppable droppableId="jobs">
+          <Droppable droppableId={id}>
             {(Provided) => (
-              <div {...Provided.droppableProps} ref={Provided.innerRef}>
+              <div
+                {...Provided.droppableProps}
+                ref={Provided.innerRef}
+                className={style.jobarea}
+              >
                 {subTask.map((item, index) => {
                   return (
                     <Draggable
@@ -207,13 +218,15 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
                       draggableId={item.id}
                       index={index}
                     >
-                      {(Provided) => (
+                      {(Provided, snapshot) => (
                         <div
                           {...Provided.draggableProps}
                           {...Provided.dragHandleProps}
                           ref={Provided.innerRef}
+                          className={style.job}
                         >
                           <JobItem
+                            isDragging={snapshot.isDragging}
                             memberID={item.memberID}
                             subtaskId={id}
                             projectId={projectId}

@@ -8,7 +8,6 @@
   border-radius: 15px;
   background-color: rgba(70, 70, 70, 0.623);
   backdrop-filter: blur(10px);
-  max-height: 100vh;
   align-items: center;
   .jobname {
     text-align: center;
@@ -26,18 +25,5 @@
     font-size: 1em;
     color: white;
     transform: translateY(-1px);
-  }
-}
-.inComplete {
-  color: white;
-  letter-spacing: 2px;
-  border: none;
-  font-size: 1.2em;
-  background: transparent;
-  border-radius: 15px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  option {
-    background-color: gray;
   }
 }

@@ -74,7 +74,14 @@ const JobItem = (prop) => {
     subtaskPath.delete();
   };
   return (
-    <div className={style.jobitem}>
+    <div
+      className={style.jobitem}
+      style={
+        prop.isDragging
+          ? { backgroundColor: "rgba(255, 224, 137, 0.787)" }
+          : { backgroundColor: " rgba(70, 70, 70, 0.623)" }
+      }
+    >
       {edittaskName ? (
         <input
           type="text"

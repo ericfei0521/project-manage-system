@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "../head/header";
 import PrjectCard from "./prjectCard";
+import Loading from "../loading";
 import { useHistory } from "react-router-dom";
 import { auth, firestore } from "../../firebase";
 
@@ -8,6 +9,7 @@ function ProjectList() {
   let history = useHistory();
   let projects = firestore.collection("projects");
   let [userID, setUserID] = useState(null);
+  let [load, setLoad] = useState(true);
   let [dataProject, setProjects] = useState([]);
   let [isAdd, setAdd] = useState(false);
   let [newProjectName, setNewProjectsName] = useState("");
@@ -20,9 +22,7 @@ function ProjectList() {
     } else {
       setUserID(user.uid);
       projects.onSnapshot(function (doc) {
-        console.log("abc");
         let updateData = [];
-        // console.log(userID)
         doc.forEach((item) => {
           let member = item.data().member;
           if (member.includes(userID)) {
@@ -35,13 +35,13 @@ function ProjectList() {
           }
         });
         setProjects(updateData);
+        setTimeout(() => setLoad(false), 1000);
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userID]);
   const routeChange = () => {
     auth.signOut().then(function () {
-      // Sign-out successful.
       history.push("/");
     });
   };
@@ -96,6 +96,9 @@ function ProjectList() {
         ) : (
           <button onClick={() => setAdd(true)}>Add Project</button>
         )}
+      </div>
+      <div style={load ? { display: "block" } : { display: "none" }}>
+        <Loading />
       </div>
     </div>
   );

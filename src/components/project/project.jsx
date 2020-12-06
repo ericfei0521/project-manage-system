@@ -4,19 +4,23 @@ import TaskList from "../Task/taskList";
 import MemberList from "../member/memberList";
 import AlluserList from "../member/alluserList";
 import TaskItem from "../Task/taskItem";
+import Loading from "../loading";
 import style from "../../style/project.module.scss";
 import { addList, getMember, deleteProject } from "../../action/action";
 import { useParams, Link } from "react-router-dom";
-import { firestore } from "../../firebase";
+import { auth, firestore } from "../../firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
-const Project = () => {
+const Project = (prop) => {
+  // console.log(prop)
   let dispatch = useDispatch();
   let { projectId } = useParams();
   const state = useSelector((state) => state.HandleTaskMember);
   let project = firestore.collection("projects").doc(projectId);
-  let [open, setOpen] = useState(state.open);
+  let [userID, setUserID] = useState("aaa");
+  let [load, setLoad] = useState(true);
+  let [open, setOpen] = useState(false);
   let [name, setName] = useState("");
   let [listname, setListName] = useState("");
   let [memberNum, setMemberNum] = useState([]);
@@ -25,9 +29,13 @@ const Project = () => {
   let [showallusers, setAllusers] = useState(false);
 
   useEffect(() => {
-    console.log("now in project");
+    let user = auth.currentUser;
+    if (user) {
+      // console.log(userID)
+      setUserID(user.uid);
+    }
     project.onSnapshot(function (doc) {
-      console.log(doc.data());
+      // console.log(doc.data())
       if (doc.data() !== undefined) {
         let data = doc.data();
         setName(data.name);
@@ -54,7 +62,10 @@ const Project = () => {
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  useEffect(() => {
+    // console.log(userID)
+    setTimeout(() => setLoad(false), 1000);
+  }, [userID]);
   const handlemember = () => {
     setMemberShow(!membershow);
   };
@@ -64,13 +75,34 @@ const Project = () => {
   const handleOpen = () => {
     setOpen(!open);
   };
+
+  const handleDrag = (result) => {
+    // console.log(result)
+    if (!result.destination) return;
+    if (
+      result.destination.droppableId === result.source.droppableId &&
+      result.destination.index === result.source.index
+    ) {
+      return;
+    }
+    const dropStart = result.source.droppableId;
+    const dropEnd = result.destination.droppableId;
+    console.log(dropStart);
+    console.log(dropEnd);
+    if (dropStart === dropEnd) {
+      console.log(result);
+    }
+  };
+
   return (
-    <div>
-      <Header name={name} />
-      <div>
-        <button>成員項目</button>
-        <button>甘特圖</button>
-        <button>績效</button>
+    <div className={style.project}>
+      <Header name={name} user={userID} />
+      <div className={style.nav}>
+        <nav>
+          <button>成員項目</button>
+          <button>甘特圖</button>
+          <button>績效</button>
+        </nav>
         <div>
           <select name="" id="">
             <option value="進行中">進行中</option>
@@ -141,10 +173,12 @@ const Project = () => {
           )}
         </div>
       </div>
-      <div className={style.project}>
-        {tasks.map((item) => (
-          <TaskList id={item.id} name={item.name} open={handleOpen} />
-        ))}
+      <div className={style.projectlist}>
+        <DragDropContext onDragEnd={handleDrag}>
+          {tasks.map((item) => (
+            <TaskList id={item.id} name={item.name} open={handleOpen} />
+          ))}
+        </DragDropContext>
         <div>
           <input
             onChange={(e) => setListName(e.target.value)}
@@ -166,16 +200,7 @@ const Project = () => {
           </button>
         </div>
         {open ? (
-          <div
-            style={{
-              position: "absolute",
-              left: 0,
-              top: 0,
-              width: "100%",
-              minHeight: "100vh",
-              backgroundColor: "black",
-            }}
-          >
+          <div className={style.taskdetail}>
             <TaskItem
               taskID={state.taskID}
               id={state.id}
@@ -187,6 +212,9 @@ const Project = () => {
         ) : (
           <></>
         )}
+      </div>
+      <div style={load ? { display: "block" } : { display: "none" }}>
+        <Loading />
       </div>
     </div>
   );

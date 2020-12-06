@@ -7,7 +7,6 @@ const HandleTaskMember = (state = {}, action) => {
         id: action.payload.id,
         name: action.payload.name,
         state: action.payload.state,
-        open: action.payload.open,
       };
       return newlist;
     }

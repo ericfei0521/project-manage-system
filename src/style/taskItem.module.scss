@@ -95,7 +95,11 @@
     }
   }
   .jobarea {
+    box-sizing: border-box;
     padding: 20px;
     background-color: rgb(185, 185, 185);
+    .job {
+      margin: 8px auto;
+    }
   }
 }

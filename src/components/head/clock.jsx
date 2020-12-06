@@ -30,7 +30,7 @@ function Clock() {
   }
 
   return (
-    <div>
+    <div style={{ color: "white", fontSize: "1.5em" }}>
       <h2>{date}</h2>
     </div>
   );

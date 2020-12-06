@@ -1,6 +1,37 @@
 .list {
-  min-width: 200px;
+  box-sizing: border-box;
+  width: 200px;
   border: 1px solid gray;
-  padding: 5px;
+  padding: 10px;
   margin: 5px;
+  height: fit-content;
+  background-color: rgb(77, 77, 77);
+  border-radius: 15px;
+  .listDetail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    button {
+      font-weight: bold;
+      background-color: transparent;
+      border: none;
+      color: white;
+    }
+    h1 {
+      display: flex;
+      width: 90%;
+      align-items: center;
+      font-size: 1.2em;
+      color: #fff8e1;
+    }
+    input {
+      width: 90%;
+      font-size: 1.2em;
+      color: #fff8e1;
+      background-color: rgba(0, 0, 0, 0.205);
+      border: none;
+      outline: none;
+    }
+  }
 }

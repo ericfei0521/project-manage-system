@@ -1,17 +1,27 @@
 .project {
-  display: flex;
-  max-width: 1920;
-  min-width: 500px;
-  overflow-x: auto;
-}
-
-.open {
-  width: 500px;
-  height: 500px;
-  position: fixed;
-  background-color: green;
-  display: block;
-}
-.close {
-  display: none;
+  background-color: gray;
+  height: 100vh;
+  .nav {
+    height: 5vh;
+    display: flex;
+    align-items: center;
+    background-color: rgb(78, 78, 78);
+  }
+  .projectlist {
+    display: flex;
+    max-width: 1920;
+    min-width: 500px;
+    overflow-x: auto;
+    min-height: 80vh;
+    background-color: rgb(107, 107, 107);
+    .taskdetail {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100vh;
+      backdrop-filter: blur(3px);
+      background-color: rgba(0, 0, 0, 0.863);
+    }
+  }
 }

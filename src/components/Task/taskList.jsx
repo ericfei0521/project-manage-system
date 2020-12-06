@@ -6,6 +6,7 @@ import { firestore } from "../../firebase";
 import { nanoid } from "nanoid";
 import style from "../../style/taskList.module.scss";
 import TaskItemCard from "./taskItemCard";
+import { Droppable } from "react-beautiful-dnd";
 
 const TaskList = ({ name, id, open }) => {
   let dispatch = useDispatch();
@@ -54,6 +55,10 @@ const TaskList = ({ name, id, open }) => {
   }, []);
   const keyEvent = (e) => {
     if (e.key === "Enter") {
+      if (e.target.value === "") {
+        setNameEdit(!nameEdit);
+        return;
+      }
       setNameEdit(!nameEdit);
       taskList.update({
         name: e.target.value,
@@ -62,49 +67,65 @@ const TaskList = ({ name, id, open }) => {
   };
   return (
     <div className={style.list}>
-      {nameEdit ? (
-        <div>
-          <input
-            type="text"
-            onChange={(e) => setListName(e.target.value)}
-            onKeyDown={(e) => keyEvent(e)}
-          />
-        </div>
-      ) : (
-        <h1 onClick={() => setNameEdit(!nameEdit)}>{listName}</h1>
-      )}
-
-      {removeTask ? (
-        <div>
-          <button
-            onClick={() =>
-              dispatch(
-                deleteTask({
-                  projectId: projectId,
-                  task: nowTask,
-                  id: id,
-                })
-              )
-            }
-          >
-            Delete
-          </button>
-          <button onClick={() => setRemoveTask(!removeTask)}>Cancel</button>
-        </div>
-      ) : (
-        <button onClick={() => setRemoveTask(!removeTask)}>...</button>
-      )}
+      <div className={style.listDetail}>
+        {nameEdit ? (
+          <div>
+            <input
+              autoFocus
+              type="text"
+              onChange={(e) => setListName(e.target.value)}
+              onKeyDown={(e) => keyEvent(e)}
+            />
+          </div>
+        ) : (
+          <h1 onClick={() => setNameEdit(!nameEdit)}>{listName}</h1>
+        )}
+        {removeTask ? (
+          <div>
+            <button
+              onClick={() =>
+                dispatch(
+                  deleteTask({
+                    projectId: projectId,
+                    task: nowTask,
+                    id: id,
+                  })
+                )
+              }
+            >
+              Delete
+            </button>
+            <button onClick={() => setRemoveTask(!removeTask)}>Cancel</button>
+          </div>
+        ) : (
+          <button onClick={() => setRemoveTask(!removeTask)}>...</button>
+        )}
+      </div>
       <div>
-        {nowTask.map((item) => (
-          <TaskItemCard
-            taskID={id}
-            key={item.id}
-            id={item.id}
-            name={item.name}
-            state={item.state}
-            open={open}
-          />
-        ))}
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <Droppable droppableId={id}>
+            {(Provided) => (
+              <div
+                {...Provided.droppableProps}
+                ref={Provided.innerRef}
+                style={{ padding: "1px", flexGrow: 1 }}
+              >
+                {nowTask.map((item, index) => (
+                  <TaskItemCard
+                    index={index}
+                    taskID={id}
+                    key={item.id}
+                    id={item.id}
+                    name={item.name}
+                    state={item.state}
+                    open={open}
+                  />
+                ))}
+                {Provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </div>
         {isEdit ? (
           <div>
             <input
