@@ -10,7 +10,7 @@ import { addList, getMember, deleteProject } from "../../action/action";
 import { useParams, Link } from "react-router-dom";
 import { auth, firestore } from "../../firebase";
 import { useDispatch, useSelector } from "react-redux";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { DragDropContext } from "react-beautiful-dnd";
 
 const Project = (prop) => {
   // console.log(prop)
@@ -89,9 +89,21 @@ const Project = (prop) => {
     const dropEnd = result.destination.droppableId;
     console.log(dropStart);
     console.log(dropEnd);
-    if (dropStart === dropEnd) {
-      console.log(result);
-    }
+    project
+      .collection("tasks")
+      .doc(dropStart)
+      .get()
+      .then((doc) => {
+        const item = Array.from(doc.data().task);
+        const [reorderItem] = item.splice(result.source.index, 1);
+        item.splice(result.destination.index, 0, reorderItem);
+        return item;
+      })
+      .then((item) => {
+        project.collection("tasks").doc(dropStart).update({
+          task: item,
+        });
+      });
   };
 
   return (
@@ -127,11 +139,13 @@ const Project = (prop) => {
             +{memberNum.length}
           </button>
           {membershow ? (
-            <MemberList
-              projectid={projectId}
-              member={memberNum}
-              showmember={handlemember}
-            />
+            <div className={style.memberList}>
+              <MemberList
+                projectid={projectId}
+                member={memberNum}
+                showmember={handlemember}
+              />{" "}
+            </div>
           ) : (
             <></>
           )}
@@ -163,11 +177,13 @@ const Project = (prop) => {
             </button>
           </Link>
           {showallusers ? (
-            <AlluserList
-              projectid={projectId}
-              member={memberNum}
-              showmember={handleAddmember}
-            />
+            <div className={style.alluser}>
+              <AlluserList
+                projectid={projectId}
+                member={memberNum}
+                showmember={handleAddmember}
+              />
+            </div>
           ) : (
             <></>
           )}

@@ -114,28 +114,17 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
     const item = Array.from(subTask);
     const [reorderItem] = item.splice(result.source.index, 1);
     item.splice(result.destination.index, 0, reorderItem);
+    let batch = firestore.batch();
+    for (let i = 0; i < item.length; i++) {
+      let path = firestore
+        .collection("subtasks")
+        .doc(id)
+        .collection("jobs")
+        .doc(item[i].id);
+      batch.update(path, { Index: i });
+    }
+    batch.commit();
     setSubTask(item);
-    firestore
-      .collection("subtasks")
-      .doc(id)
-      .collection("jobs")
-      .get()
-      .then((doc) => {
-        doc.forEach((data) => {
-          for (let i = 0; i < item.length; i++) {
-            if (item[i].id === data.data().id) {
-              firestore
-                .collection("subtasks")
-                .doc(id)
-                .collection("jobs")
-                .doc(item[i].id)
-                .update({
-                  Index: i,
-                });
-            }
-          }
-        });
-      });
   };
   return (
     <div>

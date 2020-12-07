@@ -12,7 +12,6 @@ const TaskItemCard = ({ id, name, state, taskID, open, index, key }) => {
   let [taskState, setTaskState] = useState(state);
 
   useEffect(() => {
-    console.log(id);
     docPath.onSnapshot((doc) => {
       if (doc.data() === undefined) {
         return;

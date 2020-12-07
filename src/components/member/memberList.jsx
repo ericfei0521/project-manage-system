@@ -9,7 +9,14 @@ const MemberList = (props) => {
     <div>
       <button onClick={() => props.showmember()}>X</button>
       {state.member.map((item) => (
-        <div>
+        <div
+          style={{
+            display: "flex",
+            padding: "5px",
+            marginBottom: "5px",
+            border: "1px solid white",
+          }}
+        >
           <h1 key={item.userID}>{item.displayName}</h1>
           <h1>{item.email}</h1>
         </div>

@@ -32,21 +32,24 @@ const TaskList = ({ name, id, open }) => {
       if (doc.data() !== undefined) {
         let updateData = [];
         let list = doc.data().task;
+        console.log(list);
         dataList
           .orderBy("createTime")
           .get()
           .then(function (doc) {
-            doc.forEach((item) => {
-              if (list.includes(item.id)) {
-                let data = {
-                  id: item.id,
-                  name: item.data().name,
-                  state: item.data().state,
-                };
-                updateData.push(data);
-              }
+            list.forEach((item) => {
+              doc.forEach((task) => {
+                if (task.id === item) {
+                  let data = {
+                    id: task.id,
+                    name: task.data().name,
+                    state: task.data().state,
+                  };
+                  updateData.push(data);
+                }
+                console.log(updateData);
+              });
             });
-            // console.log(updateData)
             setTask(updateData);
           });
       }

@@ -27,14 +27,26 @@ const AlluserList = (props) => {
         ) {
           if (props.member.includes(item.userID)) {
             return (
-              <div>
-                {item.displayName} {item.email} Already In Project
+              <div
+                style={{
+                  display: "flex",
+                  padding: "5px",
+                  marginBottom: "5px",
+                  border: "1px solid white",
+                }}
+              >
+                {item.displayName}
+                <br />
+                {item.email}
+                <br />
+                Already In Project
               </div>
             );
           } else {
             return (
               <div>
-                {item.displayName} {item.email}{" "}
+                {item.displayName} <br />
+                {item.email}
                 <button onClick={() => updateFirestore(item.userID)}>+</button>
               </div>
             );

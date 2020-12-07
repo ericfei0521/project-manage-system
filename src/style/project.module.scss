@@ -2,10 +2,38 @@
   background-color: gray;
   height: 100vh;
   .nav {
-    height: 5vh;
+    min-height: 5vh;
     display: flex;
     align-items: center;
     background-color: rgb(78, 78, 78);
+    position: relative;
+    .memberList {
+      display: flex;
+      position: absolute;
+      left: 0;
+      top: 0;
+      background-color: rgb(78, 78, 78);
+      transform: translate(460px, 50px);
+      border: 1px solid white;
+      border-radius: 15px;
+      color: white;
+      padding: 20px;
+    }
+    .alluser {
+      min-width: 236px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid white;
+      border-radius: 15px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      background-color: rgb(78, 78, 78);
+      transform: translate(500px, 50px);
+      color: white;
+      padding: 20px;
+    }
   }
   .projectlist {
     display: flex;
