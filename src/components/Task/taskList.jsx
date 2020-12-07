@@ -47,7 +47,6 @@ const TaskList = ({ name, id, open }) => {
                   };
                   updateData.push(data);
                 }
-                console.log(updateData);
               });
             });
             setTask(updateData);
@@ -150,6 +149,9 @@ const TaskList = ({ name, id, open }) => {
 
             <button
               onClick={() => {
+                if (substate === "") {
+                  substate = "on-hold";
+                }
                 dispatch(
                   addTasks({
                     oldtasks: nowTask,

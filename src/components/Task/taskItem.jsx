@@ -6,13 +6,14 @@ import ImageDropper from "./imageDropper";
 import { useDispatch } from "react-redux";
 import { firestore } from "../../firebase";
 import { editTask } from "../../action/action";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const TaskItem = ({ id, name, state, taskID, open }) => {
   let dispatch = useDispatch();
   let docPath = firestore.collection("subtasks").doc(id);
   let { projectId } = useParams();
+  let history = useHistory();
   let [taskName, setTaskName] = useState(name);
   let [taskState, setTaskState] = useState(state);
   let [editTaskName, setEditTaskName] = useState(false);
@@ -20,9 +21,10 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
   let [editdiscript, setEditdiscript] = useState(false);
   let [subTask, setSubTask] = useState([]);
   let [addsubTask, setAddSubTask] = useState(false);
+  console.log(history);
   useEffect(() => {
-    console.log(id);
     docPath.onSnapshot((doc) => {
+      console.log(doc.data());
       if (doc.data() === undefined) {
         return;
       } else {
@@ -100,6 +102,8 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
             task: data,
           });
       });
+    firestore.collection("subtasks").doc(id).delete();
+    open();
   };
 
   const handleDrag = (result) => {
@@ -191,7 +195,7 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
             </div>
           )}
         </div>
-        <ImageDropper />
+        <ImageDropper id={id} />
         <DragDropContext onDragEnd={handleDrag}>
           <Droppable droppableId={id}>
             {(Provided) => (

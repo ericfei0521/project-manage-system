@@ -89,21 +89,50 @@ const Project = (prop) => {
     const dropEnd = result.destination.droppableId;
     console.log(dropStart);
     console.log(dropEnd);
-    project
-      .collection("tasks")
-      .doc(dropStart)
-      .get()
-      .then((doc) => {
-        const item = Array.from(doc.data().task);
-        const [reorderItem] = item.splice(result.source.index, 1);
-        item.splice(result.destination.index, 0, reorderItem);
-        return item;
-      })
-      .then((item) => {
-        project.collection("tasks").doc(dropStart).update({
-          task: item,
+    if (dropEnd === dropStart) {
+      project
+        .collection("tasks")
+        .doc(dropStart)
+        .get()
+        .then((doc) => {
+          const item = Array.from(doc.data().task);
+          const [reorderItem] = item.splice(result.source.index, 1);
+          item.splice(result.destination.index, 0, reorderItem);
+          return item;
+        })
+        .then((item) => {
+          project.collection("tasks").doc(dropStart).update({
+            task: item,
+          });
         });
-      });
+    } else {
+      console.log(result);
+      project
+        .collection("tasks")
+        .doc(dropStart)
+        .get()
+        .then((doc) => {
+          const item = Array.from(doc.data().task);
+          item.splice(result.source.index, 1);
+          console.log(item);
+          project.collection("tasks").doc(dropStart).update({
+            task: item,
+          });
+        });
+      project
+        .collection("tasks")
+        .doc(dropEnd)
+        .get()
+        .then((doc) => {
+          console.log(result.source);
+          const item = Array.from(doc.data().task);
+          item.splice(result.destination.index, 0, result.draggableId);
+          console.log(item);
+          project.collection("tasks").doc(dropEnd).update({
+            task: item,
+          });
+        });
+    }
   };
 
   return (
