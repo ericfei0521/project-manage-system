@@ -4,13 +4,13 @@ import { storage, firestore } from "../../firebase";
 
 const ImageDropper = (id) => {
   let [image, setImage] = useState(null);
-  let [isupload, setUpload] = useState(true);
+  let [isupload, setUpload] = useState(false);
   useEffect(() => {
     firestore
       .collection("subtasks")
       .doc(id.id)
       .onSnapshot((doc) => {
-        if (doc.data().image !== undefined) {
+        if (doc.data() !== undefined) {
           setImage(doc.data().image);
         }
       });
@@ -33,23 +33,43 @@ const ImageDropper = (id) => {
   };
 
   return (
-    <div id="dropArea">
-      <img
-        src={image}
-        alt=""
-        width="100px"
-        height="100px"
-        onClick={() => setUpload(!isupload)}
-      />
-
+    <div>
       <div>
         {isupload ? (
-          <form className="my-form">
-            <p>Drage image here</p>
-            <input type="file" accept="image/*" onChange={handleFiles} />
-          </form>
+          <div id="dropArea" onClick={() => setUpload(!isupload)}>
+            <form className="my-form">
+              <input type="file" accept="image/*" onChange={handleFiles} />
+            </form>
+          </div>
         ) : (
-          <button onClick={() => setUpload(!isupload)}>Upload Image</button>
+          <div>
+            {image ? (
+              <div
+                style={{
+                  width: "100%",
+                  height: "300px",
+                  backgroundImage: `url(${image})`,
+                  backgroundPosition: "center center",
+                  backgroundSize: "cover",
+                  backgroundRepeat: "no-repeat",
+                }}
+              ></div>
+            ) : (
+              <div
+                style={{
+                  width: "100%",
+                  height: "300px",
+                  backgroundColor: "gray",
+                  textAlign: "center",
+                }}
+                onClick={() => setUpload(!isupload)}
+              >
+                Upload image here
+              </div>
+            )}
+            <button onClick={() => setUpload(!isupload)}>Upload Image</button>
+            <button onClick={() => setUpload(!isupload)}>Delete Image</button>
+          </div>
         )}
       </div>
     </div>
