@@ -1,28 +1,32 @@
 import React, { useState, useEffect } from "react";
 import logo from "../../images/logo.png";
 import Clock from "./clock";
+import bell from "../../images/ICON/notification.svg";
 import style from "../../style/header.module.scss";
 import { auth, firestore } from "../../firebase";
 import { Link } from "react-router-dom";
 
 const Header = (prop) => {
   let [userID, setUserID] = useState("");
-  let [userdetail, setUserDetail] = useState("");
+  // let [userdetail, setUserDetail] = useState('')
   let [username, setUserName] = useState("");
-  auth.onAuthStateChanged((user) => {
-    if (user) {
-      setUserID(user.uid);
-    }
-  });
   useEffect(() => {
+    auth.onAuthStateChanged(async (userAuth) => {
+      if (userAuth) {
+        setUserID(userAuth.uid);
+      }
+    });
     if (userID) {
       firestore
         .collection("users")
         .doc(userID)
         .get()
         .then((doc) => {
-          setUserDetail(doc.data());
-          setUserName(doc.data().displayName);
+          let data = doc.data();
+          return data;
+        })
+        .then((data) => {
+          setUserName(data.displayName);
         });
     }
   }, [userID]);
@@ -45,8 +49,9 @@ const Header = (prop) => {
           <img src={logo} alt="" width="80px" />
         </Link>
       )}
-      <div className={style.right} style={{ width: "10%" }}>
-        <div></div>
+      <div className={style.right}>
+        <img src={bell} alt="" />
+
         <button className={style.user}>
           <h1>{username.charAt(0)}</h1>
         </button>

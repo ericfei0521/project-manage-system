@@ -1,29 +1,47 @@
-.jobitem {
-  box-sizing: border-box;
+$primary-color: #fff8e1;
+.jobCard {
   margin: 5px auto;
-  border: 1px solid gray;
-  padding: 1px;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  border-radius: 15px;
-  background-color: rgba(70, 70, 70, 0.623);
   backdrop-filter: blur(10px);
-  align-items: center;
-  .jobname {
-    text-align: center;
-    margin-left: 5px;
-    color: white;
-    font-size: 1em;
-    height: 1em;
-  }
-  input {
-    text-align-last: center;
-    margin-left: 5px;
-    background-color: transparent;
-    border: none;
-    height: 1em;
-    font-size: 1em;
-    color: white;
-    transform: translateY(-1px);
+  border: 1px solid $primary-color;
+  .jobitem {
+    box-sizing: border-box;
+    padding: 1px;
+    display: flex;
+    justify-content: space-evenly;
+    backdrop-filter: blur(10px);
+    align-items: center;
+    background-color: rgb(34, 34, 34);
+    .jobname {
+      text-align: center;
+      margin-left: 5px;
+      color: $primary-color;
+      font-size: 1em;
+      height: 1em;
+    }
+    input {
+      text-align-last: center;
+      margin-left: 5px;
+      background-color: transparent;
+      border: none;
+      height: 1em;
+      font-size: 1em;
+      color: $primary-color;
+      transform: translateY(-1px);
+    }
+    .commentshow {
+      padding: 5px;
+      width: 20px;
+      height: 20px;
+      background-color: transparent;
+      border-radius: 50%;
+      border: 1px solid $primary-color;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        width: 10px;
+        transform: rotate(90deg);
+      }
+    }
   }
 }

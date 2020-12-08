@@ -1,0 +1,45 @@
+$primary-color: #fff8e1;
+.comment {
+  width: 100%;
+  padding: 15px;
+  .commentCard {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 15px 0px;
+    .content {
+      width: 100%;
+      display: flex;
+      margin-bottom: 1em;
+      align-items: flex-start;
+      .user {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5em;
+        color: $primary-color;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid $primary-color;
+        background-color: rgba(0, 0, 0, 0.52);
+        margin-right: 15px;
+      }
+      .content {
+        background-color: rgba(88, 88, 88, 0.568);
+        min-height: 60px;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 3px;
+        width: 92%;
+        h1 {
+          font-size: 1.1em;
+          color: $primary-color;
+        }
+        p {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

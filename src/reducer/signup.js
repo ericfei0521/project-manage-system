@@ -16,6 +16,9 @@ const Signup = (state = initialState, action) => {
       } else if (action.payload.password.length < 6) {
         alert("please enter at least 6 character password");
         return state;
+      } else if (action.payload.displayName === "") {
+        alert("please enter displayName");
+        return state;
       } else if (action.payload.email.search(emailRule) === -1) {
         alert("please enter correct email");
         return state;
@@ -24,7 +27,8 @@ const Signup = (state = initialState, action) => {
       if (
         state.email !== "" &&
         state.password !== "" &&
-        state.confirmpassword !== ""
+        state.confirmpassword !== "" &&
+        state.displayName !== ""
       ) {
         auth
           .createUserWithEmailAndPassword(state.email, state.password)
@@ -38,6 +42,7 @@ const Signup = (state = initialState, action) => {
                 createAt: createAt,
                 email: auth.currentUser.email,
                 userID: auth.currentUser.uid,
+                comment: [],
               })
               .catch((error) => {
                 console.log("something went wront", error);

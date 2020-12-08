@@ -1,46 +1,58 @@
+$primary-color: #fff8e1;
 .head {
   width: 100%;
   box-sizing: border-box;
-  display: flex;
+  display: grid;
   background-color: rgb(41, 41, 41);
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
   justify-content: space-between;
   padding: 15px;
-  height: 15vh;
+  height: 100px;
   background: radial-gradient(circle at center, #3a3a3a, #222222);
   .left {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    grid-column: 1/2;
   }
   h1 {
+    grid-column: 2/3;
+    align-self: center;
     font-size: 2em;
-    color: rgba(255, 243, 208, 0.787);
+    text-align: center;
+    color: $primary-color;
   }
   .right {
     display: flex;
-    justify-content: space-around;
+    align-items: center;
+    justify-self: end;
+    grid-column: 3/4;
+    transform: scale(0.8);
+    img {
+      height: 2em;
+      margin-right: 16px;
+    }
     .user {
       align-self: end;
       width: 45px;
       height: 45px;
-      border: 2px solid rgba(255, 243, 208, 0.787);
+      border: 2px solid $primary-color;
       border-radius: 50%;
       background-color: transparent;
       h1 {
         display: block;
-        color: white;
+        color: $primary-color;
         font-size: 2em;
       }
       h1:hover {
         width: 100%;
-        color: rgb(255, 255, 255);
+        color: $primary-color;
         animation: gradient 5s ease infinite;
       }
     }
     .user:hover {
       background-color: rgba(27, 27, 27, 0.787);
-      box-shadow: 0 0 5px rgba(255, 243, 208, 0.787);
+      box-shadow: 0 0 5px $primary-color;
     }
 
     @keyframes gradient {

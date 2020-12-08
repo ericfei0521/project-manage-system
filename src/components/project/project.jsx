@@ -221,7 +221,12 @@ const Project = (prop) => {
       <div className={style.projectlist}>
         <DragDropContext onDragEnd={handleDrag}>
           {tasks.map((item) => (
-            <TaskList id={item.id} name={item.name} open={handleOpen} />
+            <TaskList
+              key={item.id}
+              id={item.id}
+              name={item.name}
+              open={handleOpen}
+            />
           ))}
         </DragDropContext>
         <div>

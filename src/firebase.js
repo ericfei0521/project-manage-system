@@ -40,6 +40,7 @@ export const createNewUser = async (userAuth) => {
       email: userAuth.email,
       userID: userAuth.uid,
       createAt: createAt,
+      comment: [],
     };
     try {
       await userRef.set(data);

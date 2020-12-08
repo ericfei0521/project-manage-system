@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "../../style/imageupload.css";
 import { storage, firestore } from "../../firebase";
-import { nanoid } from "nanoid";
 
 const ImageDropper = (id) => {
-  console.log(id);
   let [image, setImage] = useState(null);
   let [isupload, setUpload] = useState(true);
   useEffect(() => {
@@ -44,7 +42,7 @@ const ImageDropper = (id) => {
 
       <div>
         {isupload ? (
-          <form class="my-form">
+          <form className="my-form">
             <p>Drage image here</p>
             <input type="file" accept="image/*" onChange={handleFiles} />
           </form>

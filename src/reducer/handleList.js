@@ -39,6 +39,7 @@ const HandleList = (state = initialState, action) => {
         name: state.name,
         state: action.payload.state,
         description: "Please Enter Description",
+        image: "",
       });
       return state;
     }

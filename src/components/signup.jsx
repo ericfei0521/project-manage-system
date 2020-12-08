@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import logo from "../images/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signup } from "../action/action";
+import { auth } from "../firebase";
 
 function Signup() {
   let dispatch = useDispatch();
@@ -11,6 +12,14 @@ function Signup() {
   let [password, setPassword] = useState(state.password);
   let [confirm, setConfirm] = useState(state.confirmpassword);
   let [name, setName] = useState(state.confirmpassword);
+  let history = useHistory();
+
+  auth.onAuthStateChanged(async (userAuth) => {
+    if (userAuth) {
+      history.push("/projects");
+    }
+  });
+
   return (
     <div className="App">
       <Link to="/" className="brand-logo">
@@ -38,7 +47,7 @@ function Signup() {
         onChange={(e) => setName(e.target.value)}
         value={name}
         type="text"
-        placeholder="comfrim password"
+        placeholder="Enter User Name"
       />
       <button
         onClick={() => {

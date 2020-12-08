@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { firestore } from "../../firebase";
 import EditDatePicker from "./editDayPicker";
+import Comment from "./comment";
 import style from "../../style/jobItem.module.scss";
+import arrow from "../../images/ICON/arrow.svg";
 const JobItem = (prop) => {
   let subtaskPath = firestore
     .collection("subtasks")
@@ -16,6 +18,8 @@ const JobItem = (prop) => {
   let [membername, setMemberName] = useState(prop.member);
   let [membershow, setMemberShow] = useState(false);
   let [member, setMember] = useState([]);
+  let [showComment, setShowcomment] = useState(false);
+
   useEffect(() => {
     let list = [];
     let memberlist = [];
@@ -75,90 +79,107 @@ const JobItem = (prop) => {
   };
   return (
     <div
-      className={style.jobitem}
+      className={style.jobCard}
       style={
         prop.isDragging
-          ? { backgroundColor: "rgba(255, 224, 137, 0.787)" }
-          : { backgroundColor: " rgba(70, 70, 70, 0.623)" }
+          ? { backgroundColor: "rgba(255, 224, 137, 1)" }
+          : { backgroundColor: " rgba(70, 70, 70, 1)" }
       }
     >
-      {edittaskName ? (
-        <input
-          type="text"
-          autoFocus
-          value={taskName}
-          onChange={(e) => setTaskName(e.target.value)}
-          onKeyDown={(e) => {
-            handletask(e);
+      <div className={style.jobitem}>
+        {edittaskName ? (
+          <input
+            type="text"
+            autoFocus
+            value={taskName}
+            onChange={(e) => setTaskName(e.target.value)}
+            onKeyDown={(e) => {
+              handletask(e);
+            }}
+          />
+        ) : (
+          <div
+            onClick={() => setEditTaskName(!edittaskName)}
+            className={style.jobname}
+          >
+            {taskName}
+          </div>
+        )}
+        <select
+          name="status"
+          id=""
+          value={state}
+          className={style.inComplete}
+          onChange={(e) => {
+            setState(e.target.value);
+            setEditState(!editstate);
+            updateDate(e.target.value);
           }}
-        />
-      ) : (
-        <div
-          onClick={() => setEditTaskName(!edittaskName)}
-          className={style.jobname}
         >
-          {taskName}
-        </div>
-      )}
-      <select
-        name="status"
-        id=""
-        value={state}
-        className={style.inComplete}
-        onChange={(e) => {
-          setState(e.target.value);
-          setEditState(!editstate);
-          updateDate(e.target.value);
-        }}
-      >
-        <option value="On-hold">On-hold</option>
-        <option value="Pending">Pending</option>
-        <option value="Running">Running</option>
-        <option value="Reviewing">Reviewing</option>
-        <option value="Complete">Complete</option>
-      </select>
+          <option value="On-hold">On-hold</option>
+          <option value="Pending">Pending</option>
+          <option value="Running">Running</option>
+          <option value="Reviewing">Reviewing</option>
+          <option value="Complete">Complete</option>
+        </select>
 
-      {membershow ? (
-        <div>
-          {member.map((item) => (
+        {membershow ? (
+          <div>
+            {member.map((item) => (
+              <button
+                key={item.userID}
+                value={item.displayName}
+                id={item.userID}
+                onClick={(e) => {
+                  updateMember(e.target.value);
+                  setMemberName(e.target.value);
+                  updateMemberID(e.target.id);
+                  setMemberShow(!membershow);
+                }}
+              >
+                {item.displayName}
+              </button>
+            ))}
+          </div>
+        ) : (
+          <div onClick={() => setMemberShow(!membershow)}>{membername}</div>
+        )}
+        <EditDatePicker dueDate={prop.dueDate} getDate={getDate} />
+        {isEdit ? (
+          <div>
             <button
-              key={item.userID}
-              value={item.displayName}
-              name={item.userID}
-              onClick={(e) => {
-                updateMember(e.target.value);
-                setMemberName(e.target.value);
-                updateMemberID(e.target.name);
-                setMemberShow(!membershow);
+              onClick={() => {
+                removeJob();
               }}
             >
-              {item.displayName}
+              Delete
             </button>
-          ))}
-        </div>
+            <button
+              onClick={() => {
+                setIsEdit(!isEdit);
+              }}
+            >
+              Back
+            </button>
+          </div>
+        ) : (
+          <div onClick={() => setIsEdit(!isEdit)}>...</div>
+        )}
+        <button
+          className={style.commentshow}
+          onClick={() => setShowcomment(!showComment)}
+        >
+          <img src={arrow} alt="" />
+        </button>
+      </div>
+      {showComment ? (
+        <Comment
+          projectID={prop.projectId}
+          subTaskID={prop.subtaskId}
+          jobID={prop.jobid}
+        />
       ) : (
-        <div onClick={() => setMemberShow(!membershow)}>{membername}</div>
-      )}
-      <EditDatePicker dueDate={prop.dueDate} getDate={getDate} />
-      {isEdit ? (
-        <div>
-          <button
-            onClick={() => {
-              removeJob();
-            }}
-          >
-            Delete
-          </button>
-          <button
-            onClick={() => {
-              setIsEdit(!isEdit);
-            }}
-          >
-            Back
-          </button>
-        </div>
-      ) : (
-        <div onClick={() => setIsEdit(!isEdit)}>...</div>
+        <></>
       )}
     </div>
   );
