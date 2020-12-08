@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { auth, firestore } from "../../firebase";
+import firebase from "firebase/app";
+import { auth, firestore, timestamp } from "../../firebase";
 import { nanoid } from "nanoid";
 import CommentCards from "./commentCard";
 import style from "../../style/comment.module.scss";
@@ -11,9 +12,9 @@ const Comment = ({ subTaskID, jobID, projectID }) => {
   let [user, setUser] = useState(null);
   let [newComment, setNewComment] = useState([]);
   let [member, setMember] = useState("");
+
   useEffect(() => {
     let commentid = [];
-    let comments = [];
     let user = auth.currentUser;
     if (user) {
       firestore
@@ -32,10 +33,11 @@ const Comment = ({ subTaskID, jobID, projectID }) => {
         setMember(doc.data().memberID);
         setJobcomment(commentid);
       });
-    filePath
+    firestore
       .collection("comment")
-      .get()
-      .then((doc) => {
+      .orderBy("time")
+      .onSnapshot((doc) => {
+        let comments = [];
         doc.forEach((item) => {
           if (commentid.includes(item.id)) {
             comments.push(item.data());
@@ -55,17 +57,25 @@ const Comment = ({ subTaskID, jobID, projectID }) => {
     filePath.collection("jobs").doc(jobID).update({
       comment: jobComments,
     });
-    filePath.collection("comment").doc(value.id).set(value);
-    firestore.collection("users").doc(member).update({
-      comment: jobComments,
-    });
+    firestore.collection("comment").doc(value.id).set(value);
+    firestore
+      .collection("users")
+      .doc(member)
+      .update({
+        comment: firebase.firestore.FieldValue.arrayUnion(value.id),
+      });
   };
 
   return (
     <div className={style.comment}>
       <div>
         {comment.map((item) => (
-          <CommentCards user={user} key={item.id} data={item} />
+          <CommentCards
+            user={user}
+            key={item.id}
+            data={item}
+            taskmember={member}
+          />
         ))}
       </div>
       <div>
@@ -76,6 +86,7 @@ const Comment = ({ subTaskID, jobID, projectID }) => {
         />
         <button
           onClick={() => {
+            let time = timestamp;
             let data = {
               name: user,
               project: projectID,
@@ -83,6 +94,7 @@ const Comment = ({ subTaskID, jobID, projectID }) => {
               jobID: jobID,
               id: nanoid(),
               content: newComment,
+              time: time,
             };
             handleComment(data);
             setNewComment("");

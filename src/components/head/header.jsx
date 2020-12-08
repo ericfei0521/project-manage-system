@@ -10,6 +10,7 @@ const Header = (prop) => {
   let [userID, setUserID] = useState("");
   // let [userdetail, setUserDetail] = useState('')
   let [username, setUserName] = useState("");
+  let [noticenumber, setNoticenumber] = useState(0);
   useEffect(() => {
     auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
@@ -20,13 +21,12 @@ const Header = (prop) => {
       firestore
         .collection("users")
         .doc(userID)
-        .get()
-        .then((doc) => {
+        .onSnapshot((doc) => {
           let data = doc.data();
-          return data;
-        })
-        .then((data) => {
-          setUserName(data.displayName);
+          if (data.displayName !== undefined) {
+            setUserName(data.displayName);
+            setNoticenumber(data.comment.length);
+          }
         });
     }
   }, [userID]);
@@ -51,7 +51,7 @@ const Header = (prop) => {
       )}
       <div className={style.right}>
         <img src={bell} alt="" />
-
+        <h2 style={{ color: "white" }}>{noticenumber}</h2>
         <button className={style.user}>
           <h1>{username.charAt(0)}</h1>
         </button>

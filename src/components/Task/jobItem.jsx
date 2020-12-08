@@ -142,7 +142,12 @@ const JobItem = (prop) => {
             ))}
           </div>
         ) : (
-          <div onClick={() => setMemberShow(!membershow)}>{membername}</div>
+          <div
+            className={style.memberName}
+            onClick={() => setMemberShow(!membershow)}
+          >
+            {membername}
+          </div>
         )}
         <EditDatePicker dueDate={prop.dueDate} getDate={getDate} />
         {isEdit ? (

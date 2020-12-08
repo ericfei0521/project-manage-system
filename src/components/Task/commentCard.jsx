@@ -1,22 +1,93 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import style from "../../style/comment.module.scss";
+import firebase from "firebase/app";
+import { firestore } from "../../firebase";
+
 const CommentCards = (prop) => {
   console.log(prop);
+  let [edit, setEdit] = useState(false);
+  let [send, setSend] = useState(false);
+  let [editing, setEditing] = useState(false);
+  let [content, setNewContent] = useState(prop.data.content);
+  useEffect(() => {
+    firestore
+      .collection("comment")
+      .doc(prop.data.id)
+      .onSnapshot((doc) => {
+        if (doc.data()) {
+          setNewContent(doc.data().content);
+        }
+      });
+  }, [send]);
+  const editContent = (value) => {
+    firestore.collection("comment").doc(prop.data.id).update({
+      content: value,
+    });
+  };
+  const deleteContent = () => {
+    let path = firestore.collection("subtasks").doc(prop.data.subtaskID);
+    firestore.collection("comment").doc(prop.data.id).delete();
+    path
+      .collection("jobs")
+      .doc(prop.data.jobID)
+      .update({
+        comment: firebase.firestore.FieldValue.arrayRemove(prop.data.id),
+      });
+    firestore
+      .collection("users")
+      .doc(prop.taskmember)
+      .update({
+        comment: firebase.firestore.FieldValue.arrayRemove(prop.data.id),
+      });
+  };
   return (
     <div className={style.commentCard}>
       <div className={style.content}>
         <div className={style.user}>
           <h1>{prop.data.name.charAt(0)}</h1>
         </div>
-        <div className={style.content}>
-          <h1>{prop.data.name}</h1>
-          <p>{prop.data.content}</p>
-        </div>
-      </div>
-      <div>
-        <button>...</button>
-        <button>Edit</button>
-        <button>Delete</button>
+        {editing ? (
+          <div className={style.content}>
+            <textarea
+              type="text"
+              value={content}
+              onChange={(e) => setNewContent(e.target.value)}
+            />
+            <div>
+              <button
+                onClick={() => {
+                  editContent(content);
+                  setEditing(false);
+                  setEdit(!edit);
+                  setSend(!send);
+                }}
+              >
+                Save
+              </button>
+              <button onClick={() => setEditing(false)}>Cancel</button>
+            </div>
+          </div>
+        ) : (
+          <div className={style.content}>
+            <h1>{prop.data.name}</h1>
+            <p>{content}</p>
+            <div>
+              {prop.data.name === prop.user ? (
+                <button onClick={() => setEdit(!edit)}>...</button>
+              ) : (
+                <></>
+              )}
+              {edit ? (
+                <div>
+                  <button onClick={() => setEditing(true)}>Edit</button>
+                  <button onClick={() => deleteContent()}>Delete</button>
+                </div>
+              ) : (
+                <></>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ $primary-color: #fff8e1;
     justify-content: space-evenly;
     backdrop-filter: blur(10px);
     align-items: center;
-    background-color: rgb(34, 34, 34);
+    background-color: rgb(119, 119, 119);
     .jobname {
       text-align: center;
       margin-left: 5px;
@@ -27,6 +27,9 @@ $primary-color: #fff8e1;
       font-size: 1em;
       color: $primary-color;
       transform: translateY(-1px);
+    }
+    .memberName {
+      color: white;
     }
     .commentshow {
       padding: 5px;

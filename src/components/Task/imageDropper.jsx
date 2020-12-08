@@ -10,7 +10,9 @@ const ImageDropper = (id) => {
       .collection("subtasks")
       .doc(id.id)
       .onSnapshot((doc) => {
-        setImage(doc.data().image);
+        if (doc.data().image !== undefined) {
+          setImage(doc.data().image);
+        }
       });
   });
   const handleFiles = (e) => {
