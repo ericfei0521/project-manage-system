@@ -46,6 +46,7 @@ const Comment = ({ subTaskID, jobID, projectID }) => {
         console.log(comments);
         setComment(comments);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleComment = (value) => {

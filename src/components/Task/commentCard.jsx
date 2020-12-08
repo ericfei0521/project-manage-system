@@ -18,6 +18,7 @@ const CommentCards = (prop) => {
           setNewContent(doc.data().content);
         }
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [send]);
   const editContent = (value) => {
     firestore.collection("comment").doc(prop.data.id).update({
