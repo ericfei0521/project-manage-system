@@ -3,6 +3,7 @@ import style from "../../style/taskItem.module.scss";
 import JobItem from "./jobItem";
 import InputJob from "./inputJob";
 import ImageDropper from "./imageDropper";
+import firebase from "firebase/app";
 import { useDispatch } from "react-redux";
 import { firestore } from "../../firebase";
 import { editTask } from "../../action/action";
@@ -75,6 +76,34 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
     });
   };
   const deleteTask = () => {
+    let path = firestore
+      .collection("comment")
+      .where("project", "==", projectId);
+    let userpath = firestore.collection("users");
+    path
+      .get()
+      .then((doc) => {
+        let commentList = [];
+        doc.forEach((item) => {
+          commentList.push(item.ref.id);
+          item.ref.delete();
+        });
+        return commentList;
+      })
+      .then((commentlist) => {
+        commentlist.forEach((item) => {
+          userpath
+            .where("comment", "array-contains", item)
+            .get()
+            .then((doc) => {
+              doc.forEach((data) => {
+                data.ref.update({
+                  comment: firebase.firestore.FieldValue.arrayRemove(item),
+                });
+              });
+            });
+        });
+      });
     firestore
       .collection("projects")
       .doc(projectId)

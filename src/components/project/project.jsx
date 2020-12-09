@@ -244,6 +244,7 @@ const Project = (prop) => {
                   name: listname,
                 })
               );
+              setListName("");
             }}
           >
             +

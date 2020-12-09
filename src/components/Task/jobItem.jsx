@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { firestore } from "../../firebase";
+import firebase from "firebase/app";
 import EditDatePicker from "./editDayPicker";
 import Comment from "./comment";
 import style from "../../style/jobItem.module.scss";
@@ -76,11 +77,31 @@ const JobItem = (prop) => {
   };
   const removeJob = () => {
     let path = firestore.collection("comment").where("jobID", "==", prop.jobid);
-    path.get().then((doc) => {
-      doc.forEach((item) => {
-        item.ref.delete();
+    let userpath = firestore.collection("users");
+    path
+      .get()
+      .then((doc) => {
+        let commentList = [];
+        doc.forEach((item) => {
+          commentList.push(item.ref.id);
+          item.ref.delete();
+        });
+        return commentList;
+      })
+      .then((commentlist) => {
+        commentlist.forEach((item) => {
+          userpath
+            .where("comment", "array-contains", item)
+            .get()
+            .then((doc) => {
+              doc.forEach((data) => {
+                data.ref.update({
+                  comment: firebase.firestore.FieldValue.arrayRemove(item),
+                });
+              });
+            });
+        });
       });
-    });
     subtaskPath.delete();
   };
   return (
