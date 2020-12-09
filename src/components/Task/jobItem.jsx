@@ -75,6 +75,12 @@ const JobItem = (prop) => {
     });
   };
   const removeJob = () => {
+    let path = firestore.collection("comment").where("jobID", "==", prop.jobid);
+    path.get().then((doc) => {
+      doc.forEach((item) => {
+        item.ref.delete();
+      });
+    });
     subtaskPath.delete();
   };
   return (

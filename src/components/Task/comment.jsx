@@ -29,9 +29,11 @@ const Comment = ({ subTaskID, jobID, projectID }) => {
       .collection("jobs")
       .doc(jobID)
       .onSnapshot((doc) => {
-        commentid = doc.data().comment;
-        setMember(doc.data().memberID);
-        setJobcomment(commentid);
+        if (doc.data() !== undefined) {
+          commentid = doc.data().comment;
+          setMember(doc.data().memberID);
+          setJobcomment(commentid);
+        }
       });
     firestore
       .collection("comment")

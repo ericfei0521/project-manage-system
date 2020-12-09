@@ -1,35 +1,71 @@
 import React, { useState, useEffect } from "react";
 import logo from "../../images/logo.png";
 import Clock from "./clock";
+import Notice from "./notice";
+import firebase from "firebase/app";
 import bell from "../../images/ICON/notification.svg";
 import style from "../../style/header.module.scss";
 import { auth, firestore } from "../../firebase";
 import { Link } from "react-router-dom";
 
 const Header = (prop) => {
+  let [userdetail, setUserDetail] = useState("");
   let [userID, setUserID] = useState("");
-  // let [userdetail, setUserDetail] = useState('')
   let [username, setUserName] = useState("");
-  let [noticenumber, setNoticenumber] = useState(0);
+  let [noticenumber, setNoticenumber] = useState([]);
+  let [noticeList, setNoticeList] = useState([]);
+  let [check, setCheck] = useState(false);
   useEffect(() => {
-    auth.onAuthStateChanged(async (userAuth) => {
-      if (userAuth) {
-        setUserID(userAuth.uid);
-      }
-    });
-    if (userID) {
+    auth.onAuthStateChanged((userAuth) => {
       firestore
         .collection("users")
-        .doc(userID)
+        .doc(userAuth.uid)
         .onSnapshot((doc) => {
           let data = doc.data();
           if (data.displayName !== undefined) {
             setUserName(data.displayName);
-            setNoticenumber(data.comment.length);
+            setUserDetail(data);
+            setUserID(data.userID);
+            setNoticenumber(data.comment);
+            firestore
+              .collection("comment")
+              .orderBy("time", "desc")
+              .onSnapshot((doc) => {
+                let list = [];
+                let current = [];
+                doc.forEach((item) => {
+                  list.push(item.data());
+                });
+                list.forEach((item) => {
+                  console.log(item);
+                  for (let i in data.comment) {
+                    if (item.id === data.comment[i]) {
+                      current.push(item);
+                    }
+                  }
+                });
+                console.log(current);
+                setNoticeList(current);
+              });
           }
         });
-    }
-  }, [userID]);
+    });
+  }, []);
+  const readindividual = (value) => {
+    console.log(userID);
+    console.log(value);
+    firestore
+      .collection("users")
+      .doc(userID)
+      .update({
+        comment: firebase.firestore.FieldValue.arrayRemove(value),
+      });
+  };
+  const readall = () => {
+    firestore.collection("users").doc(userID).update({
+      comment: [],
+    });
+  };
   return (
     <div className={style.head}>
       <div className={style.left} style={{ width: "10%" }}>
@@ -42,20 +78,59 @@ const Header = (prop) => {
         )}
         <Clock />
       </div>
-      {prop.name ? (
-        <h1>Project: {prop.name}</h1>
-      ) : (
-        <Link to="/projects">
-          <img src={logo} alt="" width="80px" />
-        </Link>
-      )}
+      <div className={style.middle}>
+        {prop.name ? (
+          <h1>Project: {prop.name}</h1>
+        ) : (
+          <img src={logo} alt="" width="80px" className={style.logo} />
+        )}
+      </div>
+
       <div className={style.right}>
-        <img src={bell} alt="" />
-        <h2 style={{ color: "white" }}>{noticenumber}</h2>
+        <div className={style.notice}>
+          <img src={bell} alt="" onClick={() => setCheck(!check)} />
+          {noticenumber.length === 0 ? (
+            <></>
+          ) : (
+            <div className={style.noticenum}>
+              <h2 style={{ color: "white" }}>{noticenumber.length}</h2>
+            </div>
+          )}
+        </div>
         <button className={style.user}>
           <h1>{username.charAt(0)}</h1>
         </button>
       </div>
+      {check ? (
+        <div
+          style={{
+            position: "absolute",
+            right: 0,
+            width: "300px",
+            top: "110px",
+            zIndex: 200,
+            padding: "10px",
+            backgroundColor: "rgba(50,50,50,0.8)",
+            backdropFilter: "blur(10px)",
+            height: "80vh",
+            overflow: "auto",
+          }}
+        >
+          <button
+            onClick={() => {
+              readall();
+              setCheck(!check);
+            }}
+          >
+            Read All
+          </button>
+          {noticeList.map((item) => (
+            <Notice data={item} read={readindividual} />
+          ))}
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

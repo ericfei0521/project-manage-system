@@ -36,9 +36,10 @@ const ImageDropper = (id) => {
     <div>
       <div>
         {isupload ? (
-          <div id="dropArea" onClick={() => setUpload(!isupload)}>
+          <div id="dropArea">
             <form className="my-form">
               <input type="file" accept="image/*" onChange={handleFiles} />
+              <button onClick={() => setUpload(!isupload)}>back</button>
             </form>
           </div>
         ) : (
