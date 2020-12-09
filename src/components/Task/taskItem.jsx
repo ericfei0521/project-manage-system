@@ -36,20 +36,22 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
       .collection("jobs")
       .orderBy("Index")
       .onSnapshot((doc) => {
-        let childTask = [];
-        doc.forEach((item) => {
-          let data = {
-            id: item.id,
-            memberID: item.data().memberID,
-            name: item.data().name,
-            member: item.data().member,
-            dueDate: item.data().dueDate,
-            state: item.data().state,
-            comment: item.data().comment,
-          };
-          childTask.push(data);
-        });
-        setSubTask(childTask);
+        if (doc) {
+          let childTask = [];
+          doc.forEach((item) => {
+            let data = {
+              id: item.id,
+              memberID: item.data().memberID,
+              name: item.data().name,
+              member: item.data().member,
+              dueDate: item.data().dueDate,
+              state: item.data().state,
+              comment: item.data().comment,
+            };
+            childTask.push(data);
+          });
+          setSubTask(childTask);
+        }
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -76,9 +78,7 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
     });
   };
   const deleteTask = () => {
-    let path = firestore
-      .collection("comment")
-      .where("project", "==", projectId);
+    let path = firestore.collection("comment").where("subtaskID", "==", id);
     let userpath = firestore.collection("users");
     path
       .get()
@@ -128,6 +128,16 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
           .update({
             task: data,
           });
+      });
+    firestore
+      .collection("subtasks")
+      .doc(id)
+      .collection("jobs")
+      .get()
+      .then((doc) => {
+        doc.forEach((item) => {
+          item.ref.delete();
+        });
       });
     firestore.collection("subtasks").doc(id).delete();
     open();
