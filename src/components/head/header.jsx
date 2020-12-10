@@ -123,7 +123,7 @@ const Header = (prop) => {
             Read All
           </button>
           {noticeList.map((item) => (
-            <Notice data={item} read={readindividual} />
+            <Notice key={item.id} data={item} read={readindividual} />
           ))}
         </div>
       ) : (

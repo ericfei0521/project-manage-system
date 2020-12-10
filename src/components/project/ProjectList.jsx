@@ -20,7 +20,7 @@ function ProjectList() {
     if (!user) {
       history.push("/login");
     }
-    projects.onSnapshot(function (doc) {
+    let unsubscribe = projects.onSnapshot(function (doc) {
       let updateData = [];
       doc.forEach((item) => {
         let member = item.data().member;
@@ -34,9 +34,11 @@ function ProjectList() {
         }
       });
       setProjects(updateData);
-      setTimeout(() => setLoad(false), 1000);
+      setTimeout(() => setLoad(false), 500);
     });
-
+    return () => {
+      unsubscribe();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const routeChange = () => {
@@ -49,6 +51,18 @@ function ProjectList() {
     <div>
       <div>
         <Header />
+        <div>
+          <h1>
+            <button>Todos</button>
+            <button>Tasks</button>
+            <div>
+              <button>Channel</button>
+              {dataProject.map((item) => (
+                <button key={item.id}>{item.name}</button>
+              ))}
+            </div>
+          </h1>
+        </div>
         <button onClick={routeChange}>signout</button>
         {dataProject.map((item) => (
           <PrjectCard

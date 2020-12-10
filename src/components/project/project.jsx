@@ -51,6 +51,7 @@ const Project = () => {
             name: item.data().name,
           };
           listTask.push(data);
+          setTimeout(() => setLoad(false), 1000);
         });
         setTasks(listTask);
       });
