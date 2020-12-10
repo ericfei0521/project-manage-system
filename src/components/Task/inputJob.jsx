@@ -53,9 +53,7 @@ const InputJob = ({ handleAddTask, projectId, subTaskID }) => {
           setStatus(e.target.value);
         }}
       >
-        <option value="On-hold" selected>
-          On-hold
-        </option>
+        <option value="On-hold">On-hold</option>
         <option value="Pending">Pending</option>
         <option value="Running">Running</option>
         <option value="Reviewing">Reviewing</option>

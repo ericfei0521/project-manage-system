@@ -1,4 +1,5 @@
 import { timestamp, firestore } from "../firebase";
+import firebase from "firebase/app";
 let initialState = {
   id: "",
   name: "",
@@ -64,12 +65,54 @@ const HandleList = (state = initialState, action) => {
       action.payload.task.forEach((item) => {
         list.push(item.id);
       });
+      console.log(list);
+
+      list.forEach((item) => {
+        firestore
+          .collection("comment")
+          .where("subtaskID", "==", item)
+          .get()
+          .then((data) => {
+            let commentlist = [];
+            data.forEach((commentid) => {
+              commentlist.push(commentid.ref.id);
+              commentid.ref.delete();
+            });
+            return commentlist;
+          })
+          .then((commentlist) => {
+            console.log(commentlist);
+            commentlist.forEach((item) => {
+              firestore
+                .collection("users")
+                .where("comment", "array-contains", item)
+                .get()
+                .then((doc) => {
+                  doc.forEach((data) => {
+                    data.ref.update({
+                      comment: firebase.firestore.FieldValue.arrayRemove(item),
+                    });
+                  });
+                });
+            });
+          });
+      });
       firestore
         .collection("subtasks")
         .get()
         .then((doc) => {
           doc.forEach((item) => {
             if (list.includes(item.id)) {
+              firestore
+                .collection("subtasks")
+                .doc(item.id)
+                .collection("jobs")
+                .get()
+                .then((data) => {
+                  data.forEach((job) => {
+                    job.ref.delete();
+                  });
+                });
               firestore.collection("subtasks").doc(item.id).delete();
             }
           });
@@ -79,6 +122,7 @@ const HandleList = (state = initialState, action) => {
     case "DElETE_PROJECT": {
       console.log(action.payload);
       let taskList = [];
+
       firestore
         .collection("projects")
         .doc(action.payload.projectId)
@@ -92,6 +136,39 @@ const HandleList = (state = initialState, action) => {
           })
         )
         .then(() => {
+          console.log(action.payload.projectId);
+          firestore
+            .collection("comment")
+            .where("project", "==", action.payload.projectId)
+            .get()
+            .then((data) => {
+              let commentList = [];
+              data.forEach((comment) => {
+                commentList.push(comment.ref.id);
+                comment.ref.delete();
+              });
+              return commentList;
+            })
+            .then((commentList) => {
+              console.log(commentList);
+              commentList.forEach((item) => {
+                firestore
+                  .collection("users")
+                  .where("comment", "array-contains", item)
+                  .get()
+                  .then((doc) => {
+                    doc.forEach((data) => {
+                      data.ref.update({
+                        comment: firebase.firestore.FieldValue.arrayRemove(
+                          item
+                        ),
+                      });
+                    });
+                  });
+              });
+            });
+        })
+        .then(() => {
           firestore
             .collection("subtasks")
             .get()
@@ -103,12 +180,7 @@ const HandleList = (state = initialState, action) => {
                 .get()
                 .then((doc) => {
                   doc.forEach((item) => {
-                    firestore
-                      .collection("projects")
-                      .doc(action.payload.projectId)
-                      .collection("tasks")
-                      .doc(item.id)
-                      .delete();
+                    item.ref.delete();
                   });
                 });
               firestore
@@ -124,12 +196,7 @@ const HandleList = (state = initialState, action) => {
                     .get()
                     .then((task) => {
                       task.forEach((data) => {
-                        firestore
-                          .collection("subtasks")
-                          .doc(item.id)
-                          .collection("jobs")
-                          .doc(data.id)
-                          .delete();
+                        data.ref.delete();
                       });
                     });
                   firestore.collection("subtasks").doc(item.id).delete();

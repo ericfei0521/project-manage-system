@@ -22,7 +22,7 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
   let [subTask, setSubTask] = useState([]);
   let [addsubTask, setAddSubTask] = useState(false);
   useEffect(() => {
-    docPath.onSnapshot((doc) => {
+    let unsubscribesubtasks = docPath.onSnapshot((doc) => {
       console.log(doc.data());
       if (doc.data() !== undefined) {
         setTaskName(doc.data().name);
@@ -30,7 +30,7 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
         setTaskState(doc.data().state);
       }
     });
-    docPath
+    let unsubscribejobs = docPath
       .collection("jobs")
       .orderBy("Index")
       .onSnapshot((doc) => {
@@ -51,6 +51,10 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
           setSubTask(childTask);
         }
       });
+    return () => {
+      unsubscribesubtasks();
+      unsubscribejobs();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

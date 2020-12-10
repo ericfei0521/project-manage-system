@@ -25,7 +25,7 @@ const Comment = ({ subTaskID, jobID, projectID }) => {
           setUser(item.data().displayName);
         });
     }
-    filePath
+    let unsubscribejobs = filePath
       .collection("jobs")
       .doc(jobID)
       .onSnapshot((doc) => {
@@ -35,7 +35,7 @@ const Comment = ({ subTaskID, jobID, projectID }) => {
           setJobcomment(commentid);
         }
       });
-    firestore
+    let unsubscribecomment = firestore
       .collection("comment")
       .orderBy("time")
       .onSnapshot((doc) => {
@@ -48,6 +48,10 @@ const Comment = ({ subTaskID, jobID, projectID }) => {
         console.log(comments);
         setComment(comments);
       });
+    return () => {
+      unsubscribejobs();
+      unsubscribecomment();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
