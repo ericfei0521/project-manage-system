@@ -24,9 +24,7 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
   useEffect(() => {
     docPath.onSnapshot((doc) => {
       console.log(doc.data());
-      if (doc.data() === undefined) {
-        return;
-      } else {
+      if (doc.data() !== undefined) {
         setTaskName(doc.data().name);
         setDiscript(doc.data().description);
         setTaskState(doc.data().state);

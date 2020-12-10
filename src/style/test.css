@@ -13,6 +13,10 @@
 .nice-dates-day.-outside {
   color: rgba(255, 255, 255, 0.561);
 }
+.nice-dates-day:before {
+  background-color: #000000;
+  border: 2px solid #fff8e1;
+}
 .nice-dates-day:after {
   border: 2px solid #fff8e1;
   border-radius: 50%;

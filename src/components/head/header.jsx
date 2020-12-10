@@ -37,14 +37,12 @@ const Header = (prop) => {
                   list.push(item.data());
                 });
                 list.forEach((item) => {
-                  console.log(item);
                   for (let i in data.comment) {
                     if (item.id === data.comment[i]) {
                       current.push(item);
                     }
                   }
                 });
-                console.log(current);
                 setNoticeList(current);
               });
           }
