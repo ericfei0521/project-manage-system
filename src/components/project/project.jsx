@@ -8,17 +8,16 @@ import Loading from "../loading";
 import style from "../../style/project.module.scss";
 import { addList, getMember, deleteProject } from "../../action/action";
 import { useParams, Link } from "react-router-dom";
-import { auth, firestore } from "../../firebase";
+import { firestore } from "../../firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { DragDropContext } from "react-beautiful-dnd";
 
-const Project = (prop) => {
-  // console.log(prop)
+const Project = () => {
   let dispatch = useDispatch();
   let { projectId } = useParams();
   const state = useSelector((state) => state.HandleTaskMember);
+  const user = useSelector((state) => state.UserCheck);
   let project = firestore.collection("projects").doc(projectId);
-  let [userID, setUserID] = useState("aaa");
   let [load, setLoad] = useState(true);
   let [open, setOpen] = useState(false);
   let [name, setName] = useState("");
@@ -29,12 +28,7 @@ const Project = (prop) => {
   let [showallusers, setAllusers] = useState(false);
 
   useEffect(() => {
-    let user = auth.currentUser;
-    if (user) {
-      // console.log(userID)
-      setUserID(user.uid);
-    }
-    project.onSnapshot(function (doc) {
+    let unsubscribemember = project.onSnapshot(function (doc) {
       // console.log(doc.data())
       if (doc.data() !== undefined) {
         let data = doc.data();
@@ -46,7 +40,7 @@ const Project = (prop) => {
         setMemberNum(list);
       }
     });
-    project
+    let unsubscribeAllmember = project
       .collection("tasks")
       .orderBy("createTime")
       .onSnapshot(function (doc) {
@@ -60,12 +54,16 @@ const Project = (prop) => {
         });
         setTasks(listTask);
       });
+    return () => {
+      unsubscribemember();
+      unsubscribeAllmember();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
     // console.log(userID)
     setTimeout(() => setLoad(false), 1000);
-  }, [userID]);
+  }, [user]);
   const handlemember = () => {
     setMemberShow(!membershow);
   };
@@ -137,7 +135,7 @@ const Project = (prop) => {
 
   return (
     <div className={style.project}>
-      <Header name={name} user={userID} />
+      <Header name={name} />
       <div className={style.nav}>
         <nav>
           <button>成員項目</button>

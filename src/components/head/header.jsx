@@ -5,27 +5,27 @@ import Notice from "./notice";
 import firebase from "firebase/app";
 import bell from "../../images/ICON/notification.svg";
 import style from "../../style/header.module.scss";
-import { auth, firestore } from "../../firebase";
+import { firestore } from "../../firebase";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Header = (prop) => {
+  const user = useSelector((state) => state.UserCheck);
   let [userdetail, setUserDetail] = useState("");
-  let [userID, setUserID] = useState("");
   let [username, setUserName] = useState("");
   let [noticenumber, setNoticenumber] = useState([]);
   let [noticeList, setNoticeList] = useState([]);
   let [check, setCheck] = useState(false);
   useEffect(() => {
-    auth.onAuthStateChanged((userAuth) => {
+    if (user) {
       firestore
         .collection("users")
-        .doc(userAuth.uid)
+        .doc(user)
         .onSnapshot((doc) => {
           let data = doc.data();
           if (data.displayName !== undefined) {
             setUserName(data.displayName);
             setUserDetail(data);
-            setUserID(data.userID);
             setNoticenumber(data.comment);
             firestore
               .collection("comment")
@@ -47,20 +47,20 @@ const Header = (prop) => {
               });
           }
         });
-    });
+    }
   }, []);
   const readindividual = (value) => {
-    console.log(userID);
+    console.log(user);
     console.log(value);
     firestore
       .collection("users")
-      .doc(userID)
+      .doc(user)
       .update({
         comment: firebase.firestore.FieldValue.arrayRemove(value),
       });
   };
   const readall = () => {
-    firestore.collection("users").doc(userID).update({
+    firestore.collection("users").doc(user).update({
       comment: [],
     });
   };

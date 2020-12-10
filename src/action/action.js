@@ -56,6 +56,12 @@ export function showtaskitem(value) {
     payload: value,
   };
 }
+export function usercheck(value) {
+  return {
+    type: "USER_CHECK",
+    payload: value,
+  };
+}
 
 export function preaddJobe(value) {
   return (dispatch) => {

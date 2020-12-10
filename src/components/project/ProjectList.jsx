@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import Header from "../head/header";
 import PrjectCard from "./prjectCard";
 import Loading from "../loading";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { auth, firestore } from "../../firebase";
 
 function ProjectList() {
   let history = useHistory();
+  const user = useSelector((state) => state.UserCheck);
   let projects = firestore.collection("projects");
-  let [userID, setUserID] = useState(null);
   let [load, setLoad] = useState(true);
   let [dataProject, setProjects] = useState([]);
   let [isAdd, setAdd] = useState(false);
@@ -16,30 +17,28 @@ function ProjectList() {
   let [newProjectState, setNewProjectState] = useState("On-hold");
   //監聽使用者登入
   useEffect(() => {
-    let user = auth.currentUser;
     if (!user) {
       history.push("/login");
-    } else {
-      setUserID(user.uid);
-      projects.onSnapshot(function (doc) {
-        let updateData = [];
-        doc.forEach((item) => {
-          let member = item.data().member;
-          if (member.includes(userID)) {
-            let dataitem = {
-              name: item.data().name,
-              id: item.id,
-              state: item.data().state,
-            };
-            updateData.push(dataitem);
-          }
-        });
-        setProjects(updateData);
-        setTimeout(() => setLoad(false), 1000);
-      });
     }
+    projects.onSnapshot(function (doc) {
+      let updateData = [];
+      doc.forEach((item) => {
+        let member = item.data().member;
+        if (member.includes(user)) {
+          let dataitem = {
+            name: item.data().name,
+            id: item.id,
+            state: item.data().state,
+          };
+          updateData.push(dataitem);
+        }
+      });
+      setProjects(updateData);
+      setTimeout(() => setLoad(false), 1000);
+    });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userID]);
+  }, []);
   const routeChange = () => {
     auth.signOut().then(function () {
       history.push("/");
@@ -80,7 +79,7 @@ function ProjectList() {
             <button
               onClick={() => {
                 firestore.collection("projects").add({
-                  member: [userID],
+                  member: [user],
                   name: newProjectName,
                   state: newProjectState,
                 });
