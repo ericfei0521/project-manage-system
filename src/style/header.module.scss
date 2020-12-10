@@ -16,6 +16,7 @@ $primary-color: #fff8e1;
     grid-column: 1/2;
   }
   .middle {
+    justify-self: center;
     h1 {
       grid-column: 2/3;
       align-self: center;
@@ -23,8 +24,8 @@ $primary-color: #fff8e1;
       text-align: center;
       color: $primary-color;
     }
-    .logo {
-      justify-self: center;
+    img {
+      width: 80px;
     }
   }
   .right {

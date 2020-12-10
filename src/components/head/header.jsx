@@ -77,11 +77,7 @@ const Header = (prop) => {
         <Clock />
       </div>
       <div className={style.middle}>
-        {prop.name ? (
-          <h1>Project: {prop.name}</h1>
-        ) : (
-          <img src={logo} alt="" width="80px" className={style.logo} />
-        )}
+        {prop.name ? <h1>Project: {prop.name}</h1> : <img src={logo} alt="" />}
       </div>
 
       <div className={style.right}>

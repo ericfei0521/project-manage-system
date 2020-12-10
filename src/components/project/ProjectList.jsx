@@ -4,7 +4,7 @@ import PrjectCard from "./prjectCard";
 import Loading from "../loading";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { auth, firestore } from "../../firebase";
+import { auth, firestore, timestamp } from "../../firebase";
 
 function ProjectList() {
   let history = useHistory();
@@ -92,11 +92,25 @@ function ProjectList() {
             </select>
             <button
               onClick={() => {
-                firestore.collection("projects").add({
-                  member: [user],
-                  name: newProjectName,
-                  state: newProjectState,
-                });
+                firestore
+                  .collection("projects")
+                  .add({
+                    member: [user],
+                    name: newProjectName,
+                    state: newProjectState,
+                    time: timestamp,
+                  })
+                  .then((docRef) => {
+                    firestore
+                      .collection("projects")
+                      .doc(docRef.id)
+                      .collection("channel")
+                      .add({
+                        text: `wlecome to ${newProjectName} channel`,
+                        time: timestamp,
+                        from: "system",
+                      });
+                  });
                 setNewProjectsName("");
                 setNewProjectState("On-hold");
                 setAdd(true);

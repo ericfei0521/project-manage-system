@@ -16,6 +16,7 @@ function Welcome() {
       history.push("/projects");
     }
   });
+
   return (
     <div className={style.app}>
       <div className={style.header}>
