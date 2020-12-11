@@ -18,7 +18,7 @@ const Project = () => {
   const state = useSelector((state) => state.HandleTaskMember);
   let project = firestore.collection("projects").doc(projectId);
   let [load, setLoad] = useState(true);
-  let [open, setOpen] = useState(false);
+  let [open, setOpen] = useState(true);
   let [name, setName] = useState("");
   let [listname, setListName] = useState("");
   let [memberNum, setMemberNum] = useState([]);
