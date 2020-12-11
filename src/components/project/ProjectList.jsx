@@ -34,13 +34,15 @@ function ProjectList() {
         }
       });
       setProjects(updateData);
-      setTimeout(() => setLoad(false), 500);
     });
     return () => {
       unsubscribe();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  useEffect(() => {
+    setTimeout(() => setLoad(false), 200);
+  }, [dataProject]);
   const routeChange = () => {
     auth.signOut().then(function () {
       history.push("/");

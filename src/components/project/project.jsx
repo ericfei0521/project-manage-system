@@ -16,7 +16,6 @@ const Project = () => {
   let dispatch = useDispatch();
   let { projectId } = useParams();
   const state = useSelector((state) => state.HandleTaskMember);
-  const user = useSelector((state) => state.UserCheck);
   let project = firestore.collection("projects").doc(projectId);
   let [load, setLoad] = useState(true);
   let [open, setOpen] = useState(false);
@@ -51,7 +50,6 @@ const Project = () => {
             name: item.data().name,
           };
           listTask.push(data);
-          setTimeout(() => setLoad(false), 1000);
         });
         setTasks(listTask);
       });
@@ -63,8 +61,8 @@ const Project = () => {
   }, []);
   useEffect(() => {
     // console.log(userID)
-    setTimeout(() => setLoad(false), 1000);
-  }, [user]);
+    setTimeout(() => setLoad(false), 100);
+  }, [name]);
   const handlemember = () => {
     setMemberShow(!membershow);
   };
