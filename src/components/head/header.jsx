@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 const Header = (prop) => {
   const user = useSelector((state) => state.UserCheck);
-  let [userdetail, setUserDetail] = useState("");
+  // let [userdetail, setUserDetail] = useState("");
   let [username, setUserName] = useState("");
   let [noticenumber, setNoticenumber] = useState([]);
   let [noticeList, setNoticeList] = useState([]);
@@ -25,7 +25,7 @@ const Header = (prop) => {
           let data = doc.data();
           if (data.displayName !== undefined) {
             setUserName(data.displayName);
-            setUserDetail(data);
+            // setUserDetail(data);
             setNoticenumber(data.comment);
             firestore
               .collection("comment")
@@ -48,6 +48,7 @@ const Header = (prop) => {
           }
         });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const readindividual = (value) => {
     console.log(user);
