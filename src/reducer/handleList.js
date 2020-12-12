@@ -186,6 +186,16 @@ const HandleList = (state = initialState, action) => {
               firestore
                 .collection("projects")
                 .doc(action.payload.projectId)
+                .collection("channel")
+                .get()
+                .then((doc) => {
+                  doc.forEach((item) => {
+                    item.ref.delete();
+                  });
+                });
+              firestore
+                .collection("projects")
+                .doc(action.payload.projectId)
                 .delete();
               doc.forEach((item) => {
                 if (taskList.includes(item.id)) {

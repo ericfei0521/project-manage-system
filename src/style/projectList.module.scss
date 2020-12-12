@@ -1,0 +1,135 @@
+$primary-color: #fff8e1;
+$bord-color: #6b6b6b;
+.projectList {
+  background-color: $bord-color;
+  .display {
+    min-height: calc(100vh - 110px);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    column-gap: 0;
+    .sidebar {
+      background-color: rgb(65, 65, 65);
+      padding: 10px;
+      min-width: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      row-gap: 5px;
+      .channels {
+        color: $primary-color;
+        width: 100%;
+        display: flex;
+        border-radius: 10px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .channel {
+          box-sizing: border-box;
+          background-color: rgba(87, 87, 87, 0.719);
+          padding: 0px;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          height: 0px;
+          overflow: hidden;
+          transition: height 1s;
+        }
+        .channelOpen {
+          height: 600px;
+          max-height: 600px;
+          overflow-y: auto;
+          transition: 500ms ease-in;
+        }
+        .channelOpen::-webkit-scrollbar {
+          display: none;
+        }
+      }
+    }
+    .wrap {
+      width: 95%;
+      margin: 0 auto;
+      .show {
+        box-sizing: border-box;
+        padding: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        min-height: max-content;
+        max-height: calc(100vh - 110px);
+        overflow-y: auto;
+        .addCard {
+          background-color: rgba(148, 148, 148, 0.397);
+          border: none;
+          width: 23%;
+          max-width: 350px;
+          height: 180px;
+          padding: 15px;
+          margin: 5px;
+          font-size: 1.5em;
+          font-weight: inherit;
+          font-family: "Lato", sans-serif;
+          color: rgb(192, 192, 192);
+          border-radius: 25px;
+          cursor: pointer;
+          outline: none;
+        }
+        .addCard:hover {
+          background-color: rgba(148, 148, 148, 0.671);
+        }
+        .addCardInfo {
+          width: 23%;
+          max-width: 350px;
+          height: 180px;
+          padding: 15px;
+          border-radius: 25px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: rgba(44, 44, 44, 0.294);
+          flex-direction: column;
+          input,
+          select {
+            width: 100%;
+            margin: 5px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+          }
+          input {
+            text-align: center;
+          }
+          select,
+          option {
+            text-indent: 40%;
+          }
+        }
+      }
+    }
+  }
+}
+.button {
+  color: $primary-color;
+  background-color: rgb(107, 107, 107);
+  width: 90%;
+  border: none;
+  height: 30px;
+  border-radius: 10px;
+  margin: 5px;
+  outline: none;
+  font-size: 1.1em;
+  font-family: "Lato", sans-serif;
+}
+.button:hover {
+  color: black;
+  background: radial-gradient(circle at center, #f1e3bb 5%, #a79076 95%);
+}
+.button:active {
+  font-size: 1.2em;
+  border: 1px solid $primary-color;
+}
+.buttonOn {
+  color: black;
+  background: radial-gradient(circle at center, #f1e3bb 5%, #a79076 95%);
+}

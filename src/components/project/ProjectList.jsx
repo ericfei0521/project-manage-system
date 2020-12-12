@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Header from "../head/header";
 import PrjectCard from "./prjectCard";
+import ProjectChannel from "./projectChannel";
 import Loading from "../loading";
+import style from "../../style/projectList.module.scss";
+import button from "../../style/button.module.scss";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { auth, firestore, timestamp } from "../../firebase";
@@ -11,6 +14,9 @@ function ProjectList() {
   const user = useSelector((state) => state.UserCheck);
   let projects = firestore.collection("projects");
   let [load, setLoad] = useState(true);
+  let [activechannel, setActivechannel] = useState(false);
+  let [currentchannel, setCurrentchannel] = useState("");
+  let [currentShow, setCurrentShow] = useState("all");
   let [dataProject, setProjects] = useState([]);
   let [isAdd, setAdd] = useState(false);
   let [newProjectName, setNewProjectsName] = useState("");
@@ -20,29 +26,29 @@ function ProjectList() {
     if (!user) {
       history.push("/login");
     }
-    let unsubscribe = projects.onSnapshot(function (doc) {
-      let updateData = [];
-      doc.forEach((item) => {
-        let member = item.data().member;
-        if (member.includes(user)) {
-          let dataitem = {
-            name: item.data().name,
-            id: item.id,
-            state: item.data().state,
-          };
-          updateData.push(dataitem);
-        }
+    let unsubscribeList = projects
+      .orderBy("time", "desc")
+      .onSnapshot(function (doc) {
+        let updateData = [];
+        doc.forEach((item) => {
+          let member = item.data().member;
+          if (member.includes(user)) {
+            let dataitem = {
+              name: item.data().name,
+              id: item.id,
+              state: item.data().state,
+            };
+            updateData.push(dataitem);
+          }
+        });
+        setProjects(updateData);
+        setTimeout(() => setLoad(false), 200);
       });
-      setProjects(updateData);
-    });
     return () => {
-      unsubscribe();
+      unsubscribeList();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  useEffect(() => {
-    setTimeout(() => setLoad(false), 200);
-  }, [dataProject]);
   const routeChange = () => {
     auth.signOut().then(function () {
       history.push("/");
@@ -51,81 +57,158 @@ function ProjectList() {
 
   return (
     <div>
-      <div>
-        <Header />
-        <div>
-          <h1>
-            <button>Todos</button>
-            <button>Tasks</button>
-            <div>
-              <button>Channel</button>
-              {dataProject.map((item) => (
-                <button key={item.id}>{item.name}</button>
-              ))}
-            </div>
-          </h1>
+      <div className={style.projectList}>
+        <div className={style.header}>
+          <Header name={null} signOut={routeChange} />
         </div>
-        <button onClick={routeChange}>signout</button>
-        {dataProject.map((item) => (
-          <PrjectCard
-            key={item.id}
-            id={item.id}
-            name={item.name}
-            state={item.state}
-          />
-        ))}
-        {isAdd ? (
-          <div>
-            <input
-              onChange={(e) => setNewProjectsName(e.target.value)}
-              value={newProjectName}
-              type="text"
-              placeholder="Project Name"
-            />
-            <select
-              onChange={(e) => setNewProjectState(e.target.value)}
-              value={newProjectState}
-            >
-              <option value="On-hold">On-hold</option>
-              <option value="Pending">Pending</option>
-              <option value="Running">Running</option>
-              <option value="Reviewing">Reviewing</option>
-              <option value="Complete">Complete</option>
-            </select>
+        <div className={style.display}>
+          <div className={style.sidebar}>
             <button
+              className={button.button}
               onClick={() => {
-                firestore
-                  .collection("projects")
-                  .add({
-                    member: [user],
-                    name: newProjectName,
-                    state: newProjectState,
-                    time: timestamp,
-                  })
-                  .then((docRef) => {
-                    firestore
-                      .collection("projects")
-                      .doc(docRef.id)
-                      .collection("channel")
-                      .add({
-                        text: `wlecome to ${newProjectName} channel`,
-                        time: timestamp,
-                        from: "system",
-                      });
-                  });
-                setNewProjectsName("");
-                setNewProjectState("On-hold");
-                setAdd(true);
+                setCurrentShow("projects");
+                setCurrentchannel("");
               }}
             >
-              Add Project
+              Projects
             </button>
-            <button onClick={() => setAdd(true)}>X</button>
+            <button
+              className={button.button}
+              onClick={() => {
+                setCurrentShow("todos");
+                setCurrentchannel("");
+              }}
+            >
+              Todos
+            </button>
+            <button
+              className={button.button}
+              onClick={() => {
+                setCurrentShow("tasks");
+                setCurrentchannel("");
+              }}
+            >
+              Tasks
+            </button>
+            <div className={style.channels}>
+              <button
+                onClick={() => setActivechannel(!activechannel)}
+                className={button.button}
+              >
+                Channel
+              </button>
+              <div
+                className={`${style.channel} ${
+                  activechannel ? style.channelOpen : ""
+                }`}
+              >
+                {dataProject.map((item) => (
+                  <button
+                    key={item.id}
+                    className={`${style.button} ${
+                      currentchannel === item.id ? style.buttonOn : ""
+                    }`}
+                    onClick={() => {
+                      setCurrentchannel(item.id);
+                      setCurrentShow("channels");
+                    }}
+                  >
+                    {item.name}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
-        ) : (
-          <button onClick={() => setAdd(true)}>Add Project</button>
-        )}
+          <div>
+            {currentShow === "channels" ? (
+              <ProjectChannel channelID={currentchannel} />
+            ) : (
+              <></>
+            )}
+            {currentShow === "all" || currentShow === "projects" ? (
+              <div className={style.wrap}>
+                <div className={style.show}>
+                  {dataProject.map((item) => (
+                    <PrjectCard
+                      key={item.id}
+                      id={item.id}
+                      name={item.name}
+                      state={item.state}
+                    />
+                  ))}
+                  <div></div>
+                  {isAdd ? (
+                    <div className={style.addCardInfo}>
+                      <input
+                        onChange={(e) => setNewProjectsName(e.target.value)}
+                        value={newProjectName}
+                        type="text"
+                        placeholder="Project Name"
+                      />
+                      <select
+                        onChange={(e) => setNewProjectState(e.target.value)}
+                        value={newProjectState}
+                      >
+                        <option value="On-hold">On-hold</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Running">Running</option>
+                        <option value="Reviewing">Reviewing</option>
+                        <option value="Complete">Complete</option>
+                      </select>
+                      <button
+                        onClick={() => {
+                          firestore
+                            .collection("projects")
+                            .add({
+                              member: [user],
+                              name: newProjectName,
+                              state: newProjectState,
+                              time: timestamp,
+                            })
+                            .then((docRef) => {
+                              let time = Date.now();
+                              firestore
+                                .collection("projects")
+                                .doc(docRef.id)
+                                .collection("channel")
+                                .add({
+                                  text: `wlecome to ${newProjectName} channel`,
+                                  time: time,
+                                  from: "system",
+                                });
+                            });
+                          setNewProjectsName("");
+                          setNewProjectState("On-hold");
+                          setAdd(true);
+                        }}
+                        className={button.button}
+                      >
+                        Add Project
+                      </button>
+                      <button
+                        onClick={() => setAdd(false)}
+                        className={button.button}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => setAdd(true)}
+                      className={style.addCard}
+                    >
+                      Create new board
+                    </button>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <></>
+            )}
+          </div>
+        </div>
       </div>
+
       <div style={load ? { display: "block" } : { display: "none" }}>
         <Loading />
       </div>

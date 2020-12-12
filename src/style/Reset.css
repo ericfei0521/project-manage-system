@@ -146,3 +146,6 @@ select:focus {
 *::after {
   box-sizing: border-box;
 }
+body {
+  background-color: gray;
+}

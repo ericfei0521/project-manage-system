@@ -4,7 +4,6 @@ import firebase from "firebase/app";
 import { firestore } from "../../firebase";
 
 const CommentCards = (prop) => {
-  console.log(prop);
   let [edit, setEdit] = useState(false);
   let [send, setSend] = useState(false);
   let [editing, setEditing] = useState(false);
@@ -71,7 +70,7 @@ const CommentCards = (prop) => {
         ) : (
           <div className={style.content}>
             <h1>{prop.data.name}</h1>
-            <p>{content}</p>
+            <p style={{ whiteSpace: "pre-line" }}>{content}</p>
             <div>
               {prop.data.name === prop.user ? (
                 <button onClick={() => setEdit(!edit)}>...</button>

@@ -1,13 +1,29 @@
+$primary-color: #fff8e1;
+$bord-color: rgb(77, 77, 77);
 .projectCard {
-  font-size: 2em;
-  color: antiquewhite;
-  min-width: 250px;
-  width: fit-content;
+  width: 23%;
+  max-width: 350px;
+  height: 180px;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: 15px;
-  background-color: rgba(0, 0, 0, 0.616);
+  border-radius: 25px;
+  background: radial-gradient(circle at center, #3a3a3a, #222222);
   margin: 5px;
-  border-radius: 15px;
-  border: 1px solid antiquewhite;
+  a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    color: $primary-color;
+    font-size: 1.5em;
+  }
+}
+
+.projectCard:hover {
+  border: 1px solid $primary-color;
+  background: radial-gradient(circle at center, #4b4b4b, #222222);
 }

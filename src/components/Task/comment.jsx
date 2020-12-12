@@ -72,7 +72,6 @@ const Comment = ({ subTaskID, jobID, projectID }) => {
         comment: firebase.firestore.FieldValue.arrayUnion(value.id),
       });
   };
-
   return (
     <div className={style.comment}>
       <div>
@@ -89,7 +88,10 @@ const Comment = ({ subTaskID, jobID, projectID }) => {
         <textarea
           type="text"
           value={newComment}
-          onChange={(e) => setNewComment(e.target.value)}
+          onChange={(e) => {
+            setNewComment(e.target.value);
+            console.log(e.target.value);
+          }}
         />
         <button
           onClick={() => {

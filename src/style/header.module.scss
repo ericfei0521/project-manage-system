@@ -61,6 +61,7 @@ $primary-color: #fff8e1;
       border: 2px solid $primary-color;
       border-radius: 50%;
       background-color: transparent;
+      cursor: pointer;
       h1 {
         display: block;
         color: $primary-color;
@@ -74,7 +75,6 @@ $primary-color: #fff8e1;
     }
     .user:hover {
       background-color: rgba(27, 27, 27, 0.787);
-      box-shadow: 0 0 5px $primary-color;
     }
     @keyframes gradient {
       0% {

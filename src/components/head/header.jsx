@@ -17,42 +17,46 @@ const Header = (prop) => {
   let [noticeList, setNoticeList] = useState([]);
   let [check, setCheck] = useState(false);
   useEffect(() => {
-    if (user) {
-      firestore
-        .collection("users")
-        .doc(user)
-        .onSnapshot((doc) => {
-          let data = doc.data();
-          if (data.displayName !== undefined) {
-            setUserName(data.displayName);
-            // setUserDetail(data);
-            setNoticenumber(data.comment);
-            firestore
-              .collection("comment")
-              .orderBy("time", "desc")
-              .onSnapshot((doc) => {
-                let list = [];
-                let current = [];
-                doc.forEach((item) => {
-                  list.push(item.data());
-                });
-                list.forEach((item) => {
-                  for (let i in data.comment) {
-                    if (item.id === data.comment[i]) {
-                      current.push(item);
-                    }
-                  }
-                });
-                setNoticeList(current);
-              });
-          }
-        });
+    if (!user) {
+      return;
     }
+    let unsubscribe = firestore
+      .collection("users")
+      .doc(user)
+      .onSnapshot((doc) => {
+        let data = doc.data();
+        if (data.displayName !== undefined) {
+          setUserName(data.displayName);
+          // setUserDetail(data);
+          setNoticenumber(data.comment);
+          firestore
+            .collection("comment")
+            .orderBy("time", "desc")
+            .get()
+            .then((doc) => {
+              let list = [];
+              let current = [];
+              doc.forEach((item) => {
+                list.push(item.data());
+              });
+              list.forEach((item) => {
+                for (let i in data.comment) {
+                  if (item.id === data.comment[i]) {
+                    current.push(item);
+                  }
+                }
+              });
+              setNoticeList(current);
+            });
+        }
+      });
+    return () => {
+      unsubscribe();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [user]);
+
   const readindividual = (value) => {
-    console.log(user);
-    console.log(value);
     firestore
       .collection("users")
       .doc(user)
@@ -68,17 +72,13 @@ const Header = (prop) => {
   return (
     <div className={style.head}>
       <div className={style.left} style={{ width: "10%" }}>
-        {prop.name ? (
-          <Link to="/projects">
-            <img src={logo} alt="" width="80px" />
-          </Link>
-        ) : (
-          <></>
-        )}
+        <Link to="/projects">
+          <img src={logo} alt="" width="80px" />
+        </Link>
         <Clock />
       </div>
       <div className={style.middle}>
-        {prop.name ? <h1>Project: {prop.name}</h1> : <img src={logo} alt="" />}
+        {prop.name ? <h1>Project: {prop.name}</h1> : <></>}
       </div>
 
       <div className={style.right}>
@@ -95,6 +95,7 @@ const Header = (prop) => {
         <button className={style.user}>
           <h1>{username.charAt(0)}</h1>
         </button>
+        <button onClick={() => prop.signOut()}>signout</button>
       </div>
       {check ? (
         <div

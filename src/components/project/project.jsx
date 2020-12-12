@@ -7,13 +7,14 @@ import TaskItem from "../Task/taskItem";
 import Loading from "../loading";
 import style from "../../style/project.module.scss";
 import { addList, getMember, deleteProject } from "../../action/action";
-import { useParams, Link } from "react-router-dom";
-import { firestore } from "../../firebase";
+import { useParams, Link, useHistory } from "react-router-dom";
+import { auth, firestore } from "../../firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { DragDropContext } from "react-beautiful-dnd";
 
 const Project = () => {
   let dispatch = useDispatch();
+  let history = useHistory();
   let { projectId } = useParams();
   const state = useSelector((state) => state.HandleTaskMember);
   let project = firestore.collection("projects").doc(projectId);
@@ -131,25 +132,28 @@ const Project = () => {
         });
     }
   };
-
+  const routeChange = () => {
+    auth.signOut().then(function () {
+      history.push("/");
+    });
+  };
   return (
     <div className={style.project}>
-      <Header name={name} />
+      <Header name={name} signOut={routeChange} />
       <div className={style.nav}>
         <nav>
           <button>成員項目</button>
           <button>甘特圖</button>
           <button>績效</button>
         </nav>
-        <div>
+        {/* <div>
           <select name="" id="">
             <option value="進行中">進行中</option>
           </select>
           <input type="text" />
           <button>search</button>
-        </div>
+        </div> */}
         <div>
-          <button>權限</button>
           <button
             onClick={() => {
               console.log(membershow);

@@ -1,20 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import style from "../../style/projectCard.module.scss";
 const PrjectCard = ({ id, name, state }) => {
   return (
-    <Link
-      to={{
-        pathname: `/projects/${id}`,
-      }}
-      className="brand-logo"
-    >
-      <div display="flex">
-        <h1>
-          {name} state:{state}
-        </h1>
-      </div>
-    </Link>
+    <div display="flex" className={style.projectCard}>
+      <Link
+        to={{
+          pathname: `/projects/${id}`,
+        }}
+      >
+        <h1>{name}</h1>
+        <h2>state:{state}</h2>
+      </Link>
+    </div>
   );
 };
 
