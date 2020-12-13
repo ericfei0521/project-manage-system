@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "../head/header";
 import PrjectCard from "./prjectCard";
 import ProjectChannel from "./projectChannel";
+import MemberTasks from "./membertasks";
 import Loading from "../loading";
 import style from "../../style/projectList.module.scss";
 import button from "../../style/button.module.scss";
@@ -26,24 +27,22 @@ function ProjectList() {
     if (!user) {
       history.push("/login");
     }
-    let unsubscribeList = projects
-      .orderBy("time", "desc")
-      .onSnapshot(function (doc) {
-        let updateData = [];
-        doc.forEach((item) => {
-          let member = item.data().member;
-          if (member.includes(user)) {
-            let dataitem = {
-              name: item.data().name,
-              id: item.id,
-              state: item.data().state,
-            };
-            updateData.push(dataitem);
-          }
-        });
-        setProjects(updateData);
-        setTimeout(() => setLoad(false), 200);
+    let unsubscribeList = projects.orderBy("time").onSnapshot(function (doc) {
+      let updateData = [];
+      doc.forEach((item) => {
+        let member = item.data().member;
+        if (member.includes(user)) {
+          let dataitem = {
+            name: item.data().name,
+            id: item.id,
+            state: item.data().state,
+          };
+          updateData.push(dataitem);
+        }
       });
+      setProjects(updateData);
+      setTimeout(() => setLoad(false), 200);
+    });
     return () => {
       unsubscribeList();
     };
@@ -125,6 +124,7 @@ function ProjectList() {
             ) : (
               <></>
             )}
+            {currentShow === "tasks" ? <MemberTasks user={user} /> : <></>}
             {currentShow === "all" || currentShow === "projects" ? (
               <div className={style.wrap}>
                 <div className={style.show}>

@@ -93,6 +93,8 @@ export function preaddJobe(value) {
           name: value.name,
           state: value.state,
           createTime: timestamp,
+          projectName: value.projectName,
+          subTaskName: value.subTaskName,
           comment: [],
         };
         console.log(newState);

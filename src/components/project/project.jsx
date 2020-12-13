@@ -26,6 +26,7 @@ const Project = () => {
   let [tasks, setTasks] = useState([]);
   let [membershow, setMemberShow] = useState(false);
   let [showallusers, setAllusers] = useState(false);
+  let [currentPage, setCurrentPage] = useState("all");
 
   useEffect(() => {
     let unsubscribemember = project.onSnapshot(function (doc) {
@@ -142,17 +143,11 @@ const Project = () => {
       <Header name={name} signOut={routeChange} />
       <div className={style.nav}>
         <nav>
-          <button>成員項目</button>
-          <button>甘特圖</button>
-          <button>績效</button>
+          <button onClick={() => setCurrentPage("all")}>All list</button>
+          <button>Tasks</button>
+          <button>Gantt</button>
+          <button>performance</button>
         </nav>
-        {/* <div>
-          <select name="" id="">
-            <option value="進行中">進行中</option>
-          </select>
-          <input type="text" />
-          <button>search</button>
-        </div> */}
         <div>
           <button
             onClick={() => {
@@ -219,52 +214,57 @@ const Project = () => {
           )}
         </div>
       </div>
-      <div className={style.projectlist}>
-        <DragDropContext onDragEnd={handleDrag}>
-          {tasks.map((item) => (
-            <TaskList
-              key={item.id}
-              id={item.id}
-              name={item.name}
-              open={handleOpen}
+      {currentPage === "all" ? (
+        <div className={style.projectlist}>
+          <DragDropContext onDragEnd={handleDrag}>
+            {tasks.map((item) => (
+              <TaskList
+                key={item.id}
+                id={item.id}
+                name={item.name}
+                open={handleOpen}
+              />
+            ))}
+          </DragDropContext>
+          <div>
+            <input
+              onChange={(e) => setListName(e.target.value)}
+              value={listname}
+              type="text"
+              placeholder="Task Name"
             />
-          ))}
-        </DragDropContext>
-        <div>
-          <input
-            onChange={(e) => setListName(e.target.value)}
-            value={listname}
-            type="text"
-            placeholder="Task Name"
-          />
-          <button
-            onClick={() => {
-              dispatch(
-                addList({
-                  id: projectId,
-                  name: listname,
-                })
-              );
-              setListName("");
-            }}
-          >
-            +
-          </button>
-        </div>
-        {open ? (
-          <div className={style.taskdetail}>
-            <TaskItem
-              taskID={state.taskID}
-              id={state.id}
-              name={state.name}
-              state={state.state}
-              open={handleOpen}
-            />
+            <button
+              onClick={() => {
+                dispatch(
+                  addList({
+                    id: projectId,
+                    name: listname,
+                  })
+                );
+                setListName("");
+              }}
+            >
+              +
+            </button>
           </div>
-        ) : (
-          <></>
-        )}
-      </div>
+          {open ? (
+            <div className={style.taskdetail}>
+              <TaskItem
+                taskID={state.taskID}
+                id={state.id}
+                name={state.name}
+                state={state.state}
+                open={handleOpen}
+              />
+            </div>
+          ) : (
+            <></>
+          )}
+        </div>
+      ) : (
+        <></>
+      )}
+
       <div style={load ? { display: "block" } : { display: "none" }}>
         <Loading />
       </div>

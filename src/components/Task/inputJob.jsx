@@ -9,6 +9,8 @@ const InputJob = ({ handleAddTask, projectId, subTaskID }) => {
   console.log(subTaskID);
   let dispatch = useDispatch();
   let [member, setMember] = useState([]);
+  let [projectName, setProjectName] = useState("");
+  let [subtaskName, setsubTaskName] = useState("");
   let [showmember, setShowmember] = useState(false);
   let [taskmember, setTaskmember] = useState("");
   let [taskmemberID, setTaskmemberID] = useState("");
@@ -18,13 +20,20 @@ const InputJob = ({ handleAddTask, projectId, subTaskID }) => {
   useEffect(() => {
     let list = [];
     let memberlist = [];
-    firestore
+    let unsubscribeproject = firestore
       .collection("projects")
       .doc(projectId)
       .onSnapshot(function (doc) {
         if (doc.data() !== undefined) {
+          setProjectName(doc.data().name);
           list = doc.data().member;
         }
+      });
+    let unsubsvribesubtask = firestore
+      .collection("subtasks")
+      .doc(subTaskID)
+      .onSnapshot((doc) => {
+        setsubTaskName(doc.data().name);
       });
     firestore
       .collection("users")
@@ -37,6 +46,10 @@ const InputJob = ({ handleAddTask, projectId, subTaskID }) => {
         });
         setMember(memberlist);
       });
+    return () => {
+      unsubscribeproject();
+      unsubsvribesubtask();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   console.log(status);
@@ -94,6 +107,8 @@ const InputJob = ({ handleAddTask, projectId, subTaskID }) => {
                 member: taskmember,
                 name: taskname,
                 state: status,
+                projectName: projectName,
+                subTaskName: subtaskName,
                 comment: [],
               })
             );

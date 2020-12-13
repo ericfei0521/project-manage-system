@@ -28,7 +28,7 @@ const TaskList = ({ name, id, open }) => {
   let dataList = firestore.collection("subtasks");
   // 核對兩者是否有相等
   useEffect(() => {
-    taskList.onSnapshot(function (doc) {
+    let unsubscribe = taskList.onSnapshot(function (doc) {
       if (doc.data() !== undefined) {
         let updateData = [];
         let list = doc.data().task;
@@ -53,6 +53,9 @@ const TaskList = ({ name, id, open }) => {
           });
       }
     });
+    return () => {
+      unsubscribe();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const keyEvent = (e) => {
