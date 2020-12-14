@@ -42,7 +42,8 @@ $primary-color: #fff8e1;
       align-items: center;
       justify-content: flex-end;
       .campaign {
-        width: 50%;
+        width: 40%;
+        min-width: 500px;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -75,6 +76,7 @@ $primary-color: #fff8e1;
           justify-content: flex-start;
           margin-top: 15px;
           button {
+            min-width: 140px;
             width: 30%;
             transform: scaleY(1.2);
           }
