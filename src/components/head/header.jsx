@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 const Header = (prop) => {
   const user = useSelector((state) => state.UserCheck);
-  // let [userdetail, setUserDetail] = useState("");
+  let [userdetail, setUserDetail] = useState("");
   let [username, setUserName] = useState("");
   let [noticenumber, setNoticenumber] = useState([]);
   let [noticeList, setNoticeList] = useState([]);
@@ -25,9 +25,9 @@ const Header = (prop) => {
       .doc(user)
       .onSnapshot((doc) => {
         let data = doc.data();
-        if (data.displayName !== undefined) {
+        if (data !== undefined) {
           setUserName(data.displayName);
-          // setUserDetail(data);
+          setUserDetail(data);
           setNoticenumber(data.comment);
           firestore
             .collection("comment")
@@ -95,7 +95,11 @@ const Header = (prop) => {
         <button className={style.user}>
           <h1>{username.charAt(0)}</h1>
         </button>
-        <button onClick={() => prop.signOut()}>signout</button>
+        <div>
+          <h1>{userdetail.displayName}</h1>
+          <h1>{userdetail.email}</h1>
+          <button onClick={() => prop.signOut()}>signout</button>
+        </div>
       </div>
       {check ? (
         <div

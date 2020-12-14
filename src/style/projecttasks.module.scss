@@ -1,0 +1,102 @@
+$primary-color: #fff8e1;
+$statehold: rgb(195, 195, 195);
+$stateRun: rgb(156, 219, 126);
+$stateRev: rgb(226, 220, 132);
+$stateRej: rgb(250, 122, 105);
+$statecom: rgb(129, 202, 235);
+.taskssummary {
+  box-sizing: border-box;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 15px auto;
+  .usersummary {
+    box-sizing: border-box;
+    color: $primary-color;
+    display: flex;
+    width: 90%;
+    border-radius: 15px;
+    justify-content: space-evenly;
+    background-color: rgb(53, 53, 53);
+    font-size: 1.2em;
+    margin: 5px auto 0px auto;
+    padding: 5px;
+    letter-spacing: 2px;
+    .state {
+      display: flex;
+      h3 {
+        color: $statehold;
+        margin-right: 5px;
+      }
+      h4 {
+        color: white;
+      }
+    }
+    .state:nth-child(4) {
+      h3 {
+        color: $stateRun;
+      }
+    }
+    .state:nth-child(5) {
+      h3 {
+        color: $stateRev;
+      }
+    }
+    .state:nth-child(6) {
+      h3 {
+        color: $stateRej;
+      }
+    }
+    .state:nth-child(7) {
+      h3 {
+        color: $statecom;
+      }
+    }
+    .button {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1px solid $primary-color;
+      transform: rotate(90deg);
+      background-position: center;
+      background-size: 10px 10px;
+      background-repeat: no-repeat;
+      background-image: url("../images/ICON/arrow.svg");
+    }
+  }
+  .tasklist {
+    width: 85%;
+    max-height: 0;
+    transition: max-height 0.15s ease-out;
+    overflow: hidden;
+    background-color: rgb(75, 75, 75);
+    margin: 0 auto;
+    .tasks {
+      box-sizing: border-box;
+      color: $primary-color;
+      display: flex;
+      width: 90%;
+      justify-content: space-evenly;
+      font-size: 1.2em;
+      margin: 15px auto;
+      padding: 10px;
+      letter-spacing: 2px;
+      border-bottom: 1px solid $primary-color;
+      .detail {
+        width: 25%;
+        display: flex;
+        h2 {
+          margin-right: 10px;
+        }
+        h2:nth-child(1) {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+  .open {
+    max-height: 500px;
+    transition: max-height 0.25s ease-in;
+  }
+}

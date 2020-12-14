@@ -67,9 +67,9 @@ const InputJob = ({ handleAddTask, projectId, subTaskID }) => {
         }}
       >
         <option value="On-hold">On-hold</option>
-        <option value="Pending">Pending</option>
         <option value="Running">Running</option>
         <option value="Reviewing">Reviewing</option>
+        <option value="Rejected">Rejected</option>
         <option value="Complete">Complete</option>
       </select>
       <button onClick={() => setShowmember(!showmember)}>

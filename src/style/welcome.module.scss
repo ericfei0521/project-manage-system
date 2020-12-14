@@ -53,9 +53,11 @@ $primary-color: #fff8e1;
           align-items: flex-start;
           h1 {
             font-size: 5em;
-            color: $primary-color;
+            color: rgba(0, 0, 0, 0);
             line-height: 1.2em;
             font-family: "Abril Fatface", cursive;
+            -webkit-text-stroke-width: 1px;
+            -webkit-text-stroke-color: $primary-color;
           }
           h2 {
             font-size: 3em;
