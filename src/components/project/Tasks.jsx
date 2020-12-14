@@ -6,7 +6,7 @@ import { firestore } from "../../firebase";
 const Tasks = (props) => {
   const state = useSelector((state) => state.Handleshowmember);
   let [list, setList] = useState([]);
-  let [showdetail, setShowdetail] = useState(false);
+
   useEffect(() => {
     let reanageList = [];
     state.member.forEach((item) => {

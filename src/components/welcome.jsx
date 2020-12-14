@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "../images/logo.png";
-import githubIcon from "../images/github.svg";
+import video from "../images/testbackground.mp4";
 import button from "../style/button.module.scss";
 import style from "../style/welcome.module.scss";
 import { auth } from "../firebase";
@@ -20,6 +20,10 @@ function Welcome() {
 
   return (
     <div className={style.app}>
+      <video autoPlay loop muted>
+        <source src={video} type="video/mp4" />
+      </video>
+      <div className={style.filter}></div>
       <div className={style.header}>
         <Link to="/" className="brand-logo">
           <img src={logo} alt="" width="80px" />
@@ -39,8 +43,7 @@ function Welcome() {
             <div className={style.sologon}>
               <h1>Welcome TO</h1>
               <h2>-The Raven</h2>
-              <p>The best project management system</p>
-              <p>Use one manage all</p>
+              <p>&emsp;Use one manage all</p>
             </div>
             <Link to="/login">
               <button className={button.button}>Get started for free</button>
@@ -49,10 +52,10 @@ function Welcome() {
         </div>
 
         <div className={style.footer}>
-          <a href="https://github.com/ericfei0521?tab=repositories">
-            <img src={githubIcon} alt="" />
-          </a>
           <h3>@ 2020 THE RAVEN All rights reserved </h3>
+          <a href="https://github.com/ericfei0521?tab=repositories">
+            <div className={style.icon}></div>
+          </a>
         </div>
       </div>
     </div>
