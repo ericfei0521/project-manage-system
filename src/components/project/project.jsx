@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "../head/header";
 import TaskList from "../Task/taskList";
+import Tasks from "./Tasks";
 import MemberList from "../member/memberList";
 import AlluserList from "../member/alluserList";
 import TaskItem from "../Task/taskItem";
@@ -144,8 +145,19 @@ const Project = () => {
       <div className={style.nav}>
         <nav>
           <button onClick={() => setCurrentPage("all")}>All list</button>
-          <button>Tasks</button>
-          <button>Gantt</button>
+          <button
+            onClick={() => {
+              setCurrentPage("tasks");
+              dispatch(
+                getMember({
+                  show: membershow,
+                  member: memberNum,
+                })
+              );
+            }}
+          >
+            Tasks
+          </button>
           <button>performance</button>
         </nav>
         <div>
@@ -214,6 +226,11 @@ const Project = () => {
           )}
         </div>
       </div>
+      {currentPage === "tasks" ? (
+        <Tasks projectid={projectId} member={memberNum} />
+      ) : (
+        <></>
+      )}
       {currentPage === "all" ? (
         <div className={style.projectlist}>
           <DragDropContext onDragEnd={handleDrag}>

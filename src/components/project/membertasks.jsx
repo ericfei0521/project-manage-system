@@ -17,7 +17,7 @@ const MemberTasks = () => {
         setUsername(doc.data().displayName);
       });
 
-    firestore
+    let unsubscribe = firestore
       .collection("subtasks")
       .orderBy("createTime", "desc")
       .onSnapshot((doc) => {
@@ -34,16 +34,20 @@ const MemberTasks = () => {
                 newlist.push(item.data());
               });
             });
-          setUserTasks(newlist);
+          let newarray = [...newlist];
+          setUserTasks(newarray);
         });
       });
-
+    return () => {
+      unsubscribe();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
   useEffect(() => {
     setState(!state);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  console.log(usertasks);
   return (
     <div className={style.taskboard}>
       <h1>{userName}'s Tasks</h1>
@@ -60,9 +64,9 @@ const MemberTasks = () => {
           className={style.taskdetail}
           style={data.state === "Complete" ? { backgroundColor: "black" } : {}}
         >
-          <h2>Project {data.projectName}</h2>
-          <h2>Card {data.subTaskName}</h2>
-          <h2>Task {data.name}</h2>
+          <h2>{data.projectName}</h2>
+          <h2>{data.subTaskName}</h2>
+          <h2>{data.name}</h2>
           <h2
             style={
               data.state === "Complete"
