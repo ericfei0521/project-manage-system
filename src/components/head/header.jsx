@@ -10,8 +10,11 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Header = (prop) => {
+  console.log(prop);
   const user = useSelector((state) => state.UserCheck);
   let [userdetail, setUserDetail] = useState("");
+  let [editProjectName, setEditProjectName] = useState(false);
+  let [projectName, setProjectName] = useState(prop.name);
   let [username, setUserName] = useState("");
   let [noticenumber, setNoticenumber] = useState([]);
   let [noticeList, setNoticeList] = useState([]);
@@ -69,6 +72,21 @@ const Header = (prop) => {
       comment: [],
     });
   };
+  const handleproject = (e) => {
+    if (e.key === "Enter") {
+      setEditProjectName(false);
+      if (projectName !== "") {
+        firestore.collection("projects").doc(prop.id).update({
+          name: projectName,
+        });
+      }
+    }
+  };
+  const handleTaskState = (value) => {
+    firestore.collection("projects").doc(prop.id).update({
+      state: value,
+    });
+  };
   return (
     <div className={style.head}>
       <div className={style.left} style={{ width: "10%" }}>
@@ -78,7 +96,43 @@ const Header = (prop) => {
         <Clock />
       </div>
       <div className={style.middle}>
-        {prop.name ? <h1>Project: {prop.name}</h1> : <></>}
+        {prop.name ? (
+          [
+            editProjectName ? (
+              <input
+                onChange={(e) => setProjectName(e.target.value)}
+                value={projectName}
+                type="text"
+                placeholder="Project Name"
+                onKeyDown={(e) => {
+                  handleproject(e);
+                }}
+              />
+            ) : (
+              <h1 onClick={() => setEditProjectName(true)}>
+                Project: {prop.name}
+              </h1>
+            ),
+          ]
+        ) : (
+          <></>
+        )}
+        {prop.state ? (
+          <select
+            onChange={(e) => {
+              handleTaskState(e.target.value);
+            }}
+            value={prop.state}
+          >
+            <option value="On-hold">On-hold</option>
+            <option value="Running">Running</option>
+            <option value="Reviewing">Reviewing</option>
+            <option value="Rejected">Rejected</option>
+            <option value="Complete">Complete</option>
+          </select>
+        ) : (
+          <></>
+        )}
       </div>
 
       <div className={style.right}>

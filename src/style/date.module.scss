@@ -10,14 +10,4 @@
   max-height: 500px;
   overflow: auto;
   line-height: 1em;
-  animation-name: example;
-  animation-duration: 0.5s;
-}
-@keyframes example {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 10;
-  }
 }

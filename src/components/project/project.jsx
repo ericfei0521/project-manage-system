@@ -22,6 +22,7 @@ const Project = () => {
   let [load, setLoad] = useState(true);
   let [open, setOpen] = useState(false);
   let [name, setName] = useState("");
+  let [projectstate, setState] = useState("");
   let [listname, setListName] = useState("");
   let [memberNum, setMemberNum] = useState([]);
   let [tasks, setTasks] = useState([]);
@@ -35,6 +36,7 @@ const Project = () => {
       if (doc.data() !== undefined) {
         let data = doc.data();
         setName(data.name);
+        setState(data.state);
         let list = [];
         data.member.forEach((item) => {
           list.push(item);
@@ -51,6 +53,7 @@ const Project = () => {
           let data = {
             id: item.id,
             name: item.data().name,
+            tasks: item.data().task,
           };
           listTask.push(data);
         });
@@ -77,7 +80,6 @@ const Project = () => {
   };
 
   const handleDrag = (result) => {
-    // console.log(result)
     if (!result.destination) return;
     if (
       result.destination.droppableId === result.source.droppableId &&
@@ -139,9 +141,15 @@ const Project = () => {
       history.push("/");
     });
   };
+  console.log(tasks);
   return (
     <div className={style.project}>
-      <Header name={name} signOut={routeChange} />
+      <Header
+        id={projectId}
+        state={projectstate}
+        name={name}
+        signOut={routeChange}
+      />
       <div className={style.nav}>
         <nav>
           <button onClick={() => setCurrentPage("all")}>All list</button>

@@ -4,6 +4,7 @@ import PrjectCard from "./prjectCard";
 import ProjectChannel from "./projectChannel";
 import MemberTasks from "./membertasks";
 import Loading from "../loading";
+import Todos from "./Todos";
 import style from "../../style/projectList.module.scss";
 import button from "../../style/button.module.scss";
 import { useSelector } from "react-redux";
@@ -58,7 +59,7 @@ function ProjectList() {
     <div>
       <div className={style.projectList}>
         <div className={style.header}>
-          <Header name={null} signOut={routeChange} />
+          <Header id={null} state={null} name={null} signOut={routeChange} />
         </div>
         <div className={style.display}>
           <div className={style.sidebar}>
@@ -124,6 +125,7 @@ function ProjectList() {
             ) : (
               <></>
             )}
+            {currentShow === "todos" ? <Todos user={user} /> : <></>}
             {currentShow === "tasks" ? <MemberTasks user={user} /> : <></>}
             {currentShow === "all" || currentShow === "projects" ? (
               <div className={style.wrap}>
