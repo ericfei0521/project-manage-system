@@ -5,12 +5,12 @@ import Notice from "./notice";
 import firebase from "firebase/app";
 import bell from "../../images/ICON/notification.svg";
 import style from "../../style/header.module.scss";
+import button from "../../style/button.module.scss";
 import { firestore } from "../../firebase";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Header = (prop) => {
-  console.log(prop);
   const user = useSelector((state) => state.UserCheck);
   let [userdetail, setUserDetail] = useState("");
   let [editProjectName, setEditProjectName] = useState(false);
@@ -19,6 +19,7 @@ const Header = (prop) => {
   let [noticenumber, setNoticenumber] = useState([]);
   let [noticeList, setNoticeList] = useState([]);
   let [check, setCheck] = useState(false);
+  let [usershow, setUserShow] = useState(false);
   useEffect(() => {
     if (!user) {
       return;
@@ -58,7 +59,9 @@ const Header = (prop) => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
-
+  useEffect(() => {
+    setProjectName(prop.name);
+  }, [prop]);
   const readindividual = (value) => {
     firestore
       .collection("users")
@@ -100,17 +103,23 @@ const Header = (prop) => {
           [
             editProjectName ? (
               <input
-                onChange={(e) => setProjectName(e.target.value)}
                 value={projectName}
                 type="text"
-                placeholder="Project Name"
+                autoFocus
+                key={prop.name}
+                onChange={(e) => setProjectName(e.target.value)}
                 onKeyDown={(e) => {
                   handleproject(e);
                 }}
               />
             ) : (
-              <h1 onClick={() => setEditProjectName(true)}>
-                Project: {prop.name}
+              <h1
+                onClick={() => {
+                  setEditProjectName(true);
+                }}
+                key={prop.id}
+              >
+                {projectName}
               </h1>
             ),
           ]
@@ -137,7 +146,14 @@ const Header = (prop) => {
 
       <div className={style.right}>
         <div className={style.notice}>
-          <img src={bell} alt="" onClick={() => setCheck(!check)} />
+          <img
+            src={bell}
+            alt=""
+            onClick={() => {
+              setCheck(!check);
+              setUserShow(false);
+            }}
+          />
           {noticenumber.length === 0 ? (
             <></>
           ) : (
@@ -146,45 +162,38 @@ const Header = (prop) => {
             </div>
           )}
         </div>
-        <button className={style.user}>
-          <h1>{username.charAt(0)}</h1>
-        </button>
-        <div>
-          <h1>{userdetail.displayName}</h1>
-          <h1>{userdetail.email}</h1>
-          <button onClick={() => prop.signOut()}>signout</button>
-        </div>
-      </div>
-      {check ? (
-        <div
-          style={{
-            position: "absolute",
-            right: 0,
-            width: "300px",
-            top: "110px",
-            zIndex: 200,
-            padding: "10px",
-            backgroundColor: "rgba(50,50,50,0.8)",
-            backdropFilter: "blur(10px)",
-            height: "80vh",
-            overflow: "auto",
+        <button
+          className={style.user}
+          onClick={() => {
+            setUserShow(!usershow);
+            setCheck(false);
           }}
         >
-          <button
-            onClick={() => {
-              readall();
-              setCheck(!check);
-            }}
-          >
-            Read All
-          </button>
-          {noticeList.map((item) => (
-            <Notice key={item.id} data={item} read={readindividual} />
-          ))}
-        </div>
-      ) : (
-        <></>
-      )}
+          <h1>{username.charAt(0)}</h1>
+        </button>
+      </div>
+      <div
+        className={`${style.userinfo} ${usershow ? style.userinfoshow : ""}`}
+      >
+        <h2>{userdetail.displayName}</h2>
+        <h2>{userdetail.email}</h2>
+        <button onClick={() => prop.signOut()} className={button.button}>
+          signout
+        </button>
+      </div>
+      <div className={`${style.noticearea} ${check ? style.noticeshow : ""}`}>
+        <button
+          onClick={() => {
+            readall();
+            setCheck(!check);
+          }}
+        >
+          Read All
+        </button>
+        {noticeList.map((item) => (
+          <Notice key={item.id} data={item} read={readindividual} />
+        ))}
+      </div>
     </div>
   );
 };

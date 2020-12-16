@@ -4,13 +4,14 @@ $stateRun: rgb(156, 219, 126);
 $stateRev: rgb(226, 220, 132);
 $stateRej: rgb(250, 122, 105);
 $statecom: rgb(129, 202, 235);
+$projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
 .taskssummary {
   box-sizing: border-box;
-  padding: 5px;
+  padding: 2px;
   display: flex;
   flex-direction: column;
   width: 80%;
-  margin: 15px auto;
+  margin: 3px auto;
   .usersummary {
     box-sizing: border-box;
     color: $primary-color;
@@ -18,7 +19,8 @@ $statecom: rgb(129, 202, 235);
     width: 90%;
     border-radius: 15px;
     justify-content: space-evenly;
-    background-color: rgb(53, 53, 53);
+    background-color: rgb(77, 77, 77);
+    border: 1px solid gray;
     font-size: 1.2em;
     margin: 5px auto 0px auto;
     padding: 5px;
@@ -58,7 +60,6 @@ $statecom: rgb(129, 202, 235);
       height: 20px;
       border-radius: 50%;
       border: 1px solid $primary-color;
-      transform: rotate(90deg);
       background-position: center;
       background-size: 10px 10px;
       background-repeat: no-repeat;
@@ -66,26 +67,27 @@ $statecom: rgb(129, 202, 235);
     }
   }
   .tasklist {
-    width: 85%;
+    width: 86%;
     max-height: 0;
-    transition: max-height 0.15s ease-out;
+    transition: all 0.15s ease-out;
     overflow: hidden;
-    background-color: rgb(75, 75, 75);
+    background-color: rgba(75, 75, 75, 0.527);
     margin: 0 auto;
     .tasks {
       box-sizing: border-box;
       color: $primary-color;
       display: flex;
-      width: 90%;
+      width: 95%;
       justify-content: space-evenly;
       font-size: 1.2em;
-      margin: 15px auto;
+      margin: auto;
       padding: 10px;
       letter-spacing: 2px;
       border-bottom: 1px solid $primary-color;
       .detail {
         width: 25%;
         display: flex;
+        padding: 5px 0;
         h2 {
           margin-right: 10px;
         }
@@ -94,9 +96,23 @@ $statecom: rgb(129, 202, 235);
         }
       }
     }
+    .tasks:hover {
+      transform: translate(-1px, 2px);
+      background-color: rgb(136, 136, 136) !important;
+      z-index: 300;
+      box-shadow: 10px 10px 15px black;
+    }
   }
   .open {
     max-height: 500px;
-    transition: max-height 0.25s ease-in;
+    padding-bottom: 10px;
+    transition: all 0.25s ease-in-out;
   }
+}
+.taskview {
+  max-width: 100vw;
+  min-width: 500px;
+  overflow-y: auto;
+  min-height: calc(95vh - 110px);
+  background: $projectarea;
 }

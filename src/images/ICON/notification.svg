@@ -1,43 +1,25 @@
-<?xml version="1.0"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" version="1.1" width="512" height="512" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><link type="text/css" rel="stylesheet" id="dark-mode-general-link"/><link type="text/css" rel="stylesheet" id="dark-mode-custom-link"/><style lang="en" type="text/css" id="dark-mode-custom-style"/>
-<g xmlns="http://www.w3.org/2000/svg">
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.2.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="圖層_1" xmlns:svgjs="http://svgjs.com/svgjs"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
+	 style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#FFF8E1;stroke-width:25;stroke-miterlimit:10;}
+</style>
+<g>
+	<link  id="dark-mode-general-link" rel="stylesheet" type="text/css"></link>
+	<link  id="dark-mode-custom-link" rel="stylesheet" type="text/css"></link>
 	<g>
-		<path d="M467.812,431.851l-36.629-61.056c-16.917-28.181-25.856-60.459-25.856-93.312V224c0-67.52-45.056-124.629-106.667-143.04    V42.667C298.66,19.136,279.524,0,255.993,0s-42.667,19.136-42.667,42.667V80.96C151.716,99.371,106.66,156.48,106.66,224v53.483    c0,32.853-8.939,65.109-25.835,93.291l-36.629,61.056c-1.984,3.307-2.027,7.403-0.128,10.752c1.899,3.349,5.419,5.419,9.259,5.419    H458.66c3.84,0,7.381-2.069,9.28-5.397C469.839,439.275,469.775,435.136,467.812,431.851z" fill="#fff8e1" data-original="#000000" style="" class=""/>
+		<g>
+			<path class="st0" d="M444.6,416.4L410.8,360c-15.6-26-23.9-55.8-23.9-86.1v-49.3c0-62.3-41.6-115-98.4-132V57.3
+				c0-21.7-17.7-39.4-39.4-39.4s-39.4,17.7-39.4,39.4v35.3c-56.8,17-98.4,69.7-98.4,132v49.3c0,30.3-8.2,60.1-23.8,86.1l-33.8,56.3
+				c-1.8,3.1-1.9,6.8-0.1,9.9c1.8,3.1,5,5,8.5,5h374c3.5,0,6.8-1.9,8.6-5C446.5,423.2,446.4,419.4,444.6,416.4z"/>
+		</g>
+	</g>
+	<g>
+		<g>
+			<path class="st0" d="M176.3,435.9c13,32,40.7,54.4,72.8,54.4s59.8-22.4,72.8-54.4H176.3z"/>
+		</g>
 	</g>
 </g>
-<g xmlns="http://www.w3.org/2000/svg">
-	<g>
-		<path d="M188.815,469.333C200.847,494.464,226.319,512,255.993,512s55.147-17.536,67.179-42.667H188.815z" fill="#fff8e1" data-original="#000000" style="" class=""/>
-	</g>
-</g>
-<g xmlns="http://www.w3.org/2000/svg">
-</g>
-<g xmlns="http://www.w3.org/2000/svg">
-</g>
-<g xmlns="http://www.w3.org/2000/svg">
-</g>
-<g xmlns="http://www.w3.org/2000/svg">
-</g>
-<g xmlns="http://www.w3.org/2000/svg">
-</g>
-<g xmlns="http://www.w3.org/2000/svg">
-</g>
-<g xmlns="http://www.w3.org/2000/svg">
-</g>
-<g xmlns="http://www.w3.org/2000/svg">
-</g>
-<g xmlns="http://www.w3.org/2000/svg">
-</g>
-<g xmlns="http://www.w3.org/2000/svg">
-</g>
-<g xmlns="http://www.w3.org/2000/svg">
-</g>
-<g xmlns="http://www.w3.org/2000/svg">
-</g>
-<g xmlns="http://www.w3.org/2000/svg">
-</g>
-<g xmlns="http://www.w3.org/2000/svg">
-</g>
-<g xmlns="http://www.w3.org/2000/svg">
-</g>
-</g></svg>
+</svg>

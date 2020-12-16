@@ -1,9 +1,10 @@
 .list {
   box-sizing: border-box;
+  min-width: 200px;
   width: 200px;
   border: 1px solid gray;
   padding: 10px;
-  margin: 5px;
+  margin: 15px 5px;
   height: fit-content;
   background-color: rgb(77, 77, 77);
   border-radius: 15px;

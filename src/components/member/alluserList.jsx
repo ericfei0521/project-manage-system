@@ -28,6 +28,7 @@ const AlluserList = (props) => {
           if (props.member.includes(item.userID)) {
             return (
               <div
+                key={item.userID}
                 style={{
                   display: "flex",
                   padding: "5px",

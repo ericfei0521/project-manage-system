@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TasksDetail from "./TasksDetail";
+import style from "../../style/projecttasks.module.scss";
 import { useSelector } from "react-redux";
 import { firestore } from "../../firebase";
 
@@ -75,9 +76,9 @@ const Tasks = (props) => {
   }, [state]);
   console.log(list);
   return (
-    <div>
+    <div className={style.taskview}>
       {list.map((item) => (
-        <TasksDetail item={item} />
+        <TasksDetail item={item} key={item.userID} />
       ))}
     </div>
   );

@@ -136,7 +136,6 @@ const JobItem = (prop) => {
           name="status"
           id=""
           value={state}
-          className={style.inComplete}
           onChange={(e) => {
             setState(e.target.value);
             setEditState(!editstate);

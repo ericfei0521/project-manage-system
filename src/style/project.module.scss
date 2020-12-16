@@ -1,24 +1,67 @@
+$primary-color: #fff8e1;
+$projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
 .project {
-  background-color: rgb(107, 107, 107);
   min-height: 100vh;
+  background-image: url("../images//pexels-photo-4604566.jpg");
   .nav {
     min-height: 5vh;
     display: flex;
+    justify-content: space-between;
+    padding: 0 3%;
     align-items: center;
-    background-color: rgb(78, 78, 78);
+    background-color: #35312bd0;
+    backdrop-filter: blur(3px);
     position: relative;
-    .memberList {
-      display: flex;
-      position: absolute;
-      left: 0;
-      top: 0;
-      background-color: rgb(78, 78, 78);
-      transform: translate(460px, 50px);
-      border: 1px solid white;
-      border-radius: 15px;
-      color: white;
-      padding: 20px;
+    border-top: 1px solid $primary-color;
+    border-bottom: 1px solid $primary-color;
+    button {
+      border: none;
+      font-size: 1.2em;
+      color: $primary-color;
+      background-color: transparent;
+      margin-left: 5px;
     }
+    .rightnav {
+      width: 10%;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      .showmember {
+        position: relative;
+        .memberbutton {
+          display: flex;
+          img {
+            height: 25px;
+          }
+        }
+        .memberbutton:hover {
+          transform: scale(1.1);
+        }
+        .memberList {
+          display: flex;
+          position: absolute;
+          right: 0;
+          top: 0;
+          transform: translate(0px, 40px);
+          background-color: rgb(78, 78, 78);
+          border: 1px solid white;
+          border-radius: 15px;
+          color: white;
+          padding: 20px;
+          z-index: 15;
+        }
+      }
+      .showdele {
+        .ball {
+          margin: 3px;
+          border-radius: 50%;
+          width: 3px;
+          height: 3px;
+          background-color: $primary-color;
+        }
+      }
+    }
+
     .alluser {
       min-width: 236px;
       display: flex;
@@ -36,13 +79,22 @@
     }
   }
   .projectlist {
+    box-sizing: border-box;
     display: flex;
-    max-width: 1920;
+    max-width: 100vw;
     min-width: 500px;
     overflow-x: auto;
-    min-height: 80vh;
+    min-height: calc(95vh - 110px);
     height: 100%;
-    background-color: rgb(107, 107, 107);
+    background: $projectarea;
+    .projects {
+      display: flex;
+      max-width: 100%;
+      overflow-x: auto;
+    }
+    // .projects::-webkit-scrollbar {
+    //   display: none;
+    // }
     .taskdetail {
       position: absolute;
       left: 0;
@@ -52,6 +104,93 @@
       backdrop-filter: blur(3px);
       background-color: rgba(0, 0, 0, 0.863);
       z-index: 500;
+    }
+  }
+  .delete {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(32, 32, 32, 0.342);
+    backdrop-filter: blur(5px);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .deletannounce {
+      width: 40vw;
+      height: 40vh;
+      min-width: 320px;
+      min-height: 240px;
+      background-color: rgba(151, 151, 151, 0.678);
+      border-radius: 15px;
+      position: relative;
+      .announce {
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        padding: 15px;
+        background-color: rgb(194, 62, 62);
+        h1 {
+          color: white;
+          font-size: 2em;
+          margin-bottom: 5px;
+        }
+        p {
+          color: white;
+          font-size: 1.5em;
+        }
+      }
+      .confirm {
+        padding: 15px;
+        height: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        .confirmannounce {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          p {
+            font-size: 1.2em;
+            color: black;
+            margin-right: 5px;
+          }
+          h2 {
+            font-weight: bold;
+          }
+        }
+        input {
+          width: 40%;
+          font-size: 1.2em;
+          height: 2em;
+          padding: 5px;
+          border-radius: 15px;
+          border: none;
+          background-color: rgb(182, 182, 182);
+        }
+      }
+      .delelink {
+        position: absolute;
+        right: 5px;
+        bottom: 5px;
+        width: 30%;
+        padding: 5px;
+        button {
+          border-radius: 15px;
+          width: 100%;
+          border: none;
+          font-size: 1.3em;
+          cursor: pointer;
+        }
+        .avaliable {
+          background-color: white;
+        }
+        .disable {
+          background-color: rgb(175, 175, 175);
+          color: gray;
+        }
+      }
     }
   }
 }

@@ -35,7 +35,15 @@ const TasksDetail = ({ item }) => {
       </div>
       <div className={`${style.tasklist} ${showdetail ? style.open : ""}`}>
         {item.tasks.map((data) => (
-          <div className={style.tasks}>
+          <div
+            className={style.tasks}
+            key={data.id}
+            style={
+              data.state === "Complete"
+                ? { backgroundColor: "rgb(80, 80, 80)" }
+                : { backgroundColor: "transparent" }
+            }
+          >
             <div className={style.detail}>
               <h2>Task:</h2>
               <h2>{data.subTaskName}</h2>
