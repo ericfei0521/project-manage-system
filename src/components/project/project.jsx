@@ -70,9 +70,8 @@ const Project = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
-    // console.log(userID)
-    setTimeout(() => setLoad(false), 100);
-  }, [name]);
+    setTimeout(() => setLoad(false), 1000);
+  }, [tasks]);
   const handlemember = () => {
     setMemberShow(!membershow);
   };
@@ -196,27 +195,41 @@ const Project = () => {
                   projectid={projectId}
                   member={memberNum}
                   showmember={handlemember}
-                />{" "}
+                />
               </div>
             ) : (
               <></>
             )}
           </div>
-          <button
-            className={style.memberbutton}
-            onClick={() => {
-              dispatch(
-                getMember({
-                  show: membershow,
-                  member: memberNum,
-                })
-              );
-              setAllusers(!showallusers);
-            }}
-          >
-            <h2>+</h2>
-            <img src={adduser} alt="" />
-          </button>
+          <div className={style.allList}>
+            {showallusers ? (
+              <div>
+                <AlluserList
+                  projectid={projectId}
+                  member={memberNum}
+                  showmember={handleAddmember}
+                />
+              </div>
+            ) : (
+              <></>
+            )}
+            <button
+              className={style.memberbutton}
+              onClick={() => {
+                dispatch(
+                  getMember({
+                    show: membershow,
+                    member: memberNum,
+                  })
+                );
+                setAllusers(!showallusers);
+              }}
+            >
+              <h2>+</h2>
+              <img src={adduser} alt="" />
+            </button>
+          </div>
+
           <button
             className={style.showdele}
             onClick={() => setDelete(!showdelete)}
@@ -225,17 +238,6 @@ const Project = () => {
             <div className={style.ball}></div>
             <div className={style.ball}></div>
           </button>
-          {showallusers ? (
-            <div className={style.alluser}>
-              <AlluserList
-                projectid={projectId}
-                member={memberNum}
-                showmember={handleAddmember}
-              />
-            </div>
-          ) : (
-            <></>
-          )}
         </div>
       </div>
       {currentPage === "tasks" ? (
@@ -311,7 +313,7 @@ const Project = () => {
         >
           <div className={style.deletannounce}>
             <div className={style.announce}>
-              <h1>Delete thie Project ?</h1>
+              <h1>Delete this Project ?</h1>
               <p>
                 Doing so will permanently delete the data,including all nested
                 tasks

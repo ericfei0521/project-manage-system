@@ -40,7 +40,7 @@ const TasksDetail = ({ item }) => {
             key={data.id}
             style={
               data.state === "Complete"
-                ? { backgroundColor: "rgb(80, 80, 80)" }
+                ? { backgroundColor: "rgb(30, 30, 30)" }
                 : { backgroundColor: "transparent" }
             }
           >

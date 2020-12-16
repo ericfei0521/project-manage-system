@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import style from "../../style/memberList.module.scss";
 import { useSelector } from "react-redux";
 import firebase from "firebase/app";
 import { firestore } from "../../firebase";
@@ -13,49 +14,55 @@ const AlluserList = (props) => {
     });
   };
   return (
-    <div>
+    <div className={style.alluser}>
+      <div className={style.backbutton}>
+        <div></div>
+        <h1>Search member</h1>
+        <button className={style.back} onClick={() => props.showmember()}>
+          X
+        </button>
+      </div>
       <input
+        autoFocus
         type="text"
         onChange={(e) => setName(e.target.value)}
         placeholder="Enter Email"
       />
-      <button onClick={() => props.showmember()}>X</button>
-      {state.allusers.map((item) => {
-        if (
-          name !== "" &&
-          item.email.toLowerCase().includes(name.toLocaleLowerCase())
-        ) {
-          if (props.member.includes(item.userID)) {
-            return (
-              <div
-                key={item.userID}
-                style={{
-                  display: "flex",
-                  padding: "5px",
-                  marginBottom: "5px",
-                  border: "1px solid white",
-                }}
-              >
-                {item.displayName}
-                <br />
-                {item.email}
-                <br />
-                Already In Project
-              </div>
-            );
-          } else {
-            return (
-              <div>
-                {item.displayName} <br />
-                {item.email}
-                <button onClick={() => updateFirestore(item.userID)}>+</button>
-              </div>
-            );
-          }
-        } else {
-          return null;
-        }
-      })}
+      <div className={style.showing}>
+        <div className={style.showinner}>
+          {state.allusers.map((item) => {
+            if (
+              name !== "" &&
+              item.email.toLowerCase().includes(name.toLocaleLowerCase())
+            ) {
+              if (props.member.includes(item.userID)) {
+                return (
+                  <div key={item.userID} className={style.inlist}>
+                    <h2> {item.displayName}</h2>
+                    <h2> {item.email}</h2>
+                    <h2> Already In Project</h2>
+                  </div>
+                );
+              } else {
+                return (
+                  <div className={style.pendinglist}>
+                    <div className={style.adding}>
+                      <div></div>
+                      <h2> {item.displayName}</h2>
+                      <button onClick={() => updateFirestore(item.userID)}>
+                        +
+                      </button>
+                    </div>
+                    <h2>{item.email}</h2>
+                  </div>
+                );
+              }
+            } else {
+              return null;
+            }
+          })}
+        </div>
+      </div>
     </div>
   );
 };

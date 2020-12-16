@@ -1,4 +1,5 @@
 import React from "react";
+import style from "../../style/memberList.module.scss";
 import { useSelector } from "react-redux";
 
 const MemberList = (props) => {
@@ -7,20 +8,23 @@ const MemberList = (props) => {
 
   return (
     <div>
-      <button onClick={() => props.showmember()}>X</button>
-      {state.member.map((item) => (
-        <div
-          style={{
-            display: "flex",
-            padding: "5px",
-            marginBottom: "5px",
-            border: "1px solid white",
-          }}
-        >
-          <h1 key={item.userID}>{item.displayName}</h1>
-          <h1>{item.email}</h1>
+      <div className={style.backbutton}>
+        <div></div>
+        <h1>{state.member.length}members</h1>
+        <button className={style.back} onClick={() => props.showmember()}>
+          X
+        </button>
+      </div>
+      <div className={style.memberarea}>
+        <div className={style.memberinner}>
+          {state.member.map((item) => (
+            <div className={style.member}>
+              <h1 key={item.userID}>{item.displayName}</h1>
+              <h1>{item.email}</h1>
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
     </div>
   );
 };

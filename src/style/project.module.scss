@@ -9,16 +9,14 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
     justify-content: space-between;
     padding: 0 3%;
     align-items: center;
-    background-color: #35312bd0;
+    background-color: rgba(46, 38, 26, 0.705);
     backdrop-filter: blur(3px);
     position: relative;
     border-top: 1px solid $primary-color;
     border-bottom: 1px solid $primary-color;
     button {
-      border: none;
       font-size: 1.2em;
       color: $primary-color;
-      background-color: transparent;
       margin-left: 5px;
     }
     .rightnav {
@@ -28,12 +26,6 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
       align-items: center;
       .showmember {
         position: relative;
-        .memberbutton {
-          display: flex;
-          img {
-            height: 25px;
-          }
-        }
         .memberbutton:hover {
           transform: scale(1.1);
         }
@@ -43,15 +35,16 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
           right: 0;
           top: 0;
           transform: translate(0px, 40px);
-          background-color: rgb(78, 78, 78);
-          border: 1px solid white;
+          background-color: rgba(41, 41, 41, 0.863);
           border-radius: 15px;
+          border: 1px solid $primary-color;
           color: white;
-          padding: 20px;
           z-index: 15;
         }
       }
       .showdele {
+        background-color: transparent;
+        border: none;
         .ball {
           margin: 3px;
           border-radius: 50%;
@@ -60,22 +53,6 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
           background-color: $primary-color;
         }
       }
-    }
-
-    .alluser {
-      min-width: 236px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border: 1px solid white;
-      border-radius: 15px;
-      position: absolute;
-      left: 0;
-      top: 0;
-      background-color: rgb(78, 78, 78);
-      transform: translate(500px, 50px);
-      color: white;
-      padding: 20px;
     }
   }
   .projectlist {
@@ -92,9 +69,6 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
       max-width: 100%;
       overflow-x: auto;
     }
-    // .projects::-webkit-scrollbar {
-    //   display: none;
-    // }
     .taskdetail {
       position: absolute;
       left: 0;
@@ -192,5 +166,13 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
         }
       }
     }
+  }
+}
+.memberbutton {
+  display: flex;
+  background-color: transparent;
+  border: none;
+  img {
+    height: 25px;
   }
 }
