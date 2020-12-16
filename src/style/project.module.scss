@@ -15,20 +15,41 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
     border-top: 1px solid $primary-color;
     border-bottom: 1px solid $primary-color;
     button {
-      font-size: 1.2em;
+      font-size: 1.1em;
       color: $primary-color;
-      margin-left: 5px;
+    }
+    nav {
+      display: flex;
+      justify-content: space-evenly;
+      width: 25%;
+      transform: translate(-25px);
+      .navbutton {
+        width: 80%;
+        background-color: transparent;
+        border: none;
+        padding: 0px 15px 0px 15px;
+        border-right: 1px solid $primary-color;
+        margin-right: 5px;
+        cursor: pointer;
+      }
+      .navbutton:hover {
+        font-size: 1.3em;
+      }
+      .navbutton:last-child {
+        border: none;
+      }
     }
     .rightnav {
       width: 10%;
       display: flex;
       justify-content: space-evenly;
       align-items: center;
+      .memberbutton:hover {
+        transform: scale(1.1);
+      }
       .showmember {
         position: relative;
-        .memberbutton:hover {
-          transform: scale(1.1);
-        }
+
         .memberList {
           display: flex;
           position: absolute;

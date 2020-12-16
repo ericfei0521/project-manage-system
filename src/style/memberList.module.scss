@@ -77,6 +77,11 @@ $primary-color: #fff8e1;
     border-radius: 15px;
     border: none;
   }
+  input:focus {
+    font-size: 1.2em;
+    margin: 5px 0;
+    padding: 5px;
+  }
   .showing {
     width: 100%;
     padding: 3px;

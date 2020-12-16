@@ -60,5 +60,8 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "devDependencies": {
+    "@svgr/webpack": "^5.5.0"
   }
 }

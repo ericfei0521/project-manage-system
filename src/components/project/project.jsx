@@ -156,8 +156,14 @@ const Project = () => {
       />
       <div className={style.nav}>
         <nav>
-          <button onClick={() => setCurrentPage("all")}>All list</button>
           <button
+            className={style.navbutton}
+            onClick={() => setCurrentPage("all")}
+          >
+            All list
+          </button>
+          <button
+            className={style.navbutton}
             onClick={() => {
               setCurrentPage("tasks");
               dispatch(
@@ -170,7 +176,7 @@ const Project = () => {
           >
             Tasks
           </button>
-          <button>performance</button>
+          <button className={style.navbutton}>performance</button>
         </nav>
         <div className={style.rightnav}>
           <div className={style.showmember}>
