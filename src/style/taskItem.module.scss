@@ -42,6 +42,7 @@ $primary-color: #fff8e1;
   background-color: rgba(219, 219, 219, 0.411);
   backdrop-filter: blur(10px);
   margin: 20px auto;
+  overflow-x: hidden;
   .head {
     box-sizing: border-box;
     display: flex;
@@ -70,20 +71,52 @@ $primary-color: #fff8e1;
         resize: none;
         outline: none;
       }
-      button {
-        width: 30px;
-        height: 30px;
+
+      .controler {
         position: absolute;
-        border-radius: 50%;
         top: 0;
         right: 0;
-        color: white;
-        background-color: rgba(153, 153, 153, 0.739);
-        border: 1px solid #fff8e1;
-        outline: none;
-      }
-      button:hover {
-        background-color: rgba(77, 77, 77, 0.739);
+        z-index: 10;
+        button {
+          border-radius: 50%;
+          width: 30px;
+          height: 30px;
+          color: white;
+          background-color: rgba(153, 153, 153, 0.739);
+          border: 1px solid #fff8e1;
+          outline: none;
+          transform: translate(10px, -8px);
+        }
+        button:hover {
+          background-color: rgba(77, 77, 77, 0.739);
+        }
+        .menu {
+          margin-top: 5px;
+          color: $primary-color;
+          width: 30px;
+          display: flex;
+          align-items: center;
+          padding: 5px;
+          height: fit-content;
+          border-top-left-radius: 5px;
+          border-bottom-left-radius: 5px;
+          background-color: rgb(116, 116, 116);
+          border-left: 1px solid $primary-color;
+          border-top: 1px solid $primary-color;
+          border-bottom: 1px solid $primary-color;
+          transform: translate(15px);
+          writing-mode: tb-rl;
+          letter-spacing: 1px;
+          cursor: pointer;
+          transition: 0.2s ease-in;
+        }
+        .menuopen {
+          transform: translate(-104px);
+          transition: 0.2s ease-in;
+        }
+        .menu:hover {
+          background-color: rgb(49, 49, 49);
+        }
       }
     }
     .Status {
@@ -122,8 +155,8 @@ $primary-color: #fff8e1;
   }
   .discriptContent {
     width: 100%;
-    min-height: 200px;
-    max-height: 500px;
+    min-height: 100px;
+    max-height: 300px;
     font-size: 1.2em;
     color: rgb(199, 199, 199);
     background: rgba(47, 47, 47, 0.596);
@@ -174,5 +207,38 @@ $primary-color: #fff8e1;
     .job {
       margin: 8px auto;
     }
+  }
+  .sidebar {
+    padding: 5px;
+    background-color: black;
+    height: 300px;
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    transform: translate(120px);
+    transition: 0.2s ease-in;
+    border: 1px solid $primary-color;
+    border-right: none;
+    background-color: rgb(116, 116, 116);
+    button {
+      margin: 2px;
+      width: 100%;
+      color: $primary-color;
+      background: rgba(39, 39, 39, 0.609);
+      border: 1px solid $primary-color;
+      border-radius: 5px;
+      padding: 3px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: rgba(61, 61, 61, 0.582);
+    }
+  }
+  .sidebaropen {
+    transform: translate(0px);
+    transition: 0.2s ease-in;
   }
 }

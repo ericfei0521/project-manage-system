@@ -238,7 +238,6 @@ const Project = () => {
               <img src={adduser} alt="" />
             </button>
           </div>
-
           <button
             className={style.showdele}
             onClick={() => setDelete(!showdelete)}

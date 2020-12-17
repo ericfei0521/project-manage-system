@@ -21,6 +21,7 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
   let [editdiscript, setEditdiscript] = useState(false);
   let [subTask, setSubTask] = useState([]);
   let [addsubTask, setAddSubTask] = useState(false);
+  let [sidebar, setSidebar] = useState(false);
   useEffect(() => {
     let unsubscribesubtasks = docPath.onSnapshot((doc) => {
       console.log(doc.data());
@@ -51,6 +52,7 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
           setSubTask(childTask);
         }
       });
+    console.log("aaa");
     return () => {
       unsubscribesubtasks();
       unsubscribejobs();
@@ -210,7 +212,15 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
                 {taskName}
               </h1>
             )}
-            <button onClick={() => open()}>X</button>
+            <div className={style.controler}>
+              <button onClick={() => open()}>X</button>
+              <div
+                className={`${style.menu} ${sidebar ? style.menuopen : ""}`}
+                onClick={() => setSidebar(!sidebar)}
+              >
+                <h3>More</h3>
+              </div>
+            </div>
           </div>
           <div className={style.Status}>
             <h2>Status:</h2>
@@ -317,14 +327,17 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
         ) : (
           <></>
         )}
-        <div className={style.sidebar}>
-          <button onClick={() => deleteTask()}>Delete</button>
+
+        <div className={`${style.sidebar} ${sidebar ? style.sidebaropen : ""}`}>
           <button
             className={style.addtask}
             onClick={() => setAddSubTask(!addsubTask)}
           >
             Add Task
           </button>
+          <button>Add Image</button>
+          <button>Attach Link</button>
+          <button onClick={() => deleteTask()}>Delete</button>
         </div>
       </div>
     </div>

@@ -1,8 +1,20 @@
 $primary-color: #fff8e1;
 $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
 .project {
+  width: 100vw;
   min-height: 100vh;
   background-image: url("../images//pexels-photo-4604566.jpg");
+  position: relative;
+  .taskdetail {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    min-height: 100vh;
+    backdrop-filter: blur(3px);
+    background-color: rgba(0, 0, 0, 0.863);
+    z-index: 500;
+  }
   .nav {
     min-height: 5vh;
     display: flex;
@@ -10,7 +22,6 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
     padding: 0 3%;
     align-items: center;
     background-color: rgba(46, 38, 26, 0.705);
-    backdrop-filter: blur(3px);
     position: relative;
     border-top: 1px solid #a19d8ea1;
     border-bottom: 1px solid #a19d8ea1;
@@ -20,36 +31,54 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
     }
     nav {
       display: flex;
-      justify-content: space-evenly;
-      width: 25%;
-      transform: translate(-25px);
+      width: 20%;
+      transform: translate(10px);
       .navbutton {
-        width: 80%;
+        font-size: 1.2em;
+        min-width: fit-content;
         background-color: transparent;
         border: none;
-        padding: 0px 15px 0px 15px;
-        border-right: 1px solid #a19d8e;
-        margin-right: 5px;
         cursor: pointer;
+        margin-right: 15px;
+        position: relative;
+      }
+      .navbutton:before {
+        content: "";
+        position: absolute;
+        width: 0%;
+        bottom: -3px;
+        left: 0;
+        height: 1px;
+        background-color: $primary-color;
       }
       .navbutton:hover {
-        font-size: 1.3em;
+        text-shadow: 0px 0px 3px white;
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        background-clip: text;
       }
-      .navbutton:last-child {
-        border: none;
+      .navbutton:hover::before {
+        width: 100%;
+        transition: 300ms ease-in;
       }
     }
     .rightnav {
-      width: 10%;
+      width: 150px;
       display: flex;
-      justify-content: space-evenly;
+      justify-content: space-around;
       align-items: center;
+      button {
+        cursor: pointer;
+      }
+      .memberbutton {
+        height: 25px;
+      }
       .memberbutton:hover {
         transform: scale(1.1);
       }
       .showmember {
+        width: 20px;
         position: relative;
-
         .memberList {
           display: flex;
           position: absolute;
@@ -66,13 +95,19 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
       .showdele {
         background-color: transparent;
         border: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        height: 30px;
         .ball {
-          margin: 3px;
           border-radius: 50%;
           width: 3px;
           height: 3px;
           background-color: $primary-color;
         }
+      }
+      .showdele:hover {
+        transform: scale(1.1);
       }
     }
   }
@@ -80,15 +115,13 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
     box-sizing: border-box;
     display: flex;
     max-width: 100vw;
-    min-width: 500px;
+    min-width: 320px;
     overflow-x: auto;
     min-height: calc(95vh - 110px);
     height: 100%;
     background: $projectarea;
     .projects {
       display: flex;
-      max-width: 100%;
-      overflow-x: auto;
       .addCard {
         margin: 15px 5px;
         height: 60px;
@@ -96,10 +129,9 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
         height: 200px;
         width: 180px;
         overflow: hidden;
-
         .addcardbutton {
           opacity: 0;
-          width: 100%;
+          min-width: 180px;
           border-radius: 10px;
           border: 1px solid $primary-color;
           padding: 10px;
@@ -159,16 +191,6 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
           transition: 0.5s ease-in-out;
         }
       }
-    }
-    .taskdetail {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      min-height: 100vh;
-      backdrop-filter: blur(3px);
-      background-color: rgba(0, 0, 0, 0.863);
-      z-index: 500;
     }
   }
   .delete {
