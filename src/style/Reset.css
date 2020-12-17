@@ -2,7 +2,7 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@1,300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap");
 
 html,
 body,
@@ -108,7 +108,7 @@ section {
 }
 body {
   line-height: 1;
-  font-family: "Lato", sans-serif;
+  font-family: "Roboto Slab", serif;
 }
 ol,
 ul {
@@ -140,7 +140,7 @@ select:focus {
   margin: 0;
   padding: 0;
   outline: none;
-  font-family: "Lato", sans-serif;
+  font-family: "Roboto Slab", serif;
 }
 *,
 *::before,

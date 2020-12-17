@@ -47,16 +47,12 @@ const TaskItemCard = ({ id, name, state, taskID, open, index }) => {
           }}
         >
           <h1>{taskName}</h1>
-          <h1>{taskState}</h1>
+          <h2>State: {taskState}</h2>
           {image ? (
             <div
+              className={style.image}
               style={{
-                width: "100%",
-                height: "90px",
                 backgroundImage: `url(${image})`,
-                backgroundPosition: "center center",
-                backgroundSize: "cover",
-                backgroundRepeat: "no-repeat",
               }}
             ></div>
           ) : (

@@ -59,7 +59,7 @@ const TaskList = ({ name, id, open }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const keyEvent = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" || e.key === "Escape") {
       if (e.target.value === "") {
         setNameEdit(!nameEdit);
         return;
@@ -74,19 +74,23 @@ const TaskList = ({ name, id, open }) => {
     <div className={style.list}>
       <div className={style.listDetail}>
         {nameEdit ? (
-          <div>
-            <input
-              autoFocus
-              type="text"
-              onChange={(e) => setListName(e.target.value)}
-              onKeyDown={(e) => keyEvent(e)}
-            />
-          </div>
+          <input
+            autoFocus
+            type="text"
+            value={listName}
+            onChange={(e) => setListName(e.target.value)}
+            onKeyDown={(e) => keyEvent(e)}
+          />
         ) : (
-          <h1 onClick={() => setNameEdit(!nameEdit)}>{listName}</h1>
+          <div
+            className={style.listname}
+            onClick={() => setNameEdit(!nameEdit)}
+          >
+            {listName}
+          </div>
         )}
         {removeTask ? (
-          <div>
+          <div className={style.editname}>
             <button
               onClick={() =>
                 dispatch(
@@ -103,10 +107,17 @@ const TaskList = ({ name, id, open }) => {
             <button onClick={() => setRemoveTask(!removeTask)}>Cancel</button>
           </div>
         ) : (
-          <button onClick={() => setRemoveTask(!removeTask)}>...</button>
+          <button
+            className={style.editbutton}
+            onClick={() => setRemoveTask(!removeTask)}
+          >
+            <div></div>
+            <div></div>
+            <div></div>
+          </button>
         )}
       </div>
-      <div>
+      <div className={style.displayzone}>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <Droppable droppableId={id}>
             {(Provided) => (
@@ -132,7 +143,7 @@ const TaskList = ({ name, id, open }) => {
           </Droppable>
         </div>
         {isEdit ? (
-          <div>
+          <div className={style.addtaskinfo}>
             <input
               onChange={(e) => setsubTaskName(e.target.value)}
               value={subTaskname}
@@ -149,35 +160,36 @@ const TaskList = ({ name, id, open }) => {
               <option value="Rejected">Rejected</option>
               <option value="Complete">Complete</option>
             </select>
-
-            <button
-              onClick={() => {
-                if (substate === "") {
-                  substate = "on-hold";
-                }
-                dispatch(
-                  addTasks({
-                    oldtasks: nowTask,
-                    projectid: projectId,
-                    listid: id,
-                    id: nanoid(),
-                    name: subTaskname,
-                    state: substate,
-                  })
-                );
-                setsubTaskName("");
-                setsubTaskState("");
-                setEdit(false);
-              }}
-            >
-              Add Task
-            </button>
-            <button onClick={() => setEdit(false)}>X</button>
+            <div className={style.addbutton}>
+              <button
+                onClick={() => {
+                  if (substate === "") {
+                    substate = "on-hold";
+                  }
+                  dispatch(
+                    addTasks({
+                      oldtasks: nowTask,
+                      projectid: projectId,
+                      listid: id,
+                      id: nanoid(),
+                      name: subTaskname,
+                      state: substate,
+                    })
+                  );
+                  setsubTaskName("");
+                  setsubTaskState("");
+                  setEdit(false);
+                }}
+              >
+                Add Task
+              </button>
+              <button onClick={() => setEdit(false)}>X</button>
+            </div>
           </div>
         ) : (
-          <div>
-            <button onClick={() => setEdit(true)}>Add Task</button>
-          </div>
+          <button className={style.addtasks} onClick={() => setEdit(true)}>
+            + Add Task
+          </button>
         )}
       </div>
     </div>

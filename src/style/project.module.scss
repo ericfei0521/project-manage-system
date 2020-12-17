@@ -12,8 +12,8 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
     background-color: rgba(46, 38, 26, 0.705);
     backdrop-filter: blur(3px);
     position: relative;
-    border-top: 1px solid $primary-color;
-    border-bottom: 1px solid $primary-color;
+    border-top: 1px solid #a19d8ea1;
+    border-bottom: 1px solid #a19d8ea1;
     button {
       font-size: 1.1em;
       color: $primary-color;
@@ -28,7 +28,7 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
         background-color: transparent;
         border: none;
         padding: 0px 15px 0px 15px;
-        border-right: 1px solid $primary-color;
+        border-right: 1px solid #a19d8e;
         margin-right: 5px;
         cursor: pointer;
       }
@@ -89,6 +89,76 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
       display: flex;
       max-width: 100%;
       overflow-x: auto;
+      .addCard {
+        margin: 15px 5px;
+        height: 60px;
+        position: relative;
+        height: 200px;
+        width: 180px;
+        overflow: hidden;
+
+        .addcardbutton {
+          opacity: 0;
+          width: 100%;
+          border-radius: 10px;
+          border: 1px solid $primary-color;
+          padding: 10px;
+          transform: translateY(-50px);
+          background-color: rgba(185, 185, 185, 0.308);
+          color: $primary-color;
+          z-index: -1;
+          transition: 0.5s ease-in-out;
+          cursor: pointer;
+        }
+        .addcardbutton:hover {
+          background-color: rgba(197, 197, 197, 0.363);
+          transition: 0.1s;
+        }
+        .addcarddetail {
+          position: absolute;
+          opacity: 0;
+          left: 0;
+          top: 0;
+          transform: translateY(-50px);
+          transition: 0.5s ease-in-out;
+          padding: 10px;
+          border-radius: 10px;
+          border: 1px solid $primary-color;
+          background-color: rgba(223, 223, 223, 0.157);
+          color: $primary-color;
+          z-index: -1;
+          input {
+            width: 100%;
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+          }
+          .detialbutton {
+            margin-top: 5px;
+            display: flex;
+            width: 90%;
+            button {
+              margin: 2px;
+              width: 50%;
+              color: $primary-color;
+              background: rgba(117, 117, 117, 0.609);
+              border: 1px solid $primary-color;
+              border-radius: 5px;
+              padding: 3px;
+              cursor: pointer;
+            }
+            button:hover {
+              background-color: rgba(61, 61, 61, 0.582);
+            }
+          }
+        }
+        .openaddbutton {
+          opacity: 1;
+          z-index: 1;
+          transform: translateY(0px);
+          transition: 0.5s ease-in-out;
+        }
+      }
     }
     .taskdetail {
       position: absolute;
@@ -105,7 +175,7 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
     width: 100vw;
     height: 100vh;
     background-color: rgba(32, 32, 32, 0.342);
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(2px);
     position: absolute;
     left: 50%;
     top: 50%;
@@ -196,4 +266,7 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
   img {
     height: 25px;
   }
+}
+.worning::-webkit-input-placeholder {
+  color: red;
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Header from "../head/header";
 import TaskList from "../Task/taskList";
 import Tasks from "./Tasks";
@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { DragDropContext } from "react-beautiful-dnd";
 
 const Project = () => {
+  const inputref = useRef(null);
   let dispatch = useDispatch();
   let history = useHistory();
   let { projectId } = useParams();
@@ -34,6 +35,8 @@ const Project = () => {
   let [showallusers, setAllusers] = useState(false);
   let [currentPage, setCurrentPage] = useState("all");
   let [confirm, setconfirm] = useState("");
+  let [addCard, setAddcard] = useState(false);
+  let [worning, setWorning] = useState(false);
 
   useEffect(() => {
     let unsubscribemember = project.onSnapshot(function (doc) {
@@ -263,26 +266,53 @@ const Project = () => {
                   open={handleOpen}
                 />
               ))}
-              <div>
-                <input
-                  onChange={(e) => setListName(e.target.value)}
-                  value={listname}
-                  type="text"
-                  placeholder="Task Name"
-                />
+              <div className={style.addCard}>
                 <button
-                  onClick={() => {
-                    dispatch(
-                      addList({
-                        id: projectId,
-                        name: listname,
-                      })
-                    );
-                    setListName("");
-                  }}
+                  className={`${style.addcardbutton} ${
+                    addCard ? "" : style.openaddbutton
+                  }`}
+                  onClick={() => setAddcard(true)}
                 >
-                  +
+                  + Add another list
                 </button>
+                <div
+                  className={`${style.addcarddetail} ${
+                    addCard ? style.openaddbutton : ""
+                  }`}
+                >
+                  <input
+                    onChange={(e) => setListName(e.target.value)}
+                    className={worning ? style.worning : ""}
+                    value={listname}
+                    autoFocus
+                    ref={inputref}
+                    type="text"
+                    placeholder="List Name"
+                  />
+                  <div className={style.detialbutton}>
+                    <button
+                      onClick={() => {
+                        if (listname !== "") {
+                          dispatch(
+                            addList({
+                              id: projectId,
+                              name: listname,
+                            })
+                          );
+                          setListName("");
+                          setWorning(false);
+                        } else {
+                          inputref.current.placeholder =
+                            "Please enter list name";
+                          setWorning(true);
+                        }
+                      }}
+                    >
+                      Add List
+                    </button>
+                    <button onClick={() => setAddcard(false)}>X</button>
+                  </div>
+                </div>
               </div>
             </div>
           </DragDropContext>
@@ -328,7 +358,7 @@ const Project = () => {
             <div className={style.confirm}>
               <div className={style.confirmannounce}>
                 <p>
-                  Confirm you want to delete this project by typing its ID :{" "}
+                  Confirm you want to delete this project by typing its ID :
                 </p>
                 <h2>{projectId}</h2>
               </div>

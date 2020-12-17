@@ -285,7 +285,12 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
             subTaskID={id}
           />
         ) : (
-          <button onClick={() => setAddSubTask(!addsubTask)}>Add Task</button>
+          <button
+            className={style.addtask}
+            onClick={() => setAddSubTask(!addsubTask)}
+          >
+            Add Task
+          </button>
         )}
       </div>
     </div>
