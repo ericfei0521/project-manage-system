@@ -70,17 +70,25 @@ const TaskList = ({ name, id, open }) => {
       });
     }
   };
+  const textareaResize = (element) => {
+    element.style.height = "1px";
+    element.style.height = element.scrollHeight + "px";
+  };
   return (
     <div className={style.list}>
       <div className={style.listDetail}>
         {nameEdit ? (
-          <input
+          <textarea
             autoFocus
             type="text"
             value={listName}
             onChange={(e) => setListName(e.target.value)}
-            onKeyDown={(e) => keyEvent(e)}
-          />
+            onFocus={(e) => textareaResize(e.target)}
+            onKeyDown={(e) => {
+              keyEvent(e);
+              textareaResize(e.target);
+            }}
+          ></textarea>
         ) : (
           <div
             className={style.listname}

@@ -58,17 +58,28 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handletask = (e) => {
+  const handletask = () => {
+    setEditdiscript(false);
+    dispatch(
+      editTask({
+        taskid: id,
+        name: taskName,
+        description: discript,
+      })
+    );
+  };
+  const handletaskname = (e) => {
     if (e.key === "Enter") {
-      setEditTaskName(false);
-      setEditdiscript(false);
-      dispatch(
-        editTask({
-          taskid: id,
-          name: taskName,
-          description: discript,
-        })
-      );
+      if (taskName !== "") {
+        setEditTaskName(false);
+        dispatch(
+          editTask({
+            taskid: id,
+            name: taskName,
+            description: discript,
+          })
+        );
+      }
     }
   };
   const handleAddTask = () => {
@@ -169,21 +180,27 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
     batch.commit();
     setSubTask(item);
   };
+  const textareaResize = (element) => {
+    element.style.height = "1px";
+    element.style.height = element.scrollHeight + "px";
+  };
   return (
     <div>
       <div className={style.card}>
         <div className={style.head}>
           <div className={style.headTitle}>
             {editTaskName ? (
-              <input
+              <textarea
                 autoFocus
-                type="text"
-                onChange={(e) => setTaskName(e.target.value)}
+                onFocus={(e) => textareaResize(e.target)}
+                name=""
                 value={taskName}
+                onChange={(e) => setTaskName(e.target.value)}
                 onKeyDown={(e) => {
-                  handletask(e);
+                  handletaskname(e);
+                  textareaResize(e.target);
                 }}
-              />
+              ></textarea>
             ) : (
               <h1
                 onClick={() => {
@@ -196,16 +213,16 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
             <button onClick={() => open()}>X</button>
           </div>
           <div className={style.Status}>
-            <h1>Status:</h1>
+            <h2>Status:</h2>
             <select
               onChange={(e) => {
                 setTaskState(e.target.value);
                 handleTaskState(e.target.value);
               }}
               value={taskState}
-              className={
-                taskState === "Complete" ? style.Complete : style.inComplete
-              }
+              className={`${style.inComplete} ${
+                taskState === "Complete" ? style.Complete : ""
+              }`}
             >
               <option value="On-hold">On-hold</option>
               <option value="Running">Running</option>
@@ -214,26 +231,39 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
               <option value="Complete">Complete</option>
             </select>
           </div>
-
-          <button onClick={() => deleteTask()}>Delete</button>
         </div>
-        <div>
-          {editdiscript ? (
-            <div className={style.head}>
-              <textarea
-                type="text"
-                onChange={(e) => setDiscript(e.target.value)}
-                value={discript}
-                onKeyDown={(e) => handletask(e)}
-              />
-              <button onClick={(e) => setEditdiscript(false)}>X</button>
+        {editdiscript ? (
+          <div className={style.discriptContent}>
+            <textarea
+              autoFocus
+              type="text"
+              onChange={(e) => setDiscript(e.target.value)}
+              value={discript}
+              onFocus={(e) => textareaResize(e.target)}
+              onKeyDown={(e) => {
+                textareaResize(e.target);
+              }}
+            />
+            <div className={style.disbuttons}>
+              <button
+                onClick={(e) => {
+                  setEditdiscript(false);
+                  handletask();
+                }}
+              >
+                Save
+              </button>
+              <button onClick={(e) => setEditdiscript(false)}>back</button>
             </div>
-          ) : (
-            <div onClick={() => setEditdiscript(true)}>
-              <h1 onClick={() => setEditdiscript(true)}>{discript}</h1>
-            </div>
-          )}
-        </div>
+          </div>
+        ) : (
+          <h1
+            className={style.discriptContent}
+            onClick={() => setEditdiscript(true)}
+          >
+            {discript}
+          </h1>
+        )}
         <ImageDropper id={id} />
         <DragDropContext onDragEnd={handleDrag}>
           <Droppable droppableId={id}>
@@ -285,13 +315,17 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
             subTaskID={id}
           />
         ) : (
+          <></>
+        )}
+        <div className={style.sidebar}>
+          <button onClick={() => deleteTask()}>Delete</button>
           <button
             className={style.addtask}
             onClick={() => setAddSubTask(!addsubTask)}
           >
             Add Task
           </button>
-        )}
+        </div>
       </div>
     </div>
   );

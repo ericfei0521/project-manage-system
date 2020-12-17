@@ -69,7 +69,7 @@ $primary-color: #fff8e1;
       }
     }
 
-    input {
+    textarea {
       width: 90%;
       font-size: 1.3em;
       color: #fff8e1;
@@ -77,6 +77,8 @@ $primary-color: #fff8e1;
       border: none;
       outline: none;
       padding: 0;
+      resize: none;
+      outline: none;
     }
   }
   .displayzone {
