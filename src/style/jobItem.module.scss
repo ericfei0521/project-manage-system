@@ -2,16 +2,24 @@ $primary-color: #fff8e1;
 .jobCard {
   margin: 5px auto;
   backdrop-filter: blur(10px);
-  border: 1px solid $primary-color;
+  width: 100%;
+  .jobitemOpen {
+    grid-template-rows: 30px, 1fr;
+    height: fit-content;
+  }
   .jobitem {
     box-sizing: border-box;
     padding: 1px;
-    display: flex;
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: 15% 15% 15% 40% 15%;
+    grid-row: 30px;
     backdrop-filter: blur(10px);
+    border-radius: 5px;
+    border: 1px solid #fbf0baa6;
+    background-color: rgb(143, 143, 143);
     align-items: center;
-    background-color: rgb(119, 119, 119);
     .jobname {
+      width: 100%;
       text-align: center;
       margin-left: 5px;
       color: $primary-color;
@@ -19,6 +27,7 @@ $primary-color: #fff8e1;
       height: 1em;
     }
     input {
+      width: 100%;
       text-align-last: center;
       margin-left: 5px;
       background-color: transparent;
@@ -28,23 +37,163 @@ $primary-color: #fff8e1;
       color: $primary-color;
       transform: translateY(-1px);
     }
-    .memberName {
-      color: white;
+    select {
+      cursor: pointer;
+      width: 100%;
+      max-height: 22px;
+      background: transparent;
+      border: none;
+      color: black;
+      font-size: 1em;
+      text-align-last: center;
+      -webkit-appearance: none;
+      -moz-appearance: none;
     }
-    .commentshow {
-      padding: 5px;
-      width: 20px;
-      height: 20px;
-      background-color: transparent;
-      border-radius: 50%;
-      border: 1px solid $primary-color;
+    option {
+      color: $primary-color;
+      background-color: black;
+    }
+    .memberName {
+      width: 100%;
+      color: white;
+      text-align: center;
+      cursor: pointer;
+    }
+    .members {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      img {
-        width: 10px;
-        transform: rotate(90deg);
+      width: 100%;
+      overflow: hidden;
+      justify-content: space-between;
+      background-color: rgba(49, 49, 49, 0.931);
+      grid-row: 2/3;
+      grid-column: 1/6;
+      .controler {
+        width: 5%;
+        background: linear-gradient(
+          90deg,
+          rgba(126, 126, 126, 0.404),
+          rgba(0, 0, 0, 0)
+        );
+        border: none;
+      }
+      .controler:nth-child(3) {
+        background: linear-gradient(
+          90deg,
+          rgba(0, 0, 0, 0),
+          rgba(126, 126, 126, 0.404)
+        );
+      }
+      .controler:active {
+        overflow: hidden;
+        img {
+          transform: (scale(1.1));
+        }
+      }
+      .memberlist {
+        box-sizing: border-box;
+        padding: 5px;
+        max-width: 90%;
+        overflow-x: auto;
+        display: flex;
+        background: linear-gradient(
+          90deg,
+          rgba(0, 0, 0, 0),
+          rgba(31, 31, 31, 0.404),
+          rgba(0, 0, 0, 0)
+        );
+        scroll-behavior: smooth;
+        .memberCard {
+          cursor: pointer;
+          background-color: rgb(73, 73, 73);
+          border: 1px solid $primary-color;
+          border-radius: 15px;
+          color: $primary-color;
+          min-width: 120px;
+          margin: 10px;
+          height: 50px;
+        }
+        .memberCard:hover {
+          background-color: rgb(122, 122, 122);
+        }
+      }
+      .memberlist::-webkit-scrollbar {
+        display: none;
       }
     }
+    .editDate {
+      cursor: pointer;
+      width: 100%;
+      max-height: 22px;
+      background-color: transparent;
+      border: none;
+      color: $primary-color;
+      letter-spacing: 3px;
+      font-size: 1em;
+    }
+    .date {
+      margin: 5px auto;
+      width: 100%;
+      max-width: 500px;
+      background-color: rgba(153, 153, 153, 0.52);
+      background-color: rgb(85, 85, 85);
+      grid-row: 2/3;
+      grid-column: 1/6;
+      button {
+        margin: 10px;
+        width: 20%;
+        min-width: 120px;
+        color: $primary-color;
+        background: rgba(117, 117, 117, 0.609);
+        border: 1px solid $primary-color;
+        border-radius: 5px;
+        padding: 3px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: rgba(61, 61, 61, 0.582);
+      }
+    }
+
+    .btns {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      .editbtn {
+        width: 50%;
+        display: flex;
+        button {
+          margin: 10px;
+          width: 50%;
+          min-width: 120px;
+          color: $primary-color;
+          background: rgba(117, 117, 117, 0.609);
+          border: 1px solid $primary-color;
+          border-radius: 5px;
+          padding: 3px;
+          cursor: pointer;
+        }
+        button:hover {
+          background-color: rgba(61, 61, 61, 0.582);
+        }
+      }
+      .commentshow {
+        padding: 5px;
+        width: 20px;
+        height: 20px;
+        background-color: transparent;
+        border-radius: 50%;
+        border: 1px solid $primary-color;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+          width: 10px;
+        }
+      }
+    }
+  }
+  .ondrag {
+    box-shadow: 5px 15px 15px black;
+    border: 1px solid $primary-color;
   }
 }

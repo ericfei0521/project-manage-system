@@ -1,13 +1,81 @@
-.background {
+$primary-color: #fff8e1;
+.showdate {
+  width: 100%;
+  background-color: #4e4e4e;
+  height: 30px;
+  font-size: 1em;
+  color: white;
+  text-align: left;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 5px;
+  transition: 0.4s ease-in-out;
+}
+.showdateOpen {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  transition: 0.4s ease-in-out;
+}
+
+.datepick {
   box-sizing: border-box;
-  padding: 15px;
   background-color: rgba(53, 53, 53, 0.931);
   width: 100%;
-  min-width: 320px;
-  border-radius: 15px;
-  margin: 0 auto;
   max-width: 500px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  margin: 0 auto;
+  max-height: 0px;
+  line-height: 1em;
+  overflow: hidden;
+  transition: 1s;
+  .buttons {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 5px;
+    button {
+      border: 1px solid $primary-color;
+      color: $primary-color;
+      width: 20%;
+      border-radius: 5px;
+      background-color: transparent;
+    }
+    button:nth-child(1) {
+      margin-right: 10px;
+    }
+    button:hover {
+      background-color: black;
+    }
+  }
+}
+.datepickOpen {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 500px;
+  background-color: rgba(153, 153, 153, 0.52);
   max-height: 500px;
   overflow: auto;
-  line-height: 1em;
+  transition: 0.4s ease-in-out;
+  .buttons {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 5px;
+    button {
+      border: 1px solid $primary-color;
+      color: $primary-color;
+      width: 20%;
+      border-radius: 5px;
+      background-color: transparent;
+    }
+    button:nth-child(1) {
+      margin-right: 10px;
+    }
+    button:hover {
+      background-color: black;
+    }
+  }
 }

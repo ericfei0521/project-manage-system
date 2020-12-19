@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { firestore } from "../../firebase";
 import { editTask } from "../../action/action";
 import { useParams } from "react-router-dom";
+
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const TaskItem = ({ id, name, state, taskID, open }) => {
@@ -214,12 +215,6 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
             )}
             <div className={style.controler}>
               <button onClick={() => open()}>X</button>
-              <div
-                className={`${style.menu} ${sidebar ? style.menuopen : ""}`}
-                onClick={() => setSidebar(!sidebar)}
-              >
-                <h3>More</h3>
-              </div>
             </div>
           </div>
           <div className={style.Status}>
@@ -295,7 +290,7 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
                           {...Provided.draggableProps}
                           {...Provided.dragHandleProps}
                           ref={Provided.innerRef}
-                          className={style.job}
+                          className={snapshot.isDragging ? style.jobs : ""}
                         >
                           <JobItem
                             isDragging={snapshot.isDragging}
@@ -318,28 +313,55 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
             )}
           </Droppable>
         </DragDropContext>
-        {addsubTask ? (
+
+        <div className={style.moremenu}>
+          <div
+            className={`${style.menu} ${sidebar ? "" : style.menuopen}`}
+            onClick={() => setSidebar(!sidebar)}
+          >
+            <h3>More</h3>
+          </div>
+          <div
+            className={`${style.sidebar} ${sidebar ? "" : style.sidebaropen}`}
+          >
+            <button
+              className={style.addtask}
+              onClick={() => {
+                setAddSubTask(!addsubTask);
+                setSidebar(false);
+              }}
+            >
+              Add Task
+            </button>
+            <button
+              onClick={() => {
+                setSidebar(false);
+              }}
+            >
+              Add Image
+            </button>
+            <button
+              onClick={() => {
+                setSidebar(false);
+              }}
+            >
+              Attach Link
+            </button>
+            <button onClick={() => deleteTask()}>Delete</button>
+          </div>
+        </div>
+      </div>
+      {addsubTask ? (
+        <div className={style.inputjob}>
           <InputJob
             projectId={projectId}
             handleAddTask={handleAddTask}
             subTaskID={id}
-          />
-        ) : (
-          <></>
-        )}
-
-        <div className={`${style.sidebar} ${sidebar ? style.sidebaropen : ""}`}>
-          <button
-            className={style.addtask}
-            onClick={() => setAddSubTask(!addsubTask)}
-          >
-            Add Task
-          </button>
-          <button>Add Image</button>
-          <button>Attach Link</button>
-          <button onClick={() => deleteTask()}>Delete</button>
+          />{" "}
         </div>
-      </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

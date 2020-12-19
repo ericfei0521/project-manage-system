@@ -1,11 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { firestore } from "../../firebase";
 import firebase from "firebase/app";
-import EditDatePicker from "./editDayPicker";
 import Comment from "./comment";
 import style from "../../style/jobItem.module.scss";
 import arrow from "../../images/ICON/arrow.svg";
+import arrowleft from "../../images/ICON/arrowleft.svg";
+import arrowright from "../../images/ICON/arrowright.svg";
+import { format } from "date-fns";
+import { enGB } from "date-fns/locale";
+import { DatePickerCalendar } from "react-nice-dates";
+import DayJS from "react-dayjs";
+import "../../style/restdate.css";
+import "react-nice-dates/build/style.css";
+
 const JobItem = (prop) => {
+  const scrolldiv = useRef(null);
   let subtaskPath = firestore
     .collection("subtasks")
     .doc(prop.subtaskId)
@@ -20,6 +29,9 @@ const JobItem = (prop) => {
   let [membershow, setMemberShow] = useState(false);
   let [member, setMember] = useState([]);
   let [showComment, setShowcomment] = useState(false);
+  let [openJob, setOpenJob] = useState(false);
+  const [date, setDate] = useState();
+  let [show, setShow] = useState(false);
 
   useEffect(() => {
     let list = [];
@@ -104,16 +116,20 @@ const JobItem = (prop) => {
       });
     subtaskPath.delete();
   };
+  const scrollleft = () => {
+    scrolldiv.current.scrollLeft -= 150;
+  };
+  const scrollright = () => {
+    scrolldiv.current.scrollLeft += 150;
+  };
+  console.log(document.body.taskItem);
   return (
-    <div
-      className={style.jobCard}
-      style={
-        prop.isDragging
-          ? { backgroundColor: "rgba(255, 224, 137, 1)" }
-          : { backgroundColor: " rgba(70, 70, 70, 1)" }
-      }
-    >
-      <div className={style.jobitem}>
+    <div className={style.jobCard}>
+      <div
+        className={`${style.jobitem} ${prop.isDragging ? style.ondrag : ""}${
+          openJob ? style.jobitemOpen : ""
+        }`}
+      >
         {edittaskName ? (
           <input
             type="text"
@@ -148,60 +164,100 @@ const JobItem = (prop) => {
           <option value="Rejected">Rejected</option>
           <option value="Complete">Complete</option>
         </select>
-
+        <div
+          className={style.memberName}
+          onClick={() => {
+            setMemberShow(!membershow);
+          }}
+        >
+          <h1 onClick={() => setOpenJob(!openJob)}>{membername}</h1>
+        </div>
         {membershow ? (
-          <div>
-            {member.map((item) => (
+          <div className={style.members}>
+            <button className={style.controler} onClick={() => scrollleft()}>
+              <img src={arrowleft} alt="" />
+            </button>
+            <div className={style.memberlist} ref={scrolldiv}>
+              {member.map((item) => (
+                <button
+                  className={style.memberCard}
+                  key={item.userID}
+                  value={item.displayName}
+                  id={item.userID}
+                  onClick={(e) => {
+                    updateMember(e.target.value);
+                    setMemberName(e.target.value);
+                    updateMemberID(e.target.id);
+                    setMemberShow(!membershow);
+                  }}
+                >
+                  {item.displayName}
+                </button>
+              ))}
+            </div>
+
+            <button className={style.controler} onClick={() => scrollright()}>
+              <img src={arrowright} alt="" />
+            </button>
+          </div>
+        ) : (
+          <></>
+        )}
+        <button onClick={() => setShow(!show)} className={style.editDate}>
+          Due date:{" "}
+          {date ? (
+            format(date, "yyyy/MM/dd", { locale: enGB })
+          ) : (
+            <DayJS format="YYYY/MM/DD">{prop.dueDate}</DayJS>
+          )}
+        </button>
+        {show ? (
+          <div className={style.date}>
+            <DatePickerCalendar
+              date={date}
+              onDateChange={setDate}
+              locale={enGB}
+            />
+            <button
+              onClick={() => {
+                setShow(!show);
+                getDate(date.getTime());
+              }}
+            >
+              Set Date
+            </button>
+          </div>
+        ) : (
+          <></>
+        )}
+        <div className={style.btns}>
+          {isEdit ? (
+            <div className={style.editbtn}>
               <button
-                key={item.userID}
-                value={item.displayName}
-                id={item.userID}
-                onClick={(e) => {
-                  updateMember(e.target.value);
-                  setMemberName(e.target.value);
-                  updateMemberID(e.target.id);
-                  setMemberShow(!membershow);
+                onClick={() => {
+                  removeJob();
                 }}
               >
-                {item.displayName}
+                Delete
               </button>
-            ))}
-          </div>
-        ) : (
-          <div
-            className={style.memberName}
-            onClick={() => setMemberShow(!membershow)}
+              <button
+                onClick={() => {
+                  setIsEdit(!isEdit);
+                }}
+              >
+                Back
+              </button>
+            </div>
+          ) : (
+            <div onClick={() => setIsEdit(!isEdit)}>...</div>
+          )}
+          <button
+            className={style.commentshow}
+            onClick={() => setShowcomment(!showComment)}
           >
-            {membername}
-          </div>
-        )}
-        <EditDatePicker dueDate={prop.dueDate} getDate={getDate} />
-        {isEdit ? (
-          <div>
-            <button
-              onClick={() => {
-                removeJob();
-              }}
-            >
-              Delete
-            </button>
-            <button
-              onClick={() => {
-                setIsEdit(!isEdit);
-              }}
-            >
-              Back
-            </button>
-          </div>
-        ) : (
-          <div onClick={() => setIsEdit(!isEdit)}>...</div>
-        )}
-        <button
-          className={style.commentshow}
-          onClick={() => setShowcomment(!showComment)}
-        >
-          <img src={arrow} alt="" />
-        </button>
+            <img src={arrow} alt="" />
+          </button>
+        </div>
       </div>
       {showComment ? (
         <Comment

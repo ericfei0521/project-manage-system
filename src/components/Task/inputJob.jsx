@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import DatePicker from "./dayPicker";
+import style from "../../style/inputjob.module.scss";
 import { nanoid } from "nanoid";
 import { firestore } from "../../firebase";
 import { preaddJobe } from "../../action/action";
@@ -7,6 +8,7 @@ import { useDispatch } from "react-redux";
 
 const InputJob = ({ handleAddTask, projectId, subTaskID }) => {
   console.log(subTaskID);
+  const membersref = useRef(null);
   let dispatch = useDispatch();
   let [member, setMember] = useState([]);
   let [projectName, setProjectName] = useState("");
@@ -17,6 +19,7 @@ const InputJob = ({ handleAddTask, projectId, subTaskID }) => {
   let [status, setStatus] = useState("On-hold");
   let [date, setDate] = useState("");
   let [taskname, setTaskName] = useState("");
+  let [memberopen, setOpenmember] = useState(false);
   useEffect(() => {
     let list = [];
     let memberlist = [];
@@ -56,9 +59,18 @@ const InputJob = ({ handleAddTask, projectId, subTaskID }) => {
   const getDate = (value) => {
     setDate(value);
   };
+  const resize = () => {
+    membersref.current.scrollTop = 0;
+  };
   return (
-    <div>
-      <input type="text" onChange={(e) => setTaskName(e.target.value)} />
+    <div className={style.inputjob}>
+      <h1>Task Name :</h1>
+      <input
+        type="text"
+        onChange={(e) => setTaskName(e.target.value)}
+        placeholder="Please Enter Task Name"
+      />
+      <h1>Status :</h1>
       <select
         name="status"
         id=""
@@ -72,56 +84,74 @@ const InputJob = ({ handleAddTask, projectId, subTaskID }) => {
         <option value="Rejected">Rejected</option>
         <option value="Complete">Complete</option>
       </select>
-      <button onClick={() => setShowmember(!showmember)}>
-        {taskmember ? taskmember : "Assign Member"}
-      </button>
-      {showmember ? (
-        <div>
+      <div className={style.selectmember}>
+        <button onClick={() => setShowmember(!showmember)}>Member</button>
+        <div
+          className={`${style.selector} ${
+            memberopen ? "" : style.selectorOpen
+          }`}
+          onClick={(e) => {
+            setOpenmember(!memberopen);
+            resize();
+          }}
+        >
+          <h2>{taskmember ? taskmember : "Please Select Member"}</h2>
+        </div>
+        <div
+          className={`${style.members} ${memberopen ? style.membersopen : ""}`}
+          ref={membersref}
+        >
           {member.map((item) => (
             <button
+              className={style.member}
               key={item.userID}
-              onClick={() => {
+              onClick={(e) => {
+                resize();
+                setOpenmember(!memberopen);
                 setShowmember(!showmember);
                 setTaskmember(item.displayName);
                 setTaskmemberID(item.userID);
               }}
             >
-              {item.displayName} {item.email}{" "}
+              <span>{item.displayName}</span>
+              <span>{item.email}</span>
             </button>
           ))}
         </div>
-      ) : (
-        <></>
-      )}
-      <DatePicker getDate={getDate} />
-      <button
-        onClick={() => {
-          if (taskname && taskmember) {
-            dispatch(
-              preaddJobe({
-                id: nanoid(),
-                memberID: taskmemberID,
-                projectId: projectId,
-                taskid: subTaskID,
-                dueDate: date,
-                member: taskmember,
-                name: taskname,
-                state: status,
-                projectName: projectName,
-                subTaskName: subtaskName,
-                comment: [],
-              })
-            );
-            handleAddTask();
-          } else {
-            alert("Please Enter taskname or assign member");
-          }
-          setTaskName("");
-        }}
-      >
-        ADD Task
-      </button>
-      <button onClick={() => handleAddTask()}>Cancle</button>
+      </div>
+      <div className={style.date}>
+        <DatePicker getDate={getDate} />
+      </div>
+      <div className={style.bottombtns}>
+        <button
+          onClick={() => {
+            if (taskname && taskmember) {
+              dispatch(
+                preaddJobe({
+                  id: nanoid(),
+                  memberID: taskmemberID,
+                  projectId: projectId,
+                  taskid: subTaskID,
+                  dueDate: date,
+                  member: taskmember,
+                  name: taskname,
+                  state: status,
+                  projectName: projectName,
+                  subTaskName: subtaskName,
+                  comment: [],
+                })
+              );
+              handleAddTask();
+            } else {
+              alert("Please Enter taskname or assign member");
+            }
+            setTaskName("");
+          }}
+        >
+          ADD Task
+        </button>
+        <button onClick={() => handleAddTask()}>Cancle</button>
+      </div>
     </div>
   );
 };
