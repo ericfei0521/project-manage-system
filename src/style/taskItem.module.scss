@@ -186,6 +186,11 @@ $primary-color: #fff8e1;
     }
   }
 }
+@media only screen and (max-width: 768px) {
+  .card {
+    width: 80%;
+  }
+}
 .moremenu {
   position: absolute;
   top: 50px;

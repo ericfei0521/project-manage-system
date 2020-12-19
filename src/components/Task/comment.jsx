@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import firebase from "firebase/app";
 import { auth, firestore, timestamp } from "../../firebase";
 import { nanoid } from "nanoid";
 import CommentCards from "./commentCard";
+import send from "../../images/ICON/submit.png";
 import style from "../../style/comment.module.scss";
 
 const Comment = ({ subTaskID, jobID, projectID }) => {
+  const divRref = useRef(null);
   let filePath = firestore.collection("subtasks").doc(subTaskID);
   let [comment, setComment] = useState([]);
   let [jobComment, setJobcomment] = useState([]);
@@ -48,13 +50,16 @@ const Comment = ({ subTaskID, jobID, projectID }) => {
         console.log(comments);
         setComment(comments);
       });
+
     return () => {
       unsubscribejobs();
       unsubscribecomment();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  useEffect(() => {
+    scrollToBottom();
+  }, [comment]);
   const handleComment = (value) => {
     console.log(value);
     let newComments = [...comment, value];
@@ -72,9 +77,16 @@ const Comment = ({ subTaskID, jobID, projectID }) => {
         comment: firebase.firestore.FieldValue.arrayUnion(value.id),
       });
   };
+  const textareaResize = (element) => {
+    element.style.height = "1px";
+    element.style.height = element.scrollHeight + "px";
+  };
+  const scrollToBottom = () => {
+    divRref.current.scrollTop = divRref.current.scrollHeight;
+  };
   return (
     <div className={style.comment}>
-      <div>
+      <div className={style.comments} ref={divRref}>
         {comment.map((item) => (
           <CommentCards
             user={user}
@@ -84,13 +96,14 @@ const Comment = ({ subTaskID, jobID, projectID }) => {
           />
         ))}
       </div>
-      <div>
+      <div className={style.typearea}>
+        <div className={style.blank}></div>
         <textarea
           type="text"
           value={newComment}
+          onKeyDown={(e) => textareaResize(e.target)}
           onChange={(e) => {
             setNewComment(e.target.value);
-            console.log(e.target.value);
           }}
         />
         <button
@@ -109,7 +122,7 @@ const Comment = ({ subTaskID, jobID, projectID }) => {
             setNewComment("");
           }}
         >
-          submit
+          <img src={send} alt="" />
         </button>
       </div>
     </div>

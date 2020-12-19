@@ -9,9 +9,9 @@ $primary-color: #fff8e1;
   }
   .jobitem {
     box-sizing: border-box;
-    padding: 1px;
     display: grid;
-    grid-template-columns: 15% 15% 15% 40% 15%;
+    min-height: 28px;
+    grid-template-columns: 20% 20% 20% 30% 10%;
     grid-row: 30px;
     backdrop-filter: blur(10px);
     border-radius: 5px;
@@ -122,6 +122,9 @@ $primary-color: #fff8e1;
     }
     .editDate {
       cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       width: 100%;
       max-height: 22px;
       background-color: transparent;
@@ -129,6 +132,20 @@ $primary-color: #fff8e1;
       color: $primary-color;
       letter-spacing: 3px;
       font-size: 1em;
+      text-align: end;
+    }
+    @media only screen and (max-width: 768px) {
+      .editDate {
+        text-align: center;
+        font-size: 1em;
+      }
+    }
+    @media only screen and (max-width: 425px) {
+      .editDate {
+        h1 {
+          display: none;
+        }
+      }
     }
     .date {
       margin: 5px auto;
@@ -139,7 +156,6 @@ $primary-color: #fff8e1;
       grid-row: 2/3;
       grid-column: 1/6;
       button {
-        margin: 10px;
         width: 20%;
         min-width: 120px;
         color: $primary-color;
@@ -153,33 +169,19 @@ $primary-color: #fff8e1;
         background-color: rgba(61, 61, 61, 0.582);
       }
     }
-
     .btns {
       width: 100%;
       display: flex;
-      justify-content: space-between;
-      .editbtn {
-        width: 50%;
-        display: flex;
-        button {
-          margin: 10px;
-          width: 50%;
-          min-width: 120px;
-          color: $primary-color;
-          background: rgba(117, 117, 117, 0.609);
-          border: 1px solid $primary-color;
-          border-radius: 5px;
-          padding: 3px;
-          cursor: pointer;
-        }
-        button:hover {
-          background-color: rgba(61, 61, 61, 0.582);
-        }
-      }
+      justify-content: flex-end;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      height: 100%;
       .commentshow {
         padding: 5px;
         width: 20px;
         height: 20px;
+        margin-right: 20px;
         background-color: transparent;
         border-radius: 50%;
         border: 1px solid $primary-color;
@@ -190,8 +192,42 @@ $primary-color: #fff8e1;
           width: 10px;
         }
       }
+      .opencontrol {
+        width: 15px;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        transform: translate(1px);
+        height: 25px;
+        background-color: $primary-color;
+        position: absolute;
+        right: 0;
+      }
+      .closecontrol {
+        background-color: rgb(39, 39, 39);
+      }
+      .delete {
+        width: 60px;
+        position: absolute;
+        right: -59px;
+        height: 25px;
+        transition: 1s;
+        border: none;
+        background-color: rgb(92, 92, 92);
+        color: $primary-color;
+      }
+      .opendelete {
+        width: 60px;
+        position: absolute;
+        right: 9px;
+        height: 25px;
+        transition: 1s;
+        border: none;
+        color: $primary-color;
+        background-color: rgb(109, 20, 20);
+      }
     }
   }
+
   .ondrag {
     box-shadow: 5px 15px 15px black;
     border: 1px solid $primary-color;

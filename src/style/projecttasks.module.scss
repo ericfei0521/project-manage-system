@@ -16,17 +16,23 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
     box-sizing: border-box;
     color: $primary-color;
     display: flex;
-    width: 90%;
+    width: 100%;
     border-radius: 15px;
     justify-content: space-evenly;
+    align-items: center;
     background-color: rgb(77, 77, 77);
     border: 1px solid gray;
     font-size: 1.2em;
     margin: 5px auto 0px auto;
-    padding: 5px;
+    padding: 5px 15px;
     letter-spacing: 2px;
+    h2 {
+      width: 140px;
+    }
     .state {
       display: flex;
+      width: 170px;
+      margin: 5px;
       h3 {
         color: $statehold;
         margin-right: 5px;
@@ -56,8 +62,8 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
       }
     }
     .button {
-      width: 20px;
-      height: 20px;
+      min-width: 20px;
+      min-height: 20px;
       border-radius: 50%;
       border: 1px solid $primary-color;
       background-position: center;
@@ -67,7 +73,7 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
     }
   }
   .tasklist {
-    width: 86%;
+    width: 95%;
     max-height: 0;
     transition: all 0.15s ease-out;
     overflow: hidden;
@@ -78,8 +84,8 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
       color: $primary-color;
       display: flex;
       width: 100%;
-      justify-content: space-evenly;
-      font-size: 1.2em;
+      justify-content: space-around;
+      font-size: 1em;
       margin: auto;
       padding: 10px;
       letter-spacing: 2px;
@@ -87,6 +93,7 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
       .detail {
         width: 25%;
         display: flex;
+        justify-content: center;
         padding: 5px 0;
         h2 {
           margin-right: 10px;

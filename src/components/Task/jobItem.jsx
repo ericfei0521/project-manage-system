@@ -204,7 +204,7 @@ const JobItem = (prop) => {
           <></>
         )}
         <button onClick={() => setShow(!show)} className={style.editDate}>
-          Due date:{" "}
+          <h1> Due date:</h1>
           {date ? (
             format(date, "yyyy/MM/dd", { locale: enGB })
           ) : (
@@ -231,32 +231,26 @@ const JobItem = (prop) => {
           <></>
         )}
         <div className={style.btns}>
-          {isEdit ? (
-            <div className={style.editbtn}>
-              <button
-                onClick={() => {
-                  removeJob();
-                }}
-              >
-                Delete
-              </button>
-              <button
-                onClick={() => {
-                  setIsEdit(!isEdit);
-                }}
-              >
-                Back
-              </button>
-            </div>
-          ) : (
-            <div onClick={() => setIsEdit(!isEdit)}>...</div>
-          )}
           <button
             className={style.commentshow}
             onClick={() => setShowcomment(!showComment)}
           >
             <img src={arrow} alt="" />
           </button>
+          <button
+            className={isEdit ? style.opendelete : style.delete}
+            onClick={() => {
+              removeJob();
+            }}
+          >
+            Delete
+          </button>
+          <div
+            className={`${style.opencontrol} ${
+              isEdit ? "" : style.closecontrol
+            }`}
+            onClick={() => setIsEdit(!isEdit)}
+          ></div>
         </div>
       </div>
       {showComment ? (

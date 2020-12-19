@@ -10,10 +10,14 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
     left: 0;
     top: 0;
     width: 100%;
-    min-height: 100vh;
+    height: 100%;
     backdrop-filter: blur(3px);
     background-color: rgba(0, 0, 0, 0.863);
     z-index: 500;
+    overflow-x: hidden;
+  }
+  .taskdetail::-webkit-scrollbar {
+    display: none;
   }
   .nav {
     min-height: 5vh;

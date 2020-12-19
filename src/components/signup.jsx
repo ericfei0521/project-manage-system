@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signup } from "../action/action";
 import { auth } from "../firebase";
-
+import style from "../style/signup.module.scss";
 function Signup() {
   let dispatch = useDispatch();
   const state = useSelector((state) => state.Signup);
@@ -21,52 +21,58 @@ function Signup() {
   });
 
   return (
-    <div className="App">
-      <Link to="/" className="brand-logo">
-        <img src={logo} alt="" width="80px" />
-      </Link>
-      <input
-        onChange={(e) => setEmail(e.target.value)}
-        value={email}
-        type="email"
-        placeholder="email"
-      />
-      <input
-        onChange={(e) => setPassword(e.target.value)}
-        value={password}
-        type="text"
-        placeholder="password"
-      />
-      <input
-        onChange={(e) => setConfirm(e.target.value)}
-        value={confirm}
-        type="text"
-        placeholder="comfrim password"
-      />
-      <input
-        onChange={(e) => setName(e.target.value)}
-        value={name}
-        type="text"
-        placeholder="Enter User Name"
-      />
-      <button
-        onClick={() => {
-          dispatch(
-            signup({
-              email: email,
-              password: password,
-              confirmpassword: confirm,
-              displayName: name,
-            })
-          );
-          setEmail("");
-          setPassword("");
-          setConfirm("");
-          setName("");
-        }}
-      >
-        signup
-      </button>
+    <div className={style.signup}>
+      <div className={style.filter}>
+        <div className={style.wrap}>
+          <Link to="/" className="brand-logo">
+            <img src={logo} alt="" width="80px" />
+          </Link>
+          <div className={style.info}>
+            <input
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+              type="email"
+              placeholder="email"
+            />
+            <input
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+              type="text"
+              placeholder="password"
+            />
+            <input
+              onChange={(e) => setConfirm(e.target.value)}
+              value={confirm}
+              type="text"
+              placeholder="comfrim password"
+            />
+            <input
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+              type="text"
+              placeholder="Enter User Name"
+            />
+            <button
+              onClick={() => {
+                dispatch(
+                  signup({
+                    email: email,
+                    password: password,
+                    confirmpassword: confirm,
+                    displayName: name,
+                  })
+                );
+                setEmail("");
+                setPassword("");
+                setConfirm("");
+                setName("");
+              }}
+            >
+              signup
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

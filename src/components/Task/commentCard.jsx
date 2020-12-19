@@ -42,18 +42,19 @@ const CommentCards = (prop) => {
   };
   return (
     <div className={style.commentCard}>
-      <div className={style.content}>
+      <div className={style.commends}>
         <div className={style.user}>
           <h1>{prop.data.name.charAt(0)}</h1>
         </div>
         {editing ? (
           <div className={style.content}>
             <textarea
+              autoFocus
               type="text"
               value={content}
               onChange={(e) => setNewContent(e.target.value)}
             />
-            <div>
+            <div className={style.checkbtns}>
               <button
                 onClick={() => {
                   editContent(content);
@@ -71,21 +72,23 @@ const CommentCards = (prop) => {
           <div className={style.content}>
             <h1>{prop.data.name}</h1>
             <p style={{ whiteSpace: "pre-line" }}>{content}</p>
-            <div>
-              {prop.data.name === prop.user ? (
-                <button onClick={() => setEdit(!edit)}>...</button>
-              ) : (
-                <></>
-              )}
-              {edit ? (
-                <div>
-                  <button onClick={() => setEditing(true)}>Edit</button>
-                  <button onClick={() => deleteContent()}>Delete</button>
-                </div>
-              ) : (
-                <></>
-              )}
-            </div>
+            {prop.data.name === prop.user ? (
+              <div onClick={() => setEdit(!edit)} className={style.editbtns}>
+                <div className={style.circle}></div>
+                <div className={style.circle}></div>
+                <div className={style.circle}></div>
+              </div>
+            ) : (
+              <></>
+            )}
+            {edit ? (
+              <div className={style.controlbtns}>
+                <button onClick={() => setEditing(true)}>Edit</button>
+                <button onClick={() => deleteContent()}>Delete</button>
+              </div>
+            ) : (
+              <></>
+            )}
           </div>
         )}
       </div>

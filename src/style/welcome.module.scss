@@ -13,6 +13,39 @@ $primary-color: #fff8e1;
     top: 0;
     z-index: -1;
   }
+
+  @media only screen and (max-width: 768px) {
+    video {
+      width: 160%;
+      left: 50%;
+      top: 50%;
+      transform: scale(1.2) translate(-30%, -35%);
+    }
+  }
+  @media only screen and (max-width: 425px) {
+    video {
+      width: 160%;
+      left: 50%;
+      top: 50%;
+      transform: scale(1.6) translate(-30%, -25%);
+    }
+  }
+  @media only screen and (max-width: 375px) {
+    video {
+      width: 180%;
+      left: 50%;
+      top: 50%;
+      transform: scale(1.6) translate(-30%, -25%);
+    }
+  }
+  @media only screen and (max-width: 320px) {
+    video {
+      width: 197%;
+      left: 50%;
+      top: 50%;
+      transform: scale(1.7) translate(-30%, -23%);
+    }
+  }
   .filter {
     position: absolute;
     left: 0;
@@ -26,6 +59,20 @@ $primary-color: #fff8e1;
     );
     z-index: 0;
   }
+  @media only screen and (max-width: 425px) {
+    filter {
+      width: 100%;
+      height: 100%;
+      left: 50%;
+      top: 50%;
+      background: linear-gradient(
+        45deg,
+        rgba(88, 88, 88, 0),
+        rgba(68, 68, 68, 0.808) 80%
+      );
+      transform: translate(-50%, -50%);
+    }
+  }
   .header {
     box-sizing: border-box;
     width: 100%;
@@ -38,6 +85,7 @@ $primary-color: #fff8e1;
     background-color: rgba(14, 14, 14, 0.479);
     backdrop-filter: blur(5px);
     border-bottom: 1px solid $primary-color;
+
     .btngroup {
       width: 10%;
       min-width: 300px;
@@ -48,6 +96,40 @@ $primary-color: #fff8e1;
       a {
         width: 50%;
       }
+    }
+    @media only screen and (max-width: 375px) {
+      .btngroup {
+        width: 10%;
+        min-width: 200px;
+        display: flex;
+        justify-content: space-evenly;
+        animation-duration: 1s;
+        animation-name: moveleft;
+        a {
+          width: 50%;
+        }
+      }
+    }
+    @media only screen and (max-width: 375px) {
+      .btngroup {
+        width: 10%;
+        min-width: 150px;
+        display: flex;
+        align-items: flex-end;
+        animation-duration: 1s;
+        animation-name: moveleft;
+        a {
+          width: 60%;
+          button {
+            font-size: 0.8em;
+          }
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 425px) {
+    .header {
+      height: 15vh;
     }
   }
   .landing {
@@ -98,13 +180,14 @@ $primary-color: #fff8e1;
             font-family: "Abril Fatface", cursive;
           }
         }
+
         a {
-          width: 100%;
+          width: fit-content;
           display: flex;
           justify-content: flex-start;
           margin-top: 15px;
           button {
-            min-width: 140px;
+            min-width: 200px;
             width: 30%;
             transform: scaleY(1.2);
           }
@@ -131,7 +214,86 @@ $primary-color: #fff8e1;
       }
     }
   }
+  @media only screen and (max-width: 768px) {
+    .landing {
+      .branding {
+        width: 100%;
+        padding: 0;
+        .campaign {
+          width: 80%;
+          min-width: 500px;
+          margin: 0 auto;
+          align-items: center;
+          padding: 25px;
+          background-color: rgba(29, 29, 29, 0.513);
+          backdrop-filter: blur(5px);
+          border-radius: 15px;
+          .sologon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 425px) {
+    .landing {
+      height: calc(85vh - 1px);
+      .branding {
+        .campaign {
+          min-width: 400px;
+          margin: 0 auto;
+          padding: 0;
+          .sologon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            h1 {
+              font-size: 3.5em;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 375px) {
+    .landing {
+      height: calc(85vh - 1px);
+      .branding {
+        .campaign {
+          min-width: 375px;
+          margin: 0 auto;
+          border-radius: 0;
+          padding: 10px;
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 320px) {
+    .landing {
+      height: calc(85vh - 1px);
+      .branding {
+        .campaign {
+          box-sizing: border-box;
+          min-width: 320px;
+          margin: 0 auto;
+          border-radius: 0;
+          .sologon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            h1 {
+              font-size: 3em;
+            }
+          }
+        }
+      }
+    }
+  }
 }
+
 @keyframes moveup {
   from {
     transform: translateY(600px);

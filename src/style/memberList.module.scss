@@ -140,24 +140,3 @@ $primary-color: #fff8e1;
     }
   }
 }
-::-webkit-scrollbar {
-  width: 5px;
-  height: 10px;
-}
-::-webkit-scrollbar-button {
-  width: 20px;
-  height: 20px;
-}
-::-webkit-scrollbar-thumb {
-  display: none;
-  border-radius: 41px;
-}
-::-webkit-scrollbar-thumb:hover {
-  display: block;
-  background: $primary-color;
-}
-::-webkit-scrollbar-thumb {
-  background: $primary-color;
-  border: 0px none #000000;
-  border-radius: 41px;
-}

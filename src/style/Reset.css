@@ -149,5 +149,18 @@ select:focus {
   box-sizing: border-box;
 }
 body {
-  background-color: gray;
+  background-color: rgb(44, 44, 44);
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px;
+}
+::-webkit-scrollbar-button {
+  width: 20px;
+  height: 20px;
+}
+::-webkit-scrollbar-thumb {
+  background: #fff8e1;
+  border-radius: 41px;
+  cursor: auto;
 }

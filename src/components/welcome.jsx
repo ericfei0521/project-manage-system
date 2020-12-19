@@ -42,7 +42,7 @@ function Welcome() {
           <div className={style.campaign}>
             <div className={style.sologon}>
               <h1>Welcome TO</h1>
-              <h2>-The Raven</h2>
+              <h2>The Raven</h2>
               <p>&emsp;Use one manage all</p>
             </div>
             <Link to="/login">
