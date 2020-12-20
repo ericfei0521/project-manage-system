@@ -238,7 +238,10 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
           </div>
         </div>
         {editdiscript ? (
-          <div className={style.discriptContent}>
+          <div
+            className={style.discriptContent}
+            style={sidebar ? { zIndex: "10" } : { zIndex: "300" }}
+          >
             <textarea
               autoFocus
               type="text"
@@ -319,7 +322,7 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
             className={`${style.menu} ${sidebar ? "" : style.menuopen}`}
             onClick={() => setSidebar(!sidebar)}
           >
-            <h3>More</h3>
+            <h1>more</h1>
           </div>
           <div
             className={`${style.sidebar} ${sidebar ? "" : style.sidebaropen}`}

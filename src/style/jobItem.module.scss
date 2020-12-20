@@ -26,6 +26,11 @@ $primary-color: #fff8e1;
       font-size: 1em;
       height: 1em;
     }
+    @media only screen and (max-width: 425px) {
+      .jobname {
+        font-size: 0.8em;
+      }
+    }
     input {
       width: 100%;
       text-align-last: center;
@@ -36,6 +41,11 @@ $primary-color: #fff8e1;
       font-size: 1em;
       color: $primary-color;
       transform: translateY(-1px);
+    }
+    @media only screen and (max-width: 425px) {
+      input {
+        font-size: 0.8em;
+      }
     }
     select {
       cursor: pointer;
@@ -49,6 +59,11 @@ $primary-color: #fff8e1;
       -webkit-appearance: none;
       -moz-appearance: none;
     }
+    @media only screen and (max-width: 425px) {
+      select {
+        font-size: 0.8em;
+      }
+    }
     option {
       color: $primary-color;
       background-color: black;
@@ -58,6 +73,11 @@ $primary-color: #fff8e1;
       color: white;
       text-align: center;
       cursor: pointer;
+    }
+    @media only screen and (max-width: 425px) {
+      .memberName {
+        font-size: 0.8em;
+      }
     }
     .members {
       display: flex;
@@ -142,6 +162,7 @@ $primary-color: #fff8e1;
     }
     @media only screen and (max-width: 425px) {
       .editDate {
+        font-size: 0.8em;
         h1 {
           display: none;
         }
@@ -227,7 +248,11 @@ $primary-color: #fff8e1;
       }
     }
   }
-
+  @media only screen and (max-width: 425px) {
+    .jobitem {
+      grid-template-columns: 25% 15% 15% 30% 15%;
+    }
+  }
   .ondrag {
     box-shadow: 5px 15px 15px black;
     border: 1px solid $primary-color;
