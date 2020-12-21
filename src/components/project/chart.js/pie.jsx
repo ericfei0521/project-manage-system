@@ -38,6 +38,7 @@ const Piechart = ({ datas, name }) => {
       };
       setdataSet(barstate);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [datas]);
 
   return (
