@@ -5,7 +5,14 @@ const TasksDetail = ({ item }) => {
   let [showdetail, setShowdetail] = useState(false);
   return (
     <div className={style.taskssummary}>
-      <div className={style.usersummary}>
+      <div
+        className={style.usersummary}
+        style={
+          item.tasks.length === 0
+            ? { backgroundColor: "black" }
+            : { backgroundColor: "rgb(77, 77, 77)" }
+        }
+      >
         <h2>{item.user}</h2>
         <h2>Task: {item.tasks.length}</h2>
         <div className={style.state}>

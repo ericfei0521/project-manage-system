@@ -24,6 +24,13 @@ $bord-color: rgb(77, 77, 77);
   }
 }
 
+@media only screen and (max-width: 1000px) {
+  .projectCard {
+    width: 200px;
+    height: 150px;
+    font-size: 0.8em;
+  }
+}
 .projectCard:hover {
   border: 1px solid $primary-color;
   background: radial-gradient(circle at center, #4b4b4b, #222222);

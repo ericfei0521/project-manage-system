@@ -53,7 +53,7 @@ const Piechart = ({ datas, name }) => {
             fontColor: "white",
           },
           legend: {
-            position: "top",
+            position: "right",
             labels: {
               fontColor: "white",
               fontSize: 13,

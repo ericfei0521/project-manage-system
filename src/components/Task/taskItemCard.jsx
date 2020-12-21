@@ -13,7 +13,7 @@ const TaskItemCard = ({ id, name, state, taskID, open, index }) => {
   let [image, setImage] = useState(null);
 
   useEffect(() => {
-    docPath.onSnapshot((doc) => {
+    let unsubscribe = docPath.onSnapshot((doc) => {
       if (doc.data() === undefined) {
         return;
       } else {
@@ -22,6 +22,9 @@ const TaskItemCard = ({ id, name, state, taskID, open, index }) => {
         setImage(doc.data().image);
       }
     });
+    return () => {
+      unsubscribe();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

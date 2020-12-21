@@ -7,14 +7,18 @@ $primary-color: #fff8e1;
     display: grid;
     grid-template-columns: 200px 1fr;
     column-gap: 0;
+    backdrop-filter: blur(3px);
+    background-color: rgba(0, 0, 0, 0.609);
+    border-top: 1px solid #fff8e178;
     .sidebar {
-      background-color: rgb(65, 65, 65);
+      background-color: rgba(65, 65, 65, 0.445);
       padding: 10px;
       min-width: 200px;
       display: flex;
       flex-direction: column;
       align-items: center;
       row-gap: 5px;
+
       .channels {
         color: $primary-color;
         width: 100%;
@@ -25,7 +29,7 @@ $primary-color: #fff8e1;
         align-items: center;
         .channel {
           box-sizing: border-box;
-          background-color: rgba(87, 87, 87, 0.719);
+          background-color: rgba(77, 77, 77, 0.486);
           padding: 0px;
           width: 100%;
           display: flex;
@@ -77,6 +81,13 @@ $primary-color: #fff8e1;
         .addCard:hover {
           background-color: rgba(148, 148, 148, 0.671);
         }
+        @media only screen and (max-width: 1000px) {
+          .addCard {
+            width: 200px;
+            height: 150px;
+            font-size: 0.8em;
+          }
+        }
         .addCardInfo {
           width: 23%;
           max-width: 350px;
@@ -86,22 +97,26 @@ $primary-color: #fff8e1;
           display: flex;
           justify-content: center;
           align-items: center;
-          background-color: rgba(44, 44, 44, 0.294);
+          background-color: rgba(105, 105, 105, 0.294);
           flex-direction: column;
           input,
           select {
-            width: 100%;
+            width: 90%;
             margin: 5px;
             border: none;
             border-radius: 8px;
             font-size: 1.2em;
+            text-align-last: center;
           }
           input {
             text-align: center;
           }
-          select,
-          option {
-            text-indent: 40%;
+        }
+        @media only screen and (max-width: 1000px) {
+          .addCardInfo {
+            width: 200px;
+            height: 150px;
+            font-size: 0.8em;
           }
         }
       }
@@ -118,6 +133,7 @@ $primary-color: #fff8e1;
   margin: 5px;
   outline: none;
   font-size: 1.1em;
+  padding: 5px;
   font-family: "Lato", sans-serif;
 }
 .button:hover {

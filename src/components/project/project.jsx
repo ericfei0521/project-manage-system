@@ -40,6 +40,9 @@ const Project = () => {
 
   useEffect(() => {
     let unsubscribemember = project.onSnapshot(function (doc) {
+      if (!doc.data()) {
+        history.push("/");
+      }
       // console.log(doc.data())
       if (doc.data() !== undefined) {
         let data = doc.data();
@@ -327,7 +330,7 @@ const Project = () => {
                     >
                       Add List
                     </button>
-                    <button onClick={() => setAddcard(false)}>X</button>
+                    <button onClick={() => setAddcard(false)}>Cancel</button>
                   </div>
                 </div>
               </div>

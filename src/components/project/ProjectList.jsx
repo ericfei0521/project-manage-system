@@ -72,7 +72,7 @@ function ProjectList() {
             >
               Projects
             </button>
-            <button
+            {/* <button
               className={button.button}
               onClick={() => {
                 setCurrentShow("todos");
@@ -80,7 +80,7 @@ function ProjectList() {
               }}
             >
               Todos
-            </button>
+            </button> */}
             <button
               className={button.button}
               onClick={() => {

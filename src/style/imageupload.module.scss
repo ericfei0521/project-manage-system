@@ -1,0 +1,131 @@
+$primary-color: #fff8e1;
+.dropArea {
+  width: 97%;
+  margin: 20px auto;
+  display: flex;
+  form {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    label {
+      width: 100%;
+      font-size: 1.1em;
+      color: white;
+      text-align: center;
+      height: 60px;
+      border: 2px dashed gray;
+      line-height: 60px;
+      cursor: pointer;
+    }
+    label:hover {
+      color: $primary-color;
+      border-color: $primary-color;
+    }
+    input {
+      display: none;
+    }
+    button {
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      text-align: center;
+      line-height: 20px;
+      background-color: transparent;
+      color: rgb(153, 153, 153);
+      font-size: 1.1em;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      color: $primary-color;
+    }
+  }
+}
+.gallery {
+  width: 95%;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  margin: 0 auto;
+  position: relative;
+  img {
+    width: 100%;
+  }
+  button {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    font-size: 1.2em;
+    z-index: 15;
+    border: none;
+    background-color: transparent;
+    color: rgba(128, 128, 128, 0.527);
+  }
+  button:hover {
+    color: $primary-color;
+  }
+  .deletshow {
+    position: absolute;
+    right: 50%;
+    top: 50%;
+    transform: translate(50%, -50%);
+    width: 320px;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 15px black;
+    border-radius: 15px;
+    h1 {
+      display: block;
+      height: 30px;
+      text-align: center;
+      line-height: 30px;
+      color: rgb(218, 218, 218);
+      font-size: 1.2em;
+      background-color: rgba(42, 42, 42, 0.774);
+      width: 100%;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+    }
+    p {
+      display: block;
+      height: fit-content;
+      text-align: center;
+      line-height: 30px;
+      color: rgb(255, 255, 255);
+      padding: 10px;
+      word-wrap: wrap;
+      font-size: 1em;
+      background-color: rgba(0, 0, 0, 0.739);
+      width: 100%;
+    }
+    .btns {
+      width: 100%;
+      display: flex;
+      background-color: rgba(0, 0, 0, 0.739);
+      padding: 10px;
+      justify-content: space-around;
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+      .deletebtn {
+        color: $primary-color;
+        padding: 5px;
+        border-radius: 10px;
+        border: 1px solid $primary-color;
+        cursor: pointer;
+      }
+      .deletebtn:hover {
+        background-color: gray;
+      }
+    }
+  }
+}

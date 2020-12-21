@@ -1,14 +1,21 @@
-.bar {
-  background-color: rgba(47, 47, 47, 0.609);
-  color: white;
-  width: 85%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 15px auto;
+.performance {
+  width: 100vw;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.438);
   backdrop-filter: blur(5px);
-  padding: 20px;
+  .bar {
+    background-color: rgba(47, 47, 47, 0.609);
+    color: white;
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+    margin: 40px auto;
+    padding: 10px;
+  }
 }
-p {
-  color: white;
+body {
+  overflow-x: hidden;
 }

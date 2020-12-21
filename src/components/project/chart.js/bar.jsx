@@ -13,8 +13,8 @@ const Barchart = ({ data, tasklist }) => {
       let set = {
         label: task.name,
         barPercentage: 15,
-        barThickness: 60,
-        maxBarThickness: 20,
+        barThickness: 30,
+        maxBarThickness: 18,
         minBarLength: 2,
         backgroundColor: "#fff8e1",
         hoverBorderColor: "rgba(255,99,132,1)",

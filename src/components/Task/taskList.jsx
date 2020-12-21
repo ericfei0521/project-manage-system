@@ -191,7 +191,7 @@ const TaskList = ({ name, id, open }) => {
               >
                 Add Task
               </button>
-              <button onClick={() => setEdit(false)}>X</button>
+              <button onClick={() => setEdit(false)}>Cancel</button>
             </div>
           </div>
         ) : (

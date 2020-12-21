@@ -1,78 +1,96 @@
 import React, { useState, useEffect } from "react";
-import "../../style/imageupload.css";
+import style from "../../style/imageupload.module.scss";
 import { storage, firestore } from "../../firebase";
 
-const ImageDropper = (id) => {
-  let [image, setImage] = useState(null);
-  let [isupload, setUpload] = useState(false);
+const ImageDropper = ({ id, image, openupload, handleupload }) => {
+  let [isupload, setUpload] = useState(openupload);
+  let [deleteshow, setDelete] = useState(false);
+  console.log(id);
   useEffect(() => {
-    firestore
-      .collection("subtasks")
-      .doc(id.id)
-      .onSnapshot((doc) => {
-        if (doc.data() !== undefined) {
-          setImage(doc.data().image);
-        }
-      });
-  });
+    if (openupload === true) {
+      setUpload(true);
+    } else {
+      setUpload(false);
+    }
+  }, [openupload]);
   const handleFiles = (e) => {
     if (e.target.files[0]) {
       let file = e.target.files[0];
       console.log(file);
-      var storageRef = storage.ref(`images/${id.id}`);
+      var storageRef = storage.ref(`images/${id}`);
       storageRef.put(file).then(() => {
         storageRef.getDownloadURL().then((url) => {
           console.log(url);
-          firestore.collection("subtasks").doc(id.id).update({
+          firestore.collection("subtasks").doc(id).update({
             image: url,
           });
-          setUpload(!isupload);
+          setUpload(false);
+          setDelete(false);
         });
       });
     }
   };
-
+  const deleteimage = () => {
+    storage
+      .ref(`images/${id}`)
+      .delete()
+      .then(() => {
+        firestore.collection("subtasks").doc(id).update({
+          image: "",
+        });
+      });
+  };
   return (
     <div>
-      <div>
-        {isupload ? (
-          <div id="dropArea">
-            <form className="my-form">
-              <input type="file" accept="image/*" onChange={handleFiles} />
-              <button onClick={() => setUpload(!isupload)}>back</button>
-            </form>
-          </div>
-        ) : (
-          <div>
-            {image ? (
-              <div
-                style={{
-                  width: "100%",
-                  height: "300px",
-                  backgroundImage: `url(${image})`,
-                  backgroundPosition: "center center",
-                  backgroundSize: "cover",
-                  backgroundRepeat: "no-repeat",
-                }}
-              ></div>
-            ) : (
-              <div
-                style={{
-                  width: "100%",
-                  height: "300px",
-                  backgroundColor: "gray",
-                  textAlign: "center",
-                }}
-                onClick={() => setUpload(!isupload)}
-              >
-                Upload image here
-              </div>
-            )}
-            <button onClick={() => setUpload(!isupload)}>Upload Image</button>
-            <button onClick={() => setUpload(!isupload)}>Delete Image</button>
-          </div>
-        )}
-      </div>
+      {isupload ? (
+        <div className={style.dropArea}>
+          <form>
+            <label for="file-upload">Upload</label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleFiles}
+              id="file-upload"
+            />
+            <button onClick={() => handleupload()}>✖</button>
+          </form>
+        </div>
+      ) : (
+        <div>
+          {image ? (
+            <div className={style.gallery}>
+              <img src={image} alt="" />
+              {deleteshow ? (
+                <div className={style.deletshow}>
+                  <h1>Delete Image?</h1>
+                  <p>Data will be permanently deleted</p>
+                  <div className={style.btns}>
+                    <div
+                      className={style.deletebtn}
+                      onClick={() => {
+                        handleupload();
+                        deleteimage();
+                      }}
+                    >
+                      Delete
+                    </div>
+                    <div
+                      className={style.deletebtn}
+                      onClick={() => setDelete(false)}
+                    >
+                      Back
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <button onClick={() => setDelete(true)}>✖</button>
+              )}
+            </div>
+          ) : (
+            <></>
+          )}
+        </div>
+      )}
     </div>
   );
 };

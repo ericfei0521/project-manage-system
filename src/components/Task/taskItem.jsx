@@ -23,6 +23,8 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
   let [subTask, setSubTask] = useState([]);
   let [addsubTask, setAddSubTask] = useState(false);
   let [sidebar, setSidebar] = useState(false);
+  let [image, setImage] = useState("");
+  let [openupload, setUpload] = useState(false);
   useEffect(() => {
     let unsubscribesubtasks = docPath.onSnapshot((doc) => {
       console.log(doc.data());
@@ -32,6 +34,15 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
         setTaskState(doc.data().state);
       }
     });
+    let unsubscribeimage = firestore
+      .collection("subtasks")
+      .doc(id)
+      .onSnapshot((doc) => {
+        if (doc.data() !== undefined) {
+          setImage(doc.data().image);
+        }
+        console.log(doc.data.image);
+      });
     let unsubscribejobs = docPath
       .collection("jobs")
       .orderBy("Index")
@@ -57,6 +68,7 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
     return () => {
       unsubscribesubtasks();
       unsubscribejobs();
+      unsubscribeimage();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -187,6 +199,9 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
     element.style.height = "1px";
     element.style.height = element.scrollHeight + "px";
   };
+  const handleupload = () => {
+    setUpload(false);
+  };
   return (
     <div>
       <div className={style.card}>
@@ -272,7 +287,12 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
             {discript}
           </h1>
         )}
-        <ImageDropper id={id} />
+        <ImageDropper
+          id={id}
+          image={image}
+          openupload={openupload}
+          handleupload={handleupload}
+        />
         <DragDropContext onDragEnd={handleDrag}>
           <Droppable droppableId={id}>
             {(Provided) => (
@@ -317,7 +337,14 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
           </Droppable>
         </DragDropContext>
 
-        <div className={style.moremenu}>
+        <div
+          className={style.moremenu}
+          style={
+            sidebar
+              ? { zIndex: "15", transition: "z-index .2s" }
+              : { zIndex: 0, transition: "z-index 1s" }
+          }
+        >
           <div
             className={`${style.menu} ${sidebar ? "" : style.menuopen}`}
             onClick={() => setSidebar(!sidebar)}
@@ -339,9 +366,10 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
             <button
               onClick={() => {
                 setSidebar(false);
+                setUpload(!openupload);
               }}
             >
-              Add Image
+              {image ? "Update Image" : "Add Image"}
             </button>
             <button
               onClick={() => {

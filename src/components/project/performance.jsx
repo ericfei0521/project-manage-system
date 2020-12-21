@@ -3,7 +3,7 @@ import Barchart from "./chart.js/bar";
 import Piechart from "./chart.js/pie";
 import { useSelector } from "react-redux";
 import { firestore } from "../../firebase";
-
+import style from "../../style/performance.module.scss";
 const Performance = (props) => {
   const state = useSelector((state) => state.Handleshowmember);
   let [list, setList] = useState([]);
@@ -96,7 +96,7 @@ const Performance = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
   return (
-    <div style={{ width: "100vw" }}>
+    <div className={style.performance}>
       {chartinfo ? (
         <Piechart
           name={props.name}

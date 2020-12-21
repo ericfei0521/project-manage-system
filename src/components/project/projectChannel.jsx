@@ -89,8 +89,8 @@ const ProjectChannel = ({ channelID }) => {
               {member.length} members in #{channelName}
             </h1>
           </div>
-          {member.map((item) => (
-            <div className={style.members}>
+          {member.map((item, index) => (
+            <div className={style.members} key={index}>
               <div> {item.displayName}</div>
               <div> {item.email}</div>
             </div>
@@ -105,6 +105,7 @@ const ProjectChannel = ({ channelID }) => {
         <div className={style.showmember} onClick={() => setShowmember(true)}>
           {member.map((item, index) => (
             <div
+              key={index}
               className={style.from}
               style={index > 3 ? { display: "none" } : { display: "block" }}
             >
@@ -116,9 +117,9 @@ const ProjectChannel = ({ channelID }) => {
       </div>
       <div className={style.wrap}>
         <div className={style.messagearea} ref={divRref}>
-          {content.map((item) =>
+          {content.map((item, index) =>
             item.from === "system" ? (
-              <div className={style.welcome}>
+              <div className={style.welcome} key={index}>
                 <h1> {item.text}</h1>
               </div>
             ) : (
