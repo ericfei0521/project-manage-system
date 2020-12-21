@@ -214,6 +214,7 @@ $primary-color: #fff8e1;
         }
       }
       .opencontrol {
+        cursor: pointer;
         width: 15px;
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
@@ -230,8 +231,8 @@ $primary-color: #fff8e1;
         width: 60px;
         position: absolute;
         right: -59px;
-        height: 25px;
-        transition: 1s;
+        height: 22px;
+        transition: 0.4s;
         border: none;
         background-color: rgb(92, 92, 92);
         color: $primary-color;
@@ -240,8 +241,8 @@ $primary-color: #fff8e1;
         width: 60px;
         position: absolute;
         right: 9px;
-        height: 25px;
-        transition: 1s;
+        height: 22px;
+        transition: 0.4s;
         border: none;
         color: $primary-color;
         background-color: rgb(109, 20, 20);

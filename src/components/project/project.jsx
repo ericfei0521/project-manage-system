@@ -5,11 +5,11 @@ import Tasks from "./Tasks";
 import MemberList from "../member/memberList";
 import AlluserList from "../member/alluserList";
 import TaskItem from "../Task/taskItem";
+import Performance from "./performance";
 import Loading from "../loading";
 import userlog from "../../images/ICON/users.svg";
 import adduser from "../../images/ICON/useregular.svg";
 import style from "../../style/project.module.scss";
-
 import { addList, getMember, deleteProject } from "../../action/action";
 import { useParams, Link, useHistory } from "react-router-dom";
 import { auth, firestore } from "../../firebase";
@@ -179,7 +179,20 @@ const Project = () => {
           >
             Tasks
           </button>
-          <button className={style.navbutton}>performance</button>
+          <button
+            className={style.navbutton}
+            onClick={() => {
+              setCurrentPage("performance");
+              dispatch(
+                getMember({
+                  show: membershow,
+                  member: memberNum,
+                })
+              );
+            }}
+          >
+            performance
+          </button>
         </nav>
         <div className={style.rightnav}>
           <div className={style.showmember}>
@@ -248,6 +261,11 @@ const Project = () => {
           </button>
         </div>
       </div>
+      {currentPage === "performance" ? (
+        <Performance projectid={projectId} member={memberNum} name={name} />
+      ) : (
+        <></>
+      )}
       {currentPage === "tasks" ? (
         <Tasks projectid={projectId} member={memberNum} />
       ) : (

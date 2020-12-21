@@ -34,7 +34,6 @@ const Notice = (prop) => {
         }
       });
   });
-  console.log(prop);
   return (
     <div className={style.card}>
       <div className={style.title}>
