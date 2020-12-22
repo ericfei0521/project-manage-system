@@ -25,6 +25,7 @@ $primary-color: #fff8e1;
       color: $primary-color;
       font-size: 1em;
       height: 1em;
+      cursor: auto;
     }
     @media only screen and (max-width: 425px) {
       .jobname {
@@ -37,10 +38,12 @@ $primary-color: #fff8e1;
       margin-left: 5px;
       background-color: transparent;
       border: none;
-      height: 1em;
       font-size: 1em;
       color: $primary-color;
       transform: translateY(-1px);
+    }
+    input:focus {
+      border: 1px solid $primary-color;
     }
     @media only screen and (max-width: 425px) {
       input {
@@ -209,6 +212,7 @@ $primary-color: #fff8e1;
         display: flex;
         justify-content: center;
         align-items: center;
+        cursor: pointer;
         img {
           width: 10px;
         }
