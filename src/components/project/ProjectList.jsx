@@ -113,7 +113,7 @@ function ProjectList() {
                       setCurrentShow("channels");
                     }}
                   >
-                    {item.name}
+                    {item.name.length > 7 ? item.name.slice(0, 7) : item.name}
                   </button>
                 ))}
               </div>

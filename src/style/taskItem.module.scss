@@ -175,6 +175,26 @@ $primary-color: #fff8e1;
       }
     }
   }
+  .media {
+    width: 98%;
+    display: flex;
+    padding: 10px;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    iframe {
+      width: 31%;
+      margin: 5px;
+      border: 1px solid transparent;
+      z-index: 10;
+      box-shadow: none;
+    }
+    iframe:hover {
+      border: 1px solid $primary-color;
+      box-shadow: none;
+    }
+  }
   .jobarea {
     width: 98%;
     position: relative;

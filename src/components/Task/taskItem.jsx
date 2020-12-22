@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { firestore } from "../../firebase";
 import { editTask } from "../../action/action";
 import { useParams } from "react-router-dom";
-
+import Attachlink from "./attachlink";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const TaskItem = ({ id, name, state, taskID, open }) => {
@@ -25,6 +25,8 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
   let [sidebar, setSidebar] = useState(false);
   let [image, setImage] = useState("");
   let [openupload, setUpload] = useState(false);
+  let [attching, setAttaching] = useState(false);
+  let [youtubelist, setYoutubeList] = useState([]);
   useEffect(() => {
     let unsubscribesubtasks = docPath.onSnapshot((doc) => {
       console.log(doc.data());
@@ -40,6 +42,9 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
       .onSnapshot((doc) => {
         if (doc.data() !== undefined) {
           setImage(doc.data().image);
+          if (doc.data().youtube !== undefined) {
+            setYoutubeList(doc.data().youtube);
+          }
         }
         console.log(doc.data.image);
       });
@@ -202,6 +207,10 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
   const handleupload = () => {
     setUpload(false);
   };
+  const handleattach = () => {
+    setAttaching(false);
+  };
+  console.log(youtubelist);
   return (
     <div>
       <div className={style.card}>
@@ -293,6 +302,16 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
           openupload={openupload}
           handleupload={handleupload}
         />
+        {attching ? <Attachlink handleattach={handleattach} id={id} /> : <></>}
+        <div className={style.media}>
+          {youtubelist.map((item) => (
+            <iframe
+              title={item}
+              src={`https://www.youtube.com/embed/${item}`}
+              allowFullScreen
+            ></iframe>
+          ))}
+        </div>
         <DragDropContext onDragEnd={handleDrag}>
           <Droppable droppableId={id}>
             {(Provided) => (
@@ -374,6 +393,7 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
             <button
               onClick={() => {
                 setSidebar(false);
+                setAttaching(true);
               }}
             >
               Attach Link

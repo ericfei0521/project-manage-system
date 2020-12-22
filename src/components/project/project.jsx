@@ -321,6 +321,7 @@ const Project = () => {
                           );
                           setListName("");
                           setWorning(false);
+                          setAddcard(false);
                         } else {
                           inputref.current.placeholder =
                             "Please enter list name";

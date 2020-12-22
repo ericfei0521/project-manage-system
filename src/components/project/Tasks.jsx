@@ -3,11 +3,11 @@ import TasksDetail from "./TasksDetail";
 import style from "../../style/projecttasks.module.scss";
 import { useSelector } from "react-redux";
 import { firestore } from "../../firebase";
-
+import Loading from "../loading";
 const Tasks = (props) => {
   const state = useSelector((state) => state.Handleshowmember);
   let [list, setList] = useState([]);
-
+  let [load, setLoad] = useState(true);
   useEffect(() => {
     let reanageList = [];
     state.member.forEach((item) => {
@@ -68,6 +68,7 @@ const Tasks = (props) => {
           }
         });
         setList(reanageList);
+        setLoad(false);
       });
     return () => {
       unsubscribe();
@@ -80,6 +81,9 @@ const Tasks = (props) => {
       {list.map((item) => (
         <TasksDetail item={item} key={item.userID} />
       ))}
+      <div style={load ? { display: "block" } : { display: "none" }}>
+        <Loading />
+      </div>
     </div>
   );
 };

@@ -119,7 +119,9 @@ const Header = (prop) => {
                 }}
                 key={prop.id}
               >
-                {projectName}
+                {projectName.length > 7
+                  ? projectName.slice(0, 7) + "..."
+                  : projectName}
               </h1>
             ),
           ]

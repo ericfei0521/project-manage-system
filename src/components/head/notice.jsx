@@ -6,34 +6,39 @@ const Notice = (prop) => {
   let [taskName, setTaskName] = useState("");
   let [jobName, setJobName] = useState("");
   useEffect(() => {
-    firestore
+    let unsubscribenames = firestore
       .collection("projects")
       .doc(prop.data.project)
-      .get()
-      .then((doc) => {
-        setProjectName(doc.data().name);
+      .onSnapshot((doc) => {
+        if (doc.data() !== undefined) {
+          setProjectName(doc.data().name);
+        }
       });
-    firestore
+    let unsubscribetask = firestore
       .collection("subtasks")
       .doc(prop.data.subtaskID)
-      .get()
-      .then((doc) => {
+      .onSnapshot((doc) => {
         if (doc.data() !== undefined) {
           setTaskName(doc.data().name);
         }
       });
-    firestore
+    let unsubscribejobs = firestore
       .collection("subtasks")
       .doc(prop.data.subtaskID)
       .collection("jobs")
       .doc(prop.data.jobID)
-      .get()
-      .then((doc) => {
+      .onSnapshot((doc) => {
         if (doc.data() !== undefined) {
           setJobName(doc.data().name);
         }
       });
-  });
+    return () => {
+      unsubscribenames();
+      unsubscribetask();
+      unsubscribejobs();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <div className={style.card}>
       <div className={style.title}>

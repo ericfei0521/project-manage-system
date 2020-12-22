@@ -3,12 +3,14 @@ import Barchart from "./chart.js/bar";
 import Piechart from "./chart.js/pie";
 import { useSelector } from "react-redux";
 import { firestore } from "../../firebase";
+import Loading from "../loading";
 import style from "../../style/performance.module.scss";
 const Performance = (props) => {
   const state = useSelector((state) => state.Handleshowmember);
   let [list, setList] = useState([]);
   let [chartinfo, setchartinfo] = useState({});
   let [taskslist, setTaskList] = useState([]);
+  let [load, setLoad] = useState(true);
   console.log(state);
   useEffect(() => {
     let reanageList = [];
@@ -89,6 +91,7 @@ const Performance = (props) => {
         });
         setchartinfo(chartdata);
         setList(reanageList);
+        setLoad(false);
       });
     return () => {
       unsubscribe();
@@ -109,6 +112,9 @@ const Performance = (props) => {
       )}
 
       <Barchart data={chartinfo} tasklist={taskslist} list={list} />
+      <div style={load ? { display: "block" } : { display: "none" }}>
+        <Loading />
+      </div>
     </div>
   );
 };
