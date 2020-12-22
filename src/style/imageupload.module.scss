@@ -54,8 +54,18 @@ $primary-color: #fff8e1;
   overflow: hidden;
   margin: 0 auto;
   position: relative;
-  img {
+  .image {
     width: 100%;
+    height: 200px;
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    border: 1px solid #747064;
+    border-radius: 10px;
+  }
+  .image:hover {
+    border: 1px solid $primary-color;
   }
   button {
     position: absolute;

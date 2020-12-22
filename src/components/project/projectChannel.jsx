@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import style from "../../style/projectChannel.module.scss";
-import DayJS from "react-dayjs";
+import Moment from "react-moment";
 import { useSelector } from "react-redux";
 import { firestore } from "../../firebase";
 
@@ -131,7 +131,7 @@ const ProjectChannel = ({ channelID }) => {
                   <div className={style.fromdetail}>
                     <h2 className={style.name}> {item.from}</h2>
                     <h2 className={style.date}>
-                      <DayJS format="YYYY/MM/DD hh:mm">{item.time}</DayJS>
+                      <Moment format="YYYY/MM/DD hh:mm">{item.time}</Moment>
                     </h2>
                   </div>
                   <p>{item.text}</p>

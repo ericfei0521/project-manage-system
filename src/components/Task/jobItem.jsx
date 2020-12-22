@@ -9,7 +9,7 @@ import arrowright from "../../images/ICON/arrowright.svg";
 import { format } from "date-fns";
 import { enGB } from "date-fns/locale";
 import { DatePickerCalendar } from "react-nice-dates";
-import DayJS from "react-dayjs";
+import Moment from "react-moment";
 import "../../style/restdate.css";
 import "react-nice-dates/build/style.css";
 
@@ -36,7 +36,7 @@ const JobItem = (prop) => {
   useEffect(() => {
     let list = [];
     let memberlist = [];
-    firestore
+    let unsubscribemember = firestore
       .collection("projects")
       .doc(prop.projectId)
       .onSnapshot(function (doc) {
@@ -55,6 +55,9 @@ const JobItem = (prop) => {
         });
         setMember(memberlist);
       });
+    return () => {
+      unsubscribemember();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -208,7 +211,7 @@ const JobItem = (prop) => {
           {date ? (
             format(date, "yyyy/MM/dd", { locale: enGB })
           ) : (
-            <DayJS format="YYYY/MM/DD">{prop.dueDate}</DayJS>
+            <Moment format="YYYY/MM/DD">{prop.dueDate}</Moment>
           )}
         </button>
         {show ? (

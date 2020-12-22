@@ -30,7 +30,8 @@ const Header = (prop) => {
       .onSnapshot((doc) => {
         let data = doc.data();
         if (data !== undefined) {
-          setUserName(data.displayName);
+          let name = String(data.displayName);
+          setUserName(name);
           setUserDetail(data);
           setNoticenumber(data.comment);
           firestore
@@ -120,7 +121,7 @@ const Header = (prop) => {
                 key={prop.id}
               >
                 {projectName.length > 7
-                  ? projectName.slice(0, 7) + "..."
+                  ? projectName.slice(0, 12) + "..."
                   : projectName}
               </h1>
             ),
@@ -171,7 +172,7 @@ const Header = (prop) => {
             setCheck(false);
           }}
         >
-          <h1>{username.charAt(0)}</h1>
+          {username ? <h1>{username.charAt(0)}</h1> : <h1>T</h1>}
         </button>
       </div>
       <div

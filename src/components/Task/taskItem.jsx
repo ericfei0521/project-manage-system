@@ -18,7 +18,7 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
   let [taskName, setTaskName] = useState(name);
   let [taskState, setTaskState] = useState(state);
   let [editTaskName, setEditTaskName] = useState(false);
-  let [discript, setDiscript] = useState("Please Enter Description");
+  let [discript, setDiscript] = useState("");
   let [editdiscript, setEditdiscript] = useState(false);
   let [subTask, setSubTask] = useState([]);
   let [addsubTask, setAddSubTask] = useState(false);
@@ -27,6 +27,7 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
   let [openupload, setUpload] = useState(false);
   let [attching, setAttaching] = useState(false);
   let [youtubelist, setYoutubeList] = useState([]);
+  let [showimg, setShowimg] = useState(false);
   useEffect(() => {
     let unsubscribesubtasks = docPath.onSnapshot((doc) => {
       console.log(doc.data());
@@ -210,7 +211,14 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
   const handleattach = () => {
     setAttaching(false);
   };
-  console.log(youtubelist);
+  const handleshowbigimg = () => {
+    setShowimg(true);
+  };
+  const deletelink = (value) => {
+    docPath.update({
+      youtube: firebase.firestore.FieldValue.arrayRemove(value),
+    });
+  };
   return (
     <div>
       <div className={style.card}>
@@ -238,7 +246,7 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
               </h1>
             )}
             <div className={style.controler}>
-              <button onClick={() => open()}>X</button>
+              <button onClick={() => open()}>✖</button>
             </div>
           </div>
           <div className={style.Status}>
@@ -271,7 +279,12 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
               type="text"
               onChange={(e) => setDiscript(e.target.value)}
               value={discript}
-              onFocus={(e) => textareaResize(e.target)}
+              onFocus={(e) => {
+                textareaResize(e.target);
+                if (discript === "Please Enter Description") {
+                  setDiscript("");
+                }
+              }}
               onKeyDown={(e) => {
                 textareaResize(e.target);
               }}
@@ -293,7 +306,7 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
             className={style.discriptContent}
             onClick={() => setEditdiscript(true)}
           >
-            {discript}
+            {discript === "" ? "Please Enter Discript" : discript}
           </h1>
         )}
         <ImageDropper
@@ -301,15 +314,23 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
           image={image}
           openupload={openupload}
           handleupload={handleupload}
+          handleshowbigimg={handleshowbigimg}
         />
+
         {attching ? <Attachlink handleattach={handleattach} id={id} /> : <></>}
         <div className={style.media}>
           {youtubelist.map((item) => (
-            <iframe
-              title={item}
-              src={`https://www.youtube.com/embed/${item}`}
-              allowFullScreen
-            ></iframe>
+            <div className={style.videowrap} key={item}>
+              <iframe
+                title={item}
+                src={`https://www.youtube.com/embed/${item}`}
+                frameBorder="0"
+                allowFullScreen
+              ></iframe>
+              <button value={item} onClick={(e) => deletelink(e.target.value)}>
+                ✖
+              </button>
+            </div>
           ))}
         </div>
         <DragDropContext onDragEnd={handleDrag}>
@@ -409,6 +430,21 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
             handleAddTask={handleAddTask}
             subTaskID={id}
           />{" "}
+        </div>
+      ) : (
+        <></>
+      )}
+      {showimg ? (
+        <div
+          id="imagewrap"
+          className={style.bigimage}
+          onClick={(e) => {
+            if (e.target.id === "imagewrap") {
+              setShowimg(false);
+            }
+          }}
+        >
+          <img src={image} alt="" />
         </div>
       ) : (
         <></>

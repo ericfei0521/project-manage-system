@@ -2,7 +2,13 @@ import React, { useState, useEffect } from "react";
 import style from "../../style/imageupload.module.scss";
 import { storage, firestore } from "../../firebase";
 
-const ImageDropper = ({ id, image, openupload, handleupload }) => {
+const ImageDropper = ({
+  id,
+  image,
+  openupload,
+  handleupload,
+  handleshowbigimg,
+}) => {
   let [isupload, setUpload] = useState(openupload);
   let [deleteshow, setDelete] = useState(false);
   console.log(id);
@@ -59,7 +65,12 @@ const ImageDropper = ({ id, image, openupload, handleupload }) => {
         <div>
           {image ? (
             <div className={style.gallery}>
-              <img src={image} alt="" />
+              <div
+                className={style.image}
+                style={{ backgroundImage: `url(${image})` }}
+                alt={image}
+                onClick={() => handleshowbigimg()}
+              ></div>
               {deleteshow ? (
                 <div className={style.deletshow}>
                   <h1>Delete Image?</h1>

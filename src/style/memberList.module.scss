@@ -26,6 +26,8 @@ $primary-color: #fff8e1;
 .memberarea {
   padding: 5px;
   backdrop-filter: blur(2px);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
   .memberinner {
     max-height: 300px;
     overflow-y: auto;

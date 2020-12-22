@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import DayJS from "react-dayjs";
+import Moment from "react-moment";
 import style from "../../style/projecttasks.module.scss";
 const TasksDetail = ({ item }) => {
   let [showdetail, setShowdetail] = useState(false);
@@ -66,7 +66,7 @@ const TasksDetail = ({ item }) => {
             <div className={style.detail}>
               <h2>Due Date</h2>
               <h2>
-                <DayJS format="YYYY/MM/DD">{data.dueDate}</DayJS>
+                <Moment format="YYYY/MM/DD">{data.dueDate}</Moment>
               </h2>
             </div>
           </div>

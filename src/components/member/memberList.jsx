@@ -18,8 +18,8 @@ const MemberList = (props) => {
       <div className={style.memberarea}>
         <div className={style.memberinner}>
           {state.member.map((item) => (
-            <div className={style.member}>
-              <h1 key={item.userID}>{item.displayName}</h1>
+            <div className={style.member} key={item.userID}>
+              <h1>{item.displayName}</h1>
               <h1>{item.email}</h1>
             </div>
           ))}

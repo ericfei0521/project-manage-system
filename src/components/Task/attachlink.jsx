@@ -42,6 +42,7 @@ const Attachlink = ({ handleattach, id }) => {
         type="text"
         onChange={(e) => setYoutubeLink(e.target.value)}
         autoFocus
+        placeholder="Enter Youtube Link"
       />
       <div className={style.btns}>
         <button onClick={() => fetchyoutube()}>Attach</button>

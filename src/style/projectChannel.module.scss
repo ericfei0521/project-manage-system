@@ -69,24 +69,14 @@ $primary-color: #fff8e1;
         z-index: 100;
 
         h1 {
-          color: rgb(200, 200, 200);
+          color: rgb(114, 114, 114);
           box-sizing: border-box;
           padding: 0 5px;
           font-size: 1.5em;
           margin: 0 auto;
           width: fit-content;
           display: block;
-          background-color: #6b6b6b;
         }
-      }
-      .welcome:before {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 0;
-        width: 100%;
-        border-top: 3px dashed gray;
-        z-index: -1;
       }
       .message {
         width: 100%;

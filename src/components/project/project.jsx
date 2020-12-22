@@ -338,7 +338,15 @@ const Project = () => {
             </div>
           </DragDropContext>
           {open ? (
-            <div className={style.taskdetail}>
+            <div
+              className={style.taskdetail}
+              id="taskdetail"
+              onClick={(e) => {
+                if (e.target.id === "taskdetail") {
+                  handleOpen();
+                }
+              }}
+            >
               <TaskItem
                 taskID={state.taskID}
                 id={state.id}

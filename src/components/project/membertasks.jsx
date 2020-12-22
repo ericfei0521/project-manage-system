@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { firestore } from "../../firebase";
 import { useSelector } from "react-redux";
-import DayJS from "react-dayjs";
+import Moment from "react-moment";
 import style from "../../style/userTasks.module.scss";
 const MemberTasks = () => {
   const user = useSelector((state) => state.UserCheck);
@@ -77,7 +77,7 @@ const MemberTasks = () => {
             {data.state}
           </h2>
           <h2>
-            <DayJS format="YYYY/MM/DD">{data.dueDate}</DayJS>
+            <Moment format="YYYY/MM/DD">{data.dueDate}</Moment>
           </h2>
         </div>
       ))}
