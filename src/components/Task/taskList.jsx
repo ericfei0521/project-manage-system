@@ -8,7 +8,7 @@ import style from "../../style/taskList.module.scss";
 import TaskItemCard from "./taskItemCard";
 import { Droppable } from "react-beautiful-dnd";
 
-const TaskList = ({ name, id, open }) => {
+const TaskList = ({ name, id, open, allsub }) => {
   let dispatch = useDispatch();
   let { projectId } = useParams();
   let [nowTask, setTask] = useState([]);
@@ -24,40 +24,26 @@ const TaskList = ({ name, id, open }) => {
     .doc(projectId)
     .collection("tasks")
     .doc(id);
-  //   subtasks內的id
-  let dataList = firestore.collection("subtasks");
-  // 核對兩者是否有相等
+
   useEffect(() => {
-    let unsubscribe = taskList.onSnapshot(function (doc) {
-      if (doc.data() !== undefined) {
-        let updateData = [];
-        let list = doc.data().task;
-        console.log(list);
-        dataList
-          .orderBy("createTime")
-          .get()
-          .then(function (doc) {
-            list.forEach((item) => {
-              doc.forEach((task) => {
-                if (task.id === item) {
-                  let data = {
-                    id: task.id,
-                    name: task.data().name,
-                    state: task.data().state,
-                  };
-                  updateData.push(data);
-                }
-              });
-            });
-            setTask(updateData);
-          });
+    let updateData = [];
+    allsub.forEach((data) => {
+      if (data.listid === id) {
+        let dataitem = {
+          id: data.id,
+          name: data.name,
+          state: data.state,
+          index: data.index,
+        };
+        updateData.push(dataitem);
       }
     });
-    return () => {
-      unsubscribe();
-    };
+    let sortarray = updateData.sort((a, b) => {
+      return a.index - b.index;
+    });
+    setTask(sortarray);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [allsub]);
   const keyEvent = (e) => {
     if (e.key === "Enter" || e.key === "Escape") {
       if (e.target.value === "") {

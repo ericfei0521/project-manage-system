@@ -6,7 +6,8 @@ import CommentCards from "./commentCard";
 import send from "../../images/ICON/submit.png";
 import style from "../../style/comment.module.scss";
 
-const Comment = ({ subTaskID, jobID, projectID }) => {
+const Comment = ({ subTaskID, jobID, projectID, memberlist }) => {
+  console.log(memberlist);
   const divRref = useRef(null);
   let filePath = firestore.collection("subtasks").doc(subTaskID);
   let [comment, setComment] = useState([]);
@@ -14,7 +15,7 @@ const Comment = ({ subTaskID, jobID, projectID }) => {
   let [user, setUser] = useState(null);
   let [newComment, setNewComment] = useState([]);
   let [member, setMember] = useState("");
-
+  let [currentuserid, setCurrentid] = useState("");
   useEffect(() => {
     let commentid = [];
     let user = auth.currentUser;
@@ -24,6 +25,7 @@ const Comment = ({ subTaskID, jobID, projectID }) => {
         .doc(user.uid)
         .get()
         .then((item) => {
+          setCurrentid(user.uid);
           setUser(item.data().displayName);
         });
     }
@@ -70,12 +72,16 @@ const Comment = ({ subTaskID, jobID, projectID }) => {
       comment: jobComments,
     });
     firestore.collection("comment").doc(value.id).set(value);
-    firestore
-      .collection("users")
-      .doc(member)
-      .update({
-        comment: firebase.firestore.FieldValue.arrayUnion(value.id),
-      });
+    console.log(user);
+    console.log(member);
+    if (currentuserid !== member) {
+      firestore
+        .collection("users")
+        .doc(member)
+        .update({
+          comment: firebase.firestore.FieldValue.arrayUnion(value.id),
+        });
+    }
   };
   const textareaResize = (element) => {
     element.style.height = "1px";

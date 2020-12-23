@@ -37,6 +37,7 @@ const Project = () => {
   let [confirm, setconfirm] = useState("");
   let [addCard, setAddcard] = useState(false);
   let [worning, setWorning] = useState(false);
+  let [allsub, setAllsub] = useState([]);
 
   useEffect(() => {
     let unsubscribemember = project.onSnapshot(function (doc) {
@@ -55,7 +56,7 @@ const Project = () => {
         setMemberNum(list);
       }
     });
-    let unsubscribeAllmember = project
+    let unsubscribeAlltasks = project
       .collection("tasks")
       .orderBy("createTime")
       .onSnapshot(function (doc) {
@@ -69,9 +70,29 @@ const Project = () => {
         });
         setTasks(listTask);
       });
+    let unsubscribeAllsubtasks = firestore
+      .collection("subtasks")
+      .onSnapshot((doc) => {
+        let newallsub = [];
+        doc.forEach((data) => {
+          if (data.data().project === projectId) {
+            let dataitem = {
+              id: data.id,
+              name: data.data().name,
+              state: data.data().state,
+              index: data.data().index,
+              listid: data.data().listid,
+            };
+
+            newallsub.push(dataitem);
+          }
+        });
+        setAllsub(newallsub);
+      });
     return () => {
       unsubscribemember();
-      unsubscribeAllmember();
+      unsubscribeAlltasks();
+      unsubscribeAllsubtasks();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -90,6 +111,7 @@ const Project = () => {
 
   const handleDrag = (result) => {
     console.log(result);
+
     if (!result.destination) return;
     if (
       result.destination.droppableId === result.source.droppableId &&
@@ -102,21 +124,32 @@ const Project = () => {
     console.log(dropStart);
     console.log(dropEnd);
     if (dropEnd === dropStart) {
-      project
-        .collection("tasks")
-        .doc(dropStart)
-        .get()
-        .then((doc) => {
-          const item = Array.from(doc.data().task);
-          const [reorderItem] = item.splice(result.source.index, 1);
-          item.splice(result.destination.index, 0, reorderItem);
-          return item;
-        })
-        .then((item) => {
-          project.collection("tasks").doc(dropStart).update({
-            task: item,
-          });
+      let batch = firestore.batch();
+      let newarray = allsub.filter((item) => item.listid !== dropEnd);
+      let rearrangearray = allsub
+        .filter((item) => item.listid === dropEnd)
+        .sort((a, b) => a.index - b.index);
+      let rearrangeid = [];
+      rearrangearray.forEach((data) => {
+        rearrangeid.push(data.id);
+      });
+      const item = Array.from(rearrangeid);
+      const [reorderItem] = item.splice(result.source.index, 1);
+      item.splice(result.destination.index, 0, reorderItem);
+      for (let i = 0; i < item.length; i++) {
+        rearrangearray.forEach((data) => {
+          if (item[i] === data.id) {
+            data.index = i;
+          }
         });
+        let path = firestore.collection("subtasks").doc(item[i]);
+        batch.update(path, { index: i });
+      }
+      rearrangearray.forEach((newitem) => {
+        newarray.push(newitem);
+      });
+      setAllsub(newarray);
+      batch.commit();
     } else {
       console.log(result);
       project
@@ -284,6 +317,7 @@ const Project = () => {
                   id={item.id}
                   name={item.name}
                   open={handleOpen}
+                  allsub={allsub}
                 />
               ))}
               <div className={style.addCard}>

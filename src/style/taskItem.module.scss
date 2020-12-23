@@ -322,8 +322,8 @@ $primary-color: #fff8e1;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: black;
+  background-color: rgb(95, 95, 95);
   img {
-    max-height: 90vh;
+    max-width: 80vw;
   }
 }

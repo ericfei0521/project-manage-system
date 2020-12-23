@@ -35,14 +35,19 @@ const HandleList = (state = initialState, action) => {
         .update({
           task: newTask,
         });
-      firestore.collection("subtasks").doc(state.id).set({
-        createTime: time,
-        project: action.payload.projectid,
-        name: state.name,
-        state: action.payload.state,
-        description: "Please Enter Description",
-        image: "",
-      });
+      firestore
+        .collection("subtasks")
+        .doc(state.id)
+        .set({
+          createTime: time,
+          project: action.payload.projectid,
+          name: state.name,
+          state: action.payload.state,
+          description: "Please Enter Description",
+          image: "",
+          listid: state.listid,
+          index: newTask.length - 1,
+        });
       return state;
     }
     case "EDIT_TASKS": {

@@ -30,7 +30,7 @@ const JobItem = (prop) => {
   let [member, setMember] = useState([]);
   let [showComment, setShowcomment] = useState(false);
   let [openJob, setOpenJob] = useState(false);
-  const [date, setDate] = useState();
+  let [date, setDate] = useState();
   let [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -261,6 +261,7 @@ const JobItem = (prop) => {
           projectID={prop.projectId}
           subTaskID={prop.subtaskId}
           jobID={prop.jobid}
+          memberlist={member}
         />
       ) : (
         <></>
