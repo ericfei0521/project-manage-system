@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { addTasks, deleteTask } from "../../action/action";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -11,7 +11,6 @@ import { Droppable } from "react-beautiful-dnd";
 const TaskList = ({ name, id, open, allsub }) => {
   let dispatch = useDispatch();
   let { projectId } = useParams();
-  // let [nowTask, setTask] = useState([])
   let [subTaskname, setsubTaskName] = useState("");
   let [listName, setListName] = useState(name);
   let [substate, setsubTaskState] = useState("on-hold");
