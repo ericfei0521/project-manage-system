@@ -1,21 +1,14 @@
 $primary-color: #fff8e1;
-$bord-color: rgb(77, 77, 77);
 .button {
-  color: $primary-color;
-  background-color: rgb(107, 107, 107);
+  color: #cac4b1;
   width: 90%;
   border: none;
-  height: 30px;
-  border-radius: 10px;
   margin: 5px;
   outline: none;
   font-size: 1.1em;
-  font-family: "Roboto Slab", serif;
+  background-color: transparent;
+  cursor: pointer;
 }
 .button:hover {
-  color: black;
-  background: radial-gradient(circle at center, #f1e3bb 5%, #a79076 95%);
-}
-.button:active {
-  font-size: 1.2em;
+  color: $primary-color;
 }

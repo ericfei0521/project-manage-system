@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap");
 $primary-color: #fff8e1;
 .app {
   width: 100%;
@@ -46,172 +46,139 @@ $primary-color: #fff8e1;
       transform: scale(1.7) translate(-30%, -23%);
     }
   }
-  .filter {
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(
-      45deg,
-      rgba(88, 88, 88, 0),
-      rgba(68, 68, 68, 0.63) 80%
-    );
-    z-index: 0;
-  }
-  @media only screen and (max-width: 425px) {
-    filter {
-      width: 100%;
-      height: 100%;
-      left: 50%;
-      top: 50%;
-      background: linear-gradient(
-        45deg,
-        rgba(88, 88, 88, 0),
-        rgba(68, 68, 68, 0.808) 80%
-      );
-      transform: translate(-50%, -50%);
-    }
-  }
   .header {
     box-sizing: border-box;
     width: 100%;
     display: flex;
     align-items: center;
     text-decoration: none;
-    justify-content: space-between;
-    padding: 10px 30px;
+    justify-content: space-around;
     height: 10vh;
-    background-color: rgba(14, 14, 14, 0.479);
-    backdrop-filter: blur(5px);
-    border-bottom: 1px solid $primary-color;
-
-    .btngroup {
-      width: 10%;
-      min-width: 300px;
+    background-color: rgba(14, 14, 14, 0.671);
+    .headwrap {
+      width: 80%;
       display: flex;
-      justify-content: space-evenly;
-      animation-duration: 1s;
-      animation-name: moveleft;
-      a {
-        width: 50%;
+      align-items: center;
+      justify-content: space-between;
+      img {
+        width: 200px;
       }
-    }
-    @media only screen and (max-width: 375px) {
       .btngroup {
-        width: 10%;
-        min-width: 200px;
+        width: 15%;
+        min-width: 150px;
         display: flex;
         justify-content: space-evenly;
-        animation-duration: 1s;
-        animation-name: moveleft;
+
         a {
           width: 50%;
         }
       }
-    }
-    @media only screen and (max-width: 375px) {
-      .btngroup {
-        width: 10%;
-        min-width: 150px;
-        display: flex;
-        align-items: flex-end;
-        animation-duration: 1s;
-        animation-name: moveleft;
-        a {
-          width: 60%;
-          button {
-            font-size: 0.8em;
+      @media only screen and (max-width: 425px) {
+        .btngroup {
+          width: 10%;
+          min-width: 150px;
+          display: flex;
+          align-items: flex-end;
+
+          a {
+            width: 60%;
+            button {
+              font-size: 0.8em;
+            }
           }
         }
       }
-    }
-  }
-  @media only screen and (max-width: 425px) {
-    .header {
-      height: 15vh;
     }
   }
   .landing {
     height: calc(90vh - 1px);
+    width: 100%;
+    background-color: rgba(44, 44, 44, 0.671);
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    .branding {
-      box-sizing: border-box;
-      padding: 10px;
-      width: 100%;
-      height: 900px;
+    justify-content: flex-end;
+    align-items: center;
+    .sologon {
+      width: 50%;
       display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      .campaign {
-        width: 40%;
-        min-width: 500px;
+      flex-direction: column;
+      align-items: flex-start;
+      height: 50vh;
+      justify-content: space-evenly;
+      animation-duration: 1s;
+      animation-name: moveleft;
+      margin-bottom: 150px;
+      .title {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        z-index: 10;
-        animation-duration: 1s;
-        animation-name: moveup;
-
-        .sologon {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          h1 {
-            font-size: 5em;
-            color: rgba(0, 0, 0, 0);
-            line-height: 1.2em;
-            font-family: "Abril Fatface", cursive;
-            -webkit-text-stroke-width: 1px;
-            -webkit-text-stroke-color: $primary-color;
-          }
-          h2 {
-            font-size: 3em;
-            color: $primary-color;
-            line-height: 1em;
-            font-family: "Abril Fatface", cursive;
-          }
-          p {
-            font-size: 1.2em;
-            line-height: 2em;
-            color: $primary-color;
-            font-family: "Abril Fatface", cursive;
-          }
+        width: 100%;
+        max-width: 600px;
+        h1 {
+          width: 100%;
+          display: block;
+          width: 100%;
+          font-size: 6em;
+          color: $primary-color;
+          font-family: "Playfair Display", serif;
         }
-
-        a {
-          width: fit-content;
-          display: flex;
-          justify-content: flex-start;
+        h2 {
+          width: 100%;
+          font-size: 4em;
           margin-top: 15px;
-          button {
-            min-width: 200px;
-            width: 30%;
-            transform: scaleY(1.2);
-          }
+          margin-left: 10px;
+          font-family: "Playfair Display", serif;
+          color: $primary-color;
+        }
+        h3 {
+          width: 90%;
+          font-size: 1.6em;
+          margin-top: 30px;
+          margin-left: 15px;
+          line-height: 40px;
+          color: white;
         }
       }
     }
-    .footer {
-      background-color: rgba(0, 0, 0, 0.774);
-      box-sizing: border-box;
-      display: flex;
-      padding: 5px 15px;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 20;
-      h3 {
-        font-size: 1em;
-        color: rgb(114, 114, 114);
+
+    a {
+      width: fit-content;
+      margin-bottom: 45px;
+      button {
+        min-width: 200px;
+        margin-left: 10px;
+        border-radius: 5px;
+        padding: 15px;
+        text-align: center;
+        font-size: 1.2em;
+        color: white;
+        background-color: rgb(88, 88, 88);
       }
-      .icon {
-        height: 30px;
-        width: 30px;
-        background-image: url("../images//github.svg");
-        background-size: cover;
+      button:hover {
+        background-color: $primary-color;
+        color: black;
       }
+    }
+  }
+  .footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.774);
+    box-sizing: border-box;
+    display: flex;
+    padding: 5px 15px;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 20;
+    h3 {
+      font-size: 0.8em;
+      color: rgb(114, 114, 114);
+    }
+    .icon {
+      height: 30px;
+      width: 30px;
+      background-image: url("../images//github.svg");
+      background-size: cover;
     }
   }
   @media only screen and (max-width: 768px) {
@@ -220,14 +187,13 @@ $primary-color: #fff8e1;
         width: 100%;
         padding: 0;
         .campaign {
-          width: 80%;
+          width: 100%;
           min-width: 500px;
           margin: 0 auto;
           align-items: center;
           padding: 25px;
           background-color: rgba(29, 29, 29, 0.513);
           backdrop-filter: blur(5px);
-          border-radius: 15px;
           .sologon {
             display: flex;
             flex-direction: column;
@@ -294,14 +260,6 @@ $primary-color: #fff8e1;
   }
 }
 
-@keyframes moveup {
-  from {
-    transform: translateY(600px);
-  }
-  to {
-    transform: translateY(0);
-  }
-}
 @keyframes moveleft {
   from {
     transform: translateX(600px);

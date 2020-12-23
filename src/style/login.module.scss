@@ -29,18 +29,21 @@ $primary-color: #fff8e1;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      border-radius: 15px;
+      border-radius: 5px;
+      a {
+        margin-bottom: 15px;
+      }
       input {
         width: 30%;
         min-width: 300px;
         max-width: 800px;
-        margin: 5px;
+        margin-bottom: 15px;
         font-size: 1.1em;
         background-color: transparent;
         border: 1px solid $primary-color;
         padding: 5px;
         color: $primary-color;
-        border-radius: 10px;
+        border-radius: 5px;
       }
       input::-webkit-input-placeholder {
         color: rgb(136, 136, 136);
@@ -53,18 +56,21 @@ $primary-color: #fff8e1;
         max-width: 800px;
         border: none;
         height: 30px;
-        border-radius: 10px;
-        margin: 5px;
+        border-radius: 5px;
+        margin-bottom: 15px;
         outline: none;
         font-size: 1em;
-        font-family: "Roboto Slab", serif;
+      }
+      button:hover {
+        background-color: $primary-color;
+        color: black;
       }
       h2 {
         display: block;
         margin-bottom: 15px;
         width: 100%;
         text-align: center;
-        font-size: 1.5em;
+        font-size: 1.2em;
         color: $primary-color;
       }
       .signup {
@@ -74,28 +80,22 @@ $primary-color: #fff8e1;
         display: flex;
         justify-content: center;
         align-items: center;
+        cursor: pointer;
         .button {
           color: $primary-color;
           background-color: rgb(107, 107, 107);
           width: 100%;
           border: none;
           height: 30px;
-          border-radius: 10px;
+          border-radius: 5px;
           margin: 5px;
           outline: none;
           font-size: 1em;
-          font-family: "Roboto Slab", serif;
+          cursor: pointer;
         }
         .button:hover {
           color: black;
-          background: radial-gradient(
-            circle at center,
-            #f1e3bb 5%,
-            #a79076 95%
-          );
-        }
-        .button:active {
-          font-size: 1.2em;
+          background-color: $primary-color;
         }
       }
 
@@ -107,28 +107,15 @@ $primary-color: #fff8e1;
         max-width: 800px;
         border: none;
         height: 30px;
-        border-radius: 10px;
-        margin: 5px;
+        border-radius: 5px;
+        margin-bottom: 15px;
         outline: none;
         font-size: 1em;
-        font-family: "Roboto Slab", serif;
-        margin-bottom: 15px;
-        .googlelogo {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          img {
-            height: 20px;
-            margin-right: 5px;
-          }
-        }
+        cursor: pointer;
       }
       .logingoogle:hover {
         color: black;
-        background: radial-gradient(circle at center, #f1e3bb 5%, #a79076 95%);
-      }
-      .logingoogle:active {
-        font-size: 1.2em;
+        background-color: $primary-color;
       }
     }
   }

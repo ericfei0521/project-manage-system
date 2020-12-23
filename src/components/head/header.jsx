@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import logo from "../../images/logo.png";
+
 import Clock from "./clock";
 import Notice from "./notice";
 import firebase from "firebase/app";
 import bell from "../../images/ICON/notification.svg";
 import style from "../../style/header.module.scss";
-import button from "../../style/button.module.scss";
 import { firestore } from "../../firebase";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -93,13 +92,7 @@ const Header = (prop) => {
   };
   return (
     <div className={style.head}>
-      <div className={style.left} style={{ width: "10%" }}>
-        <Link to="/projects">
-          <img src={logo} alt="" width="80px" />
-        </Link>
-        <Clock />
-      </div>
-      <div className={style.middle}>
+      <div className={style.left}>
         {prop.name ? (
           [
             editProjectName ? (
@@ -127,7 +120,12 @@ const Header = (prop) => {
             ),
           ]
         ) : (
-          <></>
+          <div className={style.home}>
+            <Link to="/projects">
+              <h1>Home </h1>
+            </Link>
+            <Clock />
+          </div>
         )}
         {prop.state ? (
           <select
@@ -178,11 +176,13 @@ const Header = (prop) => {
       <div
         className={`${style.userinfo} ${usershow ? style.userinfoshow : ""}`}
       >
-        <h2>{userdetail.displayName}</h2>
-        <h2>{userdetail.email}</h2>
-        <button onClick={() => prop.signOut()} className={button.button}>
-          signout
-        </button>
+        <div className={style.info}>
+          <h2>Name :</h2>
+          <h3>{userdetail.displayName}</h3>
+          <h2>Email :</h2>
+          <h3>{userdetail.email}</h3>
+        </div>
+        <button onClick={() => prop.signOut()}>Log Out</button>
       </div>
       <div className={`${style.noticearea} ${check ? style.noticeshow : ""}`}>
         <button

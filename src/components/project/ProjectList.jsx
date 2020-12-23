@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Header from "../head/header";
+import logo from "../../images/logowelcome.png";
 import PrjectCard from "./prjectCard";
 import ProjectChannel from "./projectChannel";
 import MemberTasks from "./membertasks";
@@ -7,6 +8,7 @@ import Loading from "../loading";
 import Todos from "./Todos";
 import style from "../../style/projectList.module.scss";
 import button from "../../style/button.module.scss";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { auth, firestore, timestamp } from "../../firebase";
@@ -58,66 +60,58 @@ function ProjectList() {
   return (
     <div>
       <div className={style.projectList}>
-        <div className={style.header}>
-          <Header id={null} state={null} name={null} signOut={routeChange} />
+        <div className={style.sidebar}>
+          <div className={style.logo}>
+            <Link to="/projects">
+              <img src={logo} alt="" />
+            </Link>
+            <button></button>
+          </div>
+          <button
+            onClick={() => {
+              setCurrentShow("projects");
+              setCurrentchannel("");
+            }}
+          >
+            Projects
+          </button>
+          <button
+            onClick={() => {
+              setCurrentShow("tasks");
+              setCurrentchannel("");
+            }}
+          >
+            Tasks
+          </button>
+          <div className={style.channels}>
+            <button onClick={() => setActivechannel(!activechannel)}>
+              Channel
+            </button>
+            <div
+              className={`${style.channel} ${
+                activechannel ? style.channelOpen : ""
+              }`}
+            >
+              {dataProject.map((item) => (
+                <button
+                  key={item.id}
+                  className={`${style.button} ${
+                    currentchannel === item.id ? style.buttonOn : ""
+                  }`}
+                  onClick={() => {
+                    setCurrentchannel(item.id);
+                    setCurrentShow("channels");
+                  }}
+                >
+                  {item.name.length > 7 ? item.name.slice(0, 7) : item.name}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
         <div className={style.display}>
-          <div className={style.sidebar}>
-            <button
-              className={button.button}
-              onClick={() => {
-                setCurrentShow("projects");
-                setCurrentchannel("");
-              }}
-            >
-              Projects
-            </button>
-            {/* <button
-              className={button.button}
-              onClick={() => {
-                setCurrentShow("todos");
-                setCurrentchannel("");
-              }}
-            >
-              Todos
-            </button> */}
-            <button
-              className={button.button}
-              onClick={() => {
-                setCurrentShow("tasks");
-                setCurrentchannel("");
-              }}
-            >
-              Tasks
-            </button>
-            <div className={style.channels}>
-              <button
-                onClick={() => setActivechannel(!activechannel)}
-                className={button.button}
-              >
-                Channel
-              </button>
-              <div
-                className={`${style.channel} ${
-                  activechannel ? style.channelOpen : ""
-                }`}
-              >
-                {dataProject.map((item) => (
-                  <button
-                    key={item.id}
-                    className={`${style.button} ${
-                      currentchannel === item.id ? style.buttonOn : ""
-                    }`}
-                    onClick={() => {
-                      setCurrentchannel(item.id);
-                      setCurrentShow("channels");
-                    }}
-                  >
-                    {item.name.length > 7 ? item.name.slice(0, 7) : item.name}
-                  </button>
-                ))}
-              </div>
-            </div>
+          <div className={style.header}>
+            <Header id={null} state={null} name={null} signOut={routeChange} />
           </div>
           <div>
             {currentShow === "channels" ? (

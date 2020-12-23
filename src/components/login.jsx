@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import logo from "../images/logo.png";
-import google from "../images/ICON/google.svg";
 import button from "../style/button.module.scss";
 import style from "../style/login.module.scss";
 import { Link, useHistory } from "react-router-dom";
@@ -55,15 +54,12 @@ function Login() {
             Submit
           </button>
 
-          <h2>-------------or-------------</h2>
+          <h2> - - - - - - - - - - - or - - - - - - - - - - - </h2>
           <button onClick={signInWithGoogle} className={style.logingoogle}>
-            <div className={style.googlelogo}>
-              <img src={google} alt="" />
-              <p>login with Google</p>
-            </div>
+            Login With Google
           </button>
           <Link to="/signup" className={style.signup}>
-            <button className={style.button}>Sign up</button>
+            <button className={style.button}>Sign Up</button>
           </Link>
         </div>
       </div>

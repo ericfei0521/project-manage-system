@@ -1,20 +1,14 @@
 $primary-color: #fff8e1;
 .head {
   position: relative;
-  width: 100%;
   box-sizing: border-box;
-  display: grid;
-  background-color: rgb(41, 41, 41);
-  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  display: flex;
   align-items: center;
+  text-decoration: none;
   justify-content: space-between;
-  padding: 15px 3%;
-  height: 110px;
-  background: radial-gradient(
-    circle at center,
-    rgba(104, 104, 104, 0.816),
-    #2222228a
-  );
+  padding: 5px 3%;
+  height: 10vh;
   .noticearea {
     position: absolute;
     right: 10px;
@@ -31,7 +25,6 @@ $primary-color: #fff8e1;
     transform: scaleX(0);
     transform-origin: 100% 50%;
     transition: 0.3s ease-in-out;
-
     button {
       color: rgb(143, 143, 143);
       background-color: transparent;
@@ -48,37 +41,71 @@ $primary-color: #fff8e1;
   .userinfo {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
+    justify-content: space-between;
+    align-items: flex-start;
     width: fit-content;
     max-width: 300px;
     word-wrap: break-word;
-    padding: 10px;
+    padding: 5px;
     position: absolute;
     right: 10px;
     top: 90px;
     color: $primary-color;
     font-size: 1.2em;
     z-index: 200;
-    height: 18vh;
-    background-color: rgba(20, 20, 20, 0.561);
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-    box-shadow: 0 0 5px rgb(66, 66, 66);
+    height: 150px;
+    background-color: rgb(70, 70, 70);
+    border-radius: 5px;
+    box-shadow: 0 0 3px rgb(255, 255, 255);
     transform: scaleX(0);
     transform-origin: 100% 50%;
     transition: 0.3s ease-in-out;
+    .info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      height: 150px;
+      padding: 5px;
+      border-bottom: 1px solid white;
+      h2 {
+        font-size: 0.8em;
+        color: white;
+      }
+      h3 {
+        font-size: 0.8em;
+        color: white;
+      }
+    }
+
+    button {
+      color: rgb(160, 160, 160);
+      background-color: transparent;
+      border: none;
+      height: 30px;
+      border-radius: 5px;
+      outline: none;
+      font-size: 0.8em;
+      padding: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      color: $primary-color;
+    }
   }
   .userinfoshow {
     transform: scaleX(1);
     transition: 0.3s ease-in-out;
   }
   .left {
-    display: flex;
-    align-items: center;
-    grid-column: 1/2;
-  }
-  .middle {
+    .home {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      h1 {
+        font-size: 1.5em;
+        margin-right: 10px;
+      }
+    }
     justify-self: center;
     display: flex;
     flex-direction: column;
@@ -167,18 +194,6 @@ $primary-color: #fff8e1;
       h1:hover {
         width: 100%;
         color: $primary-color;
-        animation: gradient 5s ease infinite;
-      }
-    }
-    .user:hover {
-      background-color: rgba(27, 27, 27, 0.787);
-    }
-    @keyframes gradient {
-      0% {
-        transform: rotateY(0deg);
-      }
-      100% {
-        transform: rotateY(360deg);
       }
     }
   }

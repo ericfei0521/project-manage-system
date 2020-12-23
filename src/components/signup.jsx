@@ -27,50 +27,48 @@ function Signup() {
           <Link to="/" className="brand-logo">
             <img src={logo} alt="" width="80px" />
           </Link>
-          <div className={style.info}>
-            <input
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-              type="email"
-              placeholder="email"
-            />
-            <input
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              type="text"
-              placeholder="password"
-            />
-            <input
-              onChange={(e) => setConfirm(e.target.value)}
-              value={confirm}
-              type="text"
-              placeholder="comfrim password"
-            />
-            <input
-              onChange={(e) => setName(e.target.value)}
-              value={name}
-              type="text"
-              placeholder="Enter User Name"
-            />
-            <button
-              onClick={() => {
-                dispatch(
-                  signup({
-                    email: email,
-                    password: password,
-                    confirmpassword: confirm,
-                    displayName: name,
-                  })
-                );
-                setEmail("");
-                setPassword("");
-                setConfirm("");
-                setName("");
-              }}
-            >
-              signup
-            </button>
-          </div>
+          <input
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            type="email"
+            placeholder="email"
+          />
+          <input
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+            type="text"
+            placeholder="password"
+          />
+          <input
+            onChange={(e) => setConfirm(e.target.value)}
+            value={confirm}
+            type="text"
+            placeholder="comfrim password"
+          />
+          <input
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+            type="text"
+            placeholder="Enter User Name"
+          />
+          <button
+            onClick={() => {
+              dispatch(
+                signup({
+                  email: email,
+                  password: password,
+                  confirmpassword: confirm,
+                  displayName: name,
+                })
+              );
+              setEmail("");
+              setPassword("");
+              setConfirm("");
+              setName("");
+            }}
+          >
+            Sign Up
+          </button>
         </div>
       </div>
     </div>

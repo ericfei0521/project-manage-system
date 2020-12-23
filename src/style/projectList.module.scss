@@ -1,54 +1,85 @@
 $primary-color: #fff8e1;
 .projectList {
   background-image: url("../images//pexels-photo-4604566.jpg");
-  .display {
-    min-height: calc(100vh - 110px);
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    column-gap: 0;
-    backdrop-filter: blur(3px);
-    background-color: rgba(0, 0, 0, 0.609);
-    border-top: 1px solid #fff8e178;
-    .sidebar {
-      background-color: rgba(65, 65, 65, 0.445);
-      padding: 10px;
-      min-width: 200px;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  .sidebar {
+    background-color: rgba(41, 41, 41, 0.445);
+    padding: 8px 5px;
+    min-width: 200px;
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    backdrop-filter: blur(2px);
+    row-gap: 5px;
+    .logo {
+      width: 100%;
       display: flex;
-      flex-direction: column;
+      justify-content: space-evenly;
       align-items: center;
-      row-gap: 5px;
-
-      .channels {
-        color: $primary-color;
-        width: 100%;
-        display: flex;
-        border-radius: 10px;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        .channel {
-          box-sizing: border-box;
-          background-color: rgba(77, 77, 77, 0.486);
-          padding: 0px;
+      a {
+        width: calc(100% - 30px);
+        img {
           width: 100%;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          height: 0px;
-          overflow: hidden;
-          transition: height 1s;
-        }
-        .channelOpen {
-          height: 600px;
-          max-height: 600px;
-          overflow-y: auto;
-          transition: 500ms ease-in;
-        }
-        .channelOpen::-webkit-scrollbar {
-          display: none;
         }
       }
+      button {
+        width: 15%;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        background-color: transparent;
+        height: 20px;
+        width: 20px;
+        border: none;
+        background-image: url("../images/ICON/menu.svg");
+        cursor: pointer;
+      }
+    }
+    .channels {
+      color: $primary-color;
+      width: 100%;
+      display: flex;
+      border-radius: 10px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .channel {
+        box-sizing: border-box;
+        background-color: rgba(77, 77, 77, 0.486);
+        padding: 0px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 0px;
+        overflow: hidden;
+        transition: height 1s;
+      }
+      .channelOpen {
+        height: 600px;
+        max-height: 600px;
+        overflow-y: auto;
+        transition: 500ms ease-in;
+      }
+      .channelOpen::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+  .display {
+    width: 85%;
+    min-height: calc(90vh);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    column-gap: 0;
+    backdrop-filter: blur(2px);
+    background-color: rgba(93, 93, 93, 0.602);
+    .header {
+      width: 100%;
     }
     .wrap {
       width: 95%;
@@ -72,7 +103,6 @@ $primary-color: #fff8e1;
           margin: 5px;
           font-size: 1.5em;
           font-weight: inherit;
-          font-family: "Lato", sans-serif;
           color: rgb(192, 192, 192);
           border-radius: 25px;
           cursor: pointer;
@@ -125,26 +155,20 @@ $primary-color: #fff8e1;
 }
 .button {
   color: $primary-color;
-  background-color: rgb(107, 107, 107);
-  width: 90%;
+  background-color: transparent;
+  width: 100%;
   border: none;
   height: 30px;
-  border-radius: 10px;
   margin: 5px;
   outline: none;
-  font-size: 1.1em;
+  font-size: 1em;
   padding: 5px;
   font-family: "Lato", sans-serif;
 }
 .button:hover {
-  color: black;
-  background: radial-gradient(circle at center, #f1e3bb 5%, #a79076 95%);
-}
-.button:active {
-  font-size: 1.2em;
-  border: 1px solid $primary-color;
+  background-color: gray;
 }
 .buttonOn {
   color: black;
-  background: radial-gradient(circle at center, #f1e3bb 5%, #a79076 95%);
+  background-color: gray;
 }
