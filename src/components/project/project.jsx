@@ -82,8 +82,8 @@ const Project = () => {
               state: data.data().state,
               index: data.data().index,
               listid: data.data().listid,
+              image: data.data().image,
             };
-
             newallsub.push(dataitem);
           }
         });
@@ -123,60 +123,79 @@ const Project = () => {
     const dropEnd = result.destination.droppableId;
     console.log(dropStart);
     console.log(dropEnd);
+    let batch = firestore.batch();
     if (dropEnd === dropStart) {
-      let batch = firestore.batch();
       let newarray = allsub.filter((item) => item.listid !== dropEnd);
       let rearrangearray = allsub
         .filter((item) => item.listid === dropEnd)
         .sort((a, b) => a.index - b.index);
-      let rearrangeid = [];
-      rearrangearray.forEach((data) => {
-        rearrangeid.push(data.id);
-      });
-      const item = Array.from(rearrangeid);
-      const [reorderItem] = item.splice(result.source.index, 1);
-      item.splice(result.destination.index, 0, reorderItem);
-      for (let i = 0; i < item.length; i++) {
+      // let rearrangeid = []
+      // rearrangearray.forEach((data) => {
+      //   rearrangeid.push(data.id)
+      // })
+      const [reorderItem] = rearrangearray.splice(result.source.index, 1);
+      rearrangearray.splice(result.destination.index, 0, reorderItem);
+      for (let i = 0; i < rearrangearray.length; i++) {
         rearrangearray.forEach((data) => {
-          if (item[i] === data.id) {
+          if (rearrangearray[i].id === data.id) {
             data.index = i;
           }
         });
-        let path = firestore.collection("subtasks").doc(item[i]);
+        let path = firestore.collection("subtasks").doc(rearrangearray[i].id);
         batch.update(path, { index: i });
       }
       rearrangearray.forEach((newitem) => {
         newarray.push(newitem);
       });
-      setAllsub(newarray);
+
       batch.commit();
     } else {
       console.log(result);
-      project
-        .collection("tasks")
-        .doc(dropStart)
-        .get()
-        .then((doc) => {
-          const item = Array.from(doc.data().task);
-          item.splice(result.source.index, 1);
-          console.log(item);
-          project.collection("tasks").doc(dropStart).update({
-            task: item,
-          });
+      let newallsub = [...allsub];
+      let sourcearray = allsub
+        .filter((item) => item.listid === dropStart)
+        .sort((a, b) => a.index - b.index);
+      let sourceRearrangeid = [];
+      sourcearray.forEach((data) => {
+        sourceRearrangeid.push(data.id);
+      });
+      const item = Array.from(sourceRearrangeid);
+      item.splice(result.source.index, 1);
+      console.log(item);
+      for (let i = 0; i < item.length; i++) {
+        newallsub.forEach((data) => {
+          if (data.id === item[i]) {
+            data.index = i;
+          }
         });
-      project
-        .collection("tasks")
-        .doc(dropEnd)
-        .get()
-        .then((doc) => {
-          console.log(result.source);
-          const item = Array.from(doc.data().task);
-          item.splice(result.destination.index, 0, result.draggableId);
-          console.log(item);
-          project.collection("tasks").doc(dropEnd).update({
-            task: item,
-          });
+      }
+      let destinationarray = allsub
+        .filter((item) => item.listid === dropEnd)
+        .sort((a, b) => a.index - b.index);
+      let destinationarrayid = [];
+      destinationarray.forEach((data) => {
+        destinationarrayid.push(data.id);
+      });
+      const destitem = Array.from(destinationarrayid);
+      destitem.splice(result.destination.index, 0, result.draggableId);
+      console.log(destitem);
+      destitem.forEach((data, index) => {
+        for (let i in newallsub) {
+          if (newallsub[i].id === data) {
+            newallsub[i].index = index;
+            newallsub[i].listid = dropEnd;
+          }
+        }
+      });
+      setAllsub(newallsub);
+      newallsub.forEach((item) => {
+        let path = firestore.collection("subtasks").doc(item.id);
+        batch.update(path, {
+          index: item.index,
+          listid: item.listid,
         });
+      });
+      batch.commit();
     }
   };
   const routeChange = () => {
@@ -184,7 +203,7 @@ const Project = () => {
       history.push("/");
     });
   };
-
+  console.log(allsub);
   return (
     <div className={style.project}>
       <Header

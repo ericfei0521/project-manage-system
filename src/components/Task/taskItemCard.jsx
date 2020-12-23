@@ -1,33 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import style from "../../style/taskItem.module.scss";
 import { showtaskitem } from "../../action/action";
 import { useDispatch } from "react-redux";
-import { firestore } from "../../firebase";
+
 import { Draggable } from "react-beautiful-dnd";
 
-const TaskItemCard = ({ id, name, state, taskID, open, index }) => {
+const TaskItemCard = ({ id, name, state, taskID, open, index, image }) => {
   let dispatch = useDispatch();
-  let docPath = firestore.collection("subtasks").doc(id);
-  let [taskName, setTaskName] = useState(name);
-  let [taskState, setTaskState] = useState(state);
-  let [image, setImage] = useState(null);
-
-  useEffect(() => {
-    let unsubscribe = docPath.onSnapshot((doc) => {
-      if (doc.data() === undefined) {
-        return;
-      } else {
-        setTaskName(doc.data().name);
-        setTaskState(doc.data().state);
-        setImage(doc.data().image);
-      }
-    });
-    return () => {
-      unsubscribe();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+  console.log(image);
   return (
     <Draggable key={id} draggableId={id} index={index}>
       {(Provided) => (
@@ -49,8 +29,8 @@ const TaskItemCard = ({ id, name, state, taskID, open, index }) => {
             );
           }}
         >
-          <h1>{taskName}</h1>
-          <h2>State: {taskState}</h2>
+          <h1>{name}</h1>
+          <h2>State: {state}</h2>
           {image ? (
             <div
               className={style.image}

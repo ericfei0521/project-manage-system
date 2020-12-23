@@ -11,39 +11,36 @@ import { Droppable } from "react-beautiful-dnd";
 const TaskList = ({ name, id, open, allsub }) => {
   let dispatch = useDispatch();
   let { projectId } = useParams();
-  let [nowTask, setTask] = useState([]);
+  // let [nowTask, setTask] = useState([])
   let [subTaskname, setsubTaskName] = useState("");
   let [listName, setListName] = useState(name);
   let [substate, setsubTaskState] = useState("on-hold");
   let [nameEdit, setNameEdit] = useState(false);
   let [removeTask, setRemoveTask] = useState(false);
   let [isEdit, setEdit] = useState(false);
-  //   project內的tasklist
   let taskList = firestore
     .collection("projects")
     .doc(projectId)
     .collection("tasks")
     .doc(id);
 
-  useEffect(() => {
-    let updateData = [];
-    allsub.forEach((data) => {
-      if (data.listid === id) {
-        let dataitem = {
-          id: data.id,
-          name: data.name,
-          state: data.state,
-          index: data.index,
-        };
-        updateData.push(dataitem);
-      }
-    });
-    let sortarray = updateData.sort((a, b) => {
-      return a.index - b.index;
-    });
-    setTask(sortarray);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [allsub]);
+  let nowTask = [];
+  allsub.forEach((data) => {
+    if (data.listid === id) {
+      let dataitem = {
+        id: data.id,
+        name: data.name,
+        state: data.state,
+        index: data.index,
+        image: data.image,
+      };
+      nowTask.push(dataitem);
+    }
+  });
+  nowTask = nowTask.sort((a, b) => {
+    return a.index - b.index;
+  });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const keyEvent = (e) => {
     if (e.key === "Enter" || e.key === "Escape") {
       if (e.target.value === "") {
@@ -129,6 +126,7 @@ const TaskList = ({ name, id, open, allsub }) => {
                     name={item.name}
                     state={item.state}
                     open={open}
+                    image={item.image}
                   />
                 ))}
                 {Provided.placeholder}
