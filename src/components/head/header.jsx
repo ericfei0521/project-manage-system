@@ -108,14 +108,13 @@ const Header = (prop) => {
               />
             ) : (
               <h1
+                className={style.projectname}
                 onClick={() => {
                   setEditProjectName(true);
                 }}
                 key={prop.id}
               >
-                {projectName.length > 7
-                  ? projectName.slice(0, 12) + "..."
-                  : projectName}
+                {projectName}
               </h1>
             ),
           ]

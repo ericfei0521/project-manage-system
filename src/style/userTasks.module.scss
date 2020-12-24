@@ -27,10 +27,6 @@ $bord-color: #69a8d3;
       width: 100%;
       text-align: center;
       padding: 5px;
-      border-left: 1px solid $primary-color;
-    }
-    h2:first-child {
-      border-left: none;
     }
   }
   .taskdetail {
@@ -40,7 +36,8 @@ $bord-color: #69a8d3;
     align-items: center;
     color: white;
     border-bottom: 1px solid $primary-color;
-    padding: 5px;
+    background-color: rgba(46, 46, 46, 0.438);
+    padding: 10px 5px;
     h2 {
       font-size: 1.2em;
       display: block;

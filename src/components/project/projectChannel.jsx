@@ -6,6 +6,7 @@ import { firestore } from "../../firebase";
 
 const ProjectChannel = ({ channelID }) => {
   const divRref = useRef(null);
+  const textref = useRef(null);
   const user = useSelector((state) => state.UserCheck);
   let channelpath = firestore.collection("projects").doc(channelID);
   let userPath = firestore.collection("users");
@@ -85,14 +86,12 @@ const ProjectChannel = ({ channelID }) => {
         <div className={style.memberlist}>
           <button onClick={() => setShowmember(false)}>X</button>
           <div className={style.title}>
-            <h1>
-              {member.length} members in #{channelName}
-            </h1>
+            <h1>Member list</h1>
           </div>
           {member.map((item, index) => (
             <div className={style.members} key={index}>
-              <div> {item.displayName}</div>
-              <div> {item.email}</div>
+              <h3>{item.displayName}</h3>
+              <h3> {item.email}</h3>
             </div>
           ))}
         </div>
@@ -145,6 +144,7 @@ const ProjectChannel = ({ channelID }) => {
         <div className={style.textinput}>
           <textarea
             name=""
+            ref={textref}
             data-emoji-input="unicode"
             value={newmessage}
             onChange={(e) => setMessage(e.target.value)}
@@ -155,6 +155,7 @@ const ProjectChannel = ({ channelID }) => {
           <button
             onClick={() => {
               updateMessage();
+              textref.current.style.height = "40px";
               setMessage("");
             }}
           ></button>

@@ -9,13 +9,14 @@ $primary-color: #fff8e1;
   justify-content: space-between;
   padding: 5px 3%;
   height: 10vh;
+
   .noticearea {
     position: absolute;
-    right: 10px;
-    width: 320px;
+    right: 30px;
+    width: 350px;
     top: 90px;
     z-index: 200;
-    padding: 15px;
+    padding: 30px;
     border-radius: 15px;
     background-color: rgba(20, 20, 20, 0.561);
     backdrop-filter: blur(10px);
@@ -29,6 +30,7 @@ $primary-color: #fff8e1;
       color: rgb(143, 143, 143);
       background-color: transparent;
       border: none;
+      margin-bottom: 15px;
     }
     button:hover {
       color: $primary-color;
@@ -44,19 +46,19 @@ $primary-color: #fff8e1;
     justify-content: space-between;
     align-items: flex-start;
     width: fit-content;
-    max-width: 300px;
+    max-width: 350px;
     word-wrap: break-word;
-    padding: 5px;
+    padding: 20px;
     position: absolute;
-    right: 10px;
+    right: 30px;
     top: 90px;
     color: $primary-color;
     font-size: 1.2em;
     z-index: 200;
-    height: 150px;
-    background-color: rgb(70, 70, 70);
+    height: 200px;
+    background-color: rgba(20, 20, 20, 0.561);
+    backdrop-filter: blur(10px);
     border-radius: 5px;
-    box-shadow: 0 0 3px rgb(255, 255, 255);
     transform: scaleX(0);
     transform-origin: 100% 50%;
     transition: 0.3s ease-in-out;
@@ -68,12 +70,14 @@ $primary-color: #fff8e1;
       padding: 5px;
       border-bottom: 1px solid white;
       h2 {
-        font-size: 0.8em;
+        font-size: 1em;
         color: white;
+        margin-bottom: 15px;
       }
       h3 {
-        font-size: 0.8em;
+        font-size: 1em;
         color: white;
+        margin-bottom: 15px;
       }
     }
 
@@ -97,43 +101,42 @@ $primary-color: #fff8e1;
     transition: 0.3s ease-in-out;
   }
   .left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    h1 {
+      font-size: 1.5em;
+      color: $primary-color;
+    }
     .home {
       display: flex;
       align-items: center;
       justify-content: center;
       h1 {
-        font-size: 1.5em;
         margin-right: 10px;
+        font-size: 1.5em;
+        text-align: center;
+        color: $primary-color;
       }
     }
-    justify-self: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     input {
-      border: none;
       text-align: center;
-      background-color: transparent;
-      font-size: 2em;
+      background-color: grayscale($color: #000000);
+      font-size: 1.5em;
+      padding: 0px;
+      text-align: left;
       color: $primary-color;
-      grid-column: 2/3;
-      align-self: center;
     }
-    h1 {
-      padding: 3px;
-      grid-column: 2/3;
-      align-self: center;
-      font-size: 2em;
-      text-align: center;
-      color: $primary-color;
+    input:focus {
+      padding: 0px;
     }
     select {
       margin-top: 5px;
-      color: white;
+      color: rgb(230, 230, 230);
       letter-spacing: 2px;
       border: none;
-      font-size: 1.2em;
-      text-align-last: center;
+      font-size: 1em;
       background: transparent;
       border-radius: 15px;
       -webkit-appearance: none;
@@ -143,9 +146,6 @@ $primary-color: #fff8e1;
     }
     option {
       background-color: black;
-    }
-    img {
-      width: 80px;
     }
   }
   .right {
@@ -168,7 +168,7 @@ $primary-color: #fff8e1;
         top: 0;
         right: 0;
         transform: translate(-5px, -5px);
-        background-color: rgb(219, 68, 68);
+        background-color: #8c2d2d;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -195,6 +195,11 @@ $primary-color: #fff8e1;
         width: 100%;
         color: $primary-color;
       }
+    }
+    .user:hover {
+      background-color: rgb(42, 42, 42);
+      animation-name: shaking;
+      animation-duration: 0.5s;
     }
   }
 }

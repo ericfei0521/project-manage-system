@@ -9,8 +9,11 @@ const PrjectCard = ({ id, name, state }) => {
           pathname: `/projects/${id}`,
         }}
       >
-        <h1>{name}</h1>
-        <h2>state:{state}</h2>
+        <div className={style.header}>
+          {/* <h1>Project :</h1> */}
+          <h1>{name}</h1>
+        </div>
+        <span>{state}</span>
       </Link>
     </div>
   );

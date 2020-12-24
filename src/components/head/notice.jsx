@@ -43,20 +43,18 @@ const Notice = (prop) => {
     <div className={style.card}>
       <div className={style.title}>
         <div className={style.titlehead}>
-          <h1>Project: {projectName}</h1>
+          <h1>{projectName}</h1>
           <button onClick={() => prop.read(prop.data.id)}>
             <h2>X</h2>
           </button>
         </div>
         <div className={style.subTitle}>
-          <h2>Card: {taskName}</h2>
-          <h3>Task: {jobName}</h3>
+          <h2>{taskName}/</h2>
+          <h3>{jobName}</h3>
         </div>
       </div>
       <div className={style.content}>
-        <div className={style.name}>
-          <h1>{prop.data.name} :</h1>
-        </div>
+        <h1>{prop.data.name} :</h1>
         <p>{prop.data.content}</p>
       </div>
     </div>

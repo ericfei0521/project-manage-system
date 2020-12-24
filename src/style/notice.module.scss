@@ -2,25 +2,25 @@ $primary-color: #fff8e1;
 $card-color: rgb(161, 161, 161);
 .card {
   box-sizing: border-box;
-  background-color: $card-color;
-  margin: 5px;
-  border-radius: 10px;
+  border-left: 3px solid #ccc6af;
   max-width: 320px;
+  padding-left: 15px;
+  margin-bottom: 30px;
   .title {
     width: 100%;
     display: flex;
-    flex-wrap: wrap;
-    background-color: rgb(83, 83, 83);
+    flex-direction: column;
     padding: 5px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    margin-bottom: 15px;
     .titlehead {
       width: 100%;
       display: flex;
       justify-content: space-between;
       h1 {
+        text-align: left;
         color: $primary-color;
-        font-size: 1.2em;
+        font-size: 1em;
+        color: rgba(221, 221, 221, 0.507);
       }
       button {
         display: flex;
@@ -30,10 +30,10 @@ $card-color: rgb(161, 161, 161);
         height: 20px;
         padding: 5px;
         text-align: center;
-        color: $primary-color;
+        color: gray;
         background-color: transparent;
         border-radius: 50%;
-        border: 1px solid $primary-color;
+        border: 1px solid gray;
         outline: none;
         h2 {
           font-size: 10px;
@@ -41,51 +41,36 @@ $card-color: rgb(161, 161, 161);
       }
       button:hover {
         background-color: rgb(66, 66, 66);
-      }
-    }
-    .subTitle {
-      width: 80%;
-      margin-top: 2px;
-      display: flex;
-      font-size: 0.8em;
-      color: rgb(221, 221, 221);
-      letter-spacing: 2px;
-      h2 {
-        margin-right: 2px;
+        color: $primary-color;
+        border-color: $primary-color;
       }
     }
   }
   .content {
+    width: 100%;
     padding: 8px;
-    .name {
-      display: flex;
-      align-items: center;
-      .nameinfo {
-        padding: 5px;
-        width: 25px;
-        height: 25px;
-        color: $primary-color;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: black;
-        margin-right: 5px;
-        border: 1px solid $primary-color;
-        border-radius: 50%;
-        h1 {
-          text-align: center;
-        }
-      }
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    h1 {
+      color: white;
+      text-align: center;
     }
+
     p {
-      margin-top: 5px;
+      margin-top: 15px;
+      color: white;
       word-wrap: break-word;
     }
   }
-}
-.card:hover {
-  background-color: rgb(184, 184, 184);
-  .title {
-    background-color: rgb(109, 109, 109);
+  .subTitle {
+    width: 100%;
+    display: flex;
+    font-size: 0.8em;
+    justify-content: flex-start;
+    color: rgba(221, 221, 221, 0.507);
+    h2 {
+      margin-right: 2px;
+    }
   }
 }

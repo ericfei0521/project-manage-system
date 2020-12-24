@@ -206,49 +206,41 @@ const Project = () => {
   console.log(allsub);
   return (
     <div className={style.project}>
-      <Header
-        id={projectId}
-        state={projectstate}
-        name={name}
-        signOut={routeChange}
-      />
       <div className={style.nav}>
-        <nav>
-          <button
-            className={style.navbutton}
-            onClick={() => setCurrentPage("all")}
-          >
-            All list
-          </button>
-          <button
-            className={style.navbutton}
-            onClick={() => {
-              setCurrentPage("tasks");
-              dispatch(
-                getMember({
-                  show: membershow,
-                  member: memberNum,
-                })
-              );
-            }}
-          >
-            Tasks
-          </button>
-          <button
-            className={style.navbutton}
-            onClick={() => {
-              setCurrentPage("performance");
-              dispatch(
-                getMember({
-                  show: membershow,
-                  member: memberNum,
-                })
-              );
-            }}
-          >
-            performance
-          </button>
-        </nav>
+        <button
+          className={style.navbutton}
+          onClick={() => setCurrentPage("all")}
+        >
+          All list
+        </button>
+        <button
+          className={style.navbutton}
+          onClick={() => {
+            setCurrentPage("tasks");
+            dispatch(
+              getMember({
+                show: membershow,
+                member: memberNum,
+              })
+            );
+          }}
+        >
+          Tasks
+        </button>
+        <button
+          className={style.navbutton}
+          onClick={() => {
+            setCurrentPage("performance");
+            dispatch(
+              getMember({
+                show: membershow,
+                member: memberNum,
+              })
+            );
+          }}
+        >
+          performance
+        </button>
         <div className={style.rightnav}>
           <div className={style.showmember}>
             <button
@@ -316,105 +308,113 @@ const Project = () => {
           </button>
         </div>
       </div>
-      {currentPage === "performance" ? (
-        <Performance projectid={projectId} member={memberNum} name={name} />
-      ) : (
-        <></>
-      )}
-      {currentPage === "tasks" ? (
-        <Tasks projectid={projectId} member={memberNum} />
-      ) : (
-        <></>
-      )}
-      {currentPage === "all" ? (
-        <div className={style.projectlist}>
-          <DragDropContext onDragEnd={handleDrag}>
-            <div className={style.projects}>
-              {tasks.map((item) => (
-                <TaskList
-                  key={item.id}
-                  id={item.id}
-                  name={item.name}
-                  open={handleOpen}
-                  allsub={allsub}
-                />
-              ))}
-              <div className={style.addCard}>
-                <button
-                  className={`${style.addcardbutton} ${
-                    addCard ? "" : style.openaddbutton
-                  }`}
-                  onClick={() => setAddcard(true)}
-                >
-                  + Add another list
-                </button>
-                <div
-                  className={`${style.addcarddetail} ${
-                    addCard ? style.openaddbutton : ""
-                  }`}
-                >
-                  <input
-                    onChange={(e) => setListName(e.target.value)}
-                    className={worning ? style.worning : ""}
-                    value={listname}
-                    autoFocus
-                    ref={inputref}
-                    type="text"
-                    placeholder="List Name"
+      <div className={style.displayarea}>
+        <Header
+          id={projectId}
+          state={projectstate}
+          name={name}
+          signOut={routeChange}
+        />
+        {currentPage === "performance" ? (
+          <Performance projectid={projectId} member={memberNum} name={name} />
+        ) : (
+          <></>
+        )}
+        {currentPage === "tasks" ? (
+          <Tasks projectid={projectId} member={memberNum} />
+        ) : (
+          <></>
+        )}
+        {currentPage === "all" ? (
+          <div className={style.projectlist}>
+            <DragDropContext onDragEnd={handleDrag}>
+              <div className={style.projects}>
+                {tasks.map((item) => (
+                  <TaskList
+                    key={item.id}
+                    id={item.id}
+                    name={item.name}
+                    open={handleOpen}
+                    allsub={allsub}
                   />
-                  <div className={style.detialbutton}>
-                    <button
-                      onClick={() => {
-                        if (listname !== "") {
-                          dispatch(
-                            addList({
-                              id: projectId,
-                              name: listname,
-                            })
-                          );
-                          setListName("");
-                          setWorning(false);
-                          setAddcard(false);
-                        } else {
-                          inputref.current.placeholder =
-                            "Please enter list name";
-                          setWorning(true);
-                        }
-                      }}
-                    >
-                      Add List
-                    </button>
-                    <button onClick={() => setAddcard(false)}>Cancel</button>
+                ))}
+                <div className={style.addCard}>
+                  <button
+                    className={`${style.addcardbutton} ${
+                      addCard ? "" : style.openaddbutton
+                    }`}
+                    onClick={() => setAddcard(true)}
+                  >
+                    + Add another list
+                  </button>
+                  <div
+                    className={`${style.addcarddetail} ${
+                      addCard ? style.openaddbutton : ""
+                    }`}
+                  >
+                    <input
+                      onChange={(e) => setListName(e.target.value)}
+                      className={worning ? style.worning : ""}
+                      value={listname}
+                      autoFocus
+                      ref={inputref}
+                      type="text"
+                      placeholder="Enter list name"
+                    />
+                    <div className={style.detialbutton}>
+                      <button
+                        onClick={() => {
+                          if (listname !== "") {
+                            dispatch(
+                              addList({
+                                id: projectId,
+                                name: listname,
+                              })
+                            );
+                            setListName("");
+                            setWorning(false);
+                            setAddcard(false);
+                          } else {
+                            inputref.current.placeholder =
+                              "Please enter list name";
+                            setWorning(true);
+                          }
+                        }}
+                      >
+                        Add List
+                      </button>
+                      <button onClick={() => setAddcard(false)}>Cancel</button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </DragDropContext>
-          {open ? (
-            <div
-              className={style.taskdetail}
-              id="taskdetail"
-              onClick={(e) => {
-                if (e.target.id === "taskdetail") {
-                  handleOpen();
-                }
-              }}
-            >
-              <TaskItem
-                taskID={state.taskID}
-                id={state.id}
-                name={state.name}
-                state={state.state}
-                open={handleOpen}
-              />
-            </div>
-          ) : (
-            <></>
-          )}
-        </div>
-      ) : (
-        <></>
-      )}
+            </DragDropContext>
+            {open ? (
+              <div
+                className={style.taskdetail}
+                id="taskdetail"
+                onClick={(e) => {
+                  if (e.target.id === "taskdetail") {
+                    handleOpen();
+                  }
+                }}
+              >
+                <TaskItem
+                  taskID={state.taskID}
+                  id={state.id}
+                  name={state.name}
+                  state={state.state}
+                  open={handleOpen}
+                />
+              </div>
+            ) : (
+              <></>
+            )}
+          </div>
+        ) : (
+          <></>
+        )}
+      </div>
 
       <div style={load ? { display: "block" } : { display: "none" }}>
         <Loading />

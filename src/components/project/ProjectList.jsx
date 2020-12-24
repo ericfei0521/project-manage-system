@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Header from "../head/header";
 import logo from "../../images/logowelcome.png";
+import { ReactComponent as ProjectIcon } from "../../images/ICON/projects.svg";
+import { ReactComponent as TasksIcon } from "../../images/ICON/tasks.svg";
+import { ReactComponent as ChatIcon } from "../../images/ICON/chat.svg";
 import PrjectCard from "./prjectCard";
 import ProjectChannel from "./projectChannel";
 import MemberTasks from "./membertasks";
 import Loading from "../loading";
-import Todos from "./Todos";
 import style from "../../style/projectList.module.scss";
 import button from "../../style/button.module.scss";
 import { Link } from "react-router-dom";
@@ -56,7 +58,13 @@ function ProjectList() {
       history.push("/");
     });
   };
-
+  const handlechannel = () => {
+    if (dataProject.length > 0) {
+      setCurrentchannel(dataProject[0].id);
+    } else {
+      setCurrentchannel("");
+    }
+  };
   return (
     <div>
       <div className={style.projectList}>
@@ -67,26 +75,64 @@ function ProjectList() {
             </Link>
             <button></button>
           </div>
-          <button
-            onClick={() => {
-              setCurrentShow("projects");
-              setCurrentchannel("");
-            }}
+          <div
+            className={style.sidebutton}
+            style={
+              currentShow === "all" || currentShow === "projects"
+                ? { backgroundColor: "rgba(93, 93, 93, 0.602)" }
+                : { backgroundColor: "transparent" }
+            }
           >
-            Projects
-          </button>
-          <button
-            onClick={() => {
-              setCurrentShow("tasks");
-              setCurrentchannel("");
-            }}
-          >
-            Tasks
-          </button>
-          <div className={style.channels}>
-            <button onClick={() => setActivechannel(!activechannel)}>
-              Channel
+            <ProjectIcon className={style.icon} />
+            <button
+              onClick={() => {
+                setCurrentShow("projects");
+                setCurrentchannel("");
+                setActivechannel(false);
+              }}
+            >
+              Project list
             </button>
+          </div>
+          <div
+            className={style.sidebutton}
+            style={
+              currentShow === "tasks"
+                ? { backgroundColor: "rgba(93, 93, 93, 0.602)" }
+                : { backgroundColor: "transparent" }
+            }
+          >
+            <TasksIcon className={style.icon} />
+            <button
+              onClick={() => {
+                setCurrentShow("tasks");
+                setCurrentchannel("");
+                setActivechannel(false);
+              }}
+            >
+              Tasks
+            </button>
+          </div>
+          <div className={style.channels}>
+            <div
+              className={style.sidebutton}
+              style={
+                currentShow === "channel" || currentShow === "channels"
+                  ? { backgroundColor: "rgba(93, 93, 93, 0.602)" }
+                  : { backgroundColor: "transparent" }
+              }
+            >
+              <ChatIcon className={style.icon} />
+              <button
+                onClick={() => {
+                  setActivechannel(!activechannel);
+                  setCurrentShow("channel");
+                  handlechannel();
+                }}
+              >
+                Channel
+              </button>
+            </div>
             <div
               className={`${style.channel} ${
                 activechannel ? style.channelOpen : ""
@@ -103,23 +149,43 @@ function ProjectList() {
                     setCurrentShow("channels");
                   }}
                 >
-                  {item.name.length > 7 ? item.name.slice(0, 7) : item.name}
+                  {item.name.length > 18 ? item.name.slice(0, 18) : item.name}
                 </button>
               ))}
             </div>
           </div>
         </div>
-        <div className={style.display}>
+        <div
+          className={style.display}
+          id="displayzone"
+          onClick={(e) => {
+            if (e.target.id === "displayzone") {
+              setAdd(false);
+            }
+          }}
+        >
           <div className={style.header}>
             <Header id={null} state={null} name={null} signOut={routeChange} />
           </div>
           <div>
+            {currentShow === "channel" ? (
+              <div>
+                {dataProject.length > 0 ? (
+                  <ProjectChannel channelID={dataProject[0].id} />
+                ) : (
+                  <div className={style.noproject}>
+                    <span>You are not in any project</span>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <> </>
+            )}
             {currentShow === "channels" ? (
               <ProjectChannel channelID={currentchannel} />
             ) : (
               <></>
             )}
-            {currentShow === "todos" ? <Todos user={user} /> : <></>}
             {currentShow === "tasks" ? <MemberTasks user={user} /> : <></>}
             {currentShow === "all" || currentShow === "projects" ? (
               <div className={style.wrap}>
@@ -132,68 +198,64 @@ function ProjectList() {
                       state={item.state}
                     />
                   ))}
-                  <div></div>
                   {isAdd ? (
                     <div className={style.addCardInfo}>
-                      <input
-                        onChange={(e) => setNewProjectsName(e.target.value)}
-                        value={newProjectName}
-                        type="text"
-                        placeholder="Project Name"
-                      />
-                      <select
-                        onChange={(e) => setNewProjectState(e.target.value)}
-                        value={newProjectState}
-                      >
-                        <option value="On-hold">On-hold</option>
-                        <option value="Running">Running</option>
-                        <option value="Reviewing">Reviewing</option>
-                        <option value="Rejected">Rejected</option>
-                        <option value="Complete">Complete</option>
-                      </select>
-                      <button
-                        onClick={() => {
-                          firestore
-                            .collection("projects")
-                            .add({
-                              member: [user],
-                              name: newProjectName,
-                              state: newProjectState,
-                              time: timestamp,
-                            })
-                            .then((docRef) => {
-                              let time = Date.now();
-                              firestore
-                                .collection("projects")
-                                .doc(docRef.id)
-                                .collection("channel")
-                                .add({
-                                  text: `wlecome to ${newProjectName} channel`,
-                                  time: time,
-                                  from: "system",
-                                });
-                            });
-                          setNewProjectsName("");
-                          setNewProjectState("On-hold");
-                          setAdd(true);
-                        }}
-                        className={button.button}
-                      >
-                        Add Project
-                      </button>
-                      <button
-                        onClick={() => setAdd(false)}
-                        className={button.button}
-                      >
-                        Cancel
-                      </button>
+                      <div className={style.infoarea}>
+                        <input
+                          onChange={(e) => setNewProjectsName(e.target.value)}
+                          value={newProjectName}
+                          type="text"
+                          placeholder="Project Name"
+                        />
+                        <select
+                          onChange={(e) => setNewProjectState(e.target.value)}
+                          value={newProjectState}
+                        >
+                          <option value="On-hold">On-hold</option>
+                          <option value="Running">Running</option>
+                          <option value="Reviewing">Reviewing</option>
+                          <option value="Rejected">Rejected</option>
+                          <option value="Complete">Complete</option>
+                        </select>
+                      </div>
+                      <div className={style.btns}>
+                        <button
+                          onClick={() => {
+                            firestore
+                              .collection("projects")
+                              .add({
+                                member: [user],
+                                name: newProjectName,
+                                state: newProjectState,
+                                time: timestamp,
+                              })
+                              .then((docRef) => {
+                                let time = Date.now();
+                                firestore
+                                  .collection("projects")
+                                  .doc(docRef.id)
+                                  .collection("channel")
+                                  .add({
+                                    text: `wlecome to ${newProjectName} channel`,
+                                    time: time,
+                                    from: "system",
+                                  });
+                              });
+                            setNewProjectsName("");
+                            setNewProjectState("On-hold");
+                            setAdd(false);
+                          }}
+                        >
+                          Add
+                        </button>
+                      </div>
                     </div>
                   ) : (
                     <button
                       onClick={() => setAdd(true)}
                       className={style.addCard}
                     >
-                      Create new board
+                      + new board
                     </button>
                   )}
                 </div>
