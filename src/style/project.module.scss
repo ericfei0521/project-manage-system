@@ -223,26 +223,27 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
     justify-content: center;
     align-items: center;
     .deletannounce {
-      width: 40vw;
-      height: 40vh;
+      width: 50vw;
+      height: 30vh;
       min-width: 320px;
       min-height: 240px;
-      background-color: rgba(95, 95, 95, 0.959);
       border-radius: 5px;
       position: relative;
+      background-color: rgba(255, 255, 255, 0.15);
+      border: 1px solid #8b887bab;
       .announce {
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
         padding: 15px;
-        background-color: #8c2d2d;
+        background-color: #b61b1b70;
         h1 {
           color: white;
-          font-size: 2em;
+          font-size: 1.5em;
           margin-bottom: 5px;
         }
         p {
           color: white;
-          font-size: 1.5em;
+          font-size: 1.3em;
         }
       }
       .confirm {
@@ -251,17 +252,18 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
+
         .confirmannounce {
           display: flex;
-          justify-content: flex-start;
-          align-items: center;
+          flex-direction: column;
+          align-items: flex-start;
           p {
             font-size: 1.2em;
-            color: black;
-            margin-right: 5px;
+            color: rgb(199, 199, 199);
+            margin-bottom: 10px;
           }
           h2 {
-            font-weight: bold;
+            color: $primary-color;
           }
         }
         input {
@@ -269,9 +271,9 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
           font-size: 1.2em;
           height: 2em;
           padding: 5px;
-          border-radius: 5px;
           border: none;
-          background-color: rgb(182, 182, 182);
+          background-color: transparent;
+          border-bottom: 1px solid $primary-color;
         }
       }
       .delelink {
@@ -285,13 +287,13 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
           width: 100%;
           border: none;
           font-size: 1.3em;
+          background-color: transparent;
           cursor: pointer;
         }
         .avaliable {
-          background-color: white;
+          color: $primary-color;
         }
         .disable {
-          background-color: rgb(175, 175, 175);
           color: gray;
         }
       }
@@ -308,10 +310,10 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
   top: 50%;
   background-color: black;
   transform: translate(-50%, -50%);
-  backdrop-filter: blur(30px);
+  backdrop-filter: blur(5px);
   border-radius: 5px;
   // box-shadow: 0 0 20px #9e9a8a88;
-  background-color: rgba(0, 0, 0, 0.568);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 .memberList {
   position: absolute;
@@ -324,7 +326,7 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
   border-radius: 5px;
   transform: translate(-50%, -50%);
   backdrop-filter: blur(5px);
-  background-color: rgba(0, 0, 0, 0.568);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 .memberbutton {
   display: flex;

@@ -136,11 +136,13 @@ a {
 input,
 input:focus,
 button,
+textarea,
 select,
 select:focus {
   margin: 0;
   padding: 0;
   outline: none;
+  font-family: "Roboto";
 }
 *,
 *::before,

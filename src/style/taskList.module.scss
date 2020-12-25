@@ -1,7 +1,7 @@
 $primary-color: #fff8e1;
 .list {
   box-sizing: border-box;
-  width: 250px;
+  width: 300px;
   padding: 15px 20px;
   margin: 15px 5px;
   height: fit-content;
@@ -37,16 +37,21 @@ $primary-color: #fff8e1;
     .editname {
       position: absolute;
       right: 0;
+      top: 0;
       display: flex;
       width: 100%;
-      background-color: rgba(0, 0, 0, 0.308);
       padding: 5px;
+      background: linear-gradient(
+        45deg,
+        rgba(34, 34, 34, 0.959),
+        rgba(34, 34, 34, 0.938)
+      );
       button {
         margin: 2px;
         width: 50%;
         color: $primary-color;
-        background: rgb(117, 117, 117);
-        border: 1px solid $primary-color;
+        background: transparent;
+        border: none;
         border-radius: 5px;
         padding: 4px;
         cursor: pointer;
@@ -95,23 +100,31 @@ $primary-color: #fff8e1;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      background-color: gray;
+      align-items: center;
+      background-color: rgba(110, 110, 110, 0.691);
       border-radius: 5px;
       input {
         color: white;
-        width: 100%;
+        width: 80%;
         padding: 5px;
         margin-bottom: 5px;
         border-radius: 5px;
-        background-color: rgb(78, 78, 78);
+        background-color: transparent;
         border: none;
       }
       input::-webkit-input-placeholder {
         color: rgba(161, 161, 161, 0.575);
       }
       select {
+        width: 80%;
         background-color: rgb(78, 78, 78);
+        background-color: transparent;
+        border: none;
         color: white;
+        margin-bottom: 15px;
+      }
+      option {
+        background-color: black;
       }
       .addbutton {
         width: 100%;
@@ -120,15 +133,15 @@ $primary-color: #fff8e1;
         button {
           margin: 2px;
           width: 50%;
-          color: $primary-color;
-          background: rgba(117, 117, 117, 0.609);
-          border: 1px solid $primary-color;
+          color: rgb(163, 163, 163);
+          background: transparent;
+          border: none;
           border-radius: 5px;
           padding: 3px;
           cursor: pointer;
         }
         button:hover {
-          background-color: rgba(61, 61, 61, 0.582);
+          color: $primary-color;
         }
       }
     }

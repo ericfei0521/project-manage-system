@@ -100,17 +100,12 @@ const Performance = (props) => {
   }, [state]);
   return (
     <div className={style.performance}>
-      {chartinfo ? (
-        <Piechart
-          name={props.name}
-          datas={chartinfo}
-          tasklist={taskslist}
-          list={list}
-        />
-      ) : (
-        <></>
-      )}
-
+      <Piechart
+        name={props.name}
+        datas={chartinfo}
+        tasklist={taskslist}
+        list={list}
+      />
       <Barchart data={chartinfo} tasklist={taskslist} list={list} />
       <div style={load ? { display: "block" } : { display: "none" }}>
         <Loading />

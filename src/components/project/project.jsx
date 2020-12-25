@@ -263,6 +263,7 @@ const Project = () => {
               })
             );
             setMemberShow(!membershow);
+            setAllusers(false);
           }}
         >
           <Members className={style.icon} />
@@ -278,6 +279,7 @@ const Project = () => {
               })
             );
             setAllusers(!showallusers);
+            setMemberShow(false);
           }}
         >
           <Addmember className={style.icon} />
@@ -372,33 +374,32 @@ const Project = () => {
                 </div>
               </div>
             </DragDropContext>
-            {open ? (
-              <div
-                className={style.taskdetail}
-                id="taskdetail"
-                onClick={(e) => {
-                  if (e.target.id === "taskdetail") {
-                    handleOpen();
-                  }
-                }}
-              >
-                <TaskItem
-                  taskID={state.taskID}
-                  id={state.id}
-                  name={state.name}
-                  state={state.state}
-                  open={handleOpen}
-                />
-              </div>
-            ) : (
-              <></>
-            )}
           </div>
         ) : (
           <></>
         )}
       </div>
-
+      {open ? (
+        <div
+          className={style.taskdetail}
+          id="taskdetail"
+          onClick={(e) => {
+            if (e.target.id === "taskdetail") {
+              handleOpen();
+            }
+          }}
+        >
+          <TaskItem
+            taskID={state.taskID}
+            id={state.id}
+            name={state.name}
+            state={state.state}
+            open={handleOpen}
+          />
+        </div>
+      ) : (
+        <></>
+      )}
       <div style={load ? { display: "block" } : { display: "none" }}>
         <Loading />
       </div>
@@ -453,6 +454,7 @@ const Project = () => {
                 type="text"
                 autoFocus
                 onChange={(e) => setconfirm(e.target.value)}
+                placeholder="Please enter project ID"
               />
               <Link
                 to="/projects"

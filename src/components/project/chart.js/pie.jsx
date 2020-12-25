@@ -13,7 +13,8 @@ const Piechart = ({ datas, name }) => {
           {
             label: name,
             borderWidth: 0,
-            hoverBorderWidth: 6,
+            fontSize: 5,
+            hoverBorderWidth: 2,
             backgroundColor: [
               "rgb(195, 195, 195,0.8)",
               "rgb(156, 219, 126,0.8)",
@@ -49,7 +50,7 @@ const Piechart = ({ datas, name }) => {
   }, [datas]);
 
   return (
-    <div className={style.bar}>
+    <div className={style.pie}>
       <div className={style.detail}>
         <h2>Progress</h2>
         <h2>{complete}%</h2>
@@ -58,7 +59,6 @@ const Piechart = ({ datas, name }) => {
         data={dataSet}
         options={{
           cutoutPercentage: 60,
-
           title: {
             display: true,
             text: "Project Progress",
@@ -70,7 +70,7 @@ const Piechart = ({ datas, name }) => {
             display: false,
             labels: {
               fontColor: "white",
-              fontSize: 13,
+              fontSize: 20,
               display: true,
             },
           },

@@ -13,10 +13,7 @@ const TasksDetail = ({ item }) => {
             : { backgroundColor: "transparent" }
         }
       >
-        <div className={style.subsummary}>
-          <h2>{item.user}</h2>
-          <h2>Task: {item.tasks.length}</h2>
-        </div>
+        <h2>{item.user}</h2>
         <div
           className={style.button}
           onClick={() => setShowdetail(!showdetail)}
@@ -29,7 +26,7 @@ const TasksDetail = ({ item }) => {
             key={data.id}
             style={
               data.state === "Complete"
-                ? { backgroundColor: "rgb(30, 30, 30,0.5)" }
+                ? { backgroundColor: "rgb(30, 30, 30,0.8)" }
                 : { backgroundColor: "transparent" }
             }
           >
@@ -59,23 +56,27 @@ const TasksDetail = ({ item }) => {
         }
       >
         <div className={style.state}>
-          <h3>On-hold: </h3>
+          <h3>Tasks</h3>
+          <h4>{item.tasks.length}</h4>
+        </div>
+        <div className={style.state}>
+          <h3>On-hold : </h3>
           <h4>{item.onhold}</h4>
         </div>
         <div className={style.state}>
-          <h3>Running: </h3>
+          <h3>Running : </h3>
           <h4>{item.running}</h4>
         </div>
         <div className={style.state}>
-          <h3>Reviewing: </h3>
+          <h3>Reviewing : </h3>
           <h4>{item.reviewing}</h4>
         </div>
         <div className={style.state}>
-          <h3>Rejected: </h3>
+          <h3>Rejected : </h3>
           <h4>{item.Rejected}</h4>
         </div>
         <div className={style.state}>
-          <h3>Complete: </h3>
+          <h3>Complete : </h3>
           <h4>{item.complete}</h4>
         </div>
       </div>

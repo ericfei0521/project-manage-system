@@ -12,27 +12,17 @@ $statecom: rgb(129, 202, 235);
   width: 80%;
   margin: 20px auto;
   border-radius: 5px;
-  background-color: rgba(39, 39, 39, 0.637);
+  background-color: rgba(29, 29, 29, 0.479);
   .usersummary {
     box-sizing: border-box;
     color: $primary-color;
     display: flex;
     width: 100%;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid gray;
     font-size: 1.2em;
-    padding: 10px 5px;
     backdrop-filter: blur(5px);
-    .subsummary {
-      width: 85%;
-      display: flex;
-      margin-left: 50px;
-      h2 {
-        margin-right: 20px;
-      }
-    }
-
+    padding: 5px 30px;
     .button {
       min-width: 20px;
       min-height: 20px;
@@ -45,19 +35,19 @@ $statecom: rgb(129, 202, 235);
     }
   }
   .usertasksummary {
-    box-sizing: border-box;
     color: $primary-color;
     display: flex;
     width: 100%;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid gray;
-    font-size: 1.2em;
-    padding: 10px 5px;
+    font-size: 1em;
     backdrop-filter: blur(5px);
+    padding: 5px 0px;
     .state {
       display: flex;
-      width: 170px;
+      justify-content: flex-start;
+      width: 20%;
+      padding: 5px 30px;
       h3 {
         color: $statehold;
         margin-right: 5px;
@@ -66,22 +56,22 @@ $statecom: rgb(129, 202, 235);
         color: white;
       }
     }
-    .state:nth-child(2) {
+    .state:nth-child(3) {
       h3 {
         color: $stateRun;
       }
     }
-    .state:nth-child(3) {
+    .state:nth-child(4) {
       h3 {
         color: $stateRev;
       }
     }
-    .state:nth-child(4) {
+    .state:nth-child(5) {
       h3 {
         color: $stateRej;
       }
     }
-    .state:nth-child(5) {
+    .state:nth-child(6) {
       h3 {
         color: $statecom;
       }
@@ -93,32 +83,25 @@ $statecom: rgb(129, 202, 235);
     transition: all 0.15s ease-out;
     overflow: hidden;
     backdrop-filter: blur(5px);
-    background-color: rgba(224, 224, 224, 0.109);
     .tasks {
       box-sizing: border-box;
       color: white;
       display: flex;
       width: 100%;
-      justify-content: space-around;
+      justify-content: space-between;
       font-size: 1em;
-      padding: 10px;
-      letter-spacing: 2px;
-      border-bottom: 1px solid $primary-color;
+      padding: 5px;
+      border-top: 1px solid #9b9689;
       .detail {
-        width: 20%;
+        width: 25%;
         display: flex;
         justify-content: space-around;
         align-items: center;
         padding: 5px 0;
-        h2 {
-          width: 50%;
-        }
       }
     }
-    .tasks:hover {
-      background-color: rgba(78, 78, 78, 0.589) !important;
-      z-index: 300;
-      box-shadow: 1px 1px 5px black;
+    .tasks:last-child {
+      border-bottom: 1px solid #9b9689;
     }
   }
   .open {

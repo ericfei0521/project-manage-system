@@ -12,10 +12,8 @@ const Barchart = ({ data, tasklist }) => {
     tasklist.forEach((task) => {
       let set = {
         label: task.name,
-        barPercentage: 15,
-        barThickness: 30,
-        maxBarThickness: 18,
-        minBarLength: 2,
+        categoryPercentage: 1.0,
+        barPercentage: 0.5,
         backgroundColor: "#fff8e1",
         hoverBorderColor: "rgba(255,99,132,1)",
         borderWidth: "2",
