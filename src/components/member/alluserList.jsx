@@ -47,7 +47,6 @@ const AlluserList = (props) => {
                 return (
                   <div className={style.pendinglist}>
                     <div className={style.adding}>
-                      <div></div>
                       <h2> {item.displayName}</h2>
                       <button onClick={() => updateFirestore(item.userID)}>
                         +

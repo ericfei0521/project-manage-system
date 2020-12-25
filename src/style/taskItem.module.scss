@@ -1,19 +1,19 @@
 $primary-color: #fff8e1;
 .shortCard {
   padding: 10px;
-  border: 1px solid gray;
-  border-radius: 10px;
-  background-color: rgb(161, 161, 161);
-  color: rgb(24, 19, 19);
+  border-radius: 3px;
+  background-color: rgba(121, 121, 121, 0.356);
+  backdrop-filter: blur(5px);
+  color: rgb(195, 195, 195);
   word-wrap: break-word;
-  margin: 2px;
+  margin: 10px 2px;
   h1 {
+    font-size: 1.2em;
     margin-bottom: 5px;
     padding-bottom: 5px;
   }
   h2 {
-    font-size: 0.8em;
-    color: rgb(54, 54, 54);
+    font-size: 1em;
     margin-bottom: 5px;
   }
   .image {
@@ -25,12 +25,11 @@ $primary-color: #fff8e1;
   }
 }
 .shortCard:hover {
-  border: 1px solid $primary-color;
-  background-color: rgb(161, 161, 161);
+  background-color: rgba(121, 121, 121, 0.5);
 }
 .shortCard:active {
-  border: 1px solid $primary-color;
-  box-shadow: -3px 5px 10px black;
+  background-color: rgba(121, 121, 121, 0.5);
+  box-shadow: 1px 1px 2px black;
 }
 
 .card {

@@ -10,11 +10,54 @@ const TasksDetail = ({ item }) => {
         style={
           item.tasks.length === 0
             ? { backgroundColor: "black" }
-            : { backgroundColor: "rgb(77, 77, 77)" }
+            : { backgroundColor: "transparent" }
         }
       >
-        <h2>{item.user}</h2>
-        <h2>Task: {item.tasks.length}</h2>
+        <div className={style.subsummary}>
+          <h2>{item.user}</h2>
+          <h2>Task: {item.tasks.length}</h2>
+        </div>
+        <div
+          className={style.button}
+          onClick={() => setShowdetail(!showdetail)}
+        ></div>
+      </div>
+      <div className={`${style.tasklist} ${showdetail ? style.open : ""}`}>
+        {item.tasks.map((data) => (
+          <div
+            className={style.tasks}
+            key={data.id}
+            style={
+              data.state === "Complete"
+                ? { backgroundColor: "rgb(30, 30, 30,0.5)" }
+                : { backgroundColor: "transparent" }
+            }
+          >
+            <div className={style.detail}>
+              <h2>{data.subTaskName}</h2>
+            </div>
+            <div className={style.detail}>
+              <h2>{data.name}</h2>
+            </div>
+            <div className={style.detail}>
+              <h2>{data.state}</h2>
+            </div>
+            <div className={style.detail}>
+              <h2>
+                <Moment format="YYYY/MM/DD">{data.dueDate}</Moment>
+              </h2>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div
+        className={style.usertasksummary}
+        style={
+          item.tasks.length === 0
+            ? { backgroundColor: "black" }
+            : { backgroundColor: "transparent" }
+        }
+      >
         <div className={style.state}>
           <h3>On-hold: </h3>
           <h4>{item.onhold}</h4>
@@ -35,42 +78,6 @@ const TasksDetail = ({ item }) => {
           <h3>Complete: </h3>
           <h4>{item.complete}</h4>
         </div>
-        <div
-          className={style.button}
-          onClick={() => setShowdetail(!showdetail)}
-        ></div>
-      </div>
-      <div className={`${style.tasklist} ${showdetail ? style.open : ""}`}>
-        {item.tasks.map((data) => (
-          <div
-            className={style.tasks}
-            key={data.id}
-            style={
-              data.state === "Complete"
-                ? { backgroundColor: "rgb(30, 30, 30)" }
-                : { backgroundColor: "transparent" }
-            }
-          >
-            <div className={style.detail}>
-              <h2>Task:</h2>
-              <h2>{data.subTaskName}</h2>
-            </div>
-            <div className={style.detail}>
-              <h2>SubTask:</h2>
-              <h2>{data.name}</h2>
-            </div>
-            <div className={style.detail}>
-              <h2>Status</h2>
-              <h2>{data.state}</h2>
-            </div>
-            <div className={style.detail}>
-              <h2>Due Date</h2>
-              <h2>
-                <Moment format="YYYY/MM/DD">{data.dueDate}</Moment>
-              </h2>
-            </div>
-          </div>
-        ))}
       </div>
     </div>
   );

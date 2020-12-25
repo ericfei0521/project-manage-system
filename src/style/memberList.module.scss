@@ -3,85 +3,92 @@ $primary-color: #fff8e1;
   width: 100%;
   display: grid;
   grid-template-columns: 20px 1fr 20px;
-  background-color: rgba(0, 0, 0, 0.692);
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   padding: 5px 10px;
+  padding: 15px;
   h1 {
     text-align: center;
+    font-size: 1.3em;
+    color: $primary-color;
   }
   .back {
     width: 20px;
     height: 20px;
     font-size: 0.9em !important;
-    border: 1px solid $primary-color;
-    border-radius: 50%;
+    color: gray;
+    border: none;
     text-align: center;
     background-color: transparent;
+    cursor: pointer;
   }
   .back:hover {
-    background-color: rgb(117, 117, 117);
+    color: $primary-color;
   }
 }
 .memberarea {
+  width: 70%;
   padding: 5px;
-  backdrop-filter: blur(2px);
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-  .memberinner {
-    max-height: 300px;
-    overflow-y: auto;
-    .member {
-      width: 250px;
-      padding: 5px;
+  margin: 0 auto;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  max-height: 400px;
+  overflow-y: auto;
+  .member {
+    width: 90%;
+    padding: 5px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-bottom: 5px;
+    border-left: 1px solid $primary-color;
+    margin-bottom: 20px;
+    cursor: pointer;
+    h1 {
       margin-bottom: 5px;
-      h1 {
-        text-align: center;
-        margin-bottom: 5px;
-        margin-left: 5%;
-      }
-      position: relative;
+      margin-left: 5%;
+      color: white;
     }
-    .member:before {
-      content: "";
-      position: absolute;
-      left: 12%;
-      bottom: 0;
-      height: 0;
-      width: 80%;
-      border: 1px solid $primary-color;
-      transform: scaleX(0);
-    }
-    .member:hover:before {
-      transform: scaleX(1);
-      transition: all 0.5s;
-    }
+    position: relative;
+  }
+  .member:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    width: 0%;
+    background-color: $primary-color;
+  }
+  .member:hover:before {
+    width: 100%;
+    transition: 0.3s;
   }
 }
 .alluser {
-  position: absolute;
-  right: 0;
-  top: 0;
-  z-index: 10;
-  min-width: 236px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid white;
-  border-radius: 15px;
-  background-color: rgba(41, 41, 41, 0.863);
   color: white;
-  transform: translate(-6%, 50px);
-  backdrop-filter: blur(3px);
+
   input {
     width: 90%;
     font-size: 1.2em;
+    color: white;
     margin: 5px 0;
     padding: 5px;
-    background: rgb(165, 165, 165);
-    border-radius: 15px;
-    border: none;
+    background: transparent;
+    border-bottom: 1px solid $primary-color;
+  }
+  input::placeholder {
+    color: gray;
   }
   input:focus {
     font-size: 1.2em;
@@ -93,17 +100,20 @@ $primary-color: #fff8e1;
     padding: 3px;
     .showinner {
       width: 90%;
+      padding: 20px;
       margin: 0 auto;
-      max-height: 300px;
+      max-height: 360px;
       overflow-y: auto;
       .inlist {
         display: flex;
-        margin-bottom: 5px;
+        margin-bottom: 20px !important;
         flex-direction: column;
-        align-items: center;
-        border: 1px solid rgb(158, 158, 158);
+        align-items: flex-start;
+        margin-bottom: 10px;
+        border-left: 1px solid $primary-color;
+        padding: 5px 10px;
         h2 {
-          margin-bottom: 5px;
+          margin-bottom: 10px;
           color: rgb(158, 158, 158);
         }
         h2:nth-child(3) {
@@ -112,31 +122,37 @@ $primary-color: #fff8e1;
       }
       .pendinglist {
         display: flex;
-        margin-bottom: 5px;
+        margin-bottom: 20px !important;
         flex-direction: column;
-        align-items: center;
-        border: 1px solid $primary-color;
+        align-items: flex-start;
+        margin-bottom: 10px;
+        border-left: 1px solid $primary-color;
+        background-color: rgba(124, 124, 124, 0.308);
+        padding: 15px 10px;
         .adding {
           width: 100%;
-          display: grid;
-          grid-template-columns: 20px 1fr 20px;
-          padding: 5px 10px;
+          display: flex;
+          height: 40px;
+          justify-content: space-between;
+
           h2 {
             text-align: center;
+            margin-bottom: 10px;
           }
 
           button {
             width: 20px;
             height: 20px;
-            font-size: 0.9em !important;
-            border: 1px solid $primary-color;
-            border-radius: 50%;
+            font-size: 1.5em;
             text-align: center;
+            border: none;
             background-color: transparent;
+            color: gray;
+            cursor: pointer;
           }
-        }
-        h2:nth-child(2) {
-          padding-bottom: 5px;
+          button:hover {
+            color: $primary-color;
+          }
         }
       }
     }

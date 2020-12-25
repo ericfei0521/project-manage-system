@@ -16,14 +16,12 @@ const MemberList = (props) => {
         </button>
       </div>
       <div className={style.memberarea}>
-        <div className={style.memberinner}>
-          {state.member.map((item) => (
-            <div className={style.member} key={item.userID}>
-              <h1>{item.displayName}</h1>
-              <h1>{item.email}</h1>
-            </div>
-          ))}
-        </div>
+        {state.member.map((item) => (
+          <div className={style.member} key={item.userID}>
+            <h1>{item.displayName}</h1>
+            <h1>{item.email}</h1>
+          </div>
+        ))}
       </div>
     </div>
   );

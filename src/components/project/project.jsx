@@ -1,4 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
+import { ReactComponent as ListIcon } from "../../images/ICON/alllist.svg";
+import { ReactComponent as Membertasks } from "../../images/ICON/membertasks.svg";
+import { ReactComponent as Progress } from "../../images/ICON/progress.svg";
+import { ReactComponent as Members } from "../../images/ICON/users.svg";
+import { ReactComponent as Addmember } from "../../images/ICON/useregular.svg";
+import { ReactComponent as Delete } from "../../images/ICON/delete.svg";
 import Header from "../head/header";
 import TaskList from "../Task/taskList";
 import Tasks from "./Tasks";
@@ -7,8 +13,7 @@ import AlluserList from "../member/alluserList";
 import TaskItem from "../Task/taskItem";
 import Performance from "./performance";
 import Loading from "../loading";
-import userlog from "../../images/ICON/users.svg";
-import adduser from "../../images/ICON/useregular.svg";
+import logo from "../../images/logowelcome.png";
 import style from "../../style/project.module.scss";
 import { addList, getMember, deleteProject } from "../../action/action";
 import { useParams, Link, useHistory } from "react-router-dom";
@@ -207,14 +212,18 @@ const Project = () => {
   return (
     <div className={style.project}>
       <div className={style.nav}>
-        <button
-          className={style.navbutton}
-          onClick={() => setCurrentPage("all")}
-        >
-          All list
-        </button>
-        <button
-          className={style.navbutton}
+        <div className={style.logo}>
+          <Link to="/projects">
+            <img src={logo} alt="" />
+          </Link>
+          <button></button>
+        </div>
+        <div className={style.sidebutton} onClick={() => setCurrentPage("all")}>
+          <ListIcon className={style.icon} />
+          <button>Tasks list</button>
+        </div>
+        <div
+          className={style.sidebutton}
           onClick={() => {
             setCurrentPage("tasks");
             dispatch(
@@ -225,10 +234,11 @@ const Project = () => {
             );
           }}
         >
-          Tasks
-        </button>
-        <button
-          className={style.navbutton}
+          <Membertasks className={style.icon} />
+          <button>Performance</button>
+        </div>
+        <div
+          className={style.sidebutton}
           onClick={() => {
             setCurrentPage("performance");
             dispatch(
@@ -239,73 +249,46 @@ const Project = () => {
             );
           }}
         >
-          performance
-        </button>
-        <div className={style.rightnav}>
-          <div className={style.showmember}>
-            <button
-              className={style.memberbutton}
-              onClick={() => {
-                console.log(membershow);
-                dispatch(
-                  getMember({
-                    show: membershow,
-                    member: memberNum,
-                  })
-                );
-                setMemberShow(!membershow);
-              }}
-            >
-              <img src={userlog} alt="" />
-            </button>
-            {membershow ? (
-              <div className={style.memberList}>
-                <MemberList
-                  projectid={projectId}
-                  member={memberNum}
-                  showmember={handlemember}
-                />
-              </div>
-            ) : (
-              <></>
-            )}
-          </div>
-          <div className={style.allList}>
-            {showallusers ? (
-              <div>
-                <AlluserList
-                  projectid={projectId}
-                  member={memberNum}
-                  showmember={handleAddmember}
-                />
-              </div>
-            ) : (
-              <></>
-            )}
-            <button
-              className={style.memberbutton}
-              onClick={() => {
-                dispatch(
-                  getMember({
-                    show: membershow,
-                    member: memberNum,
-                  })
-                );
-                setAllusers(!showallusers);
-              }}
-            >
-              <h2>+</h2>
-              <img src={adduser} alt="" />
-            </button>
-          </div>
-          <button
-            className={style.showdele}
-            onClick={() => setDelete(!showdelete)}
-          >
-            <div className={style.ball}></div>
-            <div className={style.ball}></div>
-            <div className={style.ball}></div>
-          </button>
+          <Progress className={style.icon} />
+          <button>Progress</button>
+        </div>
+        <div
+          className={style.sidebutton}
+          onClick={() => {
+            console.log(membershow);
+            dispatch(
+              getMember({
+                show: membershow,
+                member: memberNum,
+              })
+            );
+            setMemberShow(!membershow);
+          }}
+        >
+          <Members className={style.icon} />
+          <button>Members</button>
+        </div>
+        <div
+          className={style.sidebutton}
+          onClick={() => {
+            dispatch(
+              getMember({
+                show: membershow,
+                member: memberNum,
+              })
+            );
+            setAllusers(!showallusers);
+          }}
+        >
+          <Addmember className={style.icon} />
+          <button>Add member</button>
+        </div>
+        <div
+          className={style.showdelete}
+          onClick={() => setDelete(!showdelete)}
+        >
+          <Delete className={style.delicon} />
+          <button>Delete</button>
         </div>
       </div>
       <div className={style.displayarea}>
@@ -381,7 +364,7 @@ const Project = () => {
                           }
                         }}
                       >
-                        Add List
+                        Add list
                       </button>
                       <button onClick={() => setAddcard(false)}>Cancel</button>
                     </div>
@@ -419,6 +402,28 @@ const Project = () => {
       <div style={load ? { display: "block" } : { display: "none" }}>
         <Loading />
       </div>
+      {showallusers ? (
+        <div className={style.allList}>
+          <AlluserList
+            projectid={projectId}
+            member={memberNum}
+            showmember={handleAddmember}
+          />
+        </div>
+      ) : (
+        <></>
+      )}
+      {membershow ? (
+        <div className={style.memberList}>
+          <MemberList
+            projectid={projectId}
+            member={memberNum}
+            showmember={handlemember}
+          />
+        </div>
+      ) : (
+        <></>
+      )}
       {showdelete ? (
         <div
           id="deleteoutside"

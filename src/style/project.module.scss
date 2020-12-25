@@ -19,101 +19,105 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
   .taskdetail::-webkit-scrollbar {
     display: none;
   }
+
   .nav {
+    background-color: rgba(41, 41, 41, 0.445);
+    padding: 10px 0px;
+    min-width: 200px;
+    width: 15%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    background-color: rgba(46, 38, 26, 0.705);
-    position: relative;
-    border-top: 1px solid #a19d8ea1;
-    border-bottom: 1px solid #a19d8ea1;
-    width: 15%;
+    align-items: flex-start;
+    backdrop-filter: blur(2px);
     button {
       font-size: 1.1em;
       color: $primary-color;
     }
-
-    .navbutton {
-      font-size: 1.2em;
-      min-width: fit-content;
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-      margin-right: 15px;
-      position: relative;
-    }
-    .navbutton:before {
-      content: "";
-      position: absolute;
-      width: 0%;
-      bottom: -3px;
-      left: 0;
-      height: 1px;
-      background-color: $primary-color;
-    }
-    .navbutton:hover {
-      text-shadow: 0px 0px 3px white;
-      -webkit-background-clip: text;
-      -moz-background-clip: text;
-      background-clip: text;
-    }
-    .navbutton:hover::before {
+    .logo {
       width: 100%;
-      transition: 300ms ease-in;
-    }
-
-    .rightnav {
-      width: 150px;
       display: flex;
       justify-content: space-around;
       align-items: center;
+      margin: 15px 0px;
+      padding: 5px 10px;
+      a {
+        width: calc(80% - 30px);
+        img {
+          width: 60%;
+          min-width: 150px;
+        }
+      }
       button {
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        background-color: transparent;
+        height: 15px;
+        width: 15px;
+        border: none;
+        background-image: url("../images/ICON/menu.svg");
         cursor: pointer;
       }
-      .memberbutton {
-        height: 25px;
-      }
-      .memberbutton:hover {
-        transform: scale(1.1);
-      }
-      .showmember {
-        width: 20px;
-        position: relative;
-        .memberList {
-          display: flex;
-          position: absolute;
-          right: 0;
-          top: 0;
-          transform: translate(0px, 40px);
-          background-color: rgba(41, 41, 41, 0.863);
-          border-radius: 15px;
-          border: 1px solid $primary-color;
-          color: white;
-          z-index: 15;
+    }
+    .sidebutton {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 10px;
+      position: relative;
+      cursor: pointer;
+      .icon {
+        width: 28px;
+        height: 28px;
+        cursor: pointer;
+        path {
+          fill: $primary-color;
         }
       }
-      .showdele {
+      button {
+        box-sizing: border-box;
+        margin-left: 5px;
+        width: 70%;
+        text-align: left;
+        font-size: 1.2em;
         background-color: transparent;
         border: none;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
+        color: $primary-color;
+        cursor: pointer;
+      }
+    }
+    .showdelete {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 10px;
+      position: relative;
+      cursor: pointer;
+      .delicon {
+        width: 30px;
         height: 30px;
-        .ball {
-          border-radius: 50%;
-          width: 3px;
-          height: 3px;
-          background-color: $primary-color;
+        cursor: pointer;
+        path {
+          fill: gray;
         }
       }
-      .showdele:hover {
-        transform: scale(1.1);
+      button {
+        box-sizing: border-box;
+        margin-left: 5px;
+        width: 70%;
+        text-align: left;
+        font-size: 1.2em;
+        background-color: transparent;
+        border: none;
+        color: gray;
+        cursor: pointer;
       }
     }
   }
   .displayarea {
     width: 85%;
     background-color: rgba(93, 93, 93, 0.602);
+    position: relative;
     .projectlist {
       box-sizing: border-box;
       display: flex;
@@ -209,7 +213,7 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
   .delete {
     width: 100vw;
     height: 100vh;
-    background-color: rgba(32, 32, 32, 0.342);
+    background-color: rgba(37, 37, 37, 0.808);
     backdrop-filter: blur(2px);
     position: absolute;
     left: 50%;
@@ -223,14 +227,14 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
       height: 40vh;
       min-width: 320px;
       min-height: 240px;
-      background-color: rgba(151, 151, 151, 0.678);
-      border-radius: 15px;
+      background-color: rgba(95, 95, 95, 0.959);
+      border-radius: 5px;
       position: relative;
       .announce {
-        border-top-left-radius: 15px;
-        border-top-right-radius: 15px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
         padding: 15px;
-        background-color: rgb(194, 62, 62);
+        background-color: #8c2d2d;
         h1 {
           color: white;
           font-size: 2em;
@@ -265,7 +269,7 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
           font-size: 1.2em;
           height: 2em;
           padding: 5px;
-          border-radius: 15px;
+          border-radius: 5px;
           border: none;
           background-color: rgb(182, 182, 182);
         }
@@ -277,7 +281,7 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
         width: 30%;
         padding: 5px;
         button {
-          border-radius: 15px;
+          border-radius: 5px;
           width: 100%;
           border: none;
           font-size: 1.3em;
@@ -293,6 +297,34 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
       }
     }
   }
+}
+.allList {
+  position: absolute;
+  width: 25%;
+  min-width: 320px;
+  min-height: 500px;
+  max-height: 700px;
+  left: 50%;
+  top: 50%;
+  background-color: black;
+  transform: translate(-50%, -50%);
+  backdrop-filter: blur(30px);
+  border-radius: 5px;
+  // box-shadow: 0 0 20px #9e9a8a88;
+  background-color: rgba(0, 0, 0, 0.568);
+}
+.memberList {
+  position: absolute;
+  width: 25%;
+  min-width: 320px;
+  min-height: 500px;
+  max-height: 700px;
+  left: 50%;
+  top: 50%;
+  border-radius: 5px;
+  transform: translate(-50%, -50%);
+  backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.568);
 }
 .memberbutton {
   display: flex;

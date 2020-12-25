@@ -30,7 +30,7 @@ const TaskItemCard = ({ id, name, state, taskID, open, index, image }) => {
           }}
         >
           <h1>{name}</h1>
-          <h2>State: {state}</h2>
+          <h2>{state}</h2>
           {image ? (
             <div
               className={style.image}
