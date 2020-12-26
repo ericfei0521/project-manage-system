@@ -99,7 +99,7 @@ const Barchart = ({ data, tasklist }) => {
             color: "#FFFFFF",
           },
           legend: {
-            position: "top",
+            position: "right",
             labels: {
               fontColor: "white",
               fontSize: 13,
