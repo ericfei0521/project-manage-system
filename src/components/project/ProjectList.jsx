@@ -27,6 +27,7 @@ function ProjectList() {
   let [isAdd, setAdd] = useState(false);
   let [newProjectName, setNewProjectsName] = useState("");
   let [newProjectState, setNewProjectState] = useState("On-hold");
+  let [showsidemenu, setShowSidemenu] = useState(false);
   //監聽使用者登入
   useEffect(() => {
     if (!user) {
@@ -68,12 +69,20 @@ function ProjectList() {
   return (
     <div>
       <div className={style.projectList}>
-        <div className={style.sidebar}>
+        <div
+          className={style.burgermenu}
+          onClick={() => setShowSidemenu(true)}
+        ></div>
+        <div
+          className={`${style.sidebar} ${
+            showsidemenu ? style.sidebarOpen : ""
+          }`}
+        >
           <div className={style.logo}>
             <Link to="/projects">
               <img src={logo} alt="" />
             </Link>
-            <button></button>
+            <button onClick={() => setShowSidemenu(false)}></button>
           </div>
           <div
             className={style.sidebutton}

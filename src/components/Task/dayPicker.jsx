@@ -25,14 +25,14 @@ function DatePicker(props) {
               props.getDate(date.getTime());
             }}
           >
-            Set Date
+            Set date
           </button>
           <button
             onClick={() => {
               setShow(!show);
             }}
           >
-            cancel
+            Cancel
           </button>
         </div>
       </div>

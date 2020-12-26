@@ -1,140 +1,170 @@
 $primary-color: #fff8e1;
-.dropArea {
-  width: 97%;
-  margin: 20px auto;
+.Image {
   display: flex;
-  form {
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin: 0 auto;
-    position: relative;
-    z-index: 1;
-    label {
-      width: 100%;
-      font-size: 1.1em;
-      color: white;
-      text-align: center;
-      height: 60px;
-      border: 2px dashed gray;
-      line-height: 60px;
-      cursor: pointer;
-    }
-    label:hover {
-      color: $primary-color;
-      border-color: $primary-color;
-    }
-    input {
-      display: none;
-    }
-    button {
-      width: 20px;
-      height: 20px;
-      position: absolute;
-      right: 5px;
-      top: 5px;
-      text-align: center;
-      line-height: 20px;
-      background-color: transparent;
-      color: rgb(153, 153, 153);
-      font-size: 1.1em;
-      border: none;
-      cursor: pointer;
-    }
-    button:hover {
-      color: $primary-color;
-    }
-  }
-}
-.gallery {
   width: 95%;
+  min-height: 100px;
+  max-height: 300px;
+  width: 95%;
+  margin: 10px auto;
   display: flex;
-  justify-content: center;
-  overflow: hidden;
-  margin: 0 auto;
-  position: relative;
-  .image {
-    width: 100%;
-    height: 200px;
-    background-position: top;
-    background-size: cover;
-    background-repeat: no-repeat;
-    cursor: pointer;
-    border: 1px solid #747064;
-    border-radius: 10px;
+  padding: 0px 10px;
+  h2 {
+    width: 20%;
+    text-align: left;
+    font-size: 1em;
+    color: rgb(187, 187, 187);
   }
-  .image:hover {
-    border: 1px solid $primary-color;
-  }
-  button {
-    position: absolute;
-    right: 5px;
-    top: 5px;
-    font-size: 1.2em;
-    z-index: 15;
-    border: none;
-    background-color: transparent;
-    color: rgba(128, 128, 128, 0.527);
-  }
-  button:hover {
-    color: $primary-color;
-  }
-  .deletshow {
-    position: absolute;
-    right: 50%;
-    top: 50%;
-    transform: translate(50%, -50%);
-    width: 320px;
-    height: fit-content;
+  .dropArea {
+    width: 80%;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
-    backdrop-filter: blur(5px);
-    box-shadow: 0 0 15px black;
-    border-radius: 15px;
-    h1 {
-      display: block;
-      height: 30px;
-      text-align: center;
-      line-height: 30px;
-      color: rgb(218, 218, 218);
-      font-size: 1.2em;
-      background-color: rgba(42, 42, 42, 0.774);
-      width: 100%;
-      border-top-left-radius: 15px;
-      border-top-right-radius: 15px;
-    }
-    p {
-      display: block;
-      height: fit-content;
-      text-align: center;
-      line-height: 30px;
-      color: rgb(255, 255, 255);
-      padding: 10px;
-      word-wrap: wrap;
-      font-size: 1em;
-      background-color: rgba(0, 0, 0, 0.739);
-      width: 100%;
-    }
-    .btns {
+    form {
       width: 100%;
       display: flex;
-      background-color: rgba(0, 0, 0, 0.739);
-      padding: 10px;
-      justify-content: space-around;
-      border-bottom-left-radius: 15px;
-      border-bottom-right-radius: 15px;
-      .deletebtn {
-        color: $primary-color;
-        padding: 5px;
-        border-radius: 10px;
-        border: 1px solid $primary-color;
+      justify-content: space-evenly;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      label {
+        width: 100%;
+        font-size: 1.1em;
+        color: white;
+        text-align: center;
+        height: 200px;
+        border: 2px dashed gray;
+        line-height: 200px;
         cursor: pointer;
       }
-      .deletebtn:hover {
-        background-color: gray;
+      label:hover {
+        color: $primary-color;
+        border-color: $primary-color;
+      }
+      input {
+        display: none;
+      }
+      button {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        text-align: center;
+        line-height: 20px;
+        background-color: transparent;
+        color: rgb(153, 153, 153);
+        font-size: 1.1em;
+        border: none;
+        cursor: pointer;
+      }
+      button:hover {
+        color: $primary-color;
+      }
+      .loader {
+        position: absolute;
+        right: 15px;
+        bottom: 15px;
+        border: 3px solid #555555; /* Light grey */
+        border-top: 3px solid $primary-color; /* Blue */
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        animation: spin 2s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    }
+  }
+  .imagearea {
+    width: 80%;
+    .gallery {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      .image {
+        width: 100%;
+        height: 200px;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        cursor: pointer;
+        border: 1px solid transparent;
+        border-radius: 5px;
+      }
+      .image:hover {
+        border: 1px solid $primary-color;
+      }
+      button {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        font-size: 1.2em;
+        z-index: 15;
+        border: none;
+        background-color: transparent;
+        color: rgb(153, 153, 153);
+        cursor: pointer;
+      }
+      button:hover {
+        color: $primary-color;
+      }
+      .deletshow {
+        position: absolute;
+        right: 50%;
+        top: 50%;
+        transform: translate(50%, -50%);
+        width: 320px;
+        height: fit-content;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        backdrop-filter: blur(5px);
+        box-shadow: 0 0 15px black;
+        border-radius: 5px;
+        background-color: rgba(22, 22, 22, 0.808);
+        h1 {
+          display: block;
+          height: 30px;
+          text-align: center;
+          line-height: 30px;
+          color: rgb(255, 255, 255);
+          font-size: 1.2em;
+          width: 100%;
+        }
+        p {
+          display: block;
+          height: fit-content;
+          text-align: center;
+          line-height: 30px;
+          color: rgb(255, 255, 255);
+          padding: 10px;
+          word-wrap: wrap;
+          font-size: 1em;
+          width: 100%;
+        }
+        .btns {
+          width: 100%;
+          display: flex;
+          padding: 10px;
+          justify-content: space-around;
+          .deletebtn {
+            color: rgb(163, 163, 163);
+            padding: 5px;
+            border-radius: 10px;
+            cursor: pointer;
+          }
+          .deletebtn:hover {
+            color: $primary-color;
+          }
+        }
       }
     }
   }

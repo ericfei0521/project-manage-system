@@ -245,12 +245,12 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
                 {taskName}
               </h1>
             )}
-            <div className={style.controler}>
-              <button onClick={() => open()}>✖</button>
-            </div>
+          </div>
+          <div className={style.controler}>
+            <button onClick={() => open()}>✖</button>
           </div>
           <div className={style.Status}>
-            <h2>Status:</h2>
+            <h2>Status :</h2>
             <select
               onChange={(e) => {
                 setTaskState(e.target.value);
@@ -269,46 +269,49 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
             </select>
           </div>
         </div>
-        {editdiscript ? (
-          <div
-            className={style.discriptContent}
-            style={sidebar ? { zIndex: "10" } : { zIndex: "300" }}
-          >
-            <textarea
-              autoFocus
-              type="text"
-              onChange={(e) => setDiscript(e.target.value)}
-              value={discript}
-              onFocus={(e) => {
-                textareaResize(e.target);
-                if (discript === "Please Enter Description") {
-                  setDiscript("");
-                }
-              }}
-              onKeyDown={(e) => {
-                textareaResize(e.target);
-              }}
-            />
-            <div className={style.disbuttons}>
-              <button
-                onClick={(e) => {
-                  setEditdiscript(false);
-                  handletask();
+        <div className={style.descriptcontent}>
+          <h2>Description : </h2>
+          {editdiscript ? (
+            <div
+              className={style.editdescript}
+              style={sidebar ? { zIndex: "10" } : { zIndex: "300" }}
+            >
+              <textarea
+                autoFocus
+                type="text"
+                onChange={(e) => setDiscript(e.target.value)}
+                value={discript}
+                onFocus={(e) => {
+                  textareaResize(e.target);
+                  if (discript === "Please enter description") {
+                    setDiscript("");
+                  }
                 }}
-              >
-                Save
-              </button>
-              <button onClick={(e) => setEditdiscript(false)}>back</button>
+                onKeyDown={(e) => {
+                  textareaResize(e.target);
+                }}
+              />
+              <div className={style.btns}>
+                <button
+                  onClick={(e) => {
+                    setEditdiscript(false);
+                    handletask();
+                  }}
+                >
+                  Save
+                </button>
+                <button onClick={(e) => setEditdiscript(false)}>Back</button>
+              </div>
             </div>
-          </div>
-        ) : (
-          <h1
-            className={style.discriptContent}
-            onClick={() => setEditdiscript(true)}
-          >
-            {discript === "" ? "Please Enter Discript" : discript}
-          </h1>
-        )}
+          ) : (
+            <div
+              className={style.description}
+              onClick={() => setEditdiscript(true)}
+            >
+              <h3> {discript === "" ? "Please enter discript" : discript}</h3>
+            </div>
+          )}
+        </div>
         <ImageDropper
           id={id}
           image={image}
@@ -316,22 +319,27 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
           handleupload={handleupload}
           handleshowbigimg={handleshowbigimg}
         />
-
         {attching ? <Attachlink handleattach={handleattach} id={id} /> : <></>}
-        <div className={style.media}>
-          {youtubelist.map((item) => (
-            <div className={style.videowrap} key={item}>
-              <iframe
-                title={item}
-                src={`https://www.youtube.com/embed/${item}`}
-                frameBorder="0"
-                allowFullScreen
-              ></iframe>
-              <button value={item} onClick={(e) => deletelink(e.target.value)}>
-                ✖
-              </button>
-            </div>
-          ))}
+        <div className={style.reference}>
+          <h2>Reference :</h2>
+          <div className={style.media}>
+            {youtubelist.map((item) => (
+              <div className={style.videowrap} key={item}>
+                <iframe
+                  title={item}
+                  src={`https://www.youtube.com/embed/${item}`}
+                  frameBorder="0"
+                  allowFullScreen
+                ></iframe>
+                <button
+                  value={item}
+                  onClick={(e) => deletelink(e.target.value)}
+                >
+                  ✖
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
         <DragDropContext onDragEnd={handleDrag}>
           <Droppable droppableId={id}>
@@ -353,7 +361,6 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
                           {...Provided.draggableProps}
                           {...Provided.dragHandleProps}
                           ref={Provided.innerRef}
-                          className={snapshot.isDragging ? style.jobs : ""}
                         >
                           <JobItem
                             isDragging={snapshot.isDragging}
@@ -389,7 +396,7 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
             className={`${style.menu} ${sidebar ? "" : style.menuopen}`}
             onClick={() => setSidebar(!sidebar)}
           >
-            <h1>more</h1>
+            <h1>More</h1>
           </div>
           <div
             className={`${style.sidebar} ${sidebar ? "" : style.sidebaropen}`}
@@ -401,7 +408,7 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
                 setSidebar(false);
               }}
             >
-              Add Task
+              Add task
             </button>
             <button
               onClick={() => {
@@ -409,7 +416,7 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
                 setUpload(!openupload);
               }}
             >
-              {image ? "Update Image" : "Add Image"}
+              {image ? "Update image" : "Add image"}
             </button>
             <button
               onClick={() => {
@@ -417,7 +424,7 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
                 setAttaching(true);
               }}
             >
-              Attach Link
+              Attach link
             </button>
             <button onClick={() => deleteTask()}>Delete</button>
           </div>

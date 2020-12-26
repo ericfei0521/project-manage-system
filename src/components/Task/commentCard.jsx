@@ -44,7 +44,7 @@ const CommentCards = (prop) => {
     <div className={style.commentCard}>
       <div className={style.commends}>
         <div className={style.user}>
-          <h1>{prop.data.name.charAt(0)}</h1>
+          <h1>{prop.data.name.toString().charAt(0)}</h1>
         </div>
         {editing ? (
           <div className={style.content}>

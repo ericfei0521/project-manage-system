@@ -11,6 +11,7 @@ const ImageDropper = ({
 }) => {
   let [isupload, setUpload] = useState(openupload);
   let [deleteshow, setDelete] = useState(false);
+  let [uploading, setuploading] = useState(false);
   console.log(id);
   useEffect(() => {
     if (openupload === true) {
@@ -22,14 +23,13 @@ const ImageDropper = ({
   const handleFiles = (e) => {
     if (e.target.files[0]) {
       let file = e.target.files[0];
-      console.log(file);
       var storageRef = storage.ref(`images/${id}`);
       storageRef.put(file).then(() => {
         storageRef.getDownloadURL().then((url) => {
-          console.log(url);
           firestore.collection("subtasks").doc(id).update({
             image: url,
           });
+          setuploading(false);
           setUpload(false);
           setDelete(false);
         });
@@ -47,22 +47,27 @@ const ImageDropper = ({
       });
   };
   return (
-    <div>
+    <div className={style.Image}>
+      <h2>Image :</h2>
       {isupload ? (
         <div className={style.dropArea}>
           <form>
-            <label for="file-upload">Upload</label>
+            <label htmlFor="file-upload">Upload</label>
+            {uploading ? <div class={style.loader}></div> : <></>}
             <input
               type="file"
               accept="image/*"
-              onChange={handleFiles}
+              onChange={(e) => {
+                handleFiles(e);
+                setuploading(true);
+              }}
               id="file-upload"
             />
             <button onClick={() => handleupload()}>✖</button>
           </form>
         </div>
       ) : (
-        <div>
+        <div className={style.imagearea}>
           {image ? (
             <div className={style.gallery}>
               <div

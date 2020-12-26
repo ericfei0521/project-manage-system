@@ -1,20 +1,15 @@
 $primary-color: #fff8e1;
 .inputjob {
   padding: 10px 5px 20px 5px;
-  width: 50%;
+  width: 40%;
   min-width: 280px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   flex-direction: column;
-  background: linear-gradient(
-    20deg,
-    rgba(141, 141, 141, 0.294) 5%,
-    rgba(0, 0, 0, 0.322) 50%
-  );
-  backdrop-filter: blur(5px);
-  border-radius: 15px;
-  border: 1px solid $primary-color;
+  background-color: rgba(37, 37, 37, 0.808);
+  backdrop-filter: blur(2px);
+  border-radius: 5px;
   h1 {
     display: block;
     width: 80%;
@@ -22,6 +17,7 @@ $primary-color: #fff8e1;
     font-size: 1em;
     color: $primary-color;
     padding: 5px 0px;
+    margin-bottom: 10px;
   }
   input {
     color: white;
@@ -111,11 +107,8 @@ $primary-color: #fff8e1;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      border-bottom-left-radius: 5px;
-      border-bottom-right-radius: 5px;
-      background-color: rgba(78, 78, 78, 0.623);
+      background-color: rgb(78, 78, 78);
       transition: max-height 0.2s ease-in-out;
-
       .member {
         margin: 10px auto;
         display: flex;
@@ -127,8 +120,7 @@ $primary-color: #fff8e1;
         margin-bottom: 5px;
         height: 80px;
         padding: 5px;
-        background-color: rgb(34, 34, 34);
-        border-radius: 10px;
+        cursor: pointer;
       }
       .member:hover {
         color: black;
@@ -137,9 +129,6 @@ $primary-color: #fff8e1;
     }
     .membersopen {
       max-height: 200px;
-      border-left: 1px solid $primary-color;
-      border-bottom: 1px solid $primary-color;
-      border-right: 1px solid $primary-color;
       transition: max-height 0.4s ease-in-out;
     }
     .selectorOpen {
@@ -159,16 +148,18 @@ $primary-color: #fff8e1;
     button {
       margin: 2px 10px 0px 0px;
       width: 20%;
-      min-width: 120px;
-      color: $primary-color;
-      background: rgba(117, 117, 117, 0.609);
-      border: 1px solid $primary-color;
+      min-width: 100px;
+      font-size: 1em;
+      text-align: left;
+      color: rgb(175, 175, 175);
+      background: transparent;
+      border: none;
       border-radius: 5px;
       padding: 3px;
       cursor: pointer;
     }
     button:hover {
-      background-color: rgba(61, 61, 61, 0.582);
+      color: $primary-color;
     }
   }
 }

@@ -148,9 +148,9 @@ const InputJob = ({ handleAddTask, projectId, subTaskID }) => {
             setTaskName("");
           }}
         >
-          ADD Task
+          Add task
         </button>
-        <button onClick={() => handleAddTask()}>Cancle</button>
+        <button onClick={() => handleAddTask()}>Cancel</button>
       </div>
     </div>
   );

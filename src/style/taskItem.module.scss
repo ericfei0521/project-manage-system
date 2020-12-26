@@ -34,11 +34,13 @@ $primary-color: #fff8e1;
 
 .card {
   width: 100%;
-  border-radius: 15px;
+  border-radius: 5px;
   box-sizing: border-box;
-  padding: 15px;
-  max-width: 800px;
-  background-color: rgba(219, 219, 219, 0.411);
+  padding: 20px;
+  max-width: 700px;
+  border-left: 1px solid $primary-color;
+  background-color: rgba(134, 134, 134, 0.253);
+  box-shadow: 1px 1px 3px rgb(54, 54, 54);
   margin: 0 auto;
   position: relative;
   // overflow-x: hidden;
@@ -50,9 +52,10 @@ $primary-color: #fff8e1;
     flex-wrap: wrap;
     .headTitle {
       width: 95%;
-      margin: 0 auto;
+      margin: 10px auto;
       height: fit-content;
       position: relative;
+      padding: 0px 10px;
       h1 {
         width: 80%;
         height: fit-content;
@@ -62,12 +65,10 @@ $primary-color: #fff8e1;
         padding: 4px 0 5px 0;
       }
       textarea {
-        margin-top: 4px;
         width: 80%;
         font-size: 1.8em;
-        line-height: 1.2em;
-        padding: 0;
-        color: #fff8e1;
+        padding: 10px;
+        color: #b1ac99;
         background-color: transparent;
         border: 1px solid $primary-color;
         outline: none;
@@ -77,46 +78,48 @@ $primary-color: #fff8e1;
       textarea::-webkit-scrollbar {
         display: none;
       }
-      .controler {
-        position: absolute;
-        top: 0;
-        right: 0;
-        z-index: 10;
-        button {
-          border-radius: 50%;
-          width: 30px;
-          height: 30px;
-          color: white;
-          background-color: rgba(153, 153, 153, 0.739);
-          border: 1px solid #fff8e1;
-          outline: none;
-          transform: translate(10px, -8px);
-        }
-        button:hover {
-          background-color: rgba(77, 77, 77, 0.739);
-        }
+    }
+    .controler {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 10;
+      button {
+        border-radius: 50%;
+        font-size: 1.2em;
+        width: 30px;
+        height: 30px;
+        color: rgb(100, 100, 100);
+        background-color: transparent;
+        border: none;
+        outline: none;
+        transform: translate(10px, -8px);
+        cursor: pointer;
+      }
+      button:hover {
+        color: $primary-color;
       }
     }
     .Status {
       width: 95%;
-      margin: 0 auto;
+      margin: 10px auto;
       display: flex;
       align-items: center;
-      font-size: 1em;
+      font-size: 1.2em;
       text-align: center;
+      padding: 0px 10px;
       h2 {
+        width: 20%;
+        text-align: left;
         font-size: 1em;
         color: rgb(187, 187, 187);
-        letter-spacing: 2px;
         margin-right: 5px;
       }
 
       .inComplete {
         color: rgb(214, 214, 214);
-        letter-spacing: 2px;
         border: none;
         font-size: 1em;
-        text-align-last: center;
         background: transparent;
         border-radius: 15px;
         -webkit-appearance: none;
@@ -130,97 +133,134 @@ $primary-color: #fff8e1;
         }
       }
       .Complete {
-        color: rgba(255, 224, 137, 0.787);
+        color: white;
       }
     }
   }
-  .discriptContent {
+  .descriptcontent {
+    display: flex;
     width: 95%;
-    min-height: 100px;
-    max-height: 300px;
-    font-size: 1.2em;
-    color: rgb(199, 199, 199);
-    background: rgba(47, 47, 47, 0.596);
-    padding: 10px;
-    margin: 5px auto;
-    border-radius: 5px;
-    position: relative;
-    word-wrap: break-word;
-    overflow: auto;
-    line-height: 20px;
-    white-space: pre-wrap;
-    textarea {
-      width: 100%;
+    width: 95%;
+    margin: 10px auto;
+    display: flex;
+    padding: 0px 10px;
+    h2 {
+      width: 20%;
+      text-align: left;
       font-size: 1em;
-      max-height: 500px;
-      line-height: 20px;
-      overflow: auto;
-      border: none;
-      padding: 0;
-      resize: none;
-      outline: none;
-      background-color: transparent;
-      color: rgb(199, 199, 199);
+      color: rgb(187, 187, 187);
     }
-    .disbuttons {
-      position: absolute;
-      right: 5px;
-      bottom: 5px;
-      button {
-        margin: 2px;
-        width: 60px;
-        color: $primary-color;
-        background: rgba(117, 117, 117, 0.609);
-        border: 1px solid $primary-color;
-        border-radius: 5px;
-        padding: 3px;
-        cursor: pointer;
+    .description {
+      width: 85%;
+      padding: 5px 5px;
+      min-height: 100px;
+      max-height: 300px;
+      position: relative;
+      overflow-y: auto;
+      margin-left: 5px;
+      border-radius: 5px;
+      background-color: rgba(124, 124, 124, 0.322);
+      h3 {
+        color: rgb(199, 199, 199);
+        font-size: 1.2em;
+        word-wrap: break-word;
+        white-space: pre-wrap;
       }
-      button:hover {
-        background-color: rgba(61, 61, 61, 0.582);
+    }
+    .description::-webkit-scrollbar {
+      width: 3px;
+    }
+    .description::-webkit-scrollbar-thumb {
+      border-radius: 3px;
+      background-color: rgba(173, 173, 173, 0.65);
+    }
+    .editdescript {
+      width: 80%;
+      background-color: rgba(124, 124, 124, 0.322);
+      padding: 10px 10px 40px 10px;
+      position: relative;
+      textarea {
+        width: 100%;
+        font-size: 1.2em;
+        max-height: 250px;
+        overflow: auto;
+        border: none;
+        padding-top: 5px;
+        resize: none;
+        outline: none;
+        background-color: transparent;
+        color: rgb(199, 199, 199);
+      }
+      .btns {
+        position: absolute;
+        left: 10px;
+        bottom: 10px;
+        button {
+          margin: 2px;
+          width: 60px;
+          color: gray;
+          background: transparent;
+          border: none;
+          cursor: pointer;
+          font-size: 1em;
+          text-align: left;
+        }
+        button:hover {
+          color: $primary-color;
+        }
       }
     }
   }
-  .media {
-    width: 96%;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    margin: 0 auto;
-    .videowrap {
-      width: inherit;
-      border: 1px solid transparent;
-      margin: 5px;
-      z-index: 10;
-      border-radius: 10px;
-      overflow: hidden;
-      position: relative;
-      iframe {
-        width: 100%;
-      }
-      button {
-        position: absolute;
-        right: 5px;
-        top: 5px;
-        background: transparent;
-        border: none;
-        color: rgb(105, 105, 105);
-        cursor: pointer;
-      }
-      button:hover {
-        transform: scale(1.1);
-        color: $primary-color;
-      }
+  .reference {
+    display: flex;
+    width: 95%;
+    margin: 10px auto;
+    display: flex;
+    padding: 0px 10px;
+    h2 {
+      width: 20%;
+      text-align: left;
+      font-size: 1em;
+      color: rgb(187, 187, 187);
     }
-    .videowrap:hover {
-      border: 1px solid $primary-color;
+    .media {
+      width: 80%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      margin: 0 auto;
+      gap: 5px;
+      .videowrap {
+        border: 1px solid transparent;
+        margin: 5px;
+        z-index: 10;
+        border-radius: 5px;
+        overflow: hidden;
+        position: relative;
+        iframe {
+          width: 100%;
+        }
+        button {
+          position: absolute;
+          right: 5px;
+          top: 5px;
+          background: transparent;
+          border: none;
+          color: rgb(105, 105, 105);
+          cursor: pointer;
+        }
+        button:hover {
+          transform: scale(1.1);
+          color: $primary-color;
+        }
+      }
+      .videowrap:hover {
+        border: 1px solid $primary-color;
+      }
     }
   }
   .jobarea {
     width: 97%;
-    margin: 0 auto;
-    padding: 5px;
-    position: relative;
-    z-index: 10;
+    margin: 5px auto;
   }
 }
 @media only screen and (max-width: 768px) {
@@ -234,46 +274,41 @@ $primary-color: #fff8e1;
   right: 0;
   display: flex;
   overflow: hidden;
-
   .menu {
     margin-top: 5px;
     color: $primary-color;
     width: 10px;
     text-align: center;
-    height: 50px;
+    height: 70px;
     z-index: 15;
     display: flex;
     align-items: center;
-    padding: 10px;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    background-color: rgb(65, 65, 65);
-    border-left: 1px solid $primary-color;
-    border-top: 1px solid $primary-color;
-    border-bottom: 1px solid $primary-color;
+    background-color: rgba(32, 32, 32, 0.568);
+    backdrop-filter: blur(15px);
     transform: translate(1px);
     writing-mode: tb-rl;
-    letter-spacing: 1px;
+    padding: 10px 10px;
+    letter-spacing: 3px;
     cursor: pointer;
     transition: 0.2s ease-in;
-    font-size: 0.5em;
+    h1 {
+      font-size: 1em;
+    }
   }
   .menuopen {
-    height: 50px;
-    padding: 10px;
-    transform: translate(120px);
+    height: 70px;
+    transform: translate(150px);
     transition: 0.2s ease-in;
   }
   .sidebar {
     padding: 5px;
     background-color: black;
-    height: 300px;
-    width: 120px;
+    height: 150px;
+    width: 150px;
     display: flex;
     flex-direction: column;
     transform: translate(0px, 5px);
     transition: 0.2s ease-in;
-    border: 1px solid $primary-color;
     border-right: none;
     border-bottom-left-radius: 10px;
     background-color: rgba(32, 32, 32, 0.568);
@@ -281,9 +316,10 @@ $primary-color: #fff8e1;
     button {
       margin: 2px;
       width: 100%;
+      font-size: 1em;
       color: $primary-color;
-      background: rgba(39, 39, 39, 0.609);
-      border: 1px solid $primary-color;
+      background: transparent;
+      border: none;
       border-radius: 5px;
       padding: 3px;
       cursor: pointer;
@@ -293,7 +329,7 @@ $primary-color: #fff8e1;
     }
   }
   .sidebaropen {
-    transform: translate(120px, 5px);
+    transform: translate(150px, 5px);
     transition: 0.2s ease-in;
   }
 }

@@ -207,7 +207,6 @@ const JobItem = (prop) => {
           <></>
         )}
         <button onClick={() => setShow(!show)} className={style.editDate}>
-          <h1> Due date:</h1>
           {date ? (
             format(date, "yyyy/MM/dd", { locale: enGB })
           ) : (
@@ -227,7 +226,7 @@ const JobItem = (prop) => {
                 getDate(date.getTime());
               }}
             >
-              Set Date
+              Set date
             </button>
           </div>
         ) : (

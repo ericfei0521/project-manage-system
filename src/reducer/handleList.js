@@ -43,7 +43,7 @@ const HandleList = (state = initialState, action) => {
           project: action.payload.projectid,
           name: state.name,
           state: action.payload.state,
-          description: "Please Enter Description",
+          description: "Please enter description",
           image: "",
           listid: state.listid,
           index: newTask.length - 1,

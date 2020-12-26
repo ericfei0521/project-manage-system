@@ -18,10 +18,10 @@ const Attachlink = ({ handleattach, id }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [handleattach]);
   const fetchyoutube = () => {
-    if (youtubelink !== "") {
-      let regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
-      let match = youtubelink.match(regExp);
-      let urlid = match && match[7].length === 11 ? match[7] : false;
+    let regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+    let match = youtubelink.match(regExp);
+    let urlid = match && match[7].length === 11 ? match[7] : false;
+    if (youtubelink !== "" && urlid !== false) {
       let newvideolist = [...videolist, urlid];
       firestore
         .collection("subtasks")
@@ -33,7 +33,7 @@ const Attachlink = ({ handleattach, id }) => {
           handleattach();
         });
     } else {
-      return;
+      alert("Please enter correct youtube link");
     }
   };
   return (

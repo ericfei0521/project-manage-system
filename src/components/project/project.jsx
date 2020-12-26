@@ -41,7 +41,6 @@ const Project = () => {
   let [currentPage, setCurrentPage] = useState("all");
   let [confirm, setconfirm] = useState("");
   let [addCard, setAddcard] = useState(false);
-  let [worning, setWorning] = useState(false);
   let [allsub, setAllsub] = useState([]);
 
   useEffect(() => {
@@ -339,7 +338,6 @@ const Project = () => {
                   >
                     <input
                       onChange={(e) => setListName(e.target.value)}
-                      className={worning ? style.worning : ""}
                       value={listname}
                       autoFocus
                       ref={inputref}
@@ -357,12 +355,10 @@ const Project = () => {
                               })
                             );
                             setListName("");
-                            setWorning(false);
                             setAddcard(false);
                           } else {
                             inputref.current.placeholder =
                               "Please enter list name";
-                            setWorning(true);
                           }
                         }}
                       >

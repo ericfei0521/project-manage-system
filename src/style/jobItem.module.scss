@@ -10,13 +10,12 @@ $primary-color: #fff8e1;
   .jobitem {
     box-sizing: border-box;
     display: grid;
-    min-height: 28px;
+    min-height: 40px;
     grid-template-columns: 20% 20% 20% 30% 10%;
     grid-row: 30px;
     backdrop-filter: blur(10px);
-    border-radius: 5px;
-    border: 1px solid #fbf0baa6;
-    background-color: rgb(143, 143, 143);
+    border-left: 1px solid #fbf0baa6;
+    background-color: rgba(100, 100, 100, 0.664);
     align-items: center;
     .jobname {
       width: 100%;
@@ -24,7 +23,6 @@ $primary-color: #fff8e1;
       margin-left: 5px;
       color: $primary-color;
       font-size: 1em;
-      height: 1em;
       cursor: auto;
     }
     @media only screen and (max-width: 425px) {
@@ -56,7 +54,7 @@ $primary-color: #fff8e1;
       max-height: 22px;
       background: transparent;
       border: none;
-      color: black;
+      color: rgb(204, 204, 204);
       font-size: 1em;
       text-align-last: center;
       -webkit-appearance: none;
@@ -87,24 +85,14 @@ $primary-color: #fff8e1;
       width: 100%;
       overflow: hidden;
       justify-content: space-between;
-      background-color: rgba(49, 49, 49, 0.931);
       grid-row: 2/3;
       grid-column: 1/6;
+      border-top: 1px solid #9c9889;
       .controler {
         width: 5%;
-        background: linear-gradient(
-          90deg,
-          rgba(126, 126, 126, 0.404),
-          rgba(0, 0, 0, 0)
-        );
         border: none;
-      }
-      .controler:nth-child(3) {
-        background: linear-gradient(
-          90deg,
-          rgba(0, 0, 0, 0),
-          rgba(126, 126, 126, 0.404)
-        );
+        background-color: transparent;
+        cursor: pointer;
       }
       .controler:active {
         overflow: hidden;
@@ -118,25 +106,27 @@ $primary-color: #fff8e1;
         max-width: 90%;
         overflow-x: auto;
         display: flex;
-        background: linear-gradient(
-          90deg,
-          rgba(0, 0, 0, 0),
-          rgba(31, 31, 31, 0.404),
-          rgba(0, 0, 0, 0)
-        );
         scroll-behavior: smooth;
         .memberCard {
           cursor: pointer;
-          background-color: rgb(73, 73, 73);
-          border: 1px solid $primary-color;
-          border-radius: 15px;
+          background-color: transparent;
+          border: none;
           color: $primary-color;
+          font-size: 1.2em;
           min-width: 120px;
           margin: 10px;
           height: 50px;
+          border-radius: 5px;
+          background: linear-gradient(
+            45deg,
+            rgba(34, 34, 34, 0.5),
+            rgba(34, 34, 34, 0.7)
+          );
+          border-left: 1px solid $primary-color;
         }
         .memberCard:hover {
-          background-color: rgb(122, 122, 122);
+          background-color: rgba(44, 44, 44, 0.726);
+          transition: 1s;
         }
       }
       .memberlist::-webkit-scrollbar {
@@ -175,22 +165,21 @@ $primary-color: #fff8e1;
       margin: 5px auto;
       width: 100%;
       max-width: 500px;
-      background-color: rgba(153, 153, 153, 0.52);
-      background-color: rgb(85, 85, 85);
       grid-row: 2/3;
       grid-column: 1/6;
       button {
         width: 20%;
         min-width: 120px;
-        color: $primary-color;
-        background: rgba(117, 117, 117, 0.609);
-        border: 1px solid $primary-color;
-        border-radius: 5px;
-        padding: 3px;
+        text-align: left;
+        color: rgb(173, 173, 173);
+        background: transparent;
+        border: none;
+        margin: 10px 15px;
+        font-size: 1em;
         cursor: pointer;
       }
       button:hover {
-        background-color: rgba(61, 61, 61, 0.582);
+        color: $primary-color;
       }
     }
     .btns {
@@ -220,10 +209,8 @@ $primary-color: #fff8e1;
       .opencontrol {
         cursor: pointer;
         width: 15px;
-        border-top-right-radius: 5px;
-        border-bottom-right-radius: 5px;
         transform: translate(1px);
-        height: 25px;
+        height: 100%;
         background-color: $primary-color;
         position: absolute;
         right: 0;
@@ -235,7 +222,7 @@ $primary-color: #fff8e1;
         width: 60px;
         position: absolute;
         right: -59px;
-        height: 22px;
+        height: 100%;
         transition: 0.4s;
         border: none;
         background-color: rgb(92, 92, 92);
@@ -245,7 +232,7 @@ $primary-color: #fff8e1;
         width: 60px;
         position: absolute;
         right: 9px;
-        height: 22px;
+        height: 100%;
         transition: 0.4s;
         border: none;
         color: $primary-color;

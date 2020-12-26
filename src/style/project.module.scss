@@ -12,8 +12,9 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
     top: 0;
     width: 100vw;
     min-height: 100vh;
-    backdrop-filter: blur(3px);
-    background-color: rgba(0, 0, 0, 0.863);
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    background-color: rgba(39, 39, 39, 0.972);
     z-index: 500;
   }
   .taskdetail::-webkit-scrollbar {
@@ -133,11 +134,11 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
           height: 60px;
           position: relative;
           height: 200px;
-          width: 180px;
+          width: 200px;
           overflow: hidden;
           .addcardbutton {
             opacity: 0;
-            min-width: 180px;
+            min-width: 200px;
             border-radius: 5px;
             border: none;
             padding: 10px;
@@ -229,7 +230,7 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
       min-height: 240px;
       border-radius: 5px;
       position: relative;
-      background-color: rgba(255, 255, 255, 0.15);
+      background-color: rgba(34, 34, 34, 0.924);
       border: 1px solid #8b887bab;
       .announce {
         border-top-left-radius: 5px;
@@ -335,7 +336,4 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
   img {
     height: 25px;
   }
-}
-.worning::-webkit-input-placeholder {
-  color: red;
 }

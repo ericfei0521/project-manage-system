@@ -51,6 +51,12 @@ $primary-color: #fff8e1;
     font-size: 0.8em;
   }
 }
+@media only screen and (max-width: 768px) {
+  .projectCard {
+    width: 90%;
+    justify-self: center;
+  }
+}
 .projectCard:hover {
   background-color: rgb(53, 53, 53);
   transition: 0.3s;
