@@ -215,12 +215,25 @@ const Project = () => {
           </Link>
           <button onClick={() => setShowSidemenu(false)}></button>
         </div>
-        <div className={style.sidebutton} onClick={() => setCurrentPage("all")}>
+        <div
+          className={style.sidebutton}
+          onClick={() => setCurrentPage("all")}
+          style={
+            currentPage === "all"
+              ? { backgroundColor: "rgba(93, 93, 93, 0.602)" }
+              : { backgroundColor: "transparent" }
+          }
+        >
           <ListIcon className={style.icon} />
           <button>Tasks list</button>
         </div>
         <div
           className={style.sidebutton}
+          style={
+            currentPage === "tasks"
+              ? { backgroundColor: "rgba(93, 93, 93, 0.602)" }
+              : { backgroundColor: "transparent" }
+          }
           onClick={() => {
             setCurrentPage("tasks");
             dispatch(
@@ -236,6 +249,11 @@ const Project = () => {
         </div>
         <div
           className={style.sidebutton}
+          style={
+            currentPage === "performance"
+              ? { backgroundColor: "rgba(93, 93, 93, 0.602)" }
+              : { backgroundColor: "transparent" }
+          }
           onClick={() => {
             setCurrentPage("performance");
             dispatch(

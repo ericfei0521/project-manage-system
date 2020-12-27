@@ -125,6 +125,10 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
         cursor: pointer;
       }
     }
+    .sidebutton:hover {
+      background-color: rgba(114, 114, 114, 0.246) !important;
+      transition: 0.3s;
+    }
     .showdelete {
       width: 100%;
       display: flex;
