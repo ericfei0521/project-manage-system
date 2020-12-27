@@ -38,7 +38,7 @@ const Signup = (state = initialState, action) => {
               .collection("users")
               .doc(auth.currentUser.uid)
               .set({
-                displayName: state.displayName,
+                displayName: action.payload.displayName,
                 createAt: createAt,
                 email: auth.currentUser.email,
                 userID: auth.currentUser.uid,

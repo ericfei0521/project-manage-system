@@ -237,7 +237,7 @@ function ProjectList() {
                                   .doc(docRef.id)
                                   .collection("channel")
                                   .add({
-                                    text: `wlecome to ${newProjectName} channel`,
+                                    text: `Welcome to ${newProjectName} channel`,
                                     time: time,
                                     from: "system",
                                   });
