@@ -57,6 +57,24 @@ const HandleList = (state = initialState, action) => {
         name: action.payload.name,
         description: action.payload.description,
       });
+      firestore
+        .collection("subtasks")
+        .doc(action.payload.taskid)
+        .collection("jobs")
+        .where("subtaskId", "==", action.payload.taskid)
+        .get()
+        .then((data) => {
+          data.forEach((item) => {
+            firestore
+              .collection("subtasks")
+              .doc(action.payload.taskid)
+              .collection("jobs")
+              .doc(item.id)
+              .update({
+                subTaskName: action.payload.name,
+              });
+          });
+        });
       return state;
     }
     case "DElETE_TASKS": {

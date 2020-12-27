@@ -82,6 +82,31 @@ const Header = (prop) => {
         firestore.collection("projects").doc(prop.id).update({
           name: projectName,
         });
+        firestore
+          .collection("subtasks")
+          .where("project", "==", prop.id)
+          .get()
+          .then((data) => {
+            data.forEach((item) => {
+              firestore
+                .collection("subtasks")
+                .doc(item.id)
+                .collection("jobs")
+                .get()
+                .then((jobs) => {
+                  jobs.forEach((job) => {
+                    firestore
+                      .collection("subtasks")
+                      .doc(item.id)
+                      .collection("jobs")
+                      .doc(job.id)
+                      .update({
+                        projectName: projectName,
+                      });
+                  });
+                });
+            });
+          });
       }
     }
   };

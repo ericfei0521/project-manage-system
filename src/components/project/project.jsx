@@ -126,8 +126,6 @@ const Project = () => {
     }
     const dropStart = result.source.droppableId;
     const dropEnd = result.destination.droppableId;
-    console.log(dropStart);
-    console.log(dropEnd);
     let batch = firestore.batch();
     if (dropEnd === dropStart) {
       let newarray = allsub.filter((item) => item.listid !== dropEnd);
@@ -152,7 +150,6 @@ const Project = () => {
 
       batch.commit();
     } else {
-      console.log(result);
       let newallsub = [...allsub];
       let sourcearray = allsub
         .filter((item) => item.listid === dropStart)
@@ -163,7 +160,6 @@ const Project = () => {
       });
       const item = Array.from(sourceRearrangeid);
       item.splice(result.source.index, 1);
-      console.log(item);
       for (let i = 0; i < item.length; i++) {
         newallsub.forEach((data) => {
           if (data.id === item[i]) {
