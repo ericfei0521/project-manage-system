@@ -416,8 +416,9 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
 }
 .memberList {
   position: absolute;
-  width: 25%;
+  width: 40%;
   min-width: 320px;
+  max-width: 400px;
   min-height: 500px;
   max-height: 700px;
   left: 50%;

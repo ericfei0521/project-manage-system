@@ -27,14 +27,13 @@ $primary-color: #fff8e1;
   }
 }
 .memberarea {
-  width: 70%;
+  width: 80%;
   padding: 5px;
   margin: 0 auto;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: flex-start;
   max-height: 400px;
   overflow-y: auto;
