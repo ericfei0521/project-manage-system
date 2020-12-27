@@ -103,7 +103,7 @@ $primary-color: #fff8e1;
       width: 90%;
       margin: 0 auto;
       height: fit-content;
-      max-height: calc(100vh - 305px);
+      max-height: calc(82vh - 131px);
       overflow: auto;
       .welcome {
         width: 60%;
@@ -184,6 +184,11 @@ $primary-color: #fff8e1;
             }
           }
         }
+      }
+    }
+    @media only screen and (max-width: 768px) {
+      .messagearea {
+        max-height: calc(85vh - 131px);
       }
     }
   }
