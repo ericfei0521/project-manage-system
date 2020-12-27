@@ -1,7 +1,7 @@
 $primary-color: #fff8e1;
 .inputjob {
   padding: 10px 5px 20px 5px;
-  width: 40%;
+  width: 60%;
   min-width: 280px;
   margin: 0 auto;
   display: flex;
@@ -161,5 +161,10 @@ $primary-color: #fff8e1;
     button:hover {
       color: $primary-color;
     }
+  }
+}
+@media only screen and (max-width: 768px) {
+  .inputjob {
+    width: 90%;
   }
 }

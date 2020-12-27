@@ -12,6 +12,11 @@ $primary-color: #fff8e1;
     .blank {
       width: 5%;
     }
+    @media only screen and (max-width: 425px) {
+      .blank {
+        width: 0px;
+      }
+    }
     textarea {
       width: 95%;
       resize: none;
@@ -26,7 +31,11 @@ $primary-color: #fff8e1;
       padding: 5px;
       border-radius: 5px;
     }
-
+    @media only screen and (max-width: 425px) {
+      textarea {
+        width: 95%;
+      }
+    }
     textarea:focus {
       border: 1px solid white;
       min-height: 30px;
@@ -51,7 +60,13 @@ $primary-color: #fff8e1;
       }
     }
   }
-
+  @media only screen and (max-width: 425px) {
+    .typearea {
+      width: 95%;
+      justify-content: space-around;
+      align-items: center;
+    }
+  }
   .comments {
     max-height: 300px;
     overflow-y: auto;

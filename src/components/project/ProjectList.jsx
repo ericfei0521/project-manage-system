@@ -164,15 +164,7 @@ function ProjectList() {
             </div>
           </div>
         </div>
-        <div
-          className={style.display}
-          id="displayzone"
-          onClick={(e) => {
-            if (e.target.id === "displayzone") {
-              setAdd(false);
-            }
-          }}
-        >
+        <div className={style.display}>
           <div className={style.header}>
             <Header id={null} state={null} name={null} signOut={routeChange} />
           </div>
@@ -198,7 +190,7 @@ function ProjectList() {
             {currentShow === "tasks" ? <MemberTasks user={user} /> : <></>}
             {currentShow === "all" || currentShow === "projects" ? (
               <div className={style.wrap}>
-                <div className={style.show}>
+                <div className={style.show} id="displayzone">
                   {dataProject.map((item) => (
                     <PrjectCard
                       key={item.id}
@@ -256,6 +248,13 @@ function ProjectList() {
                           }}
                         >
                           Add
+                        </button>
+                        <button
+                          onClick={() => {
+                            setAdd(false);
+                          }}
+                        >
+                          Cancel
                         </button>
                       </div>
                     </div>

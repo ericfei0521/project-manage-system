@@ -14,6 +14,11 @@ $primary-color: #fff8e1;
     font-size: 1em;
     color: rgb(187, 187, 187);
   }
+  @media only screen and (max-width: 425px) {
+    h2 {
+      display: none;
+    }
+  }
   .dropArea {
     width: 80%;
     display: flex;
@@ -78,6 +83,11 @@ $primary-color: #fff8e1;
           transform: rotate(360deg);
         }
       }
+    }
+  }
+  @media only screen and (max-width: 425px) {
+    .dropArea {
+      width: 100%;
     }
   }
   .imagearea {
@@ -167,5 +177,15 @@ $primary-color: #fff8e1;
         }
       }
     }
+  }
+  @media only screen and (max-width: 425px) {
+    .imagearea {
+      width: 100%;
+    }
+  }
+}
+@media only screen and (max-width: 425px) {
+  .Image {
+    padding: 5px;
   }
 }

@@ -40,6 +40,18 @@ $primary-color: #fff8e1;
     transform: scaleX(1);
     transition: 0.3s ease-in-out;
   }
+  @media only screen and (max-width: 768px) {
+    .noticearea {
+      right: 10px;
+      width: 350px;
+    }
+  }
+  @media only screen and (max-width: 375px) {
+    .noticearea {
+      right: 0;
+      width: 350px;
+    }
+  }
   .userinfo {
     display: flex;
     flex-direction: column;

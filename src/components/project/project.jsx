@@ -42,6 +42,7 @@ const Project = () => {
   let [confirm, setconfirm] = useState("");
   let [addCard, setAddcard] = useState(false);
   let [allsub, setAllsub] = useState([]);
+  let [showsidemenu, setShowSidemenu] = useState(false);
 
   useEffect(() => {
     let unsubscribemember = project.onSnapshot(function (doc) {
@@ -133,10 +134,7 @@ const Project = () => {
       let rearrangearray = allsub
         .filter((item) => item.listid === dropEnd)
         .sort((a, b) => a.index - b.index);
-      // let rearrangeid = []
-      // rearrangearray.forEach((data) => {
-      //   rearrangeid.push(data.id)
-      // })
+
       const [reorderItem] = rearrangearray.splice(result.source.index, 1);
       rearrangearray.splice(result.destination.index, 0, reorderItem);
       for (let i = 0; i < rearrangearray.length; i++) {
@@ -210,12 +208,16 @@ const Project = () => {
   console.log(allsub);
   return (
     <div className={style.project}>
-      <div className={style.nav}>
+      <div
+        className={style.burgermenu}
+        onClick={() => setShowSidemenu(true)}
+      ></div>
+      <div className={`${style.nav} ${showsidemenu ? style.sidebarOpen : ""}`}>
         <div className={style.logo}>
           <Link to="/projects">
             <img src={logo} alt="" />
           </Link>
-          <button></button>
+          <button onClick={() => setShowSidemenu(false)}></button>
         </div>
         <div className={style.sidebutton} onClick={() => setCurrentPage("all")}>
           <ListIcon className={style.icon} />
@@ -293,12 +295,14 @@ const Project = () => {
         </div>
       </div>
       <div className={style.displayarea}>
-        <Header
-          id={projectId}
-          state={projectstate}
-          name={name}
-          signOut={routeChange}
-        />
+        <div className={style.header}>
+          <Header
+            id={projectId}
+            state={projectstate}
+            name={name}
+            signOut={routeChange}
+          />
+        </div>
         {currentPage === "performance" ? (
           <Performance projectid={projectId} member={memberNum} name={name} />
         ) : (

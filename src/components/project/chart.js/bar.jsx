@@ -16,7 +16,7 @@ const Barchart = ({ data, tasklist }) => {
         barPercentage: 0.5,
         backgroundColor: "#fff8e1",
         hoverBorderColor: "rgba(255,99,132,1)",
-        borderWidth: "2",
+        borderWidth: "3",
         data: [],
       };
       let onhold = 0;
@@ -65,6 +65,7 @@ const Barchart = ({ data, tasklist }) => {
       <Bar
         data={dataSet}
         options={{
+          height: 500,
           title: {
             display: true,
             text: "Tasks Status",
@@ -99,7 +100,8 @@ const Barchart = ({ data, tasklist }) => {
             color: "#FFFFFF",
           },
           legend: {
-            position: "right",
+            position: "left",
+            display: false,
             labels: {
               fontColor: "white",
               fontSize: 13,

@@ -34,6 +34,11 @@ $primary-color: #fff8e1;
       color: #fff8e1;
       padding: 4px 0 4px 0;
     }
+    @media only screen and (max-width: 768px) {
+      .listname {
+        font-size: 1em;
+      }
+    }
     .editname {
       position: absolute;
       right: 0;
@@ -90,6 +95,11 @@ $primary-color: #fff8e1;
       padding: 0;
       resize: none;
       outline: none;
+    }
+    @media only screen and (max-width: 768px) {
+      textarea {
+        font-size: 1em;
+      }
     }
   }
   .displayzone {
@@ -159,6 +169,11 @@ $primary-color: #fff8e1;
     .addtasks:hover {
       color: $primary-color;
     }
+  }
+}
+@media only screen and (max-width: 768px) {
+  .list {
+    width: 200px;
   }
 }
 .list:hover {

@@ -42,6 +42,7 @@ $primary-color: #fff8e1;
       border-radius: 5px;
       background-color: transparent;
     }
+
     button:nth-child(1) {
       margin-right: 10px;
     }
@@ -72,6 +73,11 @@ $primary-color: #fff8e1;
       border-radius: 5px;
       background-color: transparent;
       cursor: pointer;
+    }
+    @media only screen and (max-width: 425px) {
+      button {
+        width: 90%;
+      }
     }
     button:nth-child(1) {
       margin-right: 10px;

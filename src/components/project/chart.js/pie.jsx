@@ -57,8 +57,11 @@ const Piechart = ({ datas, name }) => {
       </div>
       <Doughnut
         data={dataSet}
+        height="400"
         options={{
           cutoutPercentage: 60,
+          maintainAspectRatio: false,
+
           title: {
             display: true,
             text: "Project Progress",
@@ -67,7 +70,7 @@ const Piechart = ({ datas, name }) => {
           },
           legend: {
             position: "top",
-            display: true,
+            display: false,
             labels: {
               fontColor: "white",
               fontSize: 20,

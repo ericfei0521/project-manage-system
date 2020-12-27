@@ -3,8 +3,10 @@ $primary-color: #fff8e1;
 .projectList {
   background-image: url("../images//pexels-photo-4604566.jpg");
   display: flex;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
   width: 100vw;
+
   .burgermenu {
     display: none;
     position: absolute;
@@ -117,11 +119,17 @@ $primary-color: #fff8e1;
         overflow: hidden;
         transition: height 1s;
       }
+
       .channelOpen {
         height: 500px;
         max-height: 500px;
         overflow-y: auto;
         transition: 500ms ease-in;
+      }
+      @media only screen and (max-width: 1200px) {
+        .sidebarOpen {
+          transform: translate(0px);
+        }
       }
       .channelOpen::-webkit-scrollbar {
         display: none;
@@ -149,7 +157,6 @@ $primary-color: #fff8e1;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    column-gap: 0;
     background-color: rgba(93, 93, 93, 0.602);
     .noproject {
       width: 100%;
@@ -177,13 +184,10 @@ $primary-color: #fff8e1;
       margin: 0 auto;
       .show {
         box-sizing: border-box;
-        padding: 15px;
         display: grid;
         grid-template-columns: repeat(4, 23%);
         min-height: max-content;
-        max-height: calc(90vh);
         gap: 5px;
-        overflow-y: auto;
         .addCard {
           width: 98%;
           margin-bottom: 10px;
@@ -211,6 +215,13 @@ $primary-color: #fff8e1;
             font-size: 0.8em;
           }
         }
+        @media only screen and (max-width: 768px) {
+          .addCard {
+            width: 90%;
+            font-size: 1.2em;
+            justify-self: center;
+          }
+        }
         .addCardInfo {
           display: flex;
           flex-direction: column;
@@ -235,7 +246,7 @@ $primary-color: #fff8e1;
               margin: 5px;
               border: none;
               border-radius: 8px;
-              font-size: 0.8em;
+              font-size: 1em;
               text-align: center;
               background-color: transparent;
               color: white;
@@ -286,12 +297,39 @@ $primary-color: #fff8e1;
             font-size: 0.8em;
           }
         }
+        @media only screen and (max-width: 768px) {
+          .addCardInfo {
+            justify-self: center;
+            width: 90%;
+            .infoarea {
+              input {
+                font-size: 1.5em;
+              }
+              select {
+                font-size: 1.2em;
+              }
+            }
+            .btns {
+              button {
+                font-size: 1.2em;
+              }
+            }
+          }
+        }
       }
       @media only screen and (max-width: 1200px) {
         .show {
           width: 95%;
           margin: 0 auto;
           grid-template-columns: repeat(3, 33%);
+        }
+      }
+      @media only screen and (max-width: 425px) {
+        .show {
+          width: 95%;
+          margin: 0 auto;
+          padding: 10px 0px;
+          grid-template-columns: repeat(2, 48%);
         }
       }
     }
@@ -301,10 +339,17 @@ $primary-color: #fff8e1;
       width: 100%;
       .wrap {
         width: 100%;
+        padding: 15px 0px;
       }
     }
   }
 }
+@media only screen and (max-width: 425px) {
+  .projectList {
+    height: 100%;
+  }
+}
+
 .button {
   color: $primary-color;
   background-color: transparent;
@@ -313,8 +358,9 @@ $primary-color: #fff8e1;
   height: 30px;
   outline: none;
   font-size: 1em;
-  padding: 5px;
+  padding: 5px 15px;
   cursor: pointer;
+  text-align: left;
 }
 .button:hover {
   background-color: rgba(71, 71, 71, 0.349);

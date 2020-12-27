@@ -78,6 +78,7 @@ $primary-color: #fff8e1;
     @media only screen and (max-width: 425px) {
       .memberName {
         font-size: 0.8em;
+        margin: 0px 5px;
       }
     }
     .members {
@@ -123,6 +124,12 @@ $primary-color: #fff8e1;
             rgba(34, 34, 34, 0.7)
           );
           border-left: 1px solid $primary-color;
+        }
+        @media only screen and (max-width: 425px) {
+          .memberCard {
+            min-width: 80px;
+            font-size: 0.8em;
+          }
         }
         .memberCard:hover {
           background-color: rgba(44, 44, 44, 0.726);
@@ -206,6 +213,13 @@ $primary-color: #fff8e1;
           width: 10px;
         }
       }
+      @media only screen and (max-width: 425px) {
+        .commentshow {
+          width: 15px;
+          height: 15px;
+          margin-right: 15px;
+        }
+      }
       .opencontrol {
         cursor: pointer;
         width: 15px;
@@ -215,9 +229,15 @@ $primary-color: #fff8e1;
         position: absolute;
         right: 0;
       }
+      @media only screen and (max-width: 425px) {
+        .opencontrol {
+          width: 10px;
+        }
+      }
       .closecontrol {
         background-color: rgb(39, 39, 39);
       }
+
       .delete {
         width: 60px;
         position: absolute;
@@ -227,6 +247,12 @@ $primary-color: #fff8e1;
         border: none;
         background-color: rgb(92, 92, 92);
         color: $primary-color;
+      }
+      @media only screen and (max-width: 425px) {
+        .delete {
+          width: 80px;
+          right: -70px;
+        }
       }
       .opendelete {
         width: 60px;
@@ -238,11 +264,17 @@ $primary-color: #fff8e1;
         color: $primary-color;
         background-color: rgb(109, 20, 20);
       }
+      @media only screen and (max-width: 425px) {
+        .opendelete {
+          width: 25px;
+          font-size: 5px;
+        }
+      }
     }
   }
   @media only screen and (max-width: 425px) {
     .jobitem {
-      grid-template-columns: 25% 15% 15% 30% 15%;
+      grid-template-columns: 20% 20% 20% 30% 10%;
     }
   }
   .ondrag {

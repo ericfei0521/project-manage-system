@@ -34,6 +34,19 @@ body {
       margin: 5px;
     }
   }
+  @media only screen and (max-width: 425px) {
+    .detail {
+      font-size: 1em;
+      h2:nth-child(1) {
+        display: none;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 1200px) {
+  .pie {
+    width: 100%;
+  }
 }
 .bar {
   color: white;
@@ -42,4 +55,9 @@ body {
   align-items: center;
   justify-content: center;
   margin: 0 auto;
+}
+@media only screen and (max-width: 1200px) {
+  .bar {
+    width: 100%;
+  }
 }

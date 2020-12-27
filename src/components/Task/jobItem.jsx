@@ -148,7 +148,9 @@ const JobItem = (prop) => {
             onClick={() => setEditTaskName(!edittaskName)}
             className={style.jobname}
           >
-            {taskName}
+            {taskName.toString().length > 10
+              ? taskName.toString().substring(0, 10) + "..."
+              : taskName.toString()}
           </div>
         )}
         <select
@@ -210,7 +212,7 @@ const JobItem = (prop) => {
           {date ? (
             format(date, "yyyy/MM/dd", { locale: enGB })
           ) : (
-            <Moment format="YYYY/MM/DD">{prop.dueDate}</Moment>
+            <Moment format="YY/MM/DD">{prop.dueDate}</Moment>
           )}
         </button>
         {show ? (
@@ -245,7 +247,7 @@ const JobItem = (prop) => {
               removeJob();
             }}
           >
-            Delete
+            ✖
           </button>
           <div
             className={`${style.opencontrol} ${

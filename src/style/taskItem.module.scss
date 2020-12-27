@@ -12,9 +12,19 @@ $primary-color: #fff8e1;
     margin-bottom: 5px;
     padding-bottom: 5px;
   }
+  @media only screen and (max-width: 768px) {
+    h1 {
+      font-size: 1em;
+    }
+  }
   h2 {
     font-size: 1em;
     margin-bottom: 5px;
+  }
+  @media only screen and (max-width: 768px) {
+    h2 {
+      font-size: 0.8em;
+    }
   }
   .image {
     width: 100%;
@@ -23,7 +33,13 @@ $primary-color: #fff8e1;
     background-size: cover;
     background-repeat: no-repeat;
   }
+  @media only screen and (max-width: 768px) {
+    .image {
+      height: 60px;
+    }
+  }
 }
+
 .shortCard:hover {
   background-color: rgba(121, 121, 121, 0.5);
 }
@@ -43,7 +59,6 @@ $primary-color: #fff8e1;
   box-shadow: 1px 1px 3px rgb(54, 54, 54);
   margin: 0 auto;
   position: relative;
-  // overflow-x: hidden;
   min-height: 60vh;
   flex-direction: column;
   .head {
@@ -64,6 +79,12 @@ $primary-color: #fff8e1;
         color: #fff8e1;
         padding: 4px 0 5px 0;
       }
+      @media only screen and (max-width: 425px) {
+        h1 {
+          width: 100%;
+          padding: 0px;
+        }
+      }
       textarea {
         width: 80%;
         font-size: 1.8em;
@@ -75,8 +96,19 @@ $primary-color: #fff8e1;
         resize: none;
         outline: none;
       }
+      @media only screen and (max-width: 425px) {
+        textarea {
+          width: 100%;
+          padding: 0px;
+        }
+      }
       textarea::-webkit-scrollbar {
         display: none;
+      }
+    }
+    @media only screen and (max-width: 425px) {
+      .headTitle {
+        padding: 0px;
       }
     }
     .controler {
@@ -133,7 +165,19 @@ $primary-color: #fff8e1;
         }
       }
       .Complete {
-        color: white;
+        color: $primary-color;
+      }
+    }
+    @media only screen and (max-width: 425px) {
+      .Status {
+        padding: 0px;
+        align-items: flex-start;
+        h2 {
+          display: none;
+        }
+        .inComplete {
+          width: 100%;
+        }
       }
     }
   }
@@ -211,6 +255,21 @@ $primary-color: #fff8e1;
       }
     }
   }
+  @media only screen and (max-width: 425px) {
+    .descriptcontent {
+      align-items: flex-start;
+      padding: 0px;
+      h2 {
+        display: none;
+      }
+      .description {
+        width: 100%;
+      }
+      .editdescript {
+        width: 100%;
+      }
+    }
+  }
   .reference {
     display: flex;
     width: 95%;
@@ -258,14 +317,43 @@ $primary-color: #fff8e1;
       }
     }
   }
+  @media only screen and (max-width: 425px) {
+    .reference {
+      width: auto;
+      padding: 0px;
+      margin: 0px;
+      h2 {
+        display: none;
+      }
+      .media {
+        width: 92%;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5px;
+        .videowrap {
+          margin: 0px;
+          justify-self: center;
+          iframe {
+            height: 100px;
+          }
+        }
+      }
+    }
+  }
   .jobarea {
     width: 97%;
     margin: 5px auto;
+    padding: 0px 10px;
   }
 }
 @media only screen and (max-width: 768px) {
   .card {
     width: 95%;
+  }
+}
+@media only screen and (max-width: 425px) {
+  .card {
+    width: 100%;
+    padding: 0px;
   }
 }
 .moremenu {
@@ -338,7 +426,8 @@ $primary-color: #fff8e1;
   position: absolute;
   top: 50%;
   left: 50%;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   z-index: 600;
   transform: translate(-50%, -50%);
   background-color: rgba(0, 0, 0, 0.582);
@@ -347,6 +436,7 @@ $primary-color: #fff8e1;
   justify-content: center;
   align-items: center;
 }
+
 .bigimage {
   width: 100vw;
   height: 100vh;

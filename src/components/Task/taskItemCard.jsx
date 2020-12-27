@@ -7,7 +7,6 @@ import { Draggable } from "react-beautiful-dnd";
 
 const TaskItemCard = ({ id, name, state, taskID, open, index, image }) => {
   let dispatch = useDispatch();
-  console.log(image);
   return (
     <Draggable key={id} draggableId={id} index={index}>
       {(Provided) => (

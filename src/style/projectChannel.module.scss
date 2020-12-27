@@ -16,9 +16,13 @@ $primary-color: #fff8e1;
       font-size: 1.5em;
       color: $primary-color;
     }
+    @media only screen and (max-width: 375px) {
+      h1 {
+        font-size: 1.3em;
+      }
+    }
     .showmember {
       display: flex;
-      grid-template-columns: repeat(4, 1fr);
       position: relative;
       align-items: center;
       width: 10%;
@@ -45,11 +49,52 @@ $primary-color: #fff8e1;
         transform: translate(36px);
         z-index: 0;
       }
+      @media only screen and (max-width: 768px) {
+        .from {
+          left: 72%;
+        }
+      }
+      @media only screen and (max-width: 425px) {
+        .from {
+          left: 40%;
+        }
+      }
+      @media only screen and (max-width: 375px) {
+        .from {
+          left: 43%;
+        }
+      }
       h2 {
         font-size: 1.2em;
         color: $primary-color;
         transform: translate(70px);
       }
+      @media only screen and (max-width: 768px) {
+        h2 {
+          transform: translate(340px);
+        }
+      }
+      @media only screen and (max-width: 425px) {
+        h2 {
+          transform: translate(150px);
+        }
+      }
+      @media only screen and (max-width: 375px) {
+        h2 {
+          transform: translate(145px);
+        }
+      }
+    }
+    @media only screen and (max-width: 768px) {
+      .showmember {
+        width: 50%;
+      }
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    .channelHead {
+      width: 100%;
+      justify-content: space-around;
     }
   }
   .wrap {
@@ -77,6 +122,11 @@ $primary-color: #fff8e1;
           display: block;
         }
       }
+      @media only screen and (max-width: 425px) {
+        .welcome {
+          display: none;
+        }
+      }
       .message {
         width: 100%;
         margin: 10px auto;
@@ -93,6 +143,13 @@ $primary-color: #fff8e1;
           align-items: center;
           text-align: center;
           font-size: 1.5em;
+        }
+        @media only screen and (max-width: 425px) {
+          .from {
+            width: 30px;
+            height: 30px;
+            font-size: 1em;
+          }
         }
         .messagedetail {
           box-sizing: border-box;
@@ -120,6 +177,11 @@ $primary-color: #fff8e1;
             white-space: pre-wrap;
             line-height: 1.2rem;
             color: white;
+          }
+          @media only screen and (max-width: 425px) {
+            p {
+              font-size: 0.9em;
+            }
           }
         }
       }
@@ -153,8 +215,18 @@ $primary-color: #fff8e1;
         outline: none;
         color: white;
       }
+      @media only screen and (max-width: 768px) {
+        textarea {
+          font-size: 1em;
+        }
+      }
       textarea::-webkit-scrollbar {
         display: none;
+      }
+    }
+    @media only screen and (max-width: 768px) {
+      .textinput {
+        padding: 10px;
       }
     }
     .sendbutton {
@@ -173,11 +245,17 @@ $primary-color: #fff8e1;
         background-size: cover;
         cursor: pointer;
       }
+      @media only screen and (max-width: 768px) {
+        button {
+          width: 30px;
+          height: 30px;
+        }
+      }
     }
   }
   .memberlist {
     position: absolute;
-    width: 30%;
+    width: 50%;
     height: 500px;
     max-height: 700px;
     left: 50%;
@@ -189,7 +267,8 @@ $primary-color: #fff8e1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow: auto;
+    overflow-y: auto;
+    z-index: 300;
     .title {
       color: $primary-color;
       font-size: 1em;
@@ -238,6 +317,11 @@ $primary-color: #fff8e1;
     button:hover {
       background-color: gray;
       color: black;
+    }
+  }
+  @media only screen and (max-width: 425px) {
+    .memberlist {
+      width: 80%;
     }
   }
 }

@@ -77,7 +77,7 @@ const MemberTasks = () => {
             {data.state}
           </h2>
           <h2>
-            <Moment format="YYYY/MM/DD">{data.dueDate}</Moment>
+            <Moment format="YY/MM/DD">{data.dueDate}</Moment>
           </h2>
         </div>
       ))}

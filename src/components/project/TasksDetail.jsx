@@ -41,7 +41,7 @@ const TasksDetail = ({ item }) => {
             </div>
             <div className={style.detail}>
               <h2>
-                <Moment format="YYYY/MM/DD">{data.dueDate}</Moment>
+                <Moment format="YY/MM/DD">{data.dueDate}</Moment>
               </h2>
             </div>
           </div>
@@ -60,23 +60,23 @@ const TasksDetail = ({ item }) => {
           <h4>{item.tasks.length}</h4>
         </div>
         <div className={style.state}>
-          <h3>On-hold : </h3>
+          <h3>On-hold </h3>
           <h4>{item.onhold}</h4>
         </div>
         <div className={style.state}>
-          <h3>Running : </h3>
+          <h3>Running </h3>
           <h4>{item.running}</h4>
         </div>
         <div className={style.state}>
-          <h3>Reviewing : </h3>
+          <h3>Reviewing </h3>
           <h4>{item.reviewing}</h4>
         </div>
         <div className={style.state}>
-          <h3>Rejected : </h3>
+          <h3>Rejected </h3>
           <h4>{item.Rejected}</h4>
         </div>
         <div className={style.state}>
-          <h3>Complete : </h3>
+          <h3>Complete </h3>
           <h4>{item.complete}</h4>
         </div>
       </div>
