@@ -326,12 +326,15 @@ $projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
           font-size: 1.5em;
           margin-bottom: 5px;
         }
+        p {
+          color: white;
+          font-size: 1em;
+        }
         @media only screen and (max-width: 768px) {
           h1 {
             font-size: 1.3em;
           }
           p {
-            color: white;
             font-size: 1.2em;
           }
         }

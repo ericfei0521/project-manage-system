@@ -36,10 +36,6 @@ $primary-color: #fff8e1;
       color: $primary-color;
     }
   }
-  .noticeshow {
-    transform: scaleX(1);
-    transition: 0.3s ease-in-out;
-  }
   @media only screen and (max-width: 768px) {
     .noticearea {
       right: 10px;
@@ -48,10 +44,14 @@ $primary-color: #fff8e1;
   }
   @media only screen and (max-width: 375px) {
     .noticearea {
-      right: 0;
-      width: 350px;
+      right: -4px;
     }
   }
+  .noticeshow {
+    transform: scaleX(1);
+    transition: 0.3s ease-in-out;
+  }
+
   .userinfo {
     display: flex;
     flex-direction: column;
