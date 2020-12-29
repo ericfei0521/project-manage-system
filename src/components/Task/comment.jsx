@@ -6,8 +6,7 @@ import CommentCards from "./commentCard";
 import send from "../../images/ICON/submit.png";
 import style from "../../style/comment.module.scss";
 
-const Comment = ({ subTaskID, jobID, projectID, memberlist }) => {
-  console.log(memberlist);
+const Comment = ({ subTaskID, jobID, projectID }) => {
   const divRref = useRef(null);
   const filePath = firestore.collection("subtasks").doc(subTaskID);
   const [comment, setComment] = useState([]);
@@ -49,7 +48,6 @@ const Comment = ({ subTaskID, jobID, projectID, memberlist }) => {
             comments.push(item.data());
           }
         });
-        console.log(comments);
         setComment(comments);
       });
 
@@ -63,17 +61,13 @@ const Comment = ({ subTaskID, jobID, projectID, memberlist }) => {
     scrollToBottom();
   }, [comment]);
   const handleComment = (value) => {
-    console.log(value);
     const newComments = [...comment, value];
     const jobComments = [...jobComment, value.id];
-    console.log(jobComments);
     setComment(newComments);
     filePath.collection("jobs").doc(jobID).update({
       comment: jobComments,
     });
     firestore.collection("comment").doc(value.id).set(value);
-    console.log(user);
-    console.log(member);
     if (currentuserid !== member) {
       firestore
         .collection("users")

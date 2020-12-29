@@ -30,7 +30,6 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
   const [showimg, setShowimg] = useState(false);
   useEffect(() => {
     const unsubscribesubtasks = docPath.onSnapshot((doc) => {
-      console.log(doc.data());
       if (doc.data() !== undefined) {
         setTaskName(doc.data().name);
         setDiscript(doc.data().description);
@@ -47,7 +46,6 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
             setYoutubeList(doc.data().youtube);
           }
         }
-        console.log(doc.data.image);
       });
     const unsubscribejobs = docPath
       .collection("jobs")
@@ -70,7 +68,6 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
           setSubTask(childTask);
         }
       });
-    console.log("aaa");
     return () => {
       unsubscribesubtasks();
       unsubscribejobs();
@@ -178,7 +175,6 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
   };
 
   const handleDrag = (result) => {
-    console.log(result);
     if (!result.destination) return;
     if (
       result.destination.droppableId === result.source.droppableId &&

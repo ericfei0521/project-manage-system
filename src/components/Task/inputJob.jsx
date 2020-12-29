@@ -7,7 +7,6 @@ import { preaddJobe } from "../../action/action";
 import { useDispatch } from "react-redux";
 
 const InputJob = ({ handleAddTask, projectId, subTaskID }) => {
-  console.log(subTaskID);
   const membersref = useRef(null);
   const dispatch = useDispatch();
   const [member, setMember] = useState([]);
@@ -55,7 +54,7 @@ const InputJob = ({ handleAddTask, projectId, subTaskID }) => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log(status);
+
   const getDate = (value) => {
     setDate(value);
   };
