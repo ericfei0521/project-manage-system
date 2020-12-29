@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import Welcome from "./welcome";
-import Login from "./login";
+import Login from "./Login";
 import Signup from "./signup";
 import ProjectList from "./Project/ProjectList.jsx";
 import Project from "./Project/Project";
