@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { firestore } from "../../firebase";
 import firebase from "firebase/app";
-import Comment from "./comment";
+import Comment from "./Comment";
 import style from "../../style/jobItem.module.scss";
 import arrow from "../../images/ICON/arrow.svg";
 import arrowleft from "../../images/ICON/arrowleft.svg";

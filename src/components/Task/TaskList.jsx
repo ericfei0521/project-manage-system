@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { firestore } from "../../firebase";
 import { nanoid } from "nanoid";
 import style from "../../style/taskList.module.scss";
-import TaskItemCard from "./taskItemCard";
+import TaskItemCard from "./TaskItemCard";
 import { Droppable } from "react-beautiful-dnd";
 
 const TaskList = ({ name, id, open, allsub }) => {

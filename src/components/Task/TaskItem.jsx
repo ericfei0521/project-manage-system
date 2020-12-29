@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import style from "../../style/taskItem.module.scss";
-import JobItem from "./jobItem";
-import InputJob from "./inputJob";
-import ImageDropper from "./imageDropper";
+import JobItem from "./JobItem";
+import InputJob from "./InputJob";
+import ImageDropper from "./ImageDropper";
 import firebase from "firebase/app";
 import { useDispatch } from "react-redux";
 import { firestore } from "../../firebase";
 import { editTask } from "../../action/action";
 import { useParams } from "react-router-dom";
-import Attachlink from "./attachlink";
+import Attachlink from "./AttachLink";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const TaskItem = ({ id, name, state, taskID, open }) => {

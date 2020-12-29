@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import firebase from "firebase/app";
 import { auth, firestore, timestamp } from "../../firebase";
 import { nanoid } from "nanoid";
-import CommentCards from "./commentCard";
+import CommentCards from "./CommentCard";
 import send from "../../images/ICON/submit.png";
 import style from "../../style/comment.module.scss";
 

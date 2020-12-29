@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import DatePicker from "./dayPicker";
+import DatePicker from "./DatePicker";
 import style from "../../style/inputjob.module.scss";
 import { nanoid } from "nanoid";
 import { firestore } from "../../firebase";
