@@ -20,13 +20,11 @@ const HandleList = (state = initialState, action) => {
     case "ADD_TASKS": {
       state = action.payload;
       let time = timestamp;
-      console.log(state);
       let newTask = [];
       state.oldtasks.forEach((item) => {
         newTask.push(item.id);
       });
       newTask.push(state.id);
-      console.log(newTask);
       firestore
         .collection("projects")
         .doc(state.projectid)
@@ -51,7 +49,6 @@ const HandleList = (state = initialState, action) => {
       return state;
     }
     case "EDIT_TASKS": {
-      console.log(state);
       state = action.payload;
       firestore.collection("subtasks").doc(action.payload.taskid).update({
         name: action.payload.name,
@@ -78,7 +75,6 @@ const HandleList = (state = initialState, action) => {
       return state;
     }
     case "DElETE_TASKS": {
-      console.log(action.payload);
       firestore
         .collection("projects")
         .doc(action.payload.projectId)
@@ -89,7 +85,6 @@ const HandleList = (state = initialState, action) => {
       action.payload.task.forEach((item) => {
         list.push(item.id);
       });
-      console.log(list);
 
       list.forEach((item) => {
         firestore
@@ -105,7 +100,6 @@ const HandleList = (state = initialState, action) => {
             return commentlist;
           })
           .then((commentlist) => {
-            console.log(commentlist);
             commentlist.forEach((item) => {
               firestore
                 .collection("users")
@@ -144,9 +138,7 @@ const HandleList = (state = initialState, action) => {
       return state;
     }
     case "DElETE_PROJECT": {
-      console.log(action.payload);
       let taskList = [];
-
       firestore
         .collection("projects")
         .doc(action.payload.projectId)
@@ -160,7 +152,6 @@ const HandleList = (state = initialState, action) => {
           })
         )
         .then(() => {
-          console.log(action.payload.projectId);
           firestore
             .collection("comment")
             .where("project", "==", action.payload.projectId)
@@ -174,7 +165,6 @@ const HandleList = (state = initialState, action) => {
               return commentList;
             })
             .then((commentList) => {
-              console.log(commentList);
               commentList.forEach((item) => {
                 firestore
                   .collection("users")
@@ -224,7 +214,7 @@ const HandleList = (state = initialState, action) => {
               doc.forEach((item) => {
                 if (taskList.includes(item.id)) {
                   firestore
-                    .collection("subtasks")
+                    .collection("sub；tasks")
                     .doc(item.id)
                     .collection("jobs")
                     .get()

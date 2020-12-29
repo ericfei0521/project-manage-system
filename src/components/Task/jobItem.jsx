@@ -85,7 +85,6 @@ const JobItem = (prop) => {
     });
   };
   const getDate = (value) => {
-    console.log(value);
     subtaskPath.update({
       dueDate: value,
     });
@@ -125,7 +124,7 @@ const JobItem = (prop) => {
   const scrollright = () => {
     scrolldiv.current.scrollLeft += 150;
   };
-  console.log(document.body.taskItem);
+
   return (
     <div className={style.jobCard}>
       <div

@@ -9,7 +9,6 @@ const Signup = (state = initialState, action) => {
   const emailRule = /^\w+((-\w+)|(\.\w+))*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
   switch (action.type) {
     case "SIGN_UP": {
-      console.log(action.payload);
       if (action.payload.password !== action.payload.confirmpassword) {
         alert("password don't match");
         return state;
@@ -45,7 +44,7 @@ const Signup = (state = initialState, action) => {
                 comment: [],
               })
               .catch((error) => {
-                console.log("something went wront", error);
+                alert("something went wront", error);
               });
           });
       }
