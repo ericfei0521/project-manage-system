@@ -10,7 +10,6 @@ const Handleshowmember = (state = initial, action) => {
   switch (action.type) {
     case SHOW: {
       state = action.payload;
-      console.log(action.payload);
       return state;
     }
 

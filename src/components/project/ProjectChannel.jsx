@@ -69,7 +69,6 @@ const ProjectChannel = ({ channelID }) => {
       text: newmessage,
       time: time,
     };
-    console.log(data);
     channelpath.collection("channel").add(data);
   };
   const textareaResize = (element) => {
@@ -77,7 +76,6 @@ const ProjectChannel = ({ channelID }) => {
     element.style.height = element.scrollHeight + "px";
   };
   const scrollToBottom = () => {
-    // console.log(divRref.current.scrollHeight)
     divRref.current.scrollTop = divRref.current.scrollHeight;
   };
   return (

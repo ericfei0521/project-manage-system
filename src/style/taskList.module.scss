@@ -1,7 +1,7 @@
 $primary-color: #fff8e1;
 .list {
   box-sizing: border-box;
-  width: 300px;
+  min-width: 300px;
   padding: 15px 20px;
   margin: 15px 5px;
   height: fit-content;
@@ -173,7 +173,7 @@ $primary-color: #fff8e1;
 }
 @media only screen and (max-width: 768px) {
   .list {
-    width: 200px;
+    min-width: 200px;
   }
 }
 .list:hover {

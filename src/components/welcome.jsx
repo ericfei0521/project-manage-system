@@ -6,11 +6,7 @@ import style from "../style/welcome.module.scss";
 import { auth } from "../firebase";
 import { Link, useHistory } from "react-router-dom";
 
-// import { useDispatch } from "react-redux";
-// import { signup } from "../action/action";
-
 function Welcome() {
-  // let dispatch = useDispatch();
   const history = useHistory();
   auth.onAuthStateChanged((user) => {
     if (user) {

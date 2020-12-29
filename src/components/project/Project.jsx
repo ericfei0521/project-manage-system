@@ -6,11 +6,11 @@ import { ReactComponent as Members } from "../../images/ICON/users.svg";
 import { ReactComponent as Addmember } from "../../images/ICON/useregular.svg";
 import { ReactComponent as Delete } from "../../images/ICON/delete.svg";
 import Header from "../Head/Header";
-import TaskList from "../Task/taskList";
+import TaskList from "../Task/TaskList";
 import Tasks from "./Tasks";
 import MemberList from "../MemberList/MemberList";
 import AlluserList from "../MemberList/Alluser";
-import TaskItem from "../Task/taskItem";
+import TaskItem from "../Task/TaskItem";
 import Performance from "./Performance";
 import Loading from "../loading";
 import logo from "../../images/logowelcome.png";
@@ -144,7 +144,7 @@ const Project = () => {
       rearrangearray.forEach((newitem) => {
         newarray.push(newitem);
       });
-
+      setAllsub(newarray);
       batch.commit();
     } else {
       const newallsub = [...allsub];
@@ -322,8 +322,8 @@ const Project = () => {
           <></>
         )}
         {currentPage === "all" ? (
-          <div className={style.projectlist}>
-            <DragDropContext onDragEnd={handleDrag}>
+          <DragDropContext onDragEnd={handleDrag}>
+            <div className={style.projectlist}>
               <div className={style.projects}>
                 {tasks.map((item) => (
                   <TaskList
@@ -381,8 +381,8 @@ const Project = () => {
                   </div>
                 </div>
               </div>
-            </DragDropContext>
-          </div>
+            </div>
+          </DragDropContext>
         ) : (
           <></>
         )}
