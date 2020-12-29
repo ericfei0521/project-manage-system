@@ -4,7 +4,7 @@ import Welcome from "./welcome";
 import Login from "./login";
 import Signup from "./signup";
 import ProjectList from "./project/ProjectList.jsx";
-import Project from "./project/project";
+import Project from "./project/Project";
 import "../style/Reset.css";
 import { usercheck } from "../action/action";
 import { useDispatch } from "react-redux";
