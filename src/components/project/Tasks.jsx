@@ -28,7 +28,6 @@ const Tasks = (props) => {
       .where("project", "==", props.projectid)
       .onSnapshot(async (doc) => {
         const list = [];
-
         doc.forEach((item) => {
           list.push(
             firestore
@@ -46,10 +45,10 @@ const Tasks = (props) => {
               })
           );
         });
-        const a = await Promise.all(list);
-        const dataflatArray = a.flatMap((x) => x);
+        const getMemberTasks = await Promise.all(list);
+        const allMemberTasks = getMemberTasks.flatMap((x) => x);
 
-        dataflatArray.forEach((item) => {
+        allMemberTasks.forEach((item) => {
           for (const i in reanageList) {
             if (item.memberID === reanageList[i].userID) {
               if (item.state === "On-hold") {

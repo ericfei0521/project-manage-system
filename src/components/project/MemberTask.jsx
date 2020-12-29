@@ -22,19 +22,26 @@ const MemberTasks = () => {
       .orderBy("createTime", "desc")
       .onSnapshot((doc) => {
         const newlist = [];
-        doc.forEach(async (subtask) => {
-          await firestore
-            .collection("subtasks")
-            .doc(subtask.id)
-            .collection("jobs")
-            .where("memberID", "==", user)
-            .get()
-            .then((data) => {
-              data.forEach((item) => {
-                newlist.push(item.data());
-              });
-            });
-          const newarray = [...newlist];
+        doc.forEach((subtask) => {
+          newlist.push(
+            firestore
+              .collection("subtasks")
+              .doc(subtask.id)
+              .collection("jobs")
+              .where("memberID", "==", user)
+              .get()
+              .then((data) => {
+                const datalist = [];
+                data.forEach((item) => {
+                  datalist.push(item.data());
+                });
+                return datalist;
+              })
+          );
+        });
+        Promise.all(newlist).then((data) => {
+          const allTasks = data.flatMap((x) => x);
+          const newarray = [...allTasks];
           setUserTasks(newarray);
         });
       });

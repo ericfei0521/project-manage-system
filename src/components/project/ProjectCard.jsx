@@ -10,7 +10,6 @@ const PrjectCard = ({ id, name, state }) => {
         }}
       >
         <div className={style.header}>
-          {/* <h1>Project :</h1> */}
           <h1>{name}</h1>
         </div>
         <span>{state}</span>

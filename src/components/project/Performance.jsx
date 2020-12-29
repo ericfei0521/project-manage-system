@@ -55,17 +55,17 @@ const Performance = (props) => {
           );
         });
         setTaskList(taskName);
-        const a = await Promise.all(list);
-        const dataflatArray = a.flatMap((x) => x);
+        const allTasksData = await Promise.all(list);
+        const allTasks = allTasksData.flatMap((x) => x);
         const chartdata = {
-          totaltasks: dataflatArray.length,
+          totaltasks: allTasks.length,
           onhold: [],
           rejected: [],
           reviewing: [],
           running: [],
           complete: [],
         };
-        dataflatArray.forEach((item) => {
+        allTasks.forEach((item) => {
           for (const i in reanageList) {
             if (item.memberID === reanageList[i].userID) {
               if (item.state === "On-hold") {

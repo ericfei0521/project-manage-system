@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import style from "../../style/projectChannel.module.scss";
 import Moment from "react-moment";
+import { textareaResize, scrollToBottom } from "../../utils/util";
 import { useSelector } from "react-redux";
 import { firestore } from "../../firebase";
 
@@ -60,7 +61,7 @@ const ProjectChannel = ({ channelID }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [channelID]);
   useEffect(() => {
-    scrollToBottom();
+    scrollToBottom(divRref);
   }, [content]);
   const updateMessage = () => {
     const time = Date.now();
@@ -71,13 +72,7 @@ const ProjectChannel = ({ channelID }) => {
     };
     channelpath.collection("channel").add(data);
   };
-  const textareaResize = (element) => {
-    element.style.height = "1px";
-    element.style.height = element.scrollHeight + "px";
-  };
-  const scrollToBottom = () => {
-    divRref.current.scrollTop = divRref.current.scrollHeight;
-  };
+
   return (
     <div className={style.channel}>
       {showmember ? (

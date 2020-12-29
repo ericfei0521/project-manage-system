@@ -4,12 +4,11 @@ import logo from "../../images/logowelcome.png";
 import { ReactComponent as ProjectIcon } from "../../images/ICON/projects.svg";
 import { ReactComponent as TasksIcon } from "../../images/ICON/tasks.svg";
 import { ReactComponent as ChatIcon } from "../../images/ICON/chat.svg";
-import PrjectCard from "./prjectCard";
+import PrjectCard from "./ProjectCard";
 import ProjectChannel from "./ProjectChannel";
 import MemberTasks from "./MemberTask";
 import Loading from "../Loading";
 import style from "../../style/projectList.module.scss";
-import button from "../../style/button.module.scss";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -64,6 +63,32 @@ function ProjectList() {
       setCurrentchannel(dataProject[0].id);
     } else {
       setCurrentchannel("");
+    }
+  };
+  const addProject = () => {
+    if (newProjectName) {
+      firestore
+        .collection("projects")
+        .add({
+          member: [user],
+          name: newProjectName,
+          state: newProjectState,
+          time: timestamp,
+        })
+        .then((docRef) => {
+          const time = Date.now();
+          firestore
+            .collection("projects")
+            .doc(docRef.id)
+            .collection("channel")
+            .add({
+              text: `Welcome to ${newProjectName} channel`,
+              time: time,
+              from: "system",
+            });
+        });
+    } else {
+      alert("Please enter projectname");
     }
   };
   return (
@@ -222,26 +247,7 @@ function ProjectList() {
                       <div className={style.btns}>
                         <button
                           onClick={() => {
-                            firestore
-                              .collection("projects")
-                              .add({
-                                member: [user],
-                                name: newProjectName,
-                                state: newProjectState,
-                                time: timestamp,
-                              })
-                              .then((docRef) => {
-                                const time = Date.now();
-                                firestore
-                                  .collection("projects")
-                                  .doc(docRef.id)
-                                  .collection("channel")
-                                  .add({
-                                    text: `Welcome to ${newProjectName} channel`,
-                                    time: time,
-                                    from: "system",
-                                  });
-                              });
+                            addProject();
                             setNewProjectsName("");
                             setNewProjectState("On-hold");
                             setAdd(false);

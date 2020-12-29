@@ -53,7 +53,7 @@ const ImageDropper = ({
         <div className={style.dropArea}>
           <form>
             <label htmlFor="file-upload">Upload</label>
-            {uploading ? <div class={style.loader}></div> : <></>}
+            {uploading ? <div className={style.loader}></div> : <></>}
             <input
               type="file"
               accept="image/*"

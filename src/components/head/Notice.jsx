@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { firestore } from "../../firebase";
 import style from "../../style/notice.module.scss";
 const Notice = (prop) => {
+  const subtaskPath = firestore.collection("subtasks").doc(prop.data.subtaskID);
   const [projectName, setProjectName] = useState("");
   const [taskName, setTaskName] = useState("");
   const [jobName, setJobName] = useState("");
@@ -14,17 +15,12 @@ const Notice = (prop) => {
           setProjectName(doc.data().name);
         }
       });
-    const unsubscribetask = firestore
-      .collection("subtasks")
-      .doc(prop.data.subtaskID)
-      .onSnapshot((doc) => {
-        if (doc.data() !== undefined) {
-          setTaskName(doc.data().name);
-        }
-      });
-    const unsubscribejobs = firestore
-      .collection("subtasks")
-      .doc(prop.data.subtaskID)
+    const unsubscribetask = subtaskPath.onSnapshot((doc) => {
+      if (doc.data() !== undefined) {
+        setTaskName(doc.data().name);
+      }
+    });
+    const unsubscribejobs = subtaskPath
       .collection("jobs")
       .doc(prop.data.jobID)
       .onSnapshot((doc) => {
