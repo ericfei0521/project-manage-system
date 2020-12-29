@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-
-import Clock from "./clock";
+import Clock from "./Clock";
 import Notice from "./notice";
 import firebase from "firebase/app";
 import bell from "../../images/ICON/notification.svg";
