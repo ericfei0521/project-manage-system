@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Header from "../head/header";
+import Header from "../Head/Header";
 import logo from "../../images/logowelcome.png";
 import { ReactComponent as ProjectIcon } from "../../images/ICON/projects.svg";
 import { ReactComponent as TasksIcon } from "../../images/ICON/tasks.svg";
