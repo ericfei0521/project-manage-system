@@ -6,7 +6,7 @@ import { ReactComponent as TasksIcon } from "../../images/ICON/tasks.svg";
 import { ReactComponent as ChatIcon } from "../../images/ICON/chat.svg";
 import PrjectCard from "./prjectCard";
 import ProjectChannel from "./ProjectChannel";
-import MemberTasks from "./MemberTasks";
+import MemberTasks from "./MemberTask";
 import Loading from "../Loading";
 import style from "../../style/projectList.module.scss";
 import button from "../../style/button.module.scss";
