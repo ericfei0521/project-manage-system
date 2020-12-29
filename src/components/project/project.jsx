@@ -11,7 +11,7 @@ import Tasks from "./Tasks";
 import MemberList from "../MemberList/MemberList";
 import AlluserList from "../MemberList/Alluser";
 import TaskItem from "../Task/taskItem";
-import Performance from "./performance";
+import Performance from "./Performance";
 import Loading from "../loading";
 import logo from "../../images/logowelcome.png";
 import style from "../../style/project.module.scss";

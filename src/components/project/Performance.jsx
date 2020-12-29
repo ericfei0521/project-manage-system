@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Barchart from "./Chart/Bar";
-import Piechart from "./Chart/Donut";
+import DonutChart from "./Chart/Donut";
 import { useSelector } from "react-redux";
 import { firestore } from "../../firebase";
 import Loading from "../loading";
@@ -99,7 +99,7 @@ const Performance = (props) => {
   }, [state]);
   return (
     <div className={style.performance}>
-      <Piechart
+      <DonutChart
         name={props.name}
         datas={chartinfo}
         tasklist={taskslist}
