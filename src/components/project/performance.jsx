@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Barchart from "./chart/bar";
-import Piechart from "./chart/pie";
+import Barchart from "./Chart/Bar";
+import Piechart from "./Chart/Dounut";
 import { useSelector } from "react-redux";
 import { firestore } from "../../firebase";
 import Loading from "../loading";
