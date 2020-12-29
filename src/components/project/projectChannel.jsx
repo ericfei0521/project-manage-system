@@ -8,28 +8,28 @@ const ProjectChannel = ({ channelID }) => {
   const divRref = useRef(null);
   const textref = useRef(null);
   const user = useSelector((state) => state.UserCheck);
-  let channelpath = firestore.collection("projects").doc(channelID);
-  let userPath = firestore.collection("users");
-  let [showmember, setShowmember] = useState(false);
-  let [channelName, setChannelName] = useState("");
-  let [newmessage, setMessage] = useState("");
-  let [currentUser, setCurrentUser] = useState({});
-  let [member, setMember] = useState([]);
-  let [content, setContent] = useState([]);
+  const channelpath = firestore.collection("projects").doc(channelID);
+  const userPath = firestore.collection("users");
+  const [showmember, setShowmember] = useState(false);
+  const [channelName, setChannelName] = useState("");
+  const [newmessage, setMessage] = useState("");
+  const [currentUser, setCurrentUser] = useState({});
+  const [member, setMember] = useState([]);
+  const [content, setContent] = useState([]);
   useEffect(() => {
-    let unsubscribemessage = channelpath
+    const unsubscribemessage = channelpath
       .collection("channel")
       .orderBy("time")
       .onSnapshot((doc) => {
-        let message = [];
+        const message = [];
         doc.forEach((item) => {
           message.push(item.data());
         });
         setContent(message);
       });
-    let unsubscribmemberlist = channelpath.onSnapshot((doc) => {
-      let memberlist = [];
-      let members = [];
+    const unsubscribmemberlist = channelpath.onSnapshot((doc) => {
+      const memberlist = [];
+      const members = [];
       if (!doc) {
         return;
       }
@@ -63,8 +63,8 @@ const ProjectChannel = ({ channelID }) => {
     scrollToBottom();
   }, [content]);
   const updateMessage = () => {
-    let time = Date.now();
-    let data = {
+    const time = Date.now();
+    const data = {
       from: currentUser.displayName,
       text: newmessage,
       time: time,

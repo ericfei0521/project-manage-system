@@ -1,5 +1,5 @@
 import { firestore } from "../firebase";
-let initail = {
+const initail = {
   id: "",
   dueDate: "",
   member: "",

@@ -6,8 +6,8 @@ import { firestore } from "../../firebase";
 
 const AlluserList = (props) => {
   const state = useSelector((state) => state.Handleshowmember);
-  let [name, setName] = useState("");
-  let project = firestore.collection("projects").doc(props.projectid);
+  const [name, setName] = useState("");
+  const project = firestore.collection("projects").doc(props.projectid);
   const updateFirestore = (value) => {
     project.update({
       member: firebase.firestore.FieldValue.arrayUnion(value),

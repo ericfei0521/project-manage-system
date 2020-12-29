@@ -38,17 +38,24 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix --ext .js,.jsx ."
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
     ],
-    "prefer-const": ["error", {
-      "destructuring": "any",
-      "ignoreReadBeforeAssign": false
-  }]
+    "rules": {
+      "prefer-const": [
+        "error",
+        {
+          "destructuring": "any",
+          "ignoreReadBeforeAssign": false
+        }
+      ]
+    }
   },
   "browserslist": {
     "production": [

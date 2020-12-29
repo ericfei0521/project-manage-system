@@ -2,15 +2,15 @@ import React, { useState, useEffect } from "react";
 import { Bar } from "react-chartjs-2";
 import style from "../../../style/performance.module.scss";
 const Barchart = ({ data, tasklist }) => {
-  let [dataSet, setdataSet] = useState({});
+  const [dataSet, setdataSet] = useState({});
 
   useEffect(() => {
-    let barstate = {
+    const barstate = {
       labels: ["On-hold", "Running", "Reviewing", "Rejected", "Complete"],
       datasets: [],
     };
     tasklist.forEach((task) => {
-      let set = {
+      const set = {
         label: task.name,
         categoryPercentage: 1.0,
         barPercentage: 0.5,

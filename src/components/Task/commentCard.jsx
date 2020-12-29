@@ -4,10 +4,10 @@ import firebase from "firebase/app";
 import { firestore } from "../../firebase";
 
 const CommentCards = (prop) => {
-  let [edit, setEdit] = useState(false);
-  let [send, setSend] = useState(false);
-  let [editing, setEditing] = useState(false);
-  let [content, setNewContent] = useState(prop.data.content);
+  const [edit, setEdit] = useState(false);
+  const [send, setSend] = useState(false);
+  const [editing, setEditing] = useState(false);
+  const [content, setNewContent] = useState(prop.data.content);
   useEffect(() => {
     firestore
       .collection("comment")
@@ -25,7 +25,7 @@ const CommentCards = (prop) => {
     });
   };
   const deleteContent = () => {
-    let path = firestore.collection("subtasks").doc(prop.data.subtaskID);
+    const path = firestore.collection("subtasks").doc(prop.data.subtaskID);
     firestore.collection("comment").doc(prop.data.id).delete();
     path
       .collection("jobs")

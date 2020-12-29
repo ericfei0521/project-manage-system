@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { firestore } from "../../firebase";
 import style from "../../style/videolink.module.scss";
 const Attachlink = ({ handleattach, id }) => {
-  let [youtubelink, setYoutubeLink] = useState("");
-  let [videolist, setVideolist] = useState([]);
+  const [youtubelink, setYoutubeLink] = useState("");
+  const [videolist, setVideolist] = useState([]);
   console.log(id);
   useEffect(() => {
     firestore
@@ -18,11 +18,11 @@ const Attachlink = ({ handleattach, id }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [handleattach]);
   const fetchyoutube = () => {
-    let regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
-    let match = youtubelink.match(regExp);
-    let urlid = match && match[7].length === 11 ? match[7] : false;
+    const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+    const match = youtubelink.match(regExp);
+    const urlid = match && match[7].length === 11 ? match[7] : false;
     if (youtubelink !== "" && urlid !== false) {
-      let newvideolist = [...videolist, urlid];
+      const newvideolist = [...videolist, urlid];
       firestore
         .collection("subtasks")
         .doc(id)

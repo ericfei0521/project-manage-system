@@ -9,10 +9,10 @@ const ImageDropper = ({
   handleupload,
   handleshowbigimg,
 }) => {
-  let [isupload, setUpload] = useState(openupload);
-  let [deleteshow, setDelete] = useState(false);
-  let [uploading, setuploading] = useState(false);
-  console.log(id);
+  const [isupload, setUpload] = useState(openupload);
+  const [deleteshow, setDelete] = useState(false);
+  const [uploading, setuploading] = useState(false);
+
   useEffect(() => {
     if (openupload === true) {
       setUpload(true);
@@ -22,7 +22,7 @@ const ImageDropper = ({
   }, [openupload]);
   const handleFiles = (e) => {
     if (e.target.files[0]) {
-      let file = e.target.files[0];
+      const file = e.target.files[0];
       var storageRef = storage.ref(`images/${id}`);
       storageRef.put(file).then(() => {
         storageRef.getDownloadURL().then((url) => {

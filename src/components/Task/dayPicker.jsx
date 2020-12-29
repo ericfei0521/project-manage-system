@@ -6,7 +6,7 @@ import "../../style/restdate.css";
 import style from "../../style/date.module.scss";
 function DatePicker(props) {
   const [date, setDate] = useState();
-  let [show, setShow] = useState(false);
+  const [show, setShow] = useState(false);
   return (
     <div>
       <h1> Due date: </h1>

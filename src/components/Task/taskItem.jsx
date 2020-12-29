@@ -12,24 +12,24 @@ import Attachlink from "./attachlink";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const TaskItem = ({ id, name, state, taskID, open }) => {
-  let dispatch = useDispatch();
-  let docPath = firestore.collection("subtasks").doc(id);
-  let { projectId } = useParams();
-  let [taskName, setTaskName] = useState(name);
-  let [taskState, setTaskState] = useState(state);
-  let [editTaskName, setEditTaskName] = useState(false);
-  let [discript, setDiscript] = useState("");
-  let [editdiscript, setEditdiscript] = useState(false);
-  let [subTask, setSubTask] = useState([]);
-  let [addsubTask, setAddSubTask] = useState(false);
-  let [sidebar, setSidebar] = useState(false);
-  let [image, setImage] = useState("");
-  let [openupload, setUpload] = useState(false);
-  let [attching, setAttaching] = useState(false);
-  let [youtubelist, setYoutubeList] = useState([]);
-  let [showimg, setShowimg] = useState(false);
+  const dispatch = useDispatch();
+  const docPath = firestore.collection("subtasks").doc(id);
+  const { projectId } = useParams();
+  const [taskName, setTaskName] = useState(name);
+  const [taskState, setTaskState] = useState(state);
+  const [editTaskName, setEditTaskName] = useState(false);
+  const [discript, setDiscript] = useState("");
+  const [editdiscript, setEditdiscript] = useState(false);
+  const [subTask, setSubTask] = useState([]);
+  const [addsubTask, setAddSubTask] = useState(false);
+  const [sidebar, setSidebar] = useState(false);
+  const [image, setImage] = useState("");
+  const [openupload, setUpload] = useState(false);
+  const [attching, setAttaching] = useState(false);
+  const [youtubelist, setYoutubeList] = useState([]);
+  const [showimg, setShowimg] = useState(false);
   useEffect(() => {
-    let unsubscribesubtasks = docPath.onSnapshot((doc) => {
+    const unsubscribesubtasks = docPath.onSnapshot((doc) => {
       console.log(doc.data());
       if (doc.data() !== undefined) {
         setTaskName(doc.data().name);
@@ -37,7 +37,7 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
         setTaskState(doc.data().state);
       }
     });
-    let unsubscribeimage = firestore
+    const unsubscribeimage = firestore
       .collection("subtasks")
       .doc(id)
       .onSnapshot((doc) => {
@@ -49,14 +49,14 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
         }
         console.log(doc.data.image);
       });
-    let unsubscribejobs = docPath
+    const unsubscribejobs = docPath
       .collection("jobs")
       .orderBy("Index")
       .onSnapshot((doc) => {
         if (doc) {
-          let childTask = [];
+          const childTask = [];
           doc.forEach((item) => {
-            let data = {
+            const data = {
               id: item.id,
               memberID: item.data().memberID,
               name: item.data().name,
@@ -112,12 +112,12 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
     });
   };
   const deleteTask = () => {
-    let path = firestore.collection("comment").where("subtaskID", "==", id);
-    let userpath = firestore.collection("users");
+    const path = firestore.collection("comment").where("subtaskID", "==", id);
+    const userpath = firestore.collection("users");
     path
       .get()
       .then((doc) => {
-        let commentList = [];
+        const commentList = [];
         doc.forEach((item) => {
           commentList.push(item.ref.id);
           item.ref.delete();
@@ -145,7 +145,7 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
       .doc(taskID)
       .get()
       .then((doc) => {
-        let data = [];
+        const data = [];
         doc.data().task.forEach((item) => {
           if (item !== id) {
             data.push(item);
@@ -189,9 +189,9 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
     const item = Array.from(subTask);
     const [reorderItem] = item.splice(result.source.index, 1);
     item.splice(result.destination.index, 0, reorderItem);
-    let batch = firestore.batch();
+    const batch = firestore.batch();
     for (let i = 0; i < item.length; i++) {
-      let path = firestore
+      const path = firestore
         .collection("subtasks")
         .doc(id)
         .collection("jobs")

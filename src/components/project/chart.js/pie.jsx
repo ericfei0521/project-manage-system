@@ -3,11 +3,11 @@ import { Doughnut } from "react-chartjs-2";
 import style from "../../../style/performance.module.scss";
 const Piechart = ({ datas, name }) => {
   console.log(datas);
-  let [dataSet, setdataSet] = useState({});
-  let [complete, setcomplete] = useState(0);
+  const [dataSet, setdataSet] = useState({});
+  const [complete, setcomplete] = useState(0);
   useEffect(() => {
     if (datas.onhold) {
-      let barstate = {
+      const barstate = {
         labels: ["On-hold", "Running", "Reviewing", "Rejected", "Complete"],
         datasets: [
           {
@@ -42,8 +42,8 @@ const Piechart = ({ datas, name }) => {
       setdataSet(barstate);
     }
     if (datas.complete) {
-      let completepercentage = datas.complete.length / datas.totaltasks;
-      let percentage = Math.floor(completepercentage * 100);
+      const completepercentage = datas.complete.length / datas.totaltasks;
+      const percentage = Math.floor(completepercentage * 100);
       setcomplete(percentage);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -1,7 +1,7 @@
 const HandleTaskMember = (state = {}, action) => {
   switch (action.type) {
     case "SHOW_TASKITEM": {
-      let newlist = {
+      const newlist = {
         ...state,
         taskID: action.payload.taskID,
         id: action.payload.id,

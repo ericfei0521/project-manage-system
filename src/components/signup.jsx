@@ -6,13 +6,13 @@ import { signup } from "../action/action";
 import { auth } from "../firebase";
 import style from "../style/signup.module.scss";
 function Signup() {
-  let dispatch = useDispatch();
+  const dispatch = useDispatch();
   const state = useSelector((state) => state.Signup);
-  let [email, setEmail] = useState(state.email);
-  let [password, setPassword] = useState(state.password);
-  let [confirm, setConfirm] = useState(state.confirmpassword);
-  let [name, setName] = useState(state.confirmpassword);
-  let history = useHistory();
+  const [email, setEmail] = useState(state.email);
+  const [password, setPassword] = useState(state.password);
+  const [confirm, setConfirm] = useState(state.confirmpassword);
+  const [name, setName] = useState(state.confirmpassword);
+  const history = useHistory();
 
   auth.onAuthStateChanged(async (userAuth) => {
     if (userAuth) {

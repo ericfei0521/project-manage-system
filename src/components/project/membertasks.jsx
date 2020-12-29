@@ -5,9 +5,9 @@ import Moment from "react-moment";
 import style from "../../style/userTasks.module.scss";
 const MemberTasks = () => {
   const user = useSelector((state) => state.UserCheck);
-  let [usertasks, setUserTasks] = useState([]);
-  let [userName, setUsername] = useState("");
-  let [state, setState] = useState(false);
+  const [usertasks, setUserTasks] = useState([]);
+  const [userName, setUsername] = useState("");
+  const [state, setState] = useState(false);
   useEffect(() => {
     firestore
       .collection("users")
@@ -17,11 +17,11 @@ const MemberTasks = () => {
         setUsername(doc.data().displayName);
       });
 
-    let unsubscribe = firestore
+    const unsubscribe = firestore
       .collection("subtasks")
       .orderBy("createTime", "desc")
       .onSnapshot((doc) => {
-        let newlist = [];
+        const newlist = [];
         doc.forEach(async (subtask) => {
           await firestore
             .collection("subtasks")
@@ -34,7 +34,7 @@ const MemberTasks = () => {
                 newlist.push(item.data());
               });
             });
-          let newarray = [...newlist];
+          const newarray = [...newlist];
           setUserTasks(newarray);
         });
       });

@@ -9,21 +9,21 @@ import { useDispatch } from "react-redux";
 const InputJob = ({ handleAddTask, projectId, subTaskID }) => {
   console.log(subTaskID);
   const membersref = useRef(null);
-  let dispatch = useDispatch();
-  let [member, setMember] = useState([]);
-  let [projectName, setProjectName] = useState("");
-  let [subtaskName, setsubTaskName] = useState("");
-  let [showmember, setShowmember] = useState(false);
-  let [taskmember, setTaskmember] = useState("");
-  let [taskmemberID, setTaskmemberID] = useState("");
-  let [status, setStatus] = useState("On-hold");
-  let [date, setDate] = useState("");
-  let [taskname, setTaskName] = useState("");
-  let [memberopen, setOpenmember] = useState(false);
+  const dispatch = useDispatch();
+  const [member, setMember] = useState([]);
+  const [projectName, setProjectName] = useState("");
+  const [subtaskName, setsubTaskName] = useState("");
+  const [showmember, setShowmember] = useState(false);
+  const [taskmember, setTaskmember] = useState("");
+  const [taskmemberID, setTaskmemberID] = useState("");
+  const [status, setStatus] = useState("On-hold");
+  const [date, setDate] = useState("");
+  const [taskname, setTaskName] = useState("");
+  const [memberopen, setOpenmember] = useState(false);
   useEffect(() => {
     let list = [];
-    let memberlist = [];
-    let unsubscribeproject = firestore
+    const memberlist = [];
+    const unsubscribeproject = firestore
       .collection("projects")
       .doc(projectId)
       .onSnapshot(function (doc) {
@@ -32,7 +32,7 @@ const InputJob = ({ handleAddTask, projectId, subTaskID }) => {
           list = doc.data().member;
         }
       });
-    let unsubsvribesubtask = firestore
+    const unsubsvribesubtask = firestore
       .collection("subtasks")
       .doc(subTaskID)
       .onSnapshot((doc) => {

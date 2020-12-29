@@ -23,51 +23,50 @@ import { DragDropContext } from "react-beautiful-dnd";
 
 const Project = () => {
   const inputref = useRef(null);
-  let dispatch = useDispatch();
-  let history = useHistory();
-  let { projectId } = useParams();
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const { projectId } = useParams();
   const state = useSelector((state) => state.HandleTaskMember);
-  let project = firestore.collection("projects").doc(projectId);
-  let [load, setLoad] = useState(true);
-  let [open, setOpen] = useState(false);
-  let [name, setName] = useState("");
-  let [projectstate, setState] = useState("");
-  let [listname, setListName] = useState("");
-  let [memberNum, setMemberNum] = useState([]);
-  let [tasks, setTasks] = useState([]);
-  let [showdelete, setDelete] = useState(false);
-  let [membershow, setMemberShow] = useState(false);
-  let [showallusers, setAllusers] = useState(false);
-  let [currentPage, setCurrentPage] = useState("all");
-  let [confirm, setconfirm] = useState("");
-  let [addCard, setAddcard] = useState(false);
-  let [allsub, setAllsub] = useState([]);
-  let [showsidemenu, setShowSidemenu] = useState(false);
+  const project = firestore.collection("projects").doc(projectId);
+  const [load, setLoad] = useState(true);
+  const [open, setOpen] = useState(false);
+  const [name, setName] = useState("");
+  const [projectstate, setState] = useState("");
+  const [listname, setListName] = useState("");
+  const [memberNum, setMemberNum] = useState([]);
+  const [tasks, setTasks] = useState([]);
+  const [showdelete, setDelete] = useState(false);
+  const [membershow, setMemberShow] = useState(false);
+  const [showallusers, setAllusers] = useState(false);
+  const [currentPage, setCurrentPage] = useState("all");
+  const [confirm, setconfirm] = useState("");
+  const [addCard, setAddcard] = useState(false);
+  const [allsub, setAllsub] = useState([]);
+  const [showsidemenu, setShowSidemenu] = useState(false);
 
   useEffect(() => {
-    let unsubscribemember = project.onSnapshot(function (doc) {
+    const unsubscribemember = project.onSnapshot(function (doc) {
       if (!doc.data()) {
         history.push("/");
       }
-      // console.log(doc.data())
       if (doc.data() !== undefined) {
-        let data = doc.data();
+        const data = doc.data();
         setName(data.name);
         setState(data.state);
-        let list = [];
+        const list = [];
         data.member.forEach((item) => {
           list.push(item);
         });
         setMemberNum(list);
       }
     });
-    let unsubscribeAlltasks = project
+    const unsubscribeAlltasks = project
       .collection("tasks")
       .orderBy("createTime")
       .onSnapshot(function (doc) {
-        let listTask = [];
+        const listTask = [];
         doc.forEach((item) => {
-          let data = {
+          const data = {
             id: item.id,
             name: item.data().name,
           };
@@ -75,13 +74,13 @@ const Project = () => {
         });
         setTasks(listTask);
       });
-    let unsubscribeAllsubtasks = firestore
+    const unsubscribeAllsubtasks = firestore
       .collection("subtasks")
       .onSnapshot((doc) => {
-        let newallsub = [];
+        const newallsub = [];
         doc.forEach((data) => {
           if (data.data().project === projectId) {
-            let dataitem = {
+            const dataitem = {
               id: data.id,
               name: data.data().name,
               state: data.data().state,
@@ -115,8 +114,6 @@ const Project = () => {
   };
 
   const handleDrag = (result) => {
-    console.log(result);
-
     if (!result.destination) return;
     if (
       result.destination.droppableId === result.source.droppableId &&
@@ -126,10 +123,10 @@ const Project = () => {
     }
     const dropStart = result.source.droppableId;
     const dropEnd = result.destination.droppableId;
-    let batch = firestore.batch();
+    const batch = firestore.batch();
     if (dropEnd === dropStart) {
-      let newarray = allsub.filter((item) => item.listid !== dropEnd);
-      let rearrangearray = allsub
+      const newarray = allsub.filter((item) => item.listid !== dropEnd);
+      const rearrangearray = allsub
         .filter((item) => item.listid === dropEnd)
         .sort((a, b) => a.index - b.index);
 
@@ -141,7 +138,7 @@ const Project = () => {
             data.index = i;
           }
         });
-        let path = firestore.collection("subtasks").doc(rearrangearray[i].id);
+        const path = firestore.collection("subtasks").doc(rearrangearray[i].id);
         batch.update(path, { index: i });
       }
       rearrangearray.forEach((newitem) => {
@@ -150,11 +147,11 @@ const Project = () => {
 
       batch.commit();
     } else {
-      let newallsub = [...allsub];
-      let sourcearray = allsub
+      const newallsub = [...allsub];
+      const sourcearray = allsub
         .filter((item) => item.listid === dropStart)
         .sort((a, b) => a.index - b.index);
-      let sourceRearrangeid = [];
+      const sourceRearrangeid = [];
       sourcearray.forEach((data) => {
         sourceRearrangeid.push(data.id);
       });
@@ -167,18 +164,17 @@ const Project = () => {
           }
         });
       }
-      let destinationarray = allsub
+      const destinationarray = allsub
         .filter((item) => item.listid === dropEnd)
         .sort((a, b) => a.index - b.index);
-      let destinationarrayid = [];
+      const destinationarrayid = [];
       destinationarray.forEach((data) => {
         destinationarrayid.push(data.id);
       });
       const destitem = Array.from(destinationarrayid);
       destitem.splice(result.destination.index, 0, result.draggableId);
-      console.log(destitem);
       destitem.forEach((data, index) => {
-        for (let i in newallsub) {
+        for (const i in newallsub) {
           if (newallsub[i].id === data) {
             newallsub[i].index = index;
             newallsub[i].listid = dropEnd;
@@ -187,7 +183,7 @@ const Project = () => {
       });
       setAllsub(newallsub);
       newallsub.forEach((item) => {
-        let path = firestore.collection("subtasks").doc(item.id);
+        const path = firestore.collection("subtasks").doc(item.id);
         batch.update(path, {
           index: item.index,
           listid: item.listid,
@@ -201,7 +197,6 @@ const Project = () => {
       history.push("/");
     });
   };
-  console.log(allsub);
   return (
     <div className={style.project}>
       <div
@@ -270,7 +265,6 @@ const Project = () => {
         <div
           className={style.sidebutton}
           onClick={() => {
-            console.log(membershow);
             dispatch(
               getMember({
                 show: membershow,

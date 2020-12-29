@@ -1,6 +1,6 @@
 import { SHOW } from "../action/actionType";
 
-let initial = {
+const initial = {
   show: false,
   member: [],
   allusers: [],

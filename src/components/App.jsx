@@ -11,10 +11,9 @@ import { useDispatch } from "react-redux";
 import { auth } from "../firebase";
 
 function App() {
-  let dispatch = useDispatch();
+  const dispatch = useDispatch();
   auth.onAuthStateChanged((userAuth) => {
     if (userAuth) {
-      console.log(userAuth.uid);
       dispatch(usercheck(userAuth.uid));
     }
   });

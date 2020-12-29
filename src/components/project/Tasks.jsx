@@ -6,12 +6,12 @@ import { firestore } from "../../firebase";
 import Loading from "../loading";
 const Tasks = (props) => {
   const state = useSelector((state) => state.Handleshowmember);
-  let [list, setList] = useState([]);
-  let [load, setLoad] = useState(true);
+  const [list, setList] = useState([]);
+  const [load, setLoad] = useState(true);
   useEffect(() => {
-    let reanageList = [];
+    const reanageList = [];
     state.member.forEach((item) => {
-      let data = {
+      const data = {
         user: item.displayName,
         userID: item.userID,
         onhold: 0,
@@ -23,11 +23,11 @@ const Tasks = (props) => {
       };
       reanageList.push(data);
     });
-    let unsubscribe = firestore
+    const unsubscribe = firestore
       .collection("subtasks")
       .where("project", "==", props.projectid)
       .onSnapshot(async (doc) => {
-        let list = [];
+        const list = [];
 
         doc.forEach((item) => {
           list.push(
@@ -38,7 +38,7 @@ const Tasks = (props) => {
               .orderBy("createTime")
               .get()
               .then((data) => {
-                let datalist = [];
+                const datalist = [];
                 data.forEach((item) => {
                   datalist.push(item.data());
                 });
@@ -46,11 +46,11 @@ const Tasks = (props) => {
               })
           );
         });
-        let a = await Promise.all(list);
-        let dataflatArray = a.flatMap((x) => x);
+        const a = await Promise.all(list);
+        const dataflatArray = a.flatMap((x) => x);
 
         dataflatArray.forEach((item) => {
-          for (let i in reanageList) {
+          for (const i in reanageList) {
             if (item.memberID === reanageList[i].userID) {
               if (item.state === "On-hold") {
                 reanageList[i].onhold += 1;

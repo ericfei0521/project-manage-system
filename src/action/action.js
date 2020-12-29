@@ -71,18 +71,18 @@ export function preaddJobe(value) {
       .collection("jobs")
       .get()
       .then((doc) => {
-        let temp = [];
+        const temp = [];
         doc.forEach((item) => {
           temp.push(item.data);
         });
         return temp;
       })
       .then((list) => {
-        let index = list.length;
+        const index = list.length;
         return index;
       })
       .then((index) => {
-        let newState = {
+        const newState = {
           Index: index,
           memberID: value.memberID,
           subtaskId: value.taskid,
@@ -108,8 +108,8 @@ export function preaddJobe(value) {
 export function getMember(value) {
   return (dispatch) => {
     console.log(value);
-    let list = [];
-    let memberName = [];
+    const list = [];
+    const memberName = [];
     firestore
       .collection("users")
       .get()
@@ -128,7 +128,7 @@ export function getMember(value) {
         });
       })
       .then(() => {
-        let newList = {
+        const newList = {
           show: !value.show,
           member: memberName,
           allusers: list,

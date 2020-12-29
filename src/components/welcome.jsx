@@ -11,7 +11,7 @@ import { Link, useHistory } from "react-router-dom";
 
 function Welcome() {
   // let dispatch = useDispatch();
-  let history = useHistory();
+  const history = useHistory();
   auth.onAuthStateChanged((user) => {
     if (user) {
       history.push("/projects");

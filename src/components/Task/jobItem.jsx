@@ -15,28 +15,28 @@ import "react-nice-dates/build/style.css";
 
 const JobItem = (prop) => {
   const scrolldiv = useRef(null);
-  let subtaskPath = firestore
+  const subtaskPath = firestore
     .collection("subtasks")
     .doc(prop.subtaskId)
     .collection("jobs")
     .doc(prop.jobid);
-  let [isEdit, setIsEdit] = useState(false);
-  let [taskName, setTaskName] = useState(prop.name);
-  let [edittaskName, setEditTaskName] = useState(false);
-  let [state, setState] = useState(prop.state);
-  let [editstate, setEditState] = useState(false);
-  let [membername, setMemberName] = useState(prop.member);
-  let [membershow, setMemberShow] = useState(false);
-  let [member, setMember] = useState([]);
-  let [showComment, setShowcomment] = useState(false);
-  let [openJob, setOpenJob] = useState(false);
-  let [date, setDate] = useState();
-  let [show, setShow] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+  const [taskName, setTaskName] = useState(prop.name);
+  const [edittaskName, setEditTaskName] = useState(false);
+  const [state, setState] = useState(prop.state);
+  const [editstate, setEditState] = useState(false);
+  const [membername, setMemberName] = useState(prop.member);
+  const [membershow, setMemberShow] = useState(false);
+  const [member, setMember] = useState([]);
+  const [showComment, setShowcomment] = useState(false);
+  const [openJob, setOpenJob] = useState(false);
+  const [date, setDate] = useState();
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     let list = [];
-    let memberlist = [];
-    let unsubscribemember = firestore
+    const memberlist = [];
+    const unsubscribemember = firestore
       .collection("projects")
       .doc(prop.projectId)
       .onSnapshot(function (doc) {
@@ -90,12 +90,14 @@ const JobItem = (prop) => {
     });
   };
   const removeJob = () => {
-    let path = firestore.collection("comment").where("jobID", "==", prop.jobid);
-    let userpath = firestore.collection("users");
+    const path = firestore
+      .collection("comment")
+      .where("jobID", "==", prop.jobid);
+    const userpath = firestore.collection("users");
     path
       .get()
       .then((doc) => {
-        let commentList = [];
+        const commentList = [];
         doc.forEach((item) => {
           commentList.push(item.ref.id);
           item.ref.delete();

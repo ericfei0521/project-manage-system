@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Moment from "react-moment";
 import style from "../../style/projecttasks.module.scss";
 const TasksDetail = ({ item }) => {
-  let [showdetail, setShowdetail] = useState(false);
+  const [showdetail, setShowdetail] = useState(false);
   return (
     <div className={style.taskssummary}>
       <div

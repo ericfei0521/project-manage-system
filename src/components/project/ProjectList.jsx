@@ -16,29 +16,29 @@ import { useHistory } from "react-router-dom";
 import { auth, firestore, timestamp } from "../../firebase";
 
 function ProjectList() {
-  let history = useHistory();
+  const history = useHistory();
   const user = useSelector((state) => state.UserCheck);
-  let projects = firestore.collection("projects");
-  let [load, setLoad] = useState(true);
-  let [activechannel, setActivechannel] = useState(false);
-  let [currentchannel, setCurrentchannel] = useState("");
-  let [currentShow, setCurrentShow] = useState("all");
-  let [dataProject, setProjects] = useState([]);
-  let [isAdd, setAdd] = useState(false);
-  let [newProjectName, setNewProjectsName] = useState("");
-  let [newProjectState, setNewProjectState] = useState("On-hold");
-  let [showsidemenu, setShowSidemenu] = useState(false);
+  const projects = firestore.collection("projects");
+  const [load, setLoad] = useState(true);
+  const [activechannel, setActivechannel] = useState(false);
+  const [currentchannel, setCurrentchannel] = useState("");
+  const [currentShow, setCurrentShow] = useState("all");
+  const [dataProject, setProjects] = useState([]);
+  const [isAdd, setAdd] = useState(false);
+  const [newProjectName, setNewProjectsName] = useState("");
+  const [newProjectState, setNewProjectState] = useState("On-hold");
+  const [showsidemenu, setShowSidemenu] = useState(false);
   //監聽使用者登入
   useEffect(() => {
     if (!user) {
       history.push("/login");
     }
-    let unsubscribeList = projects.orderBy("time").onSnapshot(function (doc) {
-      let updateData = [];
+    const unsubscribeList = projects.orderBy("time").onSnapshot(function (doc) {
+      const updateData = [];
       doc.forEach((item) => {
-        let member = item.data().member;
+        const member = item.data().member;
         if (member.includes(user)) {
-          let dataitem = {
+          const dataitem = {
             name: item.data().name,
             id: item.id,
             state: item.data().state,
@@ -231,7 +231,7 @@ function ProjectList() {
                                 time: timestamp,
                               })
                               .then((docRef) => {
-                                let time = Date.now();
+                                const time = Date.now();
                                 firestore
                                   .collection("projects")
                                   .doc(docRef.id)

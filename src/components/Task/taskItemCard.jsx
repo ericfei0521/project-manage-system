@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { Draggable } from "react-beautiful-dnd";
 
 const TaskItemCard = ({ id, name, state, taskID, open, index, image }) => {
-  let dispatch = useDispatch();
+  const dispatch = useDispatch();
   return (
     <Draggable key={id} draggableId={id} index={index}>
       {(Provided) => (

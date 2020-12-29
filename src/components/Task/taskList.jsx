@@ -9,15 +9,15 @@ import TaskItemCard from "./taskItemCard";
 import { Droppable } from "react-beautiful-dnd";
 
 const TaskList = ({ name, id, open, allsub }) => {
-  let dispatch = useDispatch();
-  let { projectId } = useParams();
-  let [subTaskname, setsubTaskName] = useState("");
-  let [listName, setListName] = useState(name);
-  let [substate, setsubTaskState] = useState("on-hold");
-  let [nameEdit, setNameEdit] = useState(false);
-  let [removeTask, setRemoveTask] = useState(false);
-  let [isEdit, setEdit] = useState(false);
-  let taskList = firestore
+  const dispatch = useDispatch();
+  const { projectId } = useParams();
+  const [subTaskname, setsubTaskName] = useState("");
+  const [listName, setListName] = useState(name);
+  const [substate, setsubTaskState] = useState("on-hold");
+  const [nameEdit, setNameEdit] = useState(false);
+  const [removeTask, setRemoveTask] = useState(false);
+  const [isEdit, setEdit] = useState(false);
+  const taskList = firestore
     .collection("projects")
     .doc(projectId)
     .collection("tasks")
@@ -26,7 +26,7 @@ const TaskList = ({ name, id, open, allsub }) => {
   let nowTask = [];
   allsub.forEach((data) => {
     if (data.listid === id) {
-      let dataitem = {
+      const dataitem = {
         id: data.id,
         name: data.name,
         state: data.state,
@@ -155,7 +155,7 @@ const TaskList = ({ name, id, open, allsub }) => {
               <button
                 onClick={() => {
                   if (substate === "") {
-                    substate = "on-hold";
+                    setsubTaskState("on-hold");
                   }
                   dispatch(
                     addTasks({

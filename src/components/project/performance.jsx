@@ -7,15 +7,15 @@ import Loading from "../loading";
 import style from "../../style/performance.module.scss";
 const Performance = (props) => {
   const state = useSelector((state) => state.Handleshowmember);
-  let [list, setList] = useState([]);
-  let [chartinfo, setchartinfo] = useState({});
-  let [taskslist, setTaskList] = useState([]);
-  let [load, setLoad] = useState(true);
+  const [list, setList] = useState([]);
+  const [chartinfo, setchartinfo] = useState({});
+  const [taskslist, setTaskList] = useState([]);
+  const [load, setLoad] = useState(true);
   console.log(state);
   useEffect(() => {
-    let reanageList = [];
+    const reanageList = [];
     state.member.forEach((item) => {
-      let data = {
+      const data = {
         user: item.displayName,
         userID: item.userID,
         onhold: 0,
@@ -27,14 +27,14 @@ const Performance = (props) => {
       };
       reanageList.push(data);
     });
-    let unsubscribe = firestore
+    const unsubscribe = firestore
       .collection("subtasks")
       .where("project", "==", props.projectid)
       .onSnapshot(async (doc) => {
-        let list = [];
-        let taskName = [];
+        const list = [];
+        const taskName = [];
         doc.forEach((item) => {
-          let subtaskdata = {
+          const subtaskdata = {
             name: item.data().name,
             id: item.id,
           };
@@ -47,7 +47,7 @@ const Performance = (props) => {
               .orderBy("createTime")
               .get()
               .then((data) => {
-                let datalist = [];
+                const datalist = [];
                 data.forEach((item) => {
                   datalist.push(item.data());
                 });
@@ -56,9 +56,9 @@ const Performance = (props) => {
           );
         });
         setTaskList(taskName);
-        let a = await Promise.all(list);
-        let dataflatArray = a.flatMap((x) => x);
-        let chartdata = {
+        const a = await Promise.all(list);
+        const dataflatArray = a.flatMap((x) => x);
+        const chartdata = {
           totaltasks: dataflatArray.length,
           onhold: [],
           rejected: [],
@@ -67,7 +67,7 @@ const Performance = (props) => {
           complete: [],
         };
         dataflatArray.forEach((item) => {
-          for (let i in reanageList) {
+          for (const i in reanageList) {
             if (item.memberID === reanageList[i].userID) {
               if (item.state === "On-hold") {
                 reanageList[i].onhold += 1;

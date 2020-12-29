@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { firestore } from "../../firebase";
 import style from "../../style/notice.module.scss";
 const Notice = (prop) => {
-  let [projectName, setProjectName] = useState("");
-  let [taskName, setTaskName] = useState("");
-  let [jobName, setJobName] = useState("");
+  const [projectName, setProjectName] = useState("");
+  const [taskName, setTaskName] = useState("");
+  const [jobName, setJobName] = useState("");
   useEffect(() => {
-    let unsubscribenames = firestore
+    const unsubscribenames = firestore
       .collection("projects")
       .doc(prop.data.project)
       .onSnapshot((doc) => {
@@ -14,7 +14,7 @@ const Notice = (prop) => {
           setProjectName(doc.data().name);
         }
       });
-    let unsubscribetask = firestore
+    const unsubscribetask = firestore
       .collection("subtasks")
       .doc(prop.data.subtaskID)
       .onSnapshot((doc) => {
@@ -22,7 +22,7 @@ const Notice = (prop) => {
           setTaskName(doc.data().name);
         }
       });
-    let unsubscribejobs = firestore
+    const unsubscribejobs = firestore
       .collection("subtasks")
       .doc(prop.data.subtaskID)
       .collection("jobs")

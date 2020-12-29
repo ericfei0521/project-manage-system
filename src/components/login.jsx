@@ -8,10 +8,10 @@ import { login } from "../action/action";
 import { auth, signInWithGoogle, createNewUser } from "../firebase";
 
 function Login() {
-  let dispatch = useDispatch();
-  let [email, setEmail] = useState("");
-  let [password, setPassword] = useState("");
-  let history = useHistory();
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const history = useHistory();
 
   auth.onAuthStateChanged(async (userAuth) => {
     if (userAuth) {

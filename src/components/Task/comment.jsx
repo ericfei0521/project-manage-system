@@ -9,16 +9,16 @@ import style from "../../style/comment.module.scss";
 const Comment = ({ subTaskID, jobID, projectID, memberlist }) => {
   console.log(memberlist);
   const divRref = useRef(null);
-  let filePath = firestore.collection("subtasks").doc(subTaskID);
-  let [comment, setComment] = useState([]);
-  let [jobComment, setJobcomment] = useState([]);
-  let [user, setUser] = useState(null);
-  let [newComment, setNewComment] = useState([]);
-  let [member, setMember] = useState("");
-  let [currentuserid, setCurrentid] = useState("");
+  const filePath = firestore.collection("subtasks").doc(subTaskID);
+  const [comment, setComment] = useState([]);
+  const [jobComment, setJobcomment] = useState([]);
+  const [user, setUser] = useState(null);
+  const [newComment, setNewComment] = useState([]);
+  const [member, setMember] = useState("");
+  const [currentuserid, setCurrentid] = useState("");
   useEffect(() => {
     let commentid = [];
-    let user = auth.currentUser;
+    const user = auth.currentUser;
     if (user) {
       firestore
         .collection("users")
@@ -29,7 +29,7 @@ const Comment = ({ subTaskID, jobID, projectID, memberlist }) => {
           setUser(item.data().displayName);
         });
     }
-    let unsubscribejobs = filePath
+    const unsubscribejobs = filePath
       .collection("jobs")
       .doc(jobID)
       .onSnapshot((doc) => {
@@ -39,11 +39,11 @@ const Comment = ({ subTaskID, jobID, projectID, memberlist }) => {
           setJobcomment(commentid);
         }
       });
-    let unsubscribecomment = firestore
+    const unsubscribecomment = firestore
       .collection("comment")
       .orderBy("time")
       .onSnapshot((doc) => {
-        let comments = [];
+        const comments = [];
         doc.forEach((item) => {
           if (commentid.includes(item.id)) {
             comments.push(item.data());
@@ -64,8 +64,8 @@ const Comment = ({ subTaskID, jobID, projectID, memberlist }) => {
   }, [comment]);
   const handleComment = (value) => {
     console.log(value);
-    let newComments = [...comment, value];
-    let jobComments = [...jobComment, value.id];
+    const newComments = [...comment, value];
+    const jobComments = [...jobComment, value.id];
     console.log(jobComments);
     setComment(newComments);
     filePath.collection("jobs").doc(jobID).update({
@@ -114,8 +114,8 @@ const Comment = ({ subTaskID, jobID, projectID, memberlist }) => {
         />
         <button
           onClick={() => {
-            let time = timestamp;
-            let data = {
+            const time = timestamp;
+            const data = {
               name: user,
               project: projectID,
               subtaskID: subTaskID,

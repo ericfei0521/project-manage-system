@@ -11,25 +11,25 @@ import { Link } from "react-router-dom";
 
 const Header = (prop) => {
   const user = useSelector((state) => state.UserCheck);
-  let [userdetail, setUserDetail] = useState("");
-  let [editProjectName, setEditProjectName] = useState(false);
-  let [projectName, setProjectName] = useState(prop.name);
-  let [username, setUserName] = useState("");
-  let [noticenumber, setNoticenumber] = useState([]);
-  let [noticeList, setNoticeList] = useState([]);
-  let [check, setCheck] = useState(false);
-  let [usershow, setUserShow] = useState(false);
+  const [userdetail, setUserDetail] = useState("");
+  const [editProjectName, setEditProjectName] = useState(false);
+  const [projectName, setProjectName] = useState(prop.name);
+  const [username, setUserName] = useState("");
+  const [noticenumber, setNoticenumber] = useState([]);
+  const [noticeList, setNoticeList] = useState([]);
+  const [check, setCheck] = useState(false);
+  const [usershow, setUserShow] = useState(false);
   useEffect(() => {
     if (!user) {
       return;
     }
-    let unsubscribe = firestore
+    const unsubscribe = firestore
       .collection("users")
       .doc(user)
       .onSnapshot((doc) => {
-        let data = doc.data();
+        const data = doc.data();
         if (data !== undefined) {
-          let name = String(data.displayName);
+          const name = String(data.displayName);
           setUserName(name);
           setUserDetail(data);
           setNoticenumber(data.comment);
@@ -38,13 +38,13 @@ const Header = (prop) => {
             .orderBy("time", "desc")
             .get()
             .then((doc) => {
-              let list = [];
-              let current = [];
+              const list = [];
+              const current = [];
               doc.forEach((item) => {
                 list.push(item.data());
               });
               list.forEach((item) => {
-                for (let i in data.comment) {
+                for (const i in data.comment) {
                   if (item.id === data.comment[i]) {
                     current.push(item);
                   }

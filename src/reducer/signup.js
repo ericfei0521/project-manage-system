@@ -1,5 +1,5 @@
 import { auth, firestore } from "../firebase";
-let initialState = {
+const initialState = {
   email: "",
   password: "",
   confirmpassword: "",

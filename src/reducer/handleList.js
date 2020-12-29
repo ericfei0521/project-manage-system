@@ -1,6 +1,6 @@
 import { timestamp, firestore } from "../firebase";
 import firebase from "firebase/app";
-let initialState = {
+const initialState = {
   id: "",
   name: "",
   task: [],
@@ -9,7 +9,7 @@ const HandleList = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_LIST": {
       state = action.payload;
-      let time = timestamp;
+      const time = timestamp;
       firestore.collection("projects").doc(state.id).collection("tasks").add({
         name: state.name,
         task: [],
@@ -19,8 +19,8 @@ const HandleList = (state = initialState, action) => {
     }
     case "ADD_TASKS": {
       state = action.payload;
-      let time = timestamp;
-      let newTask = [];
+      const time = timestamp;
+      const newTask = [];
       state.oldtasks.forEach((item) => {
         newTask.push(item.id);
       });
@@ -81,7 +81,7 @@ const HandleList = (state = initialState, action) => {
         .collection("tasks")
         .doc(action.payload.id)
         .delete();
-      let list = [];
+      const list = [];
       action.payload.task.forEach((item) => {
         list.push(item.id);
       });
@@ -92,7 +92,7 @@ const HandleList = (state = initialState, action) => {
           .where("subtaskID", "==", item)
           .get()
           .then((data) => {
-            let commentlist = [];
+            const commentlist = [];
             data.forEach((commentid) => {
               commentlist.push(commentid.ref.id);
               commentid.ref.delete();
@@ -138,7 +138,7 @@ const HandleList = (state = initialState, action) => {
       return state;
     }
     case "DElETE_PROJECT": {
-      let taskList = [];
+      const taskList = [];
       firestore
         .collection("projects")
         .doc(action.payload.projectId)
@@ -157,7 +157,7 @@ const HandleList = (state = initialState, action) => {
             .where("project", "==", action.payload.projectId)
             .get()
             .then((data) => {
-              let commentList = [];
+              const commentList = [];
               data.forEach((comment) => {
                 commentList.push(comment.ref.id);
                 comment.ref.delete();
