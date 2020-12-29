@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Doughnut } from "react-chartjs-2";
 import style from "../../../style/performance.module.scss";
 const Piechart = ({ datas, name }) => {
-  console.log(datas);
   const [dataSet, setdataSet] = useState({});
   const [complete, setcomplete] = useState(0);
   useEffect(() => {
