@@ -3,7 +3,7 @@ import TasksDetail from "./TasksDetail";
 import style from "../../style/projecttasks.module.scss";
 import { useSelector } from "react-redux";
 import { firestore } from "../../firebase";
-import Loading from "../loading";
+import Loading from "../Loading";
 const Tasks = (props) => {
   const state = useSelector((state) => state.Handleshowmember);
   const [list, setList] = useState([]);
@@ -75,7 +75,6 @@ const Tasks = (props) => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
-  console.log(list);
   return (
     <div className={style.taskview}>
       {list.map((item) => (

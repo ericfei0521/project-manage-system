@@ -3,7 +3,7 @@ import Barchart from "./Chart/Bar";
 import DonutChart from "./Chart/Donut";
 import { useSelector } from "react-redux";
 import { firestore } from "../../firebase";
-import Loading from "../loading";
+import Loading from "../Loading";
 import style from "../../style/performance.module.scss";
 const Performance = (props) => {
   const state = useSelector((state) => state.Handleshowmember);

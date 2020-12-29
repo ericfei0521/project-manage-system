@@ -12,7 +12,7 @@ import MemberList from "../MemberList/MemberList";
 import AlluserList from "../MemberList/Alluser";
 import TaskItem from "../Task/TaskItem";
 import Performance from "./Performance";
-import Loading from "../loading";
+import Loading from "../Loading";
 import logo from "../../images/logowelcome.png";
 import style from "../../style/project.module.scss";
 import { addList, getMember, deleteProject } from "../../action/action";
