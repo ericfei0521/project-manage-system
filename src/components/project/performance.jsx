@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Barchart from "./chart.js/bar";
-import Piechart from "./chart.js/pie";
+import Barchart from "./chart/bar";
+import Piechart from "./chart/pie";
 import { useSelector } from "react-redux";
 import { firestore } from "../../firebase";
 import Loading from "../loading";
@@ -11,7 +11,6 @@ const Performance = (props) => {
   const [chartinfo, setchartinfo] = useState({});
   const [taskslist, setTaskList] = useState([]);
   const [load, setLoad] = useState(true);
-  console.log(state);
   useEffect(() => {
     const reanageList = [];
     state.member.forEach((item) => {
