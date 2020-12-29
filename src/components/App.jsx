@@ -1,8 +1,8 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import Welcome from "./welcome";
+import Landing from "./Landing";
 import Login from "./Login";
-import Signup from "./signup";
+import Signup from "./SignUp";
 import ProjectList from "./Project/ProjectList.jsx";
 import Project from "./Project/Project";
 import "../style/Reset.css";
@@ -19,7 +19,7 @@ function App() {
   });
   return (
     <Switch>
-      <Route exact path="/" component={Welcome} />
+      <Route exact path="/" component={Landing} />
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
       <Route exact path="/projects" component={ProjectList} />

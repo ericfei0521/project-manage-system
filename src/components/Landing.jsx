@@ -6,7 +6,7 @@ import style from "../style/welcome.module.scss";
 import { auth } from "../firebase";
 import { Link, useHistory } from "react-router-dom";
 
-function Welcome() {
+function Landing() {
   const history = useHistory();
   auth.onAuthStateChanged((user) => {
     if (user) {
@@ -60,4 +60,4 @@ function Welcome() {
   );
 }
 
-export default Welcome;
+export default Landing;

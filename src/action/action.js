@@ -97,7 +97,6 @@ export function preaddJobe(value) {
           subTaskName: value.subTaskName,
           comment: [],
         };
-        console.log(newState);
         dispatch({
           type: "ADD_JOBS",
           payload: newState,
@@ -107,7 +106,6 @@ export function preaddJobe(value) {
 }
 export function getMember(value) {
   return (dispatch) => {
-    console.log(value);
     const list = [];
     const memberName = [];
     firestore
@@ -133,7 +131,6 @@ export function getMember(value) {
           member: memberName,
           allusers: list,
         };
-        console.log(newList);
         dispatch({
           type: SHOW,
           payload: newList,

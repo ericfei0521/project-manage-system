@@ -86,8 +86,8 @@ const ProjectChannel = ({ channelID }) => {
           <div className={style.title}>
             <h1>Member list</h1>
           </div>
-          {member.map((item, index) => (
-            <div className={style.members} key={index}>
+          {member.map((item) => (
+            <div className={style.members} key={item.userID}>
               <h3>{item.displayName}</h3>
               <h3> {item.email}</h3>
             </div>
@@ -114,9 +114,9 @@ const ProjectChannel = ({ channelID }) => {
       </div>
       <div className={style.wrap}>
         <div className={style.messagearea} ref={divRref}>
-          {content.map((item, index) =>
+          {content.map((item) =>
             item.from === "system" ? (
-              <div className={style.welcome} key={index}>
+              <div className={style.welcome} key={item.time}>
                 <h1> {item.text}</h1>
               </div>
             ) : (

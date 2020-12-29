@@ -47,7 +47,6 @@ const MemberTasks = () => {
     setState(!state);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log(usertasks);
   return (
     <div className={style.taskboard}>
       <h1>{userName}'s Tasks</h1>

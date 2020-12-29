@@ -27,7 +27,7 @@ const Signup = (state = initialState, action) => {
         state.email !== "" &&
         state.password !== "" &&
         state.confirmpassword !== "" &&
-        state.displayName !== ""
+        action.payload.displayName !== ""
       ) {
         auth
           .createUserWithEmailAndPassword(state.email, state.password)
