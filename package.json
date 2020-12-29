@@ -43,9 +43,12 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest",
-      "prefer-const"
-    ]
+      "react-app/jest"
+    ],
+    "prefer-const": ["error", {
+      "destructuring": "any",
+      "ignoreReadBeforeAssign": false
+  }]
   },
   "browserslist": {
     "production": [
