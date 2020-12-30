@@ -15,7 +15,7 @@ import { useHistory } from "react-router-dom";
 import { auth, firestore } from "../../firebase";
 import { addProject } from "../../utils/util";
 
-function ProjectList() {
+function Projects() {
   const history = useHistory();
   const user = useSelector((state) => state.UserCheck);
   const projects = firestore.collection("projects");
@@ -257,4 +257,4 @@ function ProjectList() {
     </div>
   );
 }
-export default ProjectList;
+export default Projects;
