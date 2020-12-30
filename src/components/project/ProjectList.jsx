@@ -88,7 +88,7 @@ function ProjectList() {
             });
         });
     } else {
-      alert("Please enter projectname");
+      alert("Please enter project name");
     }
   };
   return (
@@ -194,7 +194,7 @@ function ProjectList() {
             <Header id={null} state={null} name={null} signOut={routeChange} />
           </div>
           <div>
-            {currentShow === "channel" ? (
+            {currentShow === "channel" && (
               <div>
                 {dataProject.length > 0 ? (
                   <ProjectChannel channelID={dataProject[0].id} />
@@ -204,16 +204,12 @@ function ProjectList() {
                   </div>
                 )}
               </div>
-            ) : (
-              <> </>
             )}
-            {currentShow === "channels" ? (
+            {currentShow === "channels" && (
               <ProjectChannel channelID={currentchannel} />
-            ) : (
-              <></>
             )}
-            {currentShow === "tasks" ? <MemberTasks user={user} /> : <></>}
-            {currentShow === "all" || currentShow === "projects" ? (
+            {currentShow === "tasks" && <MemberTasks user={user} />}
+            {(currentShow === "all" || currentShow === "projects") && (
               <div className={style.wrap}>
                 <div className={style.show} id="displayzone">
                   {dataProject.map((item) => (
@@ -274,8 +270,6 @@ function ProjectList() {
                   )}
                 </div>
               </div>
-            ) : (
-              <></>
             )}
           </div>
         </div>

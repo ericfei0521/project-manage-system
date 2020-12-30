@@ -1,18 +1,11 @@
 import React, { useState } from "react";
 import style from "../../style/memberList.module.scss";
 import { useSelector } from "react-redux";
-import firebase from "firebase/app";
-import { firestore } from "../../firebase";
-
+import { updateDoc } from "../../utils/util";
 const AlluserList = (props) => {
   const state = useSelector((state) => state.Handleshowmember);
   const [name, setName] = useState("");
-  const project = firestore.collection("projects").doc(props.projectid);
-  const updateFirestore = (value) => {
-    project.update({
-      member: firebase.firestore.FieldValue.arrayUnion(value),
-    });
-  };
+
   return (
     <div className={style.alluser}>
       <div className={style.backbutton}>
@@ -48,7 +41,17 @@ const AlluserList = (props) => {
                   <div className={style.pendinglist}>
                     <div className={style.adding}>
                       <h2> {item.displayName}</h2>
-                      <button onClick={() => updateFirestore(item.userID)}>
+                      <button
+                        onClick={() =>
+                          updateDoc(
+                            "projects",
+                            props.projectid,
+                            "arrayAddItem",
+                            "member",
+                            item.userID
+                          )
+                        }
+                      >
                         +
                       </button>
                     </div>

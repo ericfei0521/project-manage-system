@@ -4,8 +4,6 @@ import { useSelector } from "react-redux";
 
 const MemberList = (props) => {
   const state = useSelector((state) => state.Handleshowmember);
-  console.log(state);
-
   return (
     <div>
       <div className={style.backbutton}>

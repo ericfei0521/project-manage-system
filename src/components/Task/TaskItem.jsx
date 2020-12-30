@@ -10,6 +10,7 @@ import { editTask } from "../../action/action";
 import { useParams } from "react-router-dom";
 import Attachlink from "./AttachLink";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { updateDoc, textareaResize } from "../../utils/util";
 
 const TaskItem = ({ id, name, state, taskID, open }) => {
   const dispatch = useDispatch();
@@ -197,10 +198,6 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
     batch.commit();
     setSubTask(item);
   };
-  const textareaResize = (element) => {
-    element.style.height = "1px";
-    element.style.height = element.scrollHeight + "px";
-  };
   const handleupload = () => {
     setUpload(false);
   };
@@ -209,11 +206,6 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
   };
   const handleshowbigimg = () => {
     setShowimg(true);
-  };
-  const deletelink = (value) => {
-    docPath.update({
-      youtube: firebase.firestore.FieldValue.arrayRemove(value),
-    });
   };
   return (
     <div>
@@ -254,7 +246,7 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
               }}
               value={taskState}
               className={`${style.inComplete} ${
-                taskState === "Complete" ? style.Complete : ""
+                taskState === "Complete" && style.Complete
               }`}
             >
               <option value="On-hold">On-hold</option>
@@ -315,7 +307,7 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
           handleupload={handleupload}
           handleshowbigimg={handleshowbigimg}
         />
-        {attching ? <Attachlink handleattach={handleattach} id={id} /> : <></>}
+        {attching && <Attachlink handleattach={handleattach} id={id} />}
         <div className={style.reference}>
           <h2>Reference :</h2>
           <div className={style.media}>
@@ -329,7 +321,15 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
                 ></iframe>
                 <button
                   value={item}
-                  onClick={(e) => deletelink(e.target.value)}
+                  onClick={(e) =>
+                    updateDoc(
+                      "subtasks",
+                      id,
+                      "arrayDeleteItem",
+                      "youtube",
+                      e.target.value
+                    )
+                  }
                 >
                   ✖
                 </button>
@@ -389,14 +389,12 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
           }
         >
           <div
-            className={`${style.menu} ${sidebar ? "" : style.menuopen}`}
+            className={`${style.menu} ${sidebar || style.menuopen}`}
             onClick={() => setSidebar(!sidebar)}
           >
             <h1>More</h1>
           </div>
-          <div
-            className={`${style.sidebar} ${sidebar ? "" : style.sidebaropen}`}
-          >
+          <div className={`${style.sidebar} ${sidebar || style.sidebaropen}`}>
             <button
               className={style.addtask}
               onClick={() => {
@@ -426,18 +424,16 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
           </div>
         </div>
       </div>
-      {addsubTask ? (
+      {addsubTask && (
         <div className={style.inputjob}>
           <InputJob
             projectId={projectId}
             handleAddTask={handleAddTask}
             subTaskID={id}
-          />{" "}
+          />
         </div>
-      ) : (
-        <></>
       )}
-      {showimg ? (
+      {showimg && (
         <div
           id="imagewrap"
           className={style.bigimage}
@@ -449,8 +445,6 @@ const TaskItem = ({ id, name, state, taskID, open }) => {
         >
           <img src={image} alt="" />
         </div>
-      ) : (
-        <></>
       )}
     </div>
   );

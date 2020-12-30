@@ -7,7 +7,7 @@ import { nanoid } from "nanoid";
 import style from "../../style/taskList.module.scss";
 import TaskItemCard from "./TaskItemCard";
 import { Droppable } from "react-beautiful-dnd";
-
+import { textareaResize } from "../../utils/util";
 const TaskList = ({ name, id, open, allsub }) => {
   const dispatch = useDispatch();
   const { projectId } = useParams();
@@ -51,10 +51,6 @@ const TaskList = ({ name, id, open, allsub }) => {
         name: e.target.value,
       });
     }
-  };
-  const textareaResize = (element) => {
-    element.style.height = "1px";
-    element.style.height = element.scrollHeight + "px";
   };
   return (
     <div className={style.list}>

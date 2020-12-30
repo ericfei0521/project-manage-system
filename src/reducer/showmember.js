@@ -1,5 +1,3 @@
-import { SHOW } from "../action/actionType";
-
 const initial = {
   show: false,
   member: [],
@@ -8,7 +6,7 @@ const initial = {
 
 const Handleshowmember = (state = initial, action) => {
   switch (action.type) {
-    case SHOW: {
+    case "SHOW": {
       state = action.payload;
       return state;
     }

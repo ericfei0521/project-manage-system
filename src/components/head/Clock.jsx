@@ -10,7 +10,6 @@ function Clock() {
   let time = `${hour}:${minute}`;
   const [date, setDate] = useState(time);
 
-  //Replaces componentDidMount and componentWillUnmount
   useEffect(() => {
     var timerID = setInterval(() => tick(), 1000);
     return function cleanup() {

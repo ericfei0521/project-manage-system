@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Clock from "./Clock";
 import Notice from "./Notice";
-import firebase from "firebase/app";
 import bell from "../../images/ICON/notification.svg";
 import style from "../../style/header.module.scss";
 import { firestore } from "../../firebase";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { commentReadUpdate, updateDoc } from "../../utils/util";
 
 const Header = (prop) => {
   const user = useSelector((state) => state.UserCheck);
@@ -61,19 +61,7 @@ const Header = (prop) => {
   useEffect(() => {
     setProjectName(prop.name);
   }, [prop]);
-  const readindividual = (value) => {
-    firestore
-      .collection("users")
-      .doc(user)
-      .update({
-        comment: firebase.firestore.FieldValue.arrayRemove(value),
-      });
-  };
-  const readall = () => {
-    firestore.collection("users").doc(user).update({
-      comment: [],
-    });
-  };
+
   const handleproject = (e) => {
     if (e.key === "Enter") {
       setEditProjectName(false);
@@ -109,39 +97,39 @@ const Header = (prop) => {
       }
     }
   };
-  const handleTaskState = (value) => {
-    firestore.collection("projects").doc(prop.id).update({
-      state: value,
-    });
+  const projectNameSwitch = () => {
+    if (editProjectName) {
+      return (
+        <input
+          value={projectName}
+          type="text"
+          autoFocus
+          key={prop.name}
+          onChange={(e) => setProjectName(e.target.value)}
+          onKeyDown={(e) => {
+            handleproject(e);
+          }}
+        />
+      );
+    } else {
+      return (
+        <h1
+          className={style.projectname}
+          onClick={() => {
+            setEditProjectName(true);
+          }}
+          key={prop.id}
+        >
+          {projectName}
+        </h1>
+      );
+    }
   };
   return (
     <div className={style.head}>
       <div className={style.left}>
         {prop.name ? (
-          [
-            editProjectName ? (
-              <input
-                value={projectName}
-                type="text"
-                autoFocus
-                key={prop.name}
-                onChange={(e) => setProjectName(e.target.value)}
-                onKeyDown={(e) => {
-                  handleproject(e);
-                }}
-              />
-            ) : (
-              <h1
-                className={style.projectname}
-                onClick={() => {
-                  setEditProjectName(true);
-                }}
-                key={prop.id}
-              >
-                {projectName}
-              </h1>
-            ),
-          ]
+          projectNameSwitch()
         ) : (
           <div className={style.home}>
             <Link to="/projects">
@@ -153,7 +141,13 @@ const Header = (prop) => {
         {prop.state ? (
           <select
             onChange={(e) => {
-              handleTaskState(e.target.value);
+              updateDoc(
+                "projects",
+                prop.id,
+                "updateItem",
+                "state",
+                e.target.value
+              );
             }}
             value={prop.state}
           >
@@ -210,14 +204,14 @@ const Header = (prop) => {
       <div className={`${style.noticearea} ${check ? style.noticeshow : ""}`}>
         <button
           onClick={() => {
-            readall();
+            commentReadUpdate(true, user, "");
             setCheck(!check);
           }}
         >
           Read All
         </button>
         {noticeList.map((item) => (
-          <Notice key={item.id} data={item} read={readindividual} />
+          <Notice key={item.id} data={item} user={user} />
         ))}
       </div>
     </div>

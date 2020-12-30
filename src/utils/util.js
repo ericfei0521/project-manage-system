@@ -1,4 +1,4 @@
-// import firebase from 'firebase/app';
+import firebase from "firebase/app";
 import { firestore } from "../firebase";
 export const textareaResize = (element) => {
   element.style.height = "1px";
@@ -25,5 +25,45 @@ export const fetchyoutube = (youtubelink, videolist, id, callBack) => {
       });
   } else {
     alert("Please enter correct youtube link");
+  }
+};
+
+export const commentReadUpdate = (readAll, userID, value) => {
+  console.log(value);
+  const userUpdatePath = firestore.collection("users").doc(userID);
+  if (readAll === false) {
+    return userUpdatePath.update({
+      comment: firebase.firestore.FieldValue.arrayRemove(value),
+    });
+  } else {
+    return userUpdatePath.update({
+      comment: [],
+    });
+  }
+};
+
+export const updateDoc = (collection, docID, method, key, value) => {
+  const keyname = key;
+  if (method === "arrayAddItem") {
+    return firestore
+      .collection(collection)
+      .doc(docID)
+      .update({
+        [keyname]: firebase.firestore.FieldValue.arrayUnion(value),
+      });
+  } else if (method === "updateItem") {
+    return firestore
+      .collection(collection)
+      .doc(docID)
+      .update({
+        [keyname]: value,
+      });
+  } else if (method === "arrayDeleteItem") {
+    return firestore
+      .collection(collection)
+      .doc(docID)
+      .update({
+        [keyname]: firebase.firestore.FieldValue.arrayRemove(value),
+      });
   }
 };

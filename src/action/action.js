@@ -1,5 +1,4 @@
 import { timestamp, firestore } from "../firebase";
-import { SHOW } from "./actionType";
 
 export function login(value) {
   return {
@@ -62,7 +61,12 @@ export function usercheck(value) {
     payload: value,
   };
 }
-
+export function showMember(value) {
+  return {
+    type: "SHOW",
+    payload: value,
+  };
+}
 export function preaddJobe(value) {
   return (dispatch) => {
     firestore
@@ -132,7 +136,7 @@ export function getMember(value) {
           allusers: list,
         };
         dispatch({
-          type: SHOW,
+          type: "SHOW",
           payload: newList,
         });
       });
