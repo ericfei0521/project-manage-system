@@ -21,7 +21,7 @@ import { auth, firestore } from "../../firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { DragDropContext } from "react-beautiful-dnd";
 import { deleteProject } from "../../utils/util";
-const Project = () => {
+const ProjectDetail = () => {
   const { projectId } = useParams();
   const state = useSelector((state) => state.HandleTaskMember);
   const project = firestore.collection("projects").doc(projectId);
@@ -483,4 +483,4 @@ const Project = () => {
   );
 };
 
-export default Project;
+export default ProjectDetail;
