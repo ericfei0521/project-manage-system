@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import Landing from "./Landing";
 import Login from "./Login";
 import Signup from "./SignUp";
-import ProjectList from "./Project/AllProjectList";
+import ProjectList from "./Project/ProjectList.jsx";
 import Project from "./Project/Project";
 import "../style/Reset.css";
 import { usercheck } from "../action/action";
