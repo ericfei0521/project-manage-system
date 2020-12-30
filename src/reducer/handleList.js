@@ -137,99 +137,95 @@ const HandleList = (state = initialState, action) => {
         });
       return state;
     }
-    case "DElETE_PROJECT": {
-      const taskList = [];
-      firestore
-        .collection("projects")
-        .doc(action.payload.projectId)
-        .collection("tasks")
-        .get()
-        .then((doc) =>
-          doc.forEach((item) => {
-            item.data().task.forEach((data) => {
-              taskList.push(data);
-            });
-          })
-        )
-        .then(() => {
-          firestore
-            .collection("comment")
-            .where("project", "==", action.payload.projectId)
-            .get()
-            .then((data) => {
-              const commentList = [];
-              data.forEach((comment) => {
-                commentList.push(comment.ref.id);
-                comment.ref.delete();
-              });
-              return commentList;
-            })
-            .then((commentList) => {
-              commentList.forEach((item) => {
-                firestore
-                  .collection("users")
-                  .where("comment", "array-contains", item)
-                  .get()
-                  .then((doc) => {
-                    doc.forEach((data) => {
-                      data.ref.update({
-                        comment: firebase.firestore.FieldValue.arrayRemove(
-                          item
-                        ),
-                      });
-                    });
-                  });
-              });
-            });
-        })
-        .then(() => {
-          firestore
-            .collection("subtasks")
-            .get()
-            .then((doc) => {
-              firestore
-                .collection("projects")
-                .doc(action.payload.projectId)
-                .collection("tasks")
-                .get()
-                .then((doc) => {
-                  doc.forEach((item) => {
-                    item.ref.delete();
-                  });
-                });
-              firestore
-                .collection("projects")
-                .doc(action.payload.projectId)
-                .collection("channel")
-                .get()
-                .then((doc) => {
-                  doc.forEach((item) => {
-                    item.ref.delete();
-                  });
-                });
-              firestore
-                .collection("projects")
-                .doc(action.payload.projectId)
-                .delete();
-              doc.forEach((item) => {
-                if (taskList.includes(item.id)) {
-                  firestore
-                    .collection("sub；tasks")
-                    .doc(item.id)
-                    .collection("jobs")
-                    .get()
-                    .then((task) => {
-                      task.forEach((data) => {
-                        data.ref.delete();
-                      });
-                    });
-                  firestore.collection("subtasks").doc(item.id).delete();
-                }
-              });
-            });
-        });
-      return action.payload;
-    }
+    // case 'DElETE_PROJECT': {
+    //   const taskList = [];
+    //   firestore
+    //     .collection('projects')
+    //     .doc(action.payload.projectId)
+    //     .collection('tasks')
+    //     .get()
+    //     .then((doc) =>
+    //       doc.forEach((item) => {
+    //         item.data().task.forEach((data) => {
+    //           taskList.push(data);
+    //         });
+    //       })
+    //     )
+    //     .then(() => {
+    //       firestore
+    //         .collection('comment')
+    //         .where('project', '==', action.payload.projectId)
+    //         .get()
+    //         .then((data) => {
+    //           const commentList = [];
+    //           data.forEach((comment) => {
+    //             commentList.push(comment.ref.id);
+    //             comment.ref.delete();
+    //           });
+    //           return commentList;
+    //         })
+    //         .then((commentList) => {
+    //           commentList.forEach((item) => {
+    //             firestore
+    //               .collection('users')
+    //               .where('comment', 'array-contains', item)
+    //               .get()
+    //               .then((doc) => {
+    //                 doc.forEach((data) => {
+    //                   data.ref.update({
+    //                     comment: firebase.firestore.FieldValue.arrayRemove(item),
+    //                   });
+    //                 });
+    //               });
+    //           });
+    //         });
+    //     })
+    //     .then(() => {
+    //       firestore
+    //         .collection('subtasks')
+    //         .get()
+    //         .then((doc) => {
+    //           firestore
+    //             .collection('projects')
+    //             .doc(action.payload.projectId)
+    //             .collection('tasks')
+    //             .get()
+    //             .then((doc) => {
+    //               doc.forEach((item) => {
+    //                 item.ref.delete();
+    //               });
+    //             });
+    //           firestore
+    //             .collection('projects')
+    //             .doc(action.payload.projectId)
+    //             .collection('channel')
+    //             .get()
+    //             .then((doc) => {
+    //               doc.forEach((item) => {
+    //                 item.ref.delete();
+    //               });
+    //             });
+    //           firestore.collection('projects').doc(action.payload.projectId).delete();
+    //           doc.forEach((item) => {
+    //             if (taskList.includes(item.id)) {
+    //               console.log(item.id);
+    //               firestore
+    //                 .collection('subtasks')
+    //                 .doc(item.id)
+    //                 .collection('jobs')
+    //                 .get()
+    //                 .then((task) => {
+    //                   task.forEach((data) => {
+    //                     data.ref.delete();
+    //                   });
+    //                 });
+    //               firestore.collection('subtasks').doc(item.id).delete();
+    //             }
+    //           });
+    //         });
+    //     });
+    //   return action.payload;
+    // }
     default:
       return state;
   }

@@ -15,19 +15,19 @@ import Performance from "./Performance";
 import Loading from "../Loading";
 import logo from "../../images/logowelcome.png";
 import style from "../../style/project.module.scss";
-import { addList, getMember, deleteProject } from "../../action/action";
+import { addList, getMember } from "../../action/action";
 import { useParams, Link, useHistory } from "react-router-dom";
 import { auth, firestore } from "../../firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { DragDropContext } from "react-beautiful-dnd";
-
+import { deleteProject } from "../../utils/util";
 const Project = () => {
-  const inputref = useRef(null);
-  const dispatch = useDispatch();
-  const history = useHistory();
   const { projectId } = useParams();
   const state = useSelector((state) => state.HandleTaskMember);
   const project = firestore.collection("projects").doc(projectId);
+  const inputref = useRef(null);
+  const dispatch = useDispatch();
+  const history = useHistory();
   const [load, setLoad] = useState(true);
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
@@ -321,7 +321,7 @@ const Project = () => {
         ) : (
           <></>
         )}
-        {currentPage === "all" ? (
+        {currentPage === "all" && (
           <DragDropContext onDragEnd={handleDrag}>
             <div className={style.projectlist}>
               <div className={style.projects}>
@@ -383,11 +383,9 @@ const Project = () => {
               </div>
             </div>
           </DragDropContext>
-        ) : (
-          <></>
         )}
       </div>
-      {open ? (
+      {open && (
         <div
           className={style.taskdetail}
           id="taskdetail"
@@ -405,13 +403,11 @@ const Project = () => {
             open={handleOpen}
           />
         </div>
-      ) : (
-        <></>
       )}
       <div style={load ? { display: "block" } : { display: "none" }}>
         <Loading />
       </div>
-      {showallusers ? (
+      {showallusers && (
         <div className={style.allList}>
           <AlluserList
             projectid={projectId}
@@ -419,10 +415,8 @@ const Project = () => {
             showmember={handleAddmember}
           />
         </div>
-      ) : (
-        <></>
       )}
-      {membershow ? (
+      {membershow && (
         <div className={style.memberList}>
           <MemberList
             projectid={projectId}
@@ -430,10 +424,8 @@ const Project = () => {
             showmember={handlemember}
           />
         </div>
-      ) : (
-        <></>
       )}
-      {showdelete ? (
+      {showdelete && (
         <div
           id="deleteoutside"
           className={style.delete}
@@ -478,11 +470,7 @@ const Project = () => {
                     confirm === projectId ? style.avaliable : style.disable
                   }
                   onClick={() => {
-                    dispatch(
-                      deleteProject({
-                        projectId: projectId,
-                      })
-                    );
+                    deleteProject(projectId);
                   }}
                 >
                   Delete
@@ -491,8 +479,6 @@ const Project = () => {
             </div>
           </div>
         </div>
-      ) : (
-        <></>
       )}
     </div>
   );

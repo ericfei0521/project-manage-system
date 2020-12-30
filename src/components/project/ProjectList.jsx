@@ -12,7 +12,8 @@ import style from "../../style/projectList.module.scss";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { auth, firestore, timestamp } from "../../firebase";
+import { auth, firestore } from "../../firebase";
+import { addProject } from "../../utils/util";
 
 function ProjectList() {
   const history = useHistory();
@@ -65,32 +66,7 @@ function ProjectList() {
       setCurrentchannel("");
     }
   };
-  const addProject = () => {
-    if (newProjectName) {
-      firestore
-        .collection("projects")
-        .add({
-          member: [user],
-          name: newProjectName,
-          state: newProjectState,
-          time: timestamp,
-        })
-        .then((docRef) => {
-          const time = Date.now();
-          firestore
-            .collection("projects")
-            .doc(docRef.id)
-            .collection("channel")
-            .add({
-              text: `Welcome to ${newProjectName} channel`,
-              time: time,
-              from: "system",
-            });
-        });
-    } else {
-      alert("Please enter project name");
-    }
-  };
+
   return (
     <div>
       <div className={style.projectList}>
@@ -243,7 +219,7 @@ function ProjectList() {
                       <div className={style.btns}>
                         <button
                           onClick={() => {
-                            addProject();
+                            addProject(newProjectName, newProjectState, user);
                             setNewProjectsName("");
                             setNewProjectState("On-hold");
                             setAdd(false);
