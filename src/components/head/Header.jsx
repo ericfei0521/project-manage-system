@@ -6,7 +6,7 @@ import style from "../../style/header.module.scss";
 import { firestore } from "../../firebase";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { commentReadUpdate, updateDoc } from "../../utils/util";
+import { commentReadUpdate, updateDoc, updateSubDoc } from "../../utils/util";
 
 const Header = (prop) => {
   const user = useSelector((state) => state.UserCheck);
@@ -66,9 +66,20 @@ const Header = (prop) => {
     if (e.key === "Enter") {
       setEditProjectName(false);
       if (projectName !== "") {
-        firestore.collection("projects").doc(prop.id).update({
-          name: projectName,
-        });
+        updateDoc("projects", prop.id, "updateItem", "name", projectName);
+        firestore
+          .collection("projects")
+          .doc(prop.id)
+          .collection("channel")
+          .where("from", "==", "system")
+          .get()
+          .then((item) => {
+            const doc = item.docs[0];
+            doc.ref.update({
+              text: `Welcome to ${projectName} channel`,
+            });
+          });
+
         firestore
           .collection("subtasks")
           .where("project", "==", prop.id)
@@ -82,14 +93,15 @@ const Header = (prop) => {
                 .get()
                 .then((jobs) => {
                   jobs.forEach((job) => {
-                    firestore
-                      .collection("subtasks")
-                      .doc(item.id)
-                      .collection("jobs")
-                      .doc(job.id)
-                      .update({
-                        projectName: projectName,
-                      });
+                    updateSubDoc(
+                      "subtasks",
+                      item.id,
+                      "jobs",
+                      job.id,
+                      "updateItem",
+                      "projectName",
+                      projectName
+                    );
                   });
                 });
             });
@@ -138,7 +150,7 @@ const Header = (prop) => {
             <Clock />
           </div>
         )}
-        {prop.state ? (
+        {prop.state && (
           <select
             onChange={(e) => {
               updateDoc(
@@ -157,8 +169,6 @@ const Header = (prop) => {
             <option value="Rejected">Rejected</option>
             <option value="Complete">Complete</option>
           </select>
-        ) : (
-          <></>
         )}
       </div>
 
@@ -172,9 +182,7 @@ const Header = (prop) => {
               setUserShow(false);
             }}
           />
-          {noticenumber.length === 0 ? (
-            <></>
-          ) : (
+          {noticenumber.length === 0 || (
             <div className={style.noticenum}>
               <h2 style={{ color: "white" }}>{noticenumber.length}</h2>
             </div>
@@ -201,7 +209,7 @@ const Header = (prop) => {
         </div>
         <button onClick={() => prop.signOut()}>Log Out</button>
       </div>
-      <div className={`${style.noticearea} ${check ? style.noticeshow : ""}`}>
+      <div className={`${style.noticearea} ${check && style.noticeshow}`}>
         <button
           onClick={() => {
             commentReadUpdate(true, user, "");

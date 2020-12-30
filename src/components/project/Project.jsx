@@ -128,8 +128,7 @@ const Project = () => {
       const newarray = allsub.filter((item) => item.listid !== dropEnd);
       const rearrangearray = allsub
         .filter((item) => item.listid === dropEnd)
-        .sort((a, b) => a.index - b.index);
-
+        .sort((taskfirst, tasksecond) => taskfirst.index - tasksecond.index);
       const [reorderItem] = rearrangearray.splice(result.source.index, 1);
       rearrangearray.splice(result.destination.index, 0, reorderItem);
       for (let i = 0; i < rearrangearray.length; i++) {

@@ -8,7 +8,6 @@ export const textareaResize = (element) => {
 export const scrollToBottom = (ref) => {
   ref.current.scrollTop = ref.current.scrollHeight;
 };
-
 export const fetchyoutube = (youtubelink, videolist, id, callBack) => {
   const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
   const match = youtubelink.match(regExp);
@@ -28,7 +27,6 @@ export const fetchyoutube = (youtubelink, videolist, id, callBack) => {
     alert("Please enter correct youtube link");
   }
 };
-
 export const commentReadUpdate = (readAll, userID, value) => {
   console.log(value);
   const userUpdatePath = firestore.collection("users").doc(userID);
@@ -68,6 +66,27 @@ export const updateDoc = (collection, docID, method, key, value) => {
       });
   }
 };
+export const updateSubDoc = (
+  collection,
+  docID,
+  subCollection,
+  subDocID,
+  method,
+  key,
+  value
+) => {
+  const keyname = key;
+  if (method === "updateItem") {
+    return firestore
+      .collection(collection)
+      .doc(docID)
+      .collection(subCollection)
+      .doc(subDocID)
+      .update({
+        [keyname]: value,
+      });
+  }
+};
 export const addProject = (newProjectName, newProjectState, user) => {
   if (newProjectName) {
     firestore
@@ -94,17 +113,15 @@ export const addProject = (newProjectName, newProjectState, user) => {
     alert("Please enter project name");
   }
 };
-const deleteSubCollectDoc = (collection, docID, subcollection) => {
-  return firestore
+const deleteSubCollectDoc = async (collection, docID, subcollection) => {
+  const doc = await firestore
     .collection(collection)
     .doc(docID)
     .collection(subcollection)
-    .get()
-    .then((doc) => {
-      doc.forEach((item) => {
-        item.ref.delete();
-      });
-    });
+    .get();
+  doc.forEach((item) => {
+    item.ref.delete();
+  });
 };
 export const deleteProject = (value) => {
   const taskList = [];
@@ -150,46 +167,16 @@ export const deleteProject = (value) => {
         });
     })
     .then(() => {
+      deleteSubCollectDoc("projects", value, "tasks");
+      deleteSubCollectDoc("projects", value, "channel");
+      firestore.collection("projects").doc(value).delete();
       firestore
         .collection("subtasks")
         .get()
         .then((doc) => {
-          deleteSubCollectDoc("projects", value, "tasks");
-          deleteSubCollectDoc("projects", value, "channel");
-          // firestore
-          //   .collection('projects')
-          //   .doc(value)
-          //   .collection('tasks')
-          //   .get()
-          //   .then((doc) => {
-          //     doc.forEach((item) => {
-          //       item.ref.delete();
-          //     });
-          //   });
-          // firestore
-          //   .collection('projects')
-          //   .doc(value)
-          //   .collection('channel')
-          //   .get()
-          //   .then((doc) => {
-          //     doc.forEach((item) => {
-          //       item.ref.delete();
-          //     });
-          //   });
-          firestore.collection("projects").doc(value).delete();
           doc.forEach((item) => {
             if (taskList.includes(item.id)) {
               deleteSubCollectDoc("subtasks", item.id, "jobs");
-              // firestore
-              //   .collection('subtasks')
-              //   .doc(item.id)
-              //   .collection('jobs')
-              //   .get()
-              //   .then((task) => {
-              //     task.forEach((data) => {
-              //       data.ref.delete();
-              //     });
-              //   });
               firestore.collection("subtasks").doc(item.id).delete();
             }
           });

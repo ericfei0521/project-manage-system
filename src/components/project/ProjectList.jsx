@@ -145,7 +145,7 @@ function ProjectList() {
             </div>
             <div
               className={`${style.channel} ${
-                activechannel ? style.channelOpen : ""
+                activechannel && style.channelOpen
               }`}
             >
               {dataProject.map((item) => (
