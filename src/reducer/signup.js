@@ -9,28 +9,25 @@ const Signup = (state = initialState, action) => {
   const emailRule = /^\w+((-\w+)|(\.\w+))*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
   switch (action.type) {
     case "SIGN_UP": {
-      if (action.payload.password !== action.payload.confirmpassword) {
-        alert("password don't match");
+      if (action.payload.email.search(emailRule) === -1) {
+        alert("please enter correct email");
         return state;
       } else if (action.payload.password.length < 6) {
         alert("please enter at least 6 character password");
         return state;
+      } else if (action.payload.password !== action.payload.confirmpassword) {
+        alert("password don't match");
+        return state;
       } else if (action.payload.displayName === "") {
         alert("please enter displayName");
         return state;
-      } else if (action.payload.email.search(emailRule) === -1) {
-        alert("please enter correct email");
-        return state;
-      }
-      state = action.payload;
-      if (
-        state.email !== "" &&
-        state.password !== "" &&
-        state.confirmpassword !== "" &&
-        action.payload.displayName !== ""
-      ) {
+      } else {
+        state = action.payload;
         auth
-          .createUserWithEmailAndPassword(state.email, state.password)
+          .createUserWithEmailAndPassword(
+            action.payload.email,
+            action.payload.password
+          )
           .then(() => {
             const createAt = new Date();
             firestore

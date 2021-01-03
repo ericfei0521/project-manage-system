@@ -61,10 +61,12 @@ function Signup() {
                   displayName: name,
                 })
               );
-              setEmail("");
-              setPassword("");
-              setConfirm("");
-              setName("");
+              if (email !== "" && password !== "" && name !== "") {
+                setEmail("");
+                setPassword("");
+                setConfirm("");
+                setName("");
+              }
             }}
           >
             Sign Up

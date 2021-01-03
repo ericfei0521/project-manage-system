@@ -61,7 +61,6 @@ const Header = (prop) => {
   useEffect(() => {
     setProjectName(prop.name);
   }, [prop]);
-
   const handleproject = (e) => {
     if (e.key === "Enter") {
       setEditProjectName(false);

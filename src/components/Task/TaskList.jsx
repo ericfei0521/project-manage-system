@@ -72,7 +72,7 @@ const TaskList = ({ name, id, open, allsub }) => {
             className={style.listname}
             onClick={() => setNameEdit(!nameEdit)}
           >
-            {listName}
+            {name}
           </div>
         )}
         {removeTask ? (
