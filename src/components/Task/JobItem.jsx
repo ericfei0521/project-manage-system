@@ -12,6 +12,7 @@ import { DatePickerCalendar } from "react-nice-dates";
 import Moment from "react-moment";
 import "../../style/restdate.css";
 import "react-nice-dates/build/style.css";
+import { updateSubDoc } from "../../utils/util";
 
 const JobItem = (prop) => {
   const scrolldiv = useRef(null);
@@ -23,9 +24,6 @@ const JobItem = (prop) => {
   const [isEdit, setIsEdit] = useState(false);
   const [taskName, setTaskName] = useState(prop.name);
   const [edittaskName, setEditTaskName] = useState(false);
-  const [state, setState] = useState(prop.state);
-  const [editstate, setEditState] = useState(false);
-  const [membername, setMemberName] = useState(prop.member);
   const [membershow, setMemberShow] = useState(false);
   const [member, setMember] = useState([]);
   const [showComment, setShowcomment] = useState(false);
@@ -69,26 +67,6 @@ const JobItem = (prop) => {
       });
     }
   };
-  const updateDate = (value) => {
-    subtaskPath.update({
-      state: value,
-    });
-  };
-  const updateMember = (value) => {
-    subtaskPath.update({
-      member: value,
-    });
-  };
-  const updateMemberID = (value) => {
-    subtaskPath.update({
-      memberID: value,
-    });
-  };
-  const getDate = (value) => {
-    subtaskPath.update({
-      dueDate: value,
-    });
-  };
   const removeJob = () => {
     const path = firestore
       .collection("comment")
@@ -120,18 +98,18 @@ const JobItem = (prop) => {
       });
     subtaskPath.delete();
   };
-  const scrollleft = () => {
-    scrolldiv.current.scrollLeft -= 150;
+  const scroll = (direct) => {
+    if (direct === "left") {
+      scrolldiv.current.scrollLeft -= 150;
+    } else if (direct === "right") {
+      scrolldiv.current.scrollLeft += 150;
+    }
   };
-  const scrollright = () => {
-    scrolldiv.current.scrollLeft += 150;
-  };
-
   return (
     <div className={style.jobCard}>
       <div
-        className={`${style.jobitem} ${prop.isDragging ? style.ondrag : ""}${
-          openJob ? style.jobitemOpen : ""
+        className={`${style.jobitem} ${prop.isDragging && style.ondrag}${
+          openJob && style.jobitemOpen
         }`}
       >
         {edittaskName ? (
@@ -149,19 +127,25 @@ const JobItem = (prop) => {
             onClick={() => setEditTaskName(!edittaskName)}
             className={style.jobname}
           >
-            {taskName.toString().length > 10
-              ? taskName.toString().substring(0, 10) + "..."
-              : taskName.toString()}
+            {prop.name.toString().length > 10
+              ? prop.name.toString().substring(0, 10) + "..."
+              : prop.name.toString()}
           </div>
         )}
         <select
           name="status"
           id=""
-          value={state}
+          value={prop.state}
           onChange={(e) => {
-            setState(e.target.value);
-            setEditState(!editstate);
-            updateDate(e.target.value);
+            updateSubDoc(
+              "subtasks",
+              prop.subtaskId,
+              "jobs",
+              prop.jobid,
+              "updateItem",
+              "state",
+              e.target.value
+            );
           }}
         >
           <option value="On-hold">On-hold</option>
@@ -176,11 +160,11 @@ const JobItem = (prop) => {
             setMemberShow(!membershow);
           }}
         >
-          <h1 onClick={() => setOpenJob(!openJob)}>{membername}</h1>
+          <h1 onClick={() => setOpenJob(!openJob)}>{prop.member}</h1>
         </div>
-        {membershow ? (
+        {membershow && (
           <div className={style.members}>
-            <button className={style.controler} onClick={() => scrollleft()}>
+            <button className={style.controler} onClick={() => scroll("left")}>
               <img src={arrowleft} alt="" />
             </button>
             <div className={style.memberlist} ref={scrolldiv}>
@@ -191,9 +175,24 @@ const JobItem = (prop) => {
                   value={item.displayName}
                   id={item.userID}
                   onClick={(e) => {
-                    updateMember(e.target.value);
-                    setMemberName(e.target.value);
-                    updateMemberID(e.target.id);
+                    updateSubDoc(
+                      "subtasks",
+                      prop.subtaskId,
+                      "jobs",
+                      prop.jobid,
+                      "updateItem",
+                      "member",
+                      e.target.value
+                    );
+                    updateSubDoc(
+                      "subtasks",
+                      prop.subtaskId,
+                      "jobs",
+                      prop.jobid,
+                      "updateItem",
+                      "memberID",
+                      e.target.id
+                    );
                     setMemberShow(!membershow);
                   }}
                 >
@@ -202,12 +201,10 @@ const JobItem = (prop) => {
               ))}
             </div>
 
-            <button className={style.controler} onClick={() => scrollright()}>
+            <button className={style.controler} onClick={() => scroll("right")}>
               <img src={arrowright} alt="" />
             </button>
           </div>
-        ) : (
-          <></>
         )}
         <button onClick={() => setShow(!show)} className={style.editDate}>
           {date ? (
@@ -216,7 +213,7 @@ const JobItem = (prop) => {
             <Moment format="YY/MM/DD">{prop.dueDate}</Moment>
           )}
         </button>
-        {show ? (
+        {show && (
           <div className={style.date}>
             <DatePickerCalendar
               date={date}
@@ -226,14 +223,20 @@ const JobItem = (prop) => {
             <button
               onClick={() => {
                 setShow(!show);
-                getDate(date.getTime());
+                updateSubDoc(
+                  "subtasks",
+                  prop.subtaskId,
+                  "jobs",
+                  prop.jobid,
+                  "updateItem",
+                  "dueDate",
+                  date.getTime()
+                );
               }}
             >
               Set date
             </button>
           </div>
-        ) : (
-          <></>
         )}
         <div className={style.btns}>
           <button
@@ -251,22 +254,18 @@ const JobItem = (prop) => {
             ✖
           </button>
           <div
-            className={`${style.opencontrol} ${
-              isEdit ? "" : style.closecontrol
-            }`}
+            className={`${style.opencontrol} ${isEdit || style.closecontrol}`}
             onClick={() => setIsEdit(!isEdit)}
           ></div>
         </div>
       </div>
-      {showComment ? (
+      {showComment && (
         <Comment
           projectID={prop.projectId}
           subTaskID={prop.subtaskId}
           jobID={prop.jobid}
           memberlist={member}
         />
-      ) : (
-        <></>
       )}
     </div>
   );
