@@ -6,7 +6,7 @@ import style from "../../style/header.module.scss";
 import { firestore } from "../../firebase";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { commentReadUpdate, updateDoc, updateSubDoc } from "../../utils/util";
+import { updateDoc, updateSubDoc } from "../../utils/util";
 
 const Header = (prop) => {
   const user = useSelector((state) => state.UserCheck);
@@ -211,7 +211,7 @@ const Header = (prop) => {
       <div className={`${style.noticearea} ${check && style.noticeshow}`}>
         <button
           onClick={() => {
-            commentReadUpdate(true, user, "");
+            updateDoc("users", user, "updateItem", "comment", []);
             setCheck(!check);
           }}
         >
