@@ -163,10 +163,9 @@ $primary-color: #fff8e1;
   .right {
     display: flex;
     width: 100px;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     justify-self: end;
-    grid-column: 3/4;
     transform: scale(0.8);
     img {
       height: 2.2em;
@@ -213,5 +212,10 @@ $primary-color: #fff8e1;
       animation-name: shaking;
       animation-duration: 0.5s;
     }
+  }
+}
+@media only screen and (max-width: 768px) {
+  .head {
+    width: 95vw;
   }
 }
