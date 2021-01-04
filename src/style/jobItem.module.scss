@@ -1,0 +1,284 @@
+$primary-color: #fff8e1;
+.jobCard {
+  margin: 5px auto;
+  backdrop-filter: blur(10px);
+  width: 100%;
+  .jobitemOpen {
+    grid-template-rows: 30px, 1fr;
+    height: fit-content;
+  }
+  .jobitem {
+    box-sizing: border-box;
+    display: grid;
+    min-height: 40px;
+    grid-template-columns: 20% 20% 20% 30% 10%;
+    grid-row: 30px;
+    backdrop-filter: blur(10px);
+    border-left: 1px solid #fbf0baa6;
+    background-color: rgba(100, 100, 100, 0.664);
+    align-items: center;
+    .jobname {
+      width: 100%;
+      text-align: center;
+      margin-left: 5px;
+      color: $primary-color;
+      font-size: 1em;
+      cursor: auto;
+    }
+    @media only screen and (max-width: 425px) {
+      .jobname {
+        font-size: 0.8em;
+      }
+    }
+    input {
+      width: 100%;
+      text-align-last: center;
+      margin-left: 5px;
+      background-color: transparent;
+      border: none;
+      font-size: 1em;
+      color: $primary-color;
+      transform: translateY(-1px);
+    }
+    input:focus {
+      border: 1px solid $primary-color;
+    }
+    @media only screen and (max-width: 425px) {
+      input {
+        font-size: 0.8em;
+      }
+    }
+    select {
+      cursor: pointer;
+      width: 100%;
+      max-height: 22px;
+      background: transparent;
+      border: none;
+      color: rgb(204, 204, 204);
+      font-size: 1em;
+      text-align-last: center;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
+    @media only screen and (max-width: 425px) {
+      select {
+        font-size: 0.8em;
+      }
+    }
+    option {
+      color: $primary-color;
+      background-color: black;
+    }
+    .memberName {
+      width: 100%;
+      color: white;
+      text-align: center;
+      cursor: pointer;
+    }
+    @media only screen and (max-width: 425px) {
+      .memberName {
+        font-size: 0.8em;
+        margin: 0px 5px;
+      }
+    }
+    .members {
+      display: flex;
+      width: 100%;
+      overflow: hidden;
+      justify-content: space-between;
+      grid-row: 2/3;
+      grid-column: 1/6;
+      border-top: 1px solid #9c9889;
+      .controler {
+        width: 5%;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+      }
+      .controler:active {
+        overflow: hidden;
+        img {
+          transform: (scale(1.1));
+        }
+      }
+      .memberlist {
+        box-sizing: border-box;
+        padding: 5px;
+        max-width: 90%;
+        overflow-x: auto;
+        display: flex;
+        scroll-behavior: smooth;
+        .memberCard {
+          cursor: pointer;
+          background-color: transparent;
+          border: none;
+          color: $primary-color;
+          font-size: 1.2em;
+          min-width: 120px;
+          margin: 10px;
+          height: 50px;
+          border-radius: 5px;
+          background: linear-gradient(
+            45deg,
+            rgba(34, 34, 34, 0.5),
+            rgba(34, 34, 34, 0.7)
+          );
+          border-left: 1px solid $primary-color;
+        }
+        @media only screen and (max-width: 425px) {
+          .memberCard {
+            min-width: 80px;
+            font-size: 0.8em;
+          }
+        }
+        .memberCard:hover {
+          background-color: rgba(44, 44, 44, 0.726);
+          transition: 1s;
+        }
+      }
+      .memberlist::-webkit-scrollbar {
+        display: none;
+      }
+    }
+    .editDate {
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      max-height: 22px;
+      background-color: transparent;
+      border: none;
+      color: $primary-color;
+      letter-spacing: 3px;
+      font-size: 1em;
+      text-align: end;
+    }
+    @media only screen and (max-width: 768px) {
+      .editDate {
+        text-align: center;
+        font-size: 1em;
+      }
+    }
+    @media only screen and (max-width: 425px) {
+      .editDate {
+        font-size: 0.8em;
+        h1 {
+          display: none;
+        }
+      }
+    }
+    .date {
+      margin: 5px auto;
+      width: 100%;
+      max-width: 500px;
+      grid-row: 2/3;
+      grid-column: 1/6;
+      button {
+        width: 20%;
+        min-width: 120px;
+        text-align: left;
+        color: rgb(173, 173, 173);
+        background: transparent;
+        border: none;
+        margin: 10px 15px;
+        font-size: 1em;
+        cursor: pointer;
+      }
+      button:hover {
+        color: $primary-color;
+      }
+    }
+    .btns {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      height: 100%;
+      .commentshow {
+        padding: 5px;
+        width: 20px;
+        height: 20px;
+        margin-right: 20px;
+        background-color: transparent;
+        border-radius: 50%;
+        border: 1px solid $primary-color;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        img {
+          width: 10px;
+        }
+      }
+      @media only screen and (max-width: 425px) {
+        .commentshow {
+          width: 15px;
+          height: 15px;
+          margin-right: 15px;
+        }
+      }
+      .opencontrol {
+        cursor: pointer;
+        width: 15px;
+        transform: translate(1px);
+        height: 100%;
+        background-color: $primary-color;
+        position: absolute;
+        right: 0;
+      }
+      @media only screen and (max-width: 425px) {
+        .opencontrol {
+          width: 10px;
+        }
+      }
+      .closecontrol {
+        background-color: rgb(39, 39, 39);
+      }
+
+      .delete {
+        width: 60px;
+        position: absolute;
+        right: -59px;
+        height: 100%;
+        transition: 0.4s;
+        border: none;
+        background-color: rgb(92, 92, 92);
+        color: $primary-color;
+      }
+      @media only screen and (max-width: 425px) {
+        .delete {
+          width: 80px;
+          right: -70px;
+        }
+      }
+      .opendelete {
+        width: 60px;
+        position: absolute;
+        right: 9px;
+        height: 100%;
+        transition: 0.4s;
+        border: none;
+        color: $primary-color;
+        background-color: rgb(109, 20, 20);
+      }
+      @media only screen and (max-width: 425px) {
+        .opendelete {
+          width: 25px;
+          font-size: 5px;
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 425px) {
+    .jobitem {
+      grid-template-columns: 20% 20% 20% 30% 10%;
+    }
+  }
+  .ondrag {
+    box-shadow: 5px 5px 5px black;
+    border: 1px solid $primary-color;
+  }
+}

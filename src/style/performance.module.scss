@@ -1,0 +1,63 @@
+.performance {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  margin: 0 auto;
+  max-height: 90vh;
+  overflow-y: auto;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+body {
+  overflow-x: hidden;
+}
+
+.pie {
+  color: white;
+  width: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 60px auto;
+  position: relative;
+  transform: translate(0px 60px);
+  .detail {
+    position: absolute;
+    right: 50%;
+    top: 50%;
+    transform: translate(50%, 50%);
+    font-size: 1.5em;
+    text-align: center;
+    display: flex;
+    h2 {
+      margin: 5px;
+    }
+  }
+  @media only screen and (max-width: 425px) {
+    .detail {
+      font-size: 1em;
+      h2:nth-child(1) {
+        display: none;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 1200px) {
+  .pie {
+    width: 100%;
+  }
+}
+.bar {
+  color: white;
+  width: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+@media only screen and (max-width: 1200px) {
+  .bar {
+    width: 100%;
+  }
+}

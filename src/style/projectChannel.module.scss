@@ -1,0 +1,346 @@
+$primary-color: #fff8e1;
+.channel {
+  position: relative;
+  height: calc(90vh);
+  .channelHead {
+    box-sizing: border-box;
+    width: 95%;
+    padding: 8px;
+    margin: 0 auto;
+    border-bottom: 1px solid $primary-color;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    height: 60px;
+    h1 {
+      font-size: 1.5em;
+      color: $primary-color;
+    }
+    @media only screen and (max-width: 375px) {
+      h1 {
+        font-size: 1.3em;
+      }
+    }
+    .showmember {
+      display: flex;
+      position: relative;
+      align-items: center;
+      width: 10%;
+      cursor: pointer;
+      .from {
+        position: absolute;
+        left: 0;
+        width: 30px;
+        height: 30px;
+        background-color: rgb(42, 42, 42);
+        border-radius: 50%;
+        border: 2px solid $primary-color;
+        color: $primary-color;
+        line-height: 25px;
+        font-size: 1.2em;
+        text-align: center;
+        z-index: 2;
+      }
+      .from:nth-child(1) {
+        transform: translate(18px);
+        z-index: 1;
+      }
+      .from:nth-child(2) {
+        transform: translate(36px);
+        z-index: 0;
+      }
+      @media only screen and (max-width: 768px) {
+        .from {
+          left: 72%;
+        }
+      }
+      @media only screen and (max-width: 425px) {
+        .from {
+          left: 40%;
+        }
+      }
+      @media only screen and (max-width: 375px) {
+        .from {
+          left: 43%;
+        }
+      }
+      h2 {
+        font-size: 1.2em;
+        color: $primary-color;
+        transform: translate(70px);
+      }
+      @media only screen and (max-width: 768px) {
+        h2 {
+          transform: translate(340px);
+        }
+      }
+      @media only screen and (max-width: 425px) {
+        h2 {
+          transform: translate(150px);
+        }
+      }
+      @media only screen and (max-width: 375px) {
+        h2 {
+          transform: translate(145px);
+        }
+      }
+    }
+    @media only screen and (max-width: 768px) {
+      .showmember {
+        width: 50%;
+      }
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    .channelHead {
+      width: 100%;
+      justify-content: space-around;
+    }
+  }
+  .wrap {
+    width: 100%;
+    .messagearea {
+      width: 90%;
+      margin: 0 auto;
+      height: fit-content;
+      max-height: calc(82vh - 131px);
+      overflow: auto;
+      .welcome {
+        width: 60%;
+        margin: 20px auto;
+        text-align: center;
+        position: relative;
+        z-index: 100;
+
+        h1 {
+          color: rgb(202, 202, 202);
+          box-sizing: border-box;
+          padding: 0 5px;
+          font-size: 1.5em;
+          margin: 0 auto;
+          width: fit-content;
+          display: block;
+        }
+      }
+      @media only screen and (max-width: 425px) {
+        .welcome {
+          display: none;
+        }
+      }
+      .message {
+        width: 100%;
+        margin: 10px auto;
+        display: flex;
+        .from {
+          width: 40px;
+          height: 40px;
+          background-color: rgb(42, 42, 42);
+          border-radius: 50%;
+          border: 2px solid $primary-color;
+          color: $primary-color;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          font-size: 1.5em;
+        }
+        @media only screen and (max-width: 425px) {
+          .from {
+            width: 30px;
+            height: 30px;
+            font-size: 1em;
+          }
+        }
+        .messagedetail {
+          box-sizing: border-box;
+          width: calc(100% - 70px);
+          margin-left: 5px;
+          padding: 5px 10px;
+          border-radius: 5px;
+          .fromdetail {
+            width: 100%;
+            display: flex;
+            align-items: flex-end;
+            margin-bottom: 10px;
+            .name {
+              font-size: 1.3em;
+              color: $primary-color;
+              margin-right: 5px;
+            }
+            .date {
+              font-size: 0.8em;
+              color: rgba(255, 255, 255, 0.644);
+            }
+          }
+          p {
+            font-size: 1.2em;
+            white-space: pre-wrap;
+            line-height: 1.2rem;
+            color: white;
+          }
+          @media only screen and (max-width: 425px) {
+            p {
+              font-size: 0.9em;
+            }
+          }
+        }
+      }
+    }
+    @media only screen and (max-width: 768px) {
+      .messagearea {
+        max-height: calc(85vh - 131px);
+      }
+    }
+  }
+  .inputarea {
+    box-sizing: border-box;
+    width: 90%;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translate(-50%, -10px);
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(20, 20, 20, 0.561);
+    backdrop-filter: blur(10px);
+    border-radius: 5px;
+    .textinput {
+      padding: 15px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      textarea {
+        width: 100%;
+        min-height: 40px;
+        border: none;
+        background-color: transparent;
+        resize: none;
+        overflow: auto;
+        max-height: 200px;
+        font-size: 1.5em;
+        outline: none;
+        color: white;
+      }
+      @media only screen and (max-width: 768px) {
+        textarea {
+          font-size: 1em;
+        }
+      }
+      textarea::-webkit-scrollbar {
+        display: none;
+      }
+    }
+    @media only screen and (max-width: 768px) {
+      .textinput {
+        padding: 10px;
+      }
+    }
+    .sendbutton {
+      padding: 5px;
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      button {
+        background-color: transparent;
+        margin-right: 10px;
+        border: none;
+        width: 40px;
+        height: 40px;
+        background-image: url("../images//ICON/submit.png");
+        background-position: center;
+        background-size: cover;
+        cursor: pointer;
+      }
+      @media only screen and (max-width: 768px) {
+        button {
+          width: 30px;
+          height: 30px;
+        }
+      }
+    }
+  }
+  .memberlist {
+    position: absolute;
+    width: 50%;
+    height: 500px;
+    max-height: 700px;
+    left: 50%;
+    top: 50%;
+    padding: 20px;
+    transform: translate(-50%, -50%);
+    background-color: rgba(20, 20, 20, 0.561);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    z-index: 300;
+    .title {
+      color: $primary-color;
+      font-size: 1em;
+    }
+    .members {
+      width: 80%;
+      border-left: 3px solid #ccc6af;
+      margin: 10px auto;
+      height: 70px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      padding: 0px 10px;
+      position: relative;
+      h3 {
+        color: white;
+        text-align: left;
+      }
+    }
+    .members::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0px;
+      height: 1px;
+      background-color: $primary-color;
+    }
+    .members:hover::before {
+      width: 100%;
+      transition: 0.3s;
+    }
+    button {
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 25px;
+      width: 25px;
+      transform: translate(-10px, 10px);
+      background-color: transparent;
+      border: 1px solid $primary-color;
+      color: white;
+      border-radius: 50%;
+      outline: none;
+    }
+    button:hover {
+      background-color: gray;
+      color: black;
+    }
+  }
+  @media only screen and (max-width: 425px) {
+    .memberlist {
+      width: 80%;
+    }
+  }
+}
+.messagearea::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: #f5f5f500;
+}
+
+.messagearea::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f5f5f500;
+}
+
+.messagearea::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background-color: $primary-color;
+}

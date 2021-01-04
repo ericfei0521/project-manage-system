@@ -1,0 +1,221 @@
+$primary-color: #fff8e1;
+.head {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  justify-content: space-between;
+  padding: 5px 3%;
+  height: 10vh;
+
+  .noticearea {
+    position: absolute;
+    right: 30px;
+    width: 350px;
+    top: 90px;
+    z-index: 200;
+    padding: 30px;
+    border-radius: 15px;
+    background-color: rgba(20, 20, 20, 0.561);
+    backdrop-filter: blur(10px);
+    height: 80vh;
+    box-shadow: 0 0 5px rgb(66, 66, 66);
+    overflow: auto;
+    transform: scaleX(0);
+    transform-origin: 100% 50%;
+    transition: 0.3s ease-in-out;
+    button {
+      color: rgb(143, 143, 143);
+      background-color: transparent;
+      border: none;
+      margin-bottom: 15px;
+    }
+    button:hover {
+      color: $primary-color;
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    .noticearea {
+      right: 10px;
+      width: 350px;
+    }
+  }
+  @media only screen and (max-width: 375px) {
+    .noticearea {
+      right: -4px;
+    }
+  }
+  .noticeshow {
+    transform: scaleX(1);
+    transition: 0.3s ease-in-out;
+  }
+
+  .userinfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: fit-content;
+    max-width: 350px;
+    word-wrap: break-word;
+    padding: 20px;
+    position: absolute;
+    right: 30px;
+    top: 90px;
+    color: $primary-color;
+    font-size: 1.2em;
+    z-index: 200;
+    height: 200px;
+    background-color: rgba(20, 20, 20, 0.561);
+    backdrop-filter: blur(10px);
+    border-radius: 5px;
+    transform: scaleX(0);
+    transform-origin: 100% 50%;
+    transition: 0.3s ease-in-out;
+    .info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      height: 150px;
+      padding: 5px;
+      border-bottom: 1px solid white;
+      h2 {
+        font-size: 1em;
+        color: white;
+        margin-bottom: 15px;
+      }
+      h3 {
+        font-size: 1em;
+        color: white;
+        margin-bottom: 15px;
+      }
+    }
+
+    button {
+      color: rgb(160, 160, 160);
+      background-color: transparent;
+      border: none;
+      height: 30px;
+      border-radius: 5px;
+      outline: none;
+      font-size: 0.8em;
+      padding: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      color: $primary-color;
+    }
+  }
+  .userinfoshow {
+    transform: scaleX(1);
+    transition: 0.3s ease-in-out;
+  }
+  .left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    h1 {
+      font-size: 1.5em;
+      color: $primary-color;
+    }
+    .home {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      h1 {
+        margin-right: 10px;
+        font-size: 1.5em;
+        text-align: center;
+        color: $primary-color;
+      }
+    }
+    input {
+      text-align: center;
+      background-color: grayscale($color: #000000);
+      font-size: 1.5em;
+      padding: 0px;
+      text-align: left;
+      color: $primary-color;
+    }
+    input:focus {
+      padding: 0px;
+    }
+    select {
+      margin-top: 5px;
+      color: rgb(230, 230, 230);
+      letter-spacing: 2px;
+      border: none;
+      font-size: 1em;
+      background: transparent;
+      border-radius: 15px;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      text-indent: 1px;
+      text-overflow: "";
+    }
+    option {
+      background-color: black;
+    }
+  }
+  .right {
+    display: flex;
+    width: 100px;
+    justify-content: space-around;
+    align-items: center;
+    justify-self: end;
+    transform: scale(0.8);
+    img {
+      height: 2.2em;
+      margin-right: 16px;
+    }
+    .notice {
+      position: relative;
+      cursor: pointer;
+      .noticenum {
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translate(-5px, -5px);
+        background-color: #8c2d2d;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+      }
+    }
+    .user {
+      align-self: end;
+      width: 40px;
+      height: 40px;
+      border: 2px solid $primary-color;
+      border-radius: 50%;
+      background-color: transparent;
+      cursor: pointer;
+      outline: none;
+      h1 {
+        display: block;
+        color: $primary-color;
+        font-size: 2em;
+      }
+      h1:hover {
+        width: 100%;
+        color: $primary-color;
+      }
+    }
+    .user:hover {
+      background-color: rgb(42, 42, 42);
+      animation-name: shaking;
+      animation-duration: 0.5s;
+    }
+  }
+}
+@media only screen and (max-width: 768px) {
+  .head {
+    width: 95vw;
+  }
+}

@@ -1,0 +1,229 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap");
+$primary-color: #fff8e1;
+.app {
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+  position: relative;
+
+  video {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+  }
+
+  @media only screen and (max-width: 768px) {
+    video {
+      width: 230%;
+      left: 50%;
+      top: 50%;
+      transform: scale(1.2) translate(-30%, -40%);
+    }
+  }
+  @media only screen and (max-width: 425px) {
+    video {
+      width: 180%;
+      left: 50%;
+      top: 50%;
+      transform: scale(1.6) translate(-30%, -35%);
+    }
+  }
+  @media only screen and (max-width: 375px) {
+    video {
+      width: 180%;
+      left: 50%;
+      top: 50%;
+      transform: scale(1.6) translate(-30%, -25%);
+    }
+  }
+  @media only screen and (max-width: 320px) {
+    video {
+      width: 197%;
+      left: 50%;
+      top: 50%;
+      transform: scale(1.7) translate(-30%, -23%);
+    }
+  }
+  .header {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    justify-content: space-around;
+    height: 10vh;
+    background-color: rgba(14, 14, 14, 0.671);
+    .headwrap {
+      width: 80%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      img {
+        width: 200px;
+      }
+      .btngroup {
+        width: 15%;
+        min-width: 150px;
+        display: flex;
+        justify-content: space-evenly;
+
+        a {
+          width: 50%;
+        }
+      }
+      @media only screen and (max-width: 425px) {
+        .btngroup {
+          display: none;
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 425px) {
+    .header {
+      justify-content: center;
+      .headwrap {
+        width: 100%;
+        justify-content: center;
+        img {
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+
+  .landing {
+    height: calc(90vh - 1px);
+    width: 100%;
+    background-color: rgba(44, 44, 44, 0.671);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    .sologon {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      height: 50vh;
+      justify-content: space-evenly;
+      animation-duration: 1s;
+      animation-name: moveleft;
+      margin-bottom: 150px;
+      .title {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        max-width: 600px;
+        h1 {
+          width: 100%;
+          display: block;
+          width: 100%;
+          font-size: 6em;
+          color: $primary-color;
+          font-family: "Playfair Display", serif;
+        }
+        h2 {
+          width: 100%;
+          font-size: 4em;
+          margin-top: 15px;
+          margin-left: 10px;
+          font-family: "Playfair Display", serif;
+          color: $primary-color;
+        }
+        h3 {
+          width: 90%;
+          font-size: 1.6em;
+          margin-top: 30px;
+          margin-left: 15px;
+          line-height: 40px;
+          color: white;
+        }
+      }
+      @media only screen and (max-width: 1024px) {
+        .title {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          h1,
+          h2,
+          h3 {
+            text-align: center;
+          }
+        }
+      }
+      @media only screen and (max-width: 425px) {
+        .title {
+          h1,
+          h2 {
+            font-size: 3em;
+          }
+          h3 {
+            display: none;
+          }
+        }
+      }
+    }
+    @media only screen and (max-width: 1024px) {
+      .sologon {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        animation: none;
+        margin-top: 150px;
+      }
+    }
+    a {
+      width: fit-content;
+      margin-bottom: 45px;
+      button {
+        min-width: 200px;
+        margin-left: 10px;
+        border-radius: 5px;
+        padding: 15px;
+        text-align: center;
+        font-size: 1.2em;
+        color: white;
+        background-color: rgb(88, 88, 88);
+      }
+      button:hover {
+        background-color: $primary-color;
+        color: black;
+      }
+    }
+  }
+  .footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.774);
+    box-sizing: border-box;
+    display: flex;
+    padding: 5px 15px;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 20;
+    h3 {
+      font-size: 0.8em;
+      color: rgb(114, 114, 114);
+    }
+    .icon {
+      height: 30px;
+      width: 30px;
+      background-image: url("../images//github.svg");
+      background-size: cover;
+    }
+  }
+}
+
+@keyframes moveleft {
+  from {
+    transform: translateX(600px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}

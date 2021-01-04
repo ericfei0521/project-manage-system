@@ -1,0 +1,71 @@
+$primary-color: #fff8e1;
+.signup {
+  height: 100vh;
+  background-position: center;
+  background-size: cover;
+  background-image: url("../images/pexels-photo-4604566.jpg");
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .filter {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.431);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(1px);
+    overflow: hidden;
+    .wrap {
+      box-sizing: border-box;
+      width: 80%;
+      height: 60vh;
+      min-width: 320px;
+      max-width: 800px;
+      background-color: rgba(97, 97, 97, 0.534);
+      padding: 20px;
+      backdrop-filter: blur(2px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      border-radius: 5px;
+      a {
+        margin-bottom: 15px;
+      }
+      input {
+        width: 30%;
+        min-width: 300px;
+        max-width: 800px;
+        margin-bottom: 15px;
+        font-size: 1.1em;
+        background-color: transparent;
+        border: 1px solid $primary-color;
+        padding: 5px;
+        color: $primary-color;
+        border-radius: 5px;
+      }
+      input::-webkit-input-placeholder {
+        color: rgb(136, 136, 136);
+      }
+      button {
+        color: $primary-color;
+        background-color: rgb(107, 107, 107);
+        width: 40%;
+        min-width: 300px;
+        max-width: 800px;
+        border: none;
+        height: 30px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        outline: none;
+        font-size: 1em;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: $primary-color;
+        color: black;
+      }
+    }
+  }
+}

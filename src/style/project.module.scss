@@ -1,0 +1,439 @@
+$primary-color: #fff8e1;
+$projectarea: linear-gradient(#2c2c2cda 5%, #1f1f1fc4 50%);
+.project {
+  width: 100vw;
+  min-height: 100vh;
+  background-image: url("../images//pexels-photo-4604566.jpg");
+  position: relative;
+  display: flex;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  .taskdetail {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    min-height: 100vh;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    background-color: rgba(39, 39, 39, 0.972);
+    z-index: 500;
+  }
+  @media only screen and (max-width: 768px) {
+    .taskdetail {
+      width: 100%;
+    }
+  }
+  @media only screen and (max-width: 425px) {
+    .taskdetail {
+      padding: 0px;
+    }
+  }
+  .taskdetail::-webkit-scrollbar {
+    display: none;
+  }
+  .burgermenu {
+    display: none;
+    position: absolute;
+    left: 1%;
+    top: 4%;
+    z-index: 500;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-color: transparent;
+    height: 15px;
+    width: 15px;
+    border: none;
+    background-image: url("../images/ICON/menu.svg");
+    cursor: pointer;
+  }
+  @media only screen and (max-width: 768px) {
+    .burgermenu {
+      display: block;
+    }
+  }
+  .nav {
+    background-color: rgba(41, 41, 41, 0.445);
+    padding: 10px 0px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    backdrop-filter: blur(2px);
+    button {
+      font-size: 1.1em;
+      color: $primary-color;
+    }
+    .logo {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin: 15px 0px;
+      padding: 5px 10px;
+      a {
+        width: 90%;
+        img {
+          width: 60%;
+          min-width: 150px;
+        }
+      }
+      button {
+        display: none;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        background-color: transparent;
+        height: 15px;
+        width: 15px;
+        border: none;
+        background-image: url("../images/ICON/menu.svg");
+        cursor: pointer;
+      }
+      @media only screen and (max-width: 768px) {
+        button {
+          display: block;
+        }
+      }
+    }
+    .sidebutton {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 10px;
+      position: relative;
+      cursor: pointer;
+      .icon {
+        width: 28px;
+        height: 28px;
+        cursor: pointer;
+        path {
+          fill: $primary-color;
+        }
+      }
+      button {
+        box-sizing: border-box;
+        margin-left: 5px;
+        width: 70%;
+        text-align: left;
+        font-size: 1.2em;
+        background-color: transparent;
+        border: none;
+        color: $primary-color;
+        cursor: pointer;
+      }
+    }
+    .sidebutton:hover {
+      background-color: rgba(114, 114, 114, 0.246) !important;
+      transition: 0.3s;
+    }
+    .showdelete {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 10px;
+      position: relative;
+      cursor: pointer;
+      .delicon {
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        path {
+          fill: gray;
+        }
+      }
+      button {
+        box-sizing: border-box;
+        margin-left: 5px;
+        width: 70%;
+        text-align: left;
+        font-size: 1.2em;
+        background-color: transparent;
+        border: none;
+        color: gray;
+        cursor: pointer;
+      }
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    .nav {
+      position: absolute;
+      left: 0;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.849);
+      transform: translate(-200px);
+      transition: 0.4s;
+      z-index: 999;
+    }
+    .sidebarOpen {
+      transform: translate(0px);
+    }
+  }
+  .displayarea {
+    width: calc(100% - 200px);
+    background-color: rgba(93, 93, 93, 0.602);
+    position: relative;
+    .header {
+      width: 100%;
+    }
+    @media only screen and (max-width: 768px) {
+      .header {
+        width: 90%;
+        margin: 0 auto;
+      }
+    }
+    .projectlist {
+      box-sizing: border-box;
+      display: flex;
+      height: 90vh;
+      max-width: 100vw;
+      min-width: 320px;
+      overflow: auto;
+      .projects {
+        display: flex;
+        height: 87vh;
+        padding: 15px;
+        .addCard {
+          margin: 15px 5px;
+          height: 60px;
+          position: relative;
+          height: 200px;
+          width: 200px;
+          .addcardbutton {
+            opacity: 0;
+            min-width: 200px;
+            border-radius: 5px;
+            border: none;
+            padding: 10px;
+            font-size: 1em;
+            transform: translateY(-50px);
+            box-shadow: 1px 1px 2px rgba(29, 29, 29, 0.397);
+            background-color: rgba(110, 110, 110, 0.479);
+            color: $primary-color;
+            z-index: -1;
+            transition: 0.5s ease-in-out;
+            cursor: pointer;
+          }
+          .addcardbutton:hover {
+            background-color: rgba(141, 141, 141, 0.363);
+            transition: 0.1s;
+          }
+          .addcarddetail {
+            position: absolute;
+            opacity: 0;
+            left: 0;
+            top: 0;
+            transform: translateY(-50px);
+            transition: 0.5s ease-in-out;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            box-shadow: 1px 1px 2px rgba(29, 29, 29, 0.397);
+            background-color: rgba(110, 110, 110, 0.479);
+            backdrop-filter: blur(2px);
+            color: $primary-color;
+            z-index: -1;
+            input {
+              width: 100%;
+              padding: 5px;
+              border-radius: 5px;
+              background-color: transparent;
+              border: none;
+              color: white;
+            }
+            input::placeholder {
+              color: rgb(219, 219, 219);
+            }
+            .detialbutton {
+              margin-top: 5px;
+              display: flex;
+              width: 90%;
+              button {
+                margin: 2px;
+                width: 50%;
+                color: rgb(219, 219, 219);
+                background: transparent;
+                border: none;
+                border-radius: 5px;
+                padding: 3px;
+                text-align: left;
+                cursor: pointer;
+              }
+              button:hover {
+                color: $primary-color;
+              }
+            }
+          }
+          .openaddbutton {
+            opacity: 1;
+            z-index: 1;
+            transform: translateY(0px);
+            transition: 0.5s ease-in-out;
+          }
+        }
+      }
+    }
+    .projectlist::-webkit-scrollbar-corner {
+      display: none;
+    }
+    .projectlist::-webkit-scrollbar {
+      height: 8px;
+    }
+    .projectlist::-webkit-scrollbar-thumb {
+      border-radius: 3px;
+      background-color: #dad2c194;
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    .displayarea {
+      width: 100%;
+    }
+    .displayarea::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  .delete {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(37, 37, 37, 0.808);
+    backdrop-filter: blur(2px);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .deletannounce {
+      width: 50vw;
+      height: 30vh;
+      min-width: 320px;
+      min-height: 240px;
+      border-radius: 5px;
+      position: relative;
+      background-color: rgba(34, 34, 34, 0.924);
+      border: 1px solid #8b887bab;
+      .announce {
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        padding: 15px;
+        background-color: #b61b1b70;
+        h1 {
+          color: white;
+          font-size: 1.5em;
+          margin-bottom: 5px;
+        }
+        p {
+          color: white;
+          font-size: 1em;
+        }
+        @media only screen and (max-width: 768px) {
+          h1 {
+            font-size: 1.3em;
+          }
+          p {
+            font-size: 1.2em;
+          }
+        }
+      }
+      .confirm {
+        padding: 15px;
+        height: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+
+        .confirmannounce {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          p {
+            font-size: 1.2em;
+            color: rgb(199, 199, 199);
+            margin-bottom: 10px;
+          }
+          h2 {
+            color: $primary-color;
+          }
+        }
+        input {
+          width: 60%;
+          font-size: 1em;
+          height: 2em;
+          padding: 5px;
+          border: none;
+          color: $primary-color;
+          background-color: transparent;
+          border-bottom: 1px solid $primary-color;
+        }
+      }
+      .delelink {
+        position: absolute;
+        right: 5px;
+        bottom: 5px;
+        width: 30%;
+        padding: 5px;
+        button {
+          border-radius: 5px;
+          width: 100%;
+          border: none;
+          font-size: 1.3em;
+          background-color: transparent;
+          cursor: pointer;
+        }
+        .avaliable {
+          color: $primary-color;
+        }
+        .disable {
+          color: gray;
+        }
+      }
+    }
+    @media only screen and (max-width: 768px) {
+      .deletannounce {
+        width: 80%;
+      }
+    }
+  }
+}
+.project::-webkit-scrollbar {
+  display: none;
+}
+.allList {
+  position: absolute;
+  width: 25%;
+  min-width: 320px;
+  min-height: 500px;
+  max-height: 700px;
+  left: 50%;
+  top: 50%;
+  background-color: black;
+  transform: translate(-50%, -50%);
+  backdrop-filter: blur(5px);
+  border-radius: 5px;
+  // box-shadow: 0 0 20px #9e9a8a88;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.memberList {
+  position: absolute;
+  width: 40%;
+  min-width: 320px;
+  max-width: 400px;
+  min-height: 500px;
+  max-height: 700px;
+  left: 50%;
+  top: 50%;
+  border-radius: 5px;
+  transform: translate(-50%, -50%);
+  backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.memberbutton {
+  display: flex;
+  background-color: transparent;
+  border: none;
+  img {
+    height: 25px;
+  }
+}

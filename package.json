@@ -6,17 +6,27 @@
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.2.2",
+    "chart.js": "^2.9.4",
+    "date-fns": "^2.16.1",
     "firebase": "^8.1.1",
     "husky": "^4.3.0",
     "lint-staged": "^10.5.2",
-    "node-sass": "^5.0.0",
+    "moment": "^2.29.1",
+    "nanoid": "^3.1.18",
+    "node-sass": "^4.14.1",
     "prettier": "^2.2.0",
     "react": "^17.0.1",
+    "react-beautiful-dnd": "^13.0.0",
+    "react-chartjs-2": "^2.11.1",
     "react-dom": "^17.0.1",
+    "react-moment": "^1.1.1",
+    "react-nice-dates": "^3.0.7",
     "react-redux": "^7.2.2",
+    "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
     "web-vitals": "^0.2.4"
   },
   "lint-staged": {
@@ -34,7 +44,16 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "rules": {
+      "prefer-const": [
+        "error",
+        {
+          "destructuring": "any",
+          "ignoreReadBeforeAssign": false
+        }
+      ]
+    }
   },
   "browserslist": {
     "production": [
@@ -52,5 +71,8 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "devDependencies": {
+    "@svgr/webpack": "^5.5.0"
   }
 }

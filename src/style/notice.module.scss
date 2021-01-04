@@ -1,0 +1,76 @@
+$primary-color: #fff8e1;
+$card-color: rgb(161, 161, 161);
+.card {
+  box-sizing: border-box;
+  border-left: 3px solid #ccc6af;
+  max-width: 320px;
+  padding-left: 15px;
+  margin-bottom: 30px;
+  .title {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    margin-bottom: 15px;
+    .titlehead {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      h1 {
+        text-align: left;
+        color: $primary-color;
+        font-size: 1em;
+        color: rgba(221, 221, 221, 0.507);
+      }
+      button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 20px;
+        height: 20px;
+        padding: 5px;
+        text-align: center;
+        color: gray;
+        background-color: transparent;
+        border-radius: 50%;
+        border: 1px solid gray;
+        outline: none;
+        h2 {
+          font-size: 10px;
+        }
+      }
+      button:hover {
+        background-color: rgb(66, 66, 66);
+        color: $primary-color;
+        border-color: $primary-color;
+      }
+    }
+  }
+  .content {
+    width: 100%;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    h1 {
+      color: white;
+      text-align: center;
+    }
+
+    p {
+      margin-top: 15px;
+      color: white;
+      word-wrap: break-word;
+    }
+  }
+  .subTitle {
+    width: 100%;
+    display: flex;
+    font-size: 0.8em;
+    justify-content: flex-start;
+    color: rgba(221, 221, 221, 0.507);
+    h2 {
+      margin-right: 2px;
+    }
+  }
+}

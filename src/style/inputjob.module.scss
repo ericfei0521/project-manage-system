@@ -1,0 +1,170 @@
+$primary-color: #fff8e1;
+.inputjob {
+  padding: 10px 5px 20px 5px;
+  width: 60%;
+  min-width: 280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgba(37, 37, 37, 0.808);
+  backdrop-filter: blur(2px);
+  border-radius: 5px;
+  h1 {
+    display: block;
+    width: 80%;
+    text-align: left;
+    font-size: 1em;
+    color: $primary-color;
+    padding: 5px 0px;
+    margin-bottom: 10px;
+  }
+  input {
+    color: white;
+    width: 80%;
+    font-size: 1.2em;
+    padding: 5px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    background-color: rgb(78, 78, 78);
+    border: none;
+  }
+  input:focus {
+    font-size: 1.2em;
+    padding: 5px;
+  }
+  input::-webkit-input-placeholder {
+    color: rgba(161, 161, 161, 0.575);
+  }
+  select {
+    background-color: rgb(78, 78, 78);
+    font-size: 16px;
+    width: 80%;
+    color: white;
+    padding: 5px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+  option {
+    border-radius: 15px;
+  }
+  select:focus {
+    background-color: rgb(78, 78, 78);
+    font-size: 16px;
+    width: 80%;
+    color: white;
+    padding: 5px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+  .selectmember {
+    width: 80%;
+    position: relative;
+    button {
+      width: 110px;
+      height: 30px;
+      font-size: 1em;
+      background-color: transparent;
+      color: $primary-color;
+      text-align: left;
+      border: none;
+      padding: 5px 0px;
+    }
+    .selector {
+      width: 100%;
+      display: block;
+      padding: 15px 15px 15px 15px;
+      margin: 10px 0px 15px 0px;
+      position: absolute;
+      top: 20px;
+      left: 0;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      display: flex;
+      align-items: center;
+      background-color: rgb(41, 41, 41);
+      height: 30px;
+
+      h2 {
+        text-align: left;
+        color: white;
+        font-size: 16px;
+      }
+    }
+    .members {
+      position: absolute;
+      width: 100%;
+      overflow-y: auto;
+      z-index: 100;
+      top: 60px;
+      left: 0;
+      max-height: 0px;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      background-color: rgb(78, 78, 78);
+      transition: max-height 0.2s ease-in-out;
+      .member {
+        margin: 10px auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: flex-start;
+        width: 95%;
+        color: white;
+        margin-bottom: 5px;
+        height: 80px;
+        padding: 5px;
+        cursor: pointer;
+      }
+      .member:hover {
+        color: black;
+        background-color: rgb(199, 199, 199);
+      }
+    }
+    .membersopen {
+      max-height: 200px;
+      transition: max-height 0.4s ease-in-out;
+    }
+    .selectorOpen {
+      border-radius: 5px;
+      background-color: rgb(78, 78, 78);
+      transition: 0.4s ease-in-out;
+    }
+  }
+  .date {
+    width: 80%;
+    margin-top: 35px;
+  }
+  .bottombtns {
+    width: 80%;
+    display: flex;
+    margin-top: 30px;
+    button {
+      margin: 2px 10px 0px 0px;
+      width: 20%;
+      min-width: 100px;
+      font-size: 1em;
+      text-align: left;
+      color: rgb(175, 175, 175);
+      background: transparent;
+      border: none;
+      border-radius: 5px;
+      padding: 3px;
+      cursor: pointer;
+    }
+    button:hover {
+      color: $primary-color;
+    }
+  }
+}
+@media only screen and (max-width: 768px) {
+  .inputjob {
+    width: 90%;
+  }
+}

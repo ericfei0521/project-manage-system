@@ -1,0 +1,14 @@
+$primary-color: #fff8e1;
+.button {
+  color: #cac4b1;
+  width: 90%;
+  border: none;
+  margin: 5px;
+  outline: none;
+  font-size: 1.1em;
+  background-color: transparent;
+  cursor: pointer;
+}
+.button:hover {
+  color: $primary-color;
+}

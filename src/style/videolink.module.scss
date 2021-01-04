@@ -1,0 +1,46 @@
+$primary-color: #fff8e1;
+.inputwrap {
+  width: 95%;
+  padding: 10px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(37, 37, 37, 0.993);
+  backdrop-filter: blur(10px);
+  margin: 15px auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  z-index: 500;
+  input {
+    width: 90%;
+    padding: 5px;
+    background-color: transparent;
+    border-bottom: 1px solid $primary-color;
+    color: $primary-color;
+  }
+  input:focus {
+    padding: 5px;
+  }
+  .btns {
+    width: 90%;
+    button {
+      margin-top: 30px;
+      width: 60px;
+      color: gray;
+      font-size: 1em;
+      background: transparent;
+      border: none;
+      border-radius: 5px;
+      padding: 3px;
+      cursor: pointer;
+    }
+    button:hover {
+      color: $primary-color;
+    }
+  }
+}

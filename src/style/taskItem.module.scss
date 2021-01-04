@@ -1,0 +1,454 @@
+$primary-color: #fff8e1;
+.shortCard {
+  padding: 10px;
+  border-radius: 3px;
+  background-color: rgba(121, 121, 121, 0.356);
+  backdrop-filter: blur(5px);
+  color: rgb(195, 195, 195);
+  word-wrap: break-word;
+  margin: 10px 2px;
+  h1 {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+  }
+  @media only screen and (max-width: 768px) {
+    h1 {
+      font-size: 1em;
+    }
+  }
+  h2 {
+    font-size: 1em;
+    margin-bottom: 5px;
+  }
+  @media only screen and (max-width: 768px) {
+    h2 {
+      font-size: 0.8em;
+    }
+  }
+  .image {
+    width: 100%;
+    height: 90px;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  @media only screen and (max-width: 768px) {
+    .image {
+      height: 60px;
+    }
+  }
+}
+
+.shortCard:hover {
+  background-color: rgba(121, 121, 121, 0.5);
+}
+.shortCard:active {
+  background-color: rgba(121, 121, 121, 0.5);
+  box-shadow: 1px 1px 2px black;
+}
+
+.card {
+  width: 100%;
+  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 20px;
+  max-width: 700px;
+  border-left: 1px solid $primary-color;
+  background-color: rgba(134, 134, 134, 0.253);
+  box-shadow: 1px 1px 3px rgb(54, 54, 54);
+  margin: 0 auto;
+  position: relative;
+  min-height: 60vh;
+  flex-direction: column;
+  .head {
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    .headTitle {
+      width: 95%;
+      margin: 10px auto;
+      height: fit-content;
+      position: relative;
+      padding: 0px 10px;
+      h1 {
+        width: 80%;
+        height: fit-content;
+        word-wrap: break-word;
+        font-size: 2em;
+        color: #fff8e1;
+        padding: 4px 0 5px 0;
+      }
+      @media only screen and (max-width: 425px) {
+        h1 {
+          width: 100%;
+          padding: 0px;
+        }
+      }
+      textarea {
+        width: 80%;
+        font-size: 1.8em;
+        padding: 10px;
+        color: #b1ac99;
+        background-color: transparent;
+        border: 1px solid $primary-color;
+        outline: none;
+        resize: none;
+        outline: none;
+      }
+      @media only screen and (max-width: 425px) {
+        textarea {
+          width: 100%;
+          padding: 0px;
+        }
+      }
+      textarea::-webkit-scrollbar {
+        display: none;
+      }
+    }
+    @media only screen and (max-width: 425px) {
+      .headTitle {
+        padding: 0px;
+      }
+    }
+    .controler {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 10;
+      button {
+        border-radius: 50%;
+        font-size: 1.2em;
+        width: 30px;
+        height: 30px;
+        color: rgb(100, 100, 100);
+        background-color: transparent;
+        border: none;
+        outline: none;
+        transform: translate(10px, -8px);
+        cursor: pointer;
+      }
+      button:hover {
+        color: $primary-color;
+      }
+    }
+    .Status {
+      width: 95%;
+      margin: 10px auto;
+      display: flex;
+      align-items: center;
+      font-size: 1.2em;
+      text-align: center;
+      padding: 0px 10px;
+      h2 {
+        width: 20%;
+        text-align: left;
+        font-size: 1em;
+        color: rgb(187, 187, 187);
+        margin-right: 5px;
+      }
+
+      .inComplete {
+        color: rgb(214, 214, 214);
+        border: none;
+        font-size: 1em;
+        background: transparent;
+        border-radius: 15px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        text-indent: 1px;
+        text-overflow: "";
+        margin-right: 5px;
+        option {
+          color: $primary-color;
+          background-color: black;
+        }
+      }
+      .Complete {
+        color: $primary-color;
+      }
+    }
+    @media only screen and (max-width: 425px) {
+      .Status {
+        padding: 0px;
+        align-items: flex-start;
+        h2 {
+          display: none;
+        }
+        .inComplete {
+          width: 100%;
+        }
+      }
+    }
+  }
+  .descriptcontent {
+    display: flex;
+    width: 95%;
+    width: 95%;
+    margin: 10px auto;
+    display: flex;
+    padding: 0px 10px;
+    h2 {
+      width: 20%;
+      text-align: left;
+      font-size: 1em;
+      color: rgb(187, 187, 187);
+    }
+    .description {
+      width: 85%;
+      padding: 5px 5px;
+      min-height: 100px;
+      max-height: 300px;
+      position: relative;
+      overflow-y: auto;
+      margin-left: 5px;
+      border-radius: 5px;
+      background-color: rgba(124, 124, 124, 0.322);
+      h3 {
+        color: rgb(199, 199, 199);
+        font-size: 1.2em;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+      }
+    }
+    .description::-webkit-scrollbar {
+      width: 3px;
+    }
+    .description::-webkit-scrollbar-thumb {
+      border-radius: 3px;
+      background-color: rgba(173, 173, 173, 0.65);
+    }
+    .editdescript {
+      width: 80%;
+      background-color: rgba(124, 124, 124, 0.322);
+      padding: 10px 10px 40px 10px;
+      position: relative;
+      textarea {
+        width: 100%;
+        font-size: 1.2em;
+        max-height: 250px;
+        overflow: auto;
+        border: none;
+        padding-top: 5px;
+        resize: none;
+        outline: none;
+        background-color: transparent;
+        color: rgb(199, 199, 199);
+      }
+      .btns {
+        position: absolute;
+        left: 10px;
+        bottom: 10px;
+        button {
+          margin: 2px;
+          width: 60px;
+          color: gray;
+          background: transparent;
+          border: none;
+          cursor: pointer;
+          font-size: 1em;
+          text-align: left;
+        }
+        button:hover {
+          color: $primary-color;
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 425px) {
+    .descriptcontent {
+      align-items: flex-start;
+      padding: 0px;
+      h2 {
+        display: none;
+      }
+      .description {
+        width: 100%;
+      }
+      .editdescript {
+        width: 100%;
+      }
+    }
+  }
+  .reference {
+    display: flex;
+    width: 95%;
+    margin: 10px auto;
+    display: flex;
+    padding: 0px 10px;
+    h2 {
+      width: 20%;
+      text-align: left;
+      font-size: 1em;
+      color: rgb(187, 187, 187);
+    }
+    .media {
+      width: 80%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      margin: 0 auto;
+      gap: 5px;
+      .videowrap {
+        border: 1px solid transparent;
+        margin: 5px;
+        z-index: 10;
+        border-radius: 5px;
+        overflow: hidden;
+        position: relative;
+        iframe {
+          width: 100%;
+        }
+        button {
+          position: absolute;
+          right: 5px;
+          top: 5px;
+          background: transparent;
+          border: none;
+          color: rgb(105, 105, 105);
+          cursor: pointer;
+        }
+        button:hover {
+          transform: scale(1.1);
+          color: $primary-color;
+        }
+      }
+      .videowrap:hover {
+        border: 1px solid $primary-color;
+      }
+    }
+  }
+  @media only screen and (max-width: 425px) {
+    .reference {
+      width: auto;
+      padding: 0px;
+      margin: 0px;
+      h2 {
+        display: none;
+      }
+      .media {
+        width: 92%;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5px;
+        .videowrap {
+          margin: 0px;
+          justify-self: center;
+          iframe {
+            height: 100px;
+          }
+        }
+      }
+    }
+  }
+  .jobarea {
+    width: 97%;
+    margin: 5px auto;
+    padding: 0px 10px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .card {
+    width: 95%;
+  }
+}
+@media only screen and (max-width: 425px) {
+  .card {
+    width: 100%;
+    padding: 0px;
+  }
+}
+.moremenu {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  display: flex;
+  overflow: hidden;
+  .menu {
+    margin-top: 5px;
+    color: $primary-color;
+    width: 10px;
+    text-align: center;
+    height: 70px;
+    z-index: 15;
+    display: flex;
+    align-items: center;
+    background-color: rgba(32, 32, 32, 0.568);
+    backdrop-filter: blur(15px);
+    transform: translate(1px);
+    writing-mode: tb-rl;
+    padding: 10px 10px;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: 0.2s ease-in;
+    h1 {
+      font-size: 1em;
+    }
+  }
+  .menuopen {
+    height: 70px;
+    transform: translate(150px);
+    transition: 0.2s ease-in;
+  }
+  .sidebar {
+    padding: 5px;
+    background-color: black;
+    height: 150px;
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    transform: translate(0px, 5px);
+    transition: 0.2s ease-in;
+    border-right: none;
+    border-bottom-left-radius: 10px;
+    background-color: rgba(32, 32, 32, 0.568);
+    backdrop-filter: blur(15px);
+    button {
+      margin: 2px;
+      width: 100%;
+      font-size: 1em;
+      color: $primary-color;
+      background: transparent;
+      border: none;
+      border-radius: 5px;
+      padding: 3px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: rgba(61, 61, 61, 0.582);
+    }
+  }
+  .sidebaropen {
+    transform: translate(150px, 5px);
+    transition: 0.2s ease-in;
+  }
+}
+.inputjob {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-height: 100vh;
+  height: 100%;
+  z-index: 600;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.582);
+  backdrop-filter: blur(3px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bigimage {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(22, 22, 22);
+  img {
+    max-width: 60vw;
+  }
+}

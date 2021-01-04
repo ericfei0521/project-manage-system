@@ -1,0 +1,182 @@
+$primary-color: #fff8e1;
+.list {
+  box-sizing: border-box;
+  min-width: 300px;
+  padding: 15px 20px;
+  margin: 15px 5px;
+  height: fit-content;
+  min-height: 20px;
+  border-radius: 5px;
+  align-items: center;
+  background: linear-gradient(
+    45deg,
+    rgba(34, 34, 34, 0.5),
+    rgba(34, 34, 34, 0.7)
+  );
+  box-shadow: 1px 1px 2px #3a3a3a;
+  border-left: 3px solid #ccc6af;
+  color: $primary-color;
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
+
+  .listDetail {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 5px;
+    height: fit-content;
+    position: relative;
+    .listname {
+      width: 90%;
+      height: fit-content;
+      word-wrap: break-word;
+      font-size: 1.3em;
+      color: #fff8e1;
+      padding: 4px 0 4px 0;
+    }
+    @media only screen and (max-width: 768px) {
+      .listname {
+        font-size: 1em;
+      }
+    }
+    .editname {
+      position: absolute;
+      right: 0;
+      top: 0;
+      display: flex;
+      width: 100%;
+      padding: 5px;
+      background: linear-gradient(
+        45deg,
+        rgba(34, 34, 34, 0.959),
+        rgba(34, 34, 34, 0.938)
+      );
+      button {
+        margin: 2px;
+        width: 50%;
+        color: $primary-color;
+        background: transparent;
+        border: none;
+        border-radius: 5px;
+        padding: 4px;
+        cursor: pointer;
+      }
+    }
+    .editbutton {
+      display: flex;
+      width: 12%;
+      height: 20px;
+      justify-content: space-around;
+      background-color: transparent;
+      border: none;
+      color: white;
+      cursor: pointer;
+      align-items: center;
+      div {
+        width: 3px;
+        height: 3px;
+        background-color: gray;
+        border-radius: 50%;
+      }
+    }
+    .editbutton:hover {
+      div {
+        background-color: $primary-color;
+      }
+    }
+
+    textarea {
+      width: 90%;
+      font-size: 1.3em;
+      color: #fff8e1;
+      background-color: transparent;
+      border: none;
+      outline: none;
+      padding: 0;
+      resize: none;
+      outline: none;
+    }
+    @media only screen and (max-width: 768px) {
+      textarea {
+        font-size: 1em;
+      }
+    }
+  }
+  .displayzone {
+    .addtaskinfo {
+      padding: 5px;
+      width: 95%;
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: rgba(110, 110, 110, 0.691);
+      border-radius: 5px;
+      input {
+        color: white;
+        width: 80%;
+        padding: 5px;
+        margin-bottom: 5px;
+        border-radius: 5px;
+        background-color: transparent;
+        border: none;
+      }
+      input::-webkit-input-placeholder {
+        color: rgba(161, 161, 161, 0.575);
+      }
+      select {
+        width: 80%;
+        background-color: rgb(78, 78, 78);
+        background-color: transparent;
+        border: none;
+        color: white;
+        margin-bottom: 15px;
+      }
+      option {
+        background-color: black;
+      }
+      .addbutton {
+        width: 100%;
+        display: flex;
+
+        button {
+          margin: 2px;
+          width: 50%;
+          color: rgb(163, 163, 163);
+          background: transparent;
+          border: none;
+          border-radius: 5px;
+          padding: 3px;
+          cursor: pointer;
+        }
+        button:hover {
+          color: $primary-color;
+        }
+      }
+    }
+    .addtasks {
+      width: 80%;
+      width: 100%;
+      border: none;
+      text-align: left;
+      padding-left: 5px;
+      font-size: 0.8em;
+      background-color: transparent;
+      color: rgb(180, 180, 180);
+      cursor: pointer;
+    }
+    .addtasks:hover {
+      color: $primary-color;
+    }
+  }
+}
+@media only screen and (max-width: 768px) {
+  .list {
+    min-width: 200px;
+  }
+}
+.list:hover {
+  background-color: rgba(197, 197, 197, 0.363);
+  transition: 0.1s;
+}
