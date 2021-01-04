@@ -14,56 +14,31 @@ export const fetchyoutube = (youtubelink, videolist, id, callBack) => {
   const urlid = match && match[7].length === 11 ? match[7] : false;
   if (youtubelink !== "" && urlid !== false) {
     const newvideolist = [...videolist, urlid];
-    firestore
-      .collection("subtasks")
-      .doc(id)
-      .update({
-        youtube: newvideolist,
-      })
-      .then(() => {
+    updateDoc("subtasks", id, "updateItem", "youtube", newvideolist).then(
+      () => {
         callBack();
-      });
+      }
+    );
   } else {
     alert("Please enter correct youtube link");
-  }
-};
-export const commentReadUpdate = (readAll, userID, value) => {
-  console.log(value);
-  const userUpdatePath = firestore.collection("users").doc(userID);
-  if (readAll === false) {
-    return userUpdatePath.update({
-      comment: firebase.firestore.FieldValue.arrayRemove(value),
-    });
-  } else {
-    return userUpdatePath.update({
-      comment: [],
-    });
   }
 };
 // update firebase doc value under first collection
 export const updateDoc = (collection, docID, method, key, value) => {
   const keyname = key;
+  const path = firestore.collection(collection).doc(docID);
   if (method === "arrayAddItem") {
-    return firestore
-      .collection(collection)
-      .doc(docID)
-      .update({
-        [keyname]: firebase.firestore.FieldValue.arrayUnion(value),
-      });
+    return path.update({
+      [keyname]: firebase.firestore.FieldValue.arrayUnion(value),
+    });
   } else if (method === "updateItem") {
-    return firestore
-      .collection(collection)
-      .doc(docID)
-      .update({
-        [keyname]: value,
-      });
+    return path.update({
+      [keyname]: value,
+    });
   } else if (method === "arrayDeleteItem") {
-    return firestore
-      .collection(collection)
-      .doc(docID)
-      .update({
-        [keyname]: firebase.firestore.FieldValue.arrayRemove(value),
-      });
+    return path.update({
+      [keyname]: firebase.firestore.FieldValue.arrayRemove(value),
+    });
   }
 };
 export const updateSubDoc = (
@@ -76,15 +51,19 @@ export const updateSubDoc = (
   value
 ) => {
   const keyname = key;
+  const path = firestore
+    .collection(collection)
+    .doc(docID)
+    .collection(subCollection)
+    .doc(subDocID);
   if (method === "updateItem") {
-    return firestore
-      .collection(collection)
-      .doc(docID)
-      .collection(subCollection)
-      .doc(subDocID)
-      .update({
-        [keyname]: value,
-      });
+    return path.update({
+      [keyname]: value,
+    });
+  } else if (method === "arrayDeleteItem") {
+    return path.update({
+      [keyname]: firebase.firestore.FieldValue.arrayRemove(value),
+    });
   }
 };
 export const addProject = (newProjectName, newProjectState, user) => {

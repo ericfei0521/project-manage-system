@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { firestore } from "../../firebase";
 import style from "../../style/notice.module.scss";
-import { commentReadUpdate } from "../../utils/util";
+import { updateDoc } from "../../utils/util";
 
 const Notice = (prop) => {
   const subtaskPath = firestore.collection("subtasks").doc(prop.data.subtaskID);
@@ -43,7 +43,15 @@ const Notice = (prop) => {
         <div className={style.titlehead}>
           <h1>{projectName}</h1>
           <button
-            onClick={() => commentReadUpdate(false, prop.user, prop.data.id)}
+            onClick={() => {
+              updateDoc(
+                "users",
+                prop.user,
+                "arrayDeleteItem",
+                "comment",
+                prop.data.id
+              );
+            }}
           >
             <h2>X</h2>
           </button>

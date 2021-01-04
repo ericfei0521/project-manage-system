@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import style from "../../style/comment.module.scss";
-import firebase from "firebase/app";
 import { firestore } from "../../firebase";
-
+import { updateDoc, updateSubDoc } from "../../utils/util";
 const CommentCards = (prop) => {
   const [edit, setEdit] = useState(false);
   const [send, setSend] = useState(false);
@@ -19,26 +18,25 @@ const CommentCards = (prop) => {
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [send]);
-  const editContent = (value) => {
-    firestore.collection("comment").doc(prop.data.id).update({
-      content: value,
-    });
-  };
+
   const deleteContent = () => {
-    const path = firestore.collection("subtasks").doc(prop.data.subtaskID);
+    updateSubDoc(
+      "subtasks",
+      prop.data.subtaskID,
+      "jobs",
+      prop.data.jobID,
+      "arrayDeleteItem",
+      "comment",
+      prop.data.id
+    );
+    updateDoc(
+      "users",
+      prop.taskmember,
+      "arrayDeleteItem",
+      "comment",
+      prop.data.id
+    );
     firestore.collection("comment").doc(prop.data.id).delete();
-    path
-      .collection("jobs")
-      .doc(prop.data.jobID)
-      .update({
-        comment: firebase.firestore.FieldValue.arrayRemove(prop.data.id),
-      });
-    firestore
-      .collection("users")
-      .doc(prop.taskmember)
-      .update({
-        comment: firebase.firestore.FieldValue.arrayRemove(prop.data.id),
-      });
   };
   return (
     <div className={style.commentCard}>
@@ -57,7 +55,13 @@ const CommentCards = (prop) => {
             <div className={style.checkbtns}>
               <button
                 onClick={() => {
-                  editContent(content);
+                  updateDoc(
+                    "comment",
+                    prop.data.id,
+                    "updateItem",
+                    "content",
+                    content
+                  );
                   setEditing(false);
                   setEdit(!edit);
                   setSend(!send);
@@ -72,22 +76,18 @@ const CommentCards = (prop) => {
           <div className={style.content}>
             <h1>{prop.data.name}</h1>
             <p style={{ whiteSpace: "pre-line" }}>{content}</p>
-            {prop.data.name === prop.user ? (
+            {prop.data.name === prop.user && (
               <div onClick={() => setEdit(!edit)} className={style.editbtns}>
                 <div className={style.circle}></div>
                 <div className={style.circle}></div>
                 <div className={style.circle}></div>
               </div>
-            ) : (
-              <></>
             )}
-            {edit ? (
+            {edit && (
               <div className={style.controlbtns}>
                 <button onClick={() => setEditing(true)}>Edit</button>
                 <button onClick={() => deleteContent()}>Delete</button>
               </div>
-            ) : (
-              <></>
             )}
           </div>
         )}
