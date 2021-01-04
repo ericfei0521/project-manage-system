@@ -1,15 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
+import firebase from "firebase/app";
 import { auth, firestore, timestamp } from "../../firebase";
 import { nanoid } from "nanoid";
 import CommentCards from "./CommentCard";
 import send from "../../images/ICON/submit.png";
 import style from "../../style/comment.module.scss";
-import {
-  textareaResize,
-  scrollToBottom,
-  updateDoc,
-  updateSubDoc,
-} from "../../utils/util";
 
 const Comment = ({ subTaskID, jobID, projectID }) => {
   const divRref = useRef(null);
@@ -63,25 +58,31 @@ const Comment = ({ subTaskID, jobID, projectID }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
-    scrollToBottom(divRref);
+    scrollToBottom();
   }, [comment]);
   const handleComment = (value) => {
     const newComments = [...comment, value];
     const jobComments = [...jobComment, value.id];
     setComment(newComments);
-    updateSubDoc(
-      "subtasks",
-      subTaskID,
-      "jobs",
-      jobID,
-      "updateItem",
-      "comment",
-      jobComments
-    );
+    filePath.collection("jobs").doc(jobID).update({
+      comment: jobComments,
+    });
     firestore.collection("comment").doc(value.id).set(value);
     if (currentuserid !== member) {
-      updateDoc("users", member, "arrayAddItem", "comment", value.id);
+      firestore
+        .collection("users")
+        .doc(member)
+        .update({
+          comment: firebase.firestore.FieldValue.arrayUnion(value.id),
+        });
     }
+  };
+  const textareaResize = (element) => {
+    element.style.height = "1px";
+    element.style.height = element.scrollHeight + "px";
+  };
+  const scrollToBottom = () => {
+    divRref.current.scrollTop = divRref.current.scrollHeight;
   };
   return (
     <div className={style.comment}>
