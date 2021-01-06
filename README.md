@@ -1,8 +1,7 @@
-<h1>Personal demo project<h1>
-Name : Project management system 
-<br>
-framework : React/Redux/Router/React-thunk
-<br>
-Used JS library : React beautiful dnd/React Nice Dates/Day.js
-<br>
-Server : firebase 
+# THE RAVEN
+
+A production project management system.
+From small project to blockbuster,THE RAVEN let user can easily manage projects
+every where and when.
+
+
