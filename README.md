@@ -54,14 +54,48 @@ ID: demouser@gmail.com Password: demouser
 
 <img src="https://i.ibb.co/3BY4fHQ/ezgif-com-gif-maker-1.gif" width="480">
 
-### Native sign up
+### Plateform function demo
+
+#### -Native sign up
 
 <img src="./readme_img/Signup.gif" width="480">
 
-### 3rd party or native log in
+#### -3rd party or native log in
 
 <img src="./readme_img/login.gif" width="480">
 
-### Create Project
+#### -Create project
 
 <img src="./readme_img/Create Project.gif" width="480">
+
+#### -Assigned tasks tracking
+
+<img src="./readme_img/membertask.gif" width="480">
+
+#### -Project channel
+
+<img src="./readme_img/channel.gif" width="480">
+
+#### -TaskList create
+
+<img src="./readme_img/TaskList.gif" width="480">
+
+#### -Task content create
+
+<img src="./readme_img/Addtasks.gif" width="480">
+
+#### -File & Reference attachment
+
+<img src="./readme_img/FileAttach.gif" width="480">
+
+#### -Task content remove & update
+
+<img src="./readme_img/RUD.gif" width="480">
+
+#### -Rearrange tasks and subtasks order
+
+<img src="./readme_img/reorder task.gif" width="480">
+
+#### -Subtask comment & notification
+
+<img src="./readme_img/comment.gif" width="480">
