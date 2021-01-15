@@ -152,20 +152,23 @@ const TaskList = ({ name, id, open, allsub }) => {
                 onClick={() => {
                   if (substate === "") {
                     setsubTaskState("on-hold");
+                  } else if (subTaskname === "") {
+                    alert("Please enter task name");
+                  } else {
+                    dispatch(
+                      addTasks({
+                        oldtasks: nowTask,
+                        projectid: projectId,
+                        listid: id,
+                        id: nanoid(),
+                        name: subTaskname,
+                        state: substate,
+                      })
+                    );
+                    setsubTaskName("");
+                    setsubTaskState("");
+                    setEdit(false);
                   }
-                  dispatch(
-                    addTasks({
-                      oldtasks: nowTask,
-                      projectid: projectId,
-                      listid: id,
-                      id: nanoid(),
-                      name: subTaskname,
-                      state: substate,
-                    })
-                  );
-                  setsubTaskName("");
-                  setsubTaskState("");
-                  setEdit(false);
                 }}
               >
                 Add Task

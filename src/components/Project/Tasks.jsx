@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
-import TasksDetail from "./TasksDetail";
+import React, { useState, useEffect, Suspense } from "react";
+// import TasksDetail from './TasksDetail';
 import style from "../../style/projecttasks.module.scss";
 import { useSelector } from "react-redux";
 import { firestore } from "../../firebase";
 import Loading from "../Loading";
+
+const TasksDetail = React.lazy(() => import("./TasksDetail"));
 const Tasks = (props) => {
   const state = useSelector((state) => state.Handleshowmember);
   const [list, setList] = useState([]);
-  const [load, setLoad] = useState(true);
+  // const [load, setLoad] = useState(true);
   useEffect(() => {
     const reanageList = [];
     state.member.forEach((item) => {
@@ -67,7 +69,7 @@ const Tasks = (props) => {
           }
         });
         setList(reanageList);
-        setLoad(false);
+        // setLoad(false);
       });
     return () => {
       unsubscribe();
@@ -76,12 +78,14 @@ const Tasks = (props) => {
   }, [state]);
   return (
     <div className={style.taskview}>
-      {list.map((item) => (
-        <TasksDetail item={item} key={item.userID} />
-      ))}
-      <div style={load ? { display: "block" } : { display: "none" }}>
+      <Suspense fallback={<Loading />}>
+        {list.map((item) => (
+          <TasksDetail item={item} key={item.userID} />
+        ))}
+      </Suspense>
+      {/* <div style={load ? { display: 'block' } : { display: 'none' }}>
         <Loading />
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -30,6 +30,9 @@ const Attachlink = ({ handleattach, id }) => {
       <div className={style.btns}>
         <button
           onClick={() => fetchyoutube(youtubelink, videolist, id, handleattach)}
+          // onClick={() =>
+          //   import('../../utils/util').then((util) => util.fetchyoutube(youtubelink, videolist, id, handleattach))
+          // }
         >
           Attach
         </button>
