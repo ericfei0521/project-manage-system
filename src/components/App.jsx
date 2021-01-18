@@ -16,6 +16,7 @@ const Login = lazy(() => import("./Login"));
 const Signup = lazy(() => import("./SignUp"));
 const Projects = lazy(() => import("./Project/Projects"));
 const ProjectDetail = lazy(() => import("./Project/Project"));
+const Nomatch = lazy(() => import("./Nomatch"));
 function App() {
   const dispatch = useDispatch();
   auth.onAuthStateChanged((userAuth) => {
@@ -31,6 +32,7 @@ function App() {
         <Route path="/signup" component={Signup} />
         <Route exact path="/projects" component={Projects} />
         <Route path="/projects/:projectId" component={ProjectDetail} />
+        <Route component={Nomatch} />
       </Switch>
     </Suspense>
   );

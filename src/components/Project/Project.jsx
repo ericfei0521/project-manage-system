@@ -24,6 +24,7 @@ import { deleteProject } from "../../utils/util";
 const ProjectDetail = () => {
   const { projectId } = useParams();
   const state = useSelector((state) => state.HandleTaskMember);
+  const user = useSelector((state) => state.UserCheck);
   const project = firestore.collection("projects").doc(projectId);
   const inputref = useRef(null);
   const dispatch = useDispatch();
@@ -46,6 +47,9 @@ const ProjectDetail = () => {
 
   useEffect(() => {
     const unsubscribemember = project.onSnapshot(function (doc) {
+      if (!user) {
+        history.push("/login");
+      }
       if (!doc.data()) {
         history.push("/");
       }
