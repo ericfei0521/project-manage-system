@@ -148,6 +148,7 @@ select:focus {
 *::before,
 *::after {
   box-sizing: border-box;
+  font-size: 16px;
 }
 body {
   background-color: rgb(44, 44, 44);
