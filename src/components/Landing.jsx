@@ -41,8 +41,8 @@ function Landing() {
             <h1>Welcome TO</h1>
             <h2>The Raven</h2>
             <h3>
-              From the commercial to the blockbuster , The Raven organizes work
-              so teams are clear what to do,use one and manage all
+              A project management system helps team organize tasks effeciently
+              and easily, use one and manage all
             </h3>
           </div>
           <Link to="/login">
