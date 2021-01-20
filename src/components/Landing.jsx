@@ -41,8 +41,8 @@ function Landing() {
             <h1>Welcome TO</h1>
             <h2>The Raven</h2>
             <h3>
-              A project management system helps team organize tasks effeciently
-              and easily, use one and manage all
+              A project management system that integrates and synchronizes
+              multi-person workflow with great ease and efficiency
             </h3>
           </div>
           <Link to="/login">
