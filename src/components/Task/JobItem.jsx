@@ -158,6 +158,7 @@ const JobItem = (prop) => {
           className={style.memberName}
           onClick={() => {
             setMemberShow(!membershow);
+            setShow(false);
           }}
         >
           <h1 onClick={() => setOpenJob(!openJob)}>{prop.member}</h1>
@@ -206,7 +207,13 @@ const JobItem = (prop) => {
             </button>
           </div>
         )}
-        <button onClick={() => setShow(!show)} className={style.editDate}>
+        <button
+          onClick={() => {
+            setShow(!show);
+            setMemberShow(false);
+          }}
+          className={style.editDate}
+        >
           {date ? (
             format(date, "yyyy/MM/dd", { locale: enGB })
           ) : (
