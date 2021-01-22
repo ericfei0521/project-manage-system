@@ -25,7 +25,7 @@ function Signup() {
       <div className={style.filter}>
         <div className={style.wrap}>
           <Link to="/" className="brand-logo">
-            <img src={logo} alt="" width="80px" />
+            <img src={logo} alt="" width="70px" />
           </Link>
           <input
             onChange={(e) => setEmail(e.target.value)}

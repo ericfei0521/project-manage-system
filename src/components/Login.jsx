@@ -24,7 +24,7 @@ function Login() {
       <div className={style.wrap}>
         <div className={style.loginblock}>
           <Link to="/" className="brand-logo">
-            <img src={logo} alt="" width="80px" />
+            <img src={logo} alt="" width="70px" />
           </Link>
           <input
             onChange={(e) => setEmail(e.target.value)}
@@ -53,8 +53,20 @@ function Login() {
           >
             Submit
           </button>
-
-          <h2> - - - - - - - - - - - or - - - - - - - - - - - </h2>
+          <button
+            className={button.button}
+            onClick={() => {
+              dispatch(
+                login({
+                  email: "demouser@gmail.com",
+                  password: "demouser",
+                })
+              );
+            }}
+          >
+            Try THE RAVEN
+          </button>
+          <h2> - - - - - - - - - or - - - - - - - - - </h2>
           <button onClick={signInWithGoogle} className={style.logingoogle}>
             Login With Google
           </button>
