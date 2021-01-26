@@ -36,13 +36,13 @@ function Signup() {
           <input
             onChange={(e) => setPassword(e.target.value)}
             value={password}
-            type="text"
+            type="password"
             placeholder="password"
           />
           <input
             onChange={(e) => setConfirm(e.target.value)}
             value={confirm}
-            type="text"
+            type="password"
             placeholder="comfrim password"
           />
           <input
