@@ -14,7 +14,8 @@ ID: demouser@gmail.com Password: demouser
 **Front-End Skills**
 
 - HTML
-- CSS (ES6)
+- CSS
+- JS (ES6)
 - Flex/Grid
 - RWD
 
