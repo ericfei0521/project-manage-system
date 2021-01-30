@@ -10,6 +10,7 @@ import { updateDoc, updateSubDoc } from "../../utils/util";
 
 const Header = (prop) => {
   const user = useSelector((state) => state.UserCheck);
+  console.log(user);
   const [userdetail, setUserDetail] = useState("");
   const [editProjectName, setEditProjectName] = useState(false);
   const [projectName, setProjectName] = useState(prop.name);
