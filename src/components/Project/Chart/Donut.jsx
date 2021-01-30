@@ -52,7 +52,7 @@ const DonutChart = ({ datas, name }) => {
     <div className={style.pie}>
       <div className={style.detail}>
         <h2>Progress</h2>
-        <h2>{complete}%</h2>
+        <h2>{complete > 0 ? complete : 0}%</h2>
       </div>
       <Doughnut
         data={dataSet}
